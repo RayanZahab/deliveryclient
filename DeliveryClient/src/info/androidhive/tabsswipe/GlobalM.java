@@ -1,13 +1,11 @@
 package info.androidhive.tabsswipe;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -31,7 +29,7 @@ public class GlobalM {
 
 	public void bkToNav(Activity a, String msg) {
 
-		boolean admin = ((DeliveryClient) a.getApplication()).isAdmin();
+		boolean admin = ((deliveryclient) a.getApplication()).isAdmin();
 		Intent i;
 		/*
 		if (admin)
@@ -61,7 +59,7 @@ public class GlobalM {
 			t.setGravity(Gravity.TOP, 0, 0);
 			t.show();
 		}
-		if (((DeliveryClient) from.getApplication()).getToken() != null)
+		if (((deliveryclient) from.getApplication()).getToken() != null)
 			from.startActivity(i);
 	}
 

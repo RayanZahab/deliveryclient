@@ -9,6 +9,8 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="info.androidhive.tabsswipe.deliveryclient"
+        
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -16,12 +18,22 @@
         <activity
             android:name="info.androidhive.tabsswipe.MainActivity"
             android:label="@string/app_name" >
+            
+        </activity>
+         <activity
+            android:name="info.androidhive.tabsswipe.LoginActivity"
+            android:icon="@drawable/moto"
+            android:label="@string/buttonlogin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+            <category android:name="android.intent.category.LAUNCHER" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>     
     </application>
+    
 
 </manifest>

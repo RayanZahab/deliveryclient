@@ -48,7 +48,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	private boolean last = true;
 	private Object objectToAdd;
 	String token;
-	private DeliveryClient global;
+	private deliveryclient global;
 	TransparentProgressDialog pd;
 
 	private void MyJs() {
@@ -68,7 +68,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 
-	public MyJs(String returnFunction, Activity m, DeliveryClient mg, String method) {
+	public MyJs(String returnFunction, Activity m, deliveryclient mg, String method) {
 		this.returnFunction = returnFunction;
 		this.mc = m;
 		this.global = mg;
@@ -78,7 +78,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		MyJs();
 	}
 
-	public MyJs(String returnFunction, Activity m, DeliveryClient mg,
+	public MyJs(String returnFunction, Activity m, deliveryclient mg,
 			String method, boolean sm, boolean last) {
 		this.returnFunction = returnFunction;
 		this.mc = m;
@@ -89,7 +89,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		MyJs();
 	}
 
-	public MyJs(String returnFunction, Activity m, DeliveryClient mg,
+	public MyJs(String returnFunction, Activity m, deliveryclient mg,
 			String method, Object o, boolean first, boolean last) {
 		this.returnFunction = returnFunction;
 		this.mc = m;
@@ -101,7 +101,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		MyJs();
 	}
 
-	public MyJs(String returnFunction, Activity m, DeliveryClient mg,
+	public MyJs(String returnFunction, Activity m, deliveryclient mg,
 			String method, Object o) {
 		this.returnFunction = returnFunction;
 		this.mc = m;
@@ -289,11 +289,11 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		this.first = first;
 	}
 
-	public DeliveryClient getGlobal() {
+	public deliveryclient getGlobal() {
 		return global;
 	}
 
-	public void setGlobal(DeliveryClient global) {
+	public void setGlobal(deliveryclient global) {
 		this.global = global;
 	}
 	@SuppressWarnings("rawtypes")

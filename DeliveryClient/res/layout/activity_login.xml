@@ -24,7 +24,7 @@
             android:background="@drawable/edittext"
             android:ellipsize="start"
             android:ems="10"
-            android:hint="username"
+            android:hint="@string/username"
             android:inputType="text"
             android:textSize="16sp"
             android:paddingLeft="10dp"
@@ -43,7 +43,7 @@
             android:background="@drawable/edittext"
             android:ellipsize="start"
             android:ems="10"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textSize="16sp"
             android:paddingLeft="10dp"
@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/vertical_margin"
             android:background="@drawable/mybutton"
             android:onClick="login"
-            android:text="login"
+            android:text="@string/buttonlogin"
             android:textColor="#a2a2a2" />
 
         <CheckBox
@@ -73,7 +73,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/vertical_margin"
             android:button="@drawable/mylogincheckbox"
-            android:text="keep me logged in"
+            android:text="@string/keeploggedin"
             android:textColor="#818281"
             android:textSize="18sp" />
 
@@ -96,7 +96,7 @@
                 android:layout_marginLeft="30dp"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
-                android:text="forgotpass"
+                android:text="@string/forgotpass"
                 android:textColor="#818281"
                 android:textSize="12sp" />
 

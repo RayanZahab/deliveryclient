@@ -9,7 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
+ 
 public class deliveryclient extends Application {
 	private String token, orderStatus;
 	private int shopId = 0, branchId = 0, categoryId = 0, productId = 0,

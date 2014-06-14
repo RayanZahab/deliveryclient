@@ -2,7 +2,6 @@ package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
 import java.util.List;
-import info.androidhive.tabsswipe.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;

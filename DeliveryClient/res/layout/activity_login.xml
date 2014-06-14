@@ -1,0 +1,114 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/myred"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_left_margin"
+    android:paddingRight="@dimen/activity_left_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myborder"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edittext"
+            android:ellipsize="start"
+            android:ems="10"
+            android:hint="username"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#bdbdbd"
+            android:textColorHint="#bdbdbd" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/user_name"
+            android:layout_alignRight="@+id/user_name"
+            android:layout_below="@+id/user_name"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:background="@drawable/edittext"
+            android:ellipsize="start"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#bdbdbd"
+            android:textColorHint="#bdbdbd" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/password"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:background="@drawable/mybutton"
+            android:onClick="login"
+            android:text="login"
+            android:textColor="#a2a2a2" />
+
+        <CheckBox
+            android:id="@+id/keeploggedin"
+            style="@style/mytextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:button="@drawable/mylogincheckbox"
+            android:text="keep me logged in"
+            android:textColor="#818281"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/forgotpass"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_below="@+id/keeploggedin"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:background="@drawable/topbottomborders"
+            android:clickable="true"
+            android:onClick="forgotpassword" >
+
+            <TextView
+                android:id="@+id/forgotpassword"
+                style="@style/mytextview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:paddingBottom="7dp"
+                android:paddingTop="7dp"
+                android:text="forgotpass"
+                android:textColor="#818281"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/rightarrow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/flech" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

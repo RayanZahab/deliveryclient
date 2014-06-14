@@ -5,11 +5,17 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 public class MainActivity extends FragmentActivity implements
+		
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
@@ -21,10 +27,12 @@ public class MainActivity extends FragmentActivity implements
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		getActionBar().setDisplayShowHomeEnabled(false);              
+		getActionBar().setDisplayShowTitleEnabled(false);  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		// Initilization
+		
+		
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
 		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
@@ -32,11 +40,21 @@ public class MainActivity extends FragmentActivity implements
 		viewPager.setAdapter(mAdapter);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
-
+		int i =0;
 		// Adding Tabs
 		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
+			Tab tab = actionBar.newTab();
+			if(i==0)
+				tab.setIcon(R.drawable.orders_tab);
+			else if (i==1)
+				tab.setIcon(R.drawable.ic_launcher);
+			else
+				tab.setIcon(R.drawable.ic_launcher);
+			i++;
+			
+			tab.setText(tab_name);
+			actionBar.addTab(tab.setTabListener(this));
+			actionBar.setC
 		}
 
 		/**

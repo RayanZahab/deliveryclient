@@ -1,4 +1,3 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"    
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -16,16 +15,26 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:text="text"
+        android:text="date/time"
         android:textSize="16sp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <TextView
+        android:id="@+id/itemnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name"
+        android:layout_alignBottom="@+id/name"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_marginRight="85dp"
+        android:text="items" />
+
+    <TextView
+        android:id="@+id/totalprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/itemnumber"
+        android:layout_alignBottom="@+id/itemnumber"
+        android:layout_alignParentRight="true"
+        android:text="price" />
     
  </RelativeLayout>

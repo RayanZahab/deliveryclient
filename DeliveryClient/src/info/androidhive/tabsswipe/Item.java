@@ -1,7 +1,5 @@
 package info.androidhive.tabsswipe;
 
-import android.graphics.Bitmap;
-
 public class Item {
 	//text, text+image, product(text+input number+price), order(text+number+number), address(radiogroupbutton), 
 	//cart(text+inputnumb+int total+intprice)

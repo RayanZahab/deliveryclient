@@ -18,6 +18,7 @@ public class LoginActivity extends Activity {
 	private EditText username;
 	private EditText password;
 	boolean isChecked = false;
+	int i;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +30,14 @@ public class LoginActivity extends Activity {
 
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);
-
+		i++;
+		
 		if (isChecked) {
-			((DeliveryClient) this.getApplication()).setGlobals();
+			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(LoginActivity.this, MainActivity.class);
 			startActivity(i);
 		}
+		
 	}
 
 	public void login(View view) {
@@ -44,7 +47,7 @@ public class LoginActivity extends Activity {
 		user.setEncPassword(password.getText()
 				.toString());
 		MyJs mjs = new MyJs("getLoggedIn", this,
-				((DeliveryClient) this.getApplication()), "POST", (Object) user);
+				((deliveryclient) this.getApplication()), "POST", (Object) user);
 		mjs.execute(serverURL);
 
 	}
@@ -70,7 +73,7 @@ public class LoginActivity extends Activity {
 
 			editor.commit();
 
-			((DeliveryClient) this.getApplication()).setGlobals();
+			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i;
 			if(user.isIs_admin())
 					i = new Intent(this, MainActivity.class);

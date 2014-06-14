@@ -54,7 +54,7 @@ public class MainActivity extends FragmentActivity implements
 			
 			tab.setText(tab_name);
 			actionBar.addTab(tab.setTabListener(this));
-			actionBar.setC
+			//actionBar.setC
 		}
 
 		/**

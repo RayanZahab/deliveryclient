@@ -4,3 +4,5 @@
     <solid android:color="#ED1C24"/>
 
 </shape>
+<bitmap android:src="@drawable/backgroundpic"/>
+

@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.widget.TabHost;
 
 public class MainActivity extends FragmentActivity implements
 		
@@ -44,7 +46,7 @@ public class MainActivity extends FragmentActivity implements
 			else if (i==1)
 				tab.setIcon(R.drawable.ic_launcher);
 			else
-				tab.setIcon(R.drawable.ic_launcher);
+				tab.setIcon(R.drawable.carttabs);
 			i++;
 			
 			tab.setText(tab_name);
@@ -88,5 +90,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
+	
+	
 
 }

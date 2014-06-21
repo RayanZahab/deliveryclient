@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
@@ -27,6 +28,7 @@ public class LoginActivity extends Activity {
 
 		username = (EditText) findViewById(R.id.user_name);
 		password = (EditText) findViewById(R.id.password);
+		
 
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);

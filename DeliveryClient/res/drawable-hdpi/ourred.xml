@@ -2,6 +2,6 @@
 <!-- - Background; tile is broken on Android 2.2 so just have super wide background that will get clipped -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <solid android:color="#C12026" />
+    <solid android:color="#333333" />
 
 </shape>

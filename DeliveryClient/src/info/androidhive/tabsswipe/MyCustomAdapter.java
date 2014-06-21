@@ -1,7 +1,6 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +79,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		if (convertView == null) {
 
-			LayoutInflater vi = (LayoutInflater) this.context
+			LayoutInflater vi = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 			int layout = 0;

@@ -4,7 +4,7 @@ public class Item {
 	//text, text+image, product(text+input number+price), order(text+number+number), address(radiogroupbutton), 
 	//cart(text+inputnumb+int total+intprice)
 	
-	private String type;
+	private String type , name;
 	//txt, txtImg, product,order,cart,address 
 
 	public String getType() {
@@ -14,6 +14,12 @@ public class Item {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

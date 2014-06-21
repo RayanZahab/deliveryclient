@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-   
-    <solid android:color="#ED1C24"/>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/ourred"/>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/backgroundpic" />
+    </item>
 
-</shape>
-<bitmap android:src="@drawable/backgroundpic"/>
-
+</layer-list>

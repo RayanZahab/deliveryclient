@@ -51,10 +51,9 @@ public class APIManager {
 	}
 
 	public ArrayList<Country> getCountries(String cont) {
-
+		Log.d("rays", cont);
 		JSONObject jsonResponse;
 		ArrayList<Country> gridArray = new ArrayList<Country>();
-		gridArray.add(new Country(0, "Select"));
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
@@ -70,6 +69,7 @@ public class APIManager {
 
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
+						
 						name = jsonChildNode.optString("name").toString();
 						gridArray.add(new Country(id, name));
 					}
@@ -94,7 +94,6 @@ public class APIManager {
 	public ArrayList<City> getCitiesByCountry(String cont) {
 		JSONObject jsonResponse;
 		ArrayList<City> gridArray = new ArrayList<City>();
-		gridArray.add(new City(0, "Select"));
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {

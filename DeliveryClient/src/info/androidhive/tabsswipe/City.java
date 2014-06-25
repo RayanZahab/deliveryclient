@@ -1,9 +1,12 @@
 package info.androidhive.tabsswipe;
 
+import java.util.ArrayList;
+
 public class City {
 	private int id;
 	private int country_id;
 	private String name;
+	private ArrayList<Area> areas;
 
 	public City(int id,String name) {
 		this.setId(id);
@@ -51,5 +54,11 @@ public class City {
 		if(this.id == c.getId())
 			return true;
 		return false;
+	}
+	public ArrayList<Area> getAreas() {
+		return areas;
+	}
+	public void setAreas(ArrayList<Area> areas) {
+		this.areas = areas;
 	}
 }

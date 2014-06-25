@@ -59,5 +59,9 @@ public class Shop {
 	public void setBusiness(Business business) {
 		this.business = business;
 	}
+	public String toString()
+	{
+		return getName();
+	}
 
 }

@@ -1,9 +1,12 @@
 package info.androidhive.tabsswipe;
 
+import java.lang.reflect.Method;
+
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.view.Menu;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,7 +56,9 @@ public class LoginActivity extends Activity {
 		mjs.execute(serverURL);
 
 	}
-
+	public void callMethod(String m,String s, String error) {
+		 getLoggedIn( s,  error);
+	}
 	public void getLoggedIn(String s, String error) {
 		if (error == null) {
 			User user = new APIManager().getLogedInUser(s);

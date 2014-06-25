@@ -20,12 +20,12 @@ public class deliveryclient extends Application {
 	private UncaughtExceptionHandler defaultUEH;
 
 	public deliveryclient() {
-		defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
-		Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);
+		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
+		//Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);
 	}
 
 	// handler listener
-	private Thread.UncaughtExceptionHandler _unCaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+	/*private Thread.UncaughtExceptionHandler _unCaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
 		@Override
 		public void uncaughtException(Thread thread, Throwable ex) {
 			// here I do logging of exception to a db
@@ -45,7 +45,7 @@ public class deliveryclient extends Application {
 
 		}
 	};
-
+*/
 	public String getToken() {
 		return token;
 	}

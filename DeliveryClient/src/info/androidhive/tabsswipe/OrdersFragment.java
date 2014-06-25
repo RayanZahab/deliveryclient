@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class OrdersFragment extends Fragment {
@@ -31,6 +32,7 @@ public class OrdersFragment extends Fragment {
 			categoryId = 0;
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	static Activity currentActivity;
+	static View view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +46,7 @@ public class OrdersFragment extends Fragment {
 		sequence.add("categories");
 		sequence.add("products");
 		currentActivity = getActivity();
-		View view = inflater
+		view = inflater
 				.inflate(R.layout.fragment_orders, container, false);
 		mylist = new ArrayList<Item>();
 		Button buttonOne = (Button) view.findViewById(R.id.back);
@@ -233,7 +235,8 @@ public class OrdersFragment extends Fragment {
 		for (Product myProduct : products) {
 			Item it = new Item();
 			it.setName(myProduct.toString());
-			it.setType("txt");
+			it.setType("product");
+			it.setPrice(myProduct.getPrice());
 			it.setId(myProduct.getId());
 			mylist.add(it);
 		}
@@ -318,5 +321,18 @@ public class OrdersFragment extends Fragment {
 						android.R.layout.simple_list_item_1, mylist));
 			}
 		});
+	}
+	
+	public static void updateFooter(List<Product> cart)
+	{
+		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
+		TextView price = (TextView) view.findViewById(R.id.totalprice);
+		int totalPrice=0;
+		for(Product myP:cart)
+		{
+			totalPrice += myP.getPrice();
+		}
+		price.setText(totalPrice+" L.L");
+		quantity.setText(""+cart.size());
 	}
 }

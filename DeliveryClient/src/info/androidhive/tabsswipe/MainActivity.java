@@ -1,9 +1,6 @@
 package info.androidhive.tabsswipe;
 
-import java.lang.ref.WeakReference;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 import info.androidhive.tabsswipe.adapter.TabsPagerAdapter;
@@ -12,16 +9,11 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ActionBar.Tab;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.widget.TabHost;
 
 public class MainActivity extends FragmentActivity implements
 
@@ -89,9 +81,7 @@ ActionBar.TabListener {
 	}
 
 	public void callMethod(String m, String s, String error) {
-		FragmentManager fm = this.getSupportFragmentManager();
 		OrdersFragment f = (OrdersFragment) getVisibleFragment();
-
 		Method returnFunction;
 		try {
 			returnFunction = f.getClass().getDeclaredMethod(m, s.getClass(),

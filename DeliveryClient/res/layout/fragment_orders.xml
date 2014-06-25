@@ -62,7 +62,7 @@
                 android:ems="10" />
 
             <EditText
-                android:id="@+id/quantity"
+                android:id="@+id/totalQuantity"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"

@@ -7,7 +7,7 @@ public class Item {
 
 	private String type, name;
 	// txt, txtImg, product,order,cart,address
-	private int img, id;
+	private int img, id,price;
 
 	public String getType() {
 		return type;
@@ -39,5 +39,13 @@ public class Item {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

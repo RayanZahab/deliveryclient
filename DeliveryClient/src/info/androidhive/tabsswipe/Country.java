@@ -7,7 +7,7 @@ import android.util.Log;
 public class Country {
 	private Integer id;
 	private String name;
-
+	private ArrayList<City> cities;
 	public Country(Integer id, String name) {
 		this.setId(id);
 		this.setName(name);
@@ -52,5 +52,11 @@ public class Country {
 		if(this.id == c.getId())
 			return true;
 		return false;
+	}
+	public ArrayList<City> getCities() {
+		return cities;
+	}
+	public void setCities(ArrayList<City> cities) {
+		this.cities = cities;
 	}
 }

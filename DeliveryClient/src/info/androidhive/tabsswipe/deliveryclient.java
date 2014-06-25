@@ -1,6 +1,8 @@
 package info.androidhive.tabsswipe;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -9,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class deliveryclient extends Application {
 	private String token, orderStatus;
@@ -18,6 +21,8 @@ public class deliveryclient extends Application {
 	public MyJs.TransparentProgressDialog loader;
 	public Activity current;
 	private UncaughtExceptionHandler defaultUEH;
+	private List<Product> myCart = new ArrayList<Product>();
+	private List<Integer> myCartIds = new ArrayList<Integer>();
 
 	public deliveryclient() {
 		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
@@ -207,5 +212,32 @@ public class deliveryclient extends Application {
 
 	public void setLoader(MyJs.TransparentProgressDialog loader) {
 		this.loader = loader;
+	}
+
+	public List<Product> getMyCart() {
+		return myCart;
+	}
+
+	public void setMyCart(List<Product> myCart) {
+		this.myCart = myCart;
+	}
+	
+	public List<Integer> getMyCartIds() {
+		return myCartIds;
+	}
+
+	public void setMyCartIds(List<Integer> myIds) {
+		this.myCartIds = myIds;
+	}
+	public void addToCart(Product p)
+	{
+		myCart.add(p);
+		myCartIds.add(p.getId());
+		Log.d("ray","cart size"+myCart.size());
+		for(Product c:myCart)
+		{
+			Log.d("ray",","+c.getId());			
+		}
+		OrdersFragment.updateFooter(myCart);
 	}
 }

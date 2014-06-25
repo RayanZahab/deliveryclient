@@ -1,14 +1,17 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	private ArrayList<Item> currentList;
 	Context context;
 	private String type;
+	List<Integer> cartIds = new ArrayList<Integer>();
 
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
@@ -24,6 +28,8 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		this.currentList = new ArrayList<Item>();
 		this.currentList.addAll(navList);
 		this.context = context;
+		Activity activity = (Activity) context;
+		cartIds = ((deliveryclient) activity.getApplication()).getMyCartIds();
 		this.setType();
 	}
 
@@ -41,10 +47,38 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	}
 
 	class productHolder extends ViewHolder {
-		TextView name;
+		TextView name, qtTxt;
 		EditText input;
 		TextView price;
-		NumberPicker np;
+		Button quantity;
+		public productHolder(View convertView,final Item item) {
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+			price = (TextView) convertView.findViewById(R.id.price);
+			price.setText(""+item.getPrice());
+			quantity = (Button) convertView.findViewById(R.id.quantity);
+			qtTxt = (TextView) convertView.findViewById(R.id.qtTxt);
+			//int p = cartIds.get(item.getId());
+			//if(p>0)
+			//{
+				
+			//}
+			quantity.setOnClickListener(new Button.OnClickListener() {
+				public void onClick(View v) {
+					int qt = Integer.parseInt(qtTxt.getText().toString());
+					qt++;
+					qtTxt.setText(""+qt);
+					addToCart(item);
+					
+				}
+			});
+		}
+	}
+	public void addToCart(Item item){
+		Activity activity = (Activity) context;
+		Product p = new Product(item.getId());
+		p.setPrice(item.getPrice());
+		((deliveryclient) activity.getApplication()).addToCart(p);
 	}
 
 	class orderHolder extends ViewHolder {
@@ -118,7 +152,8 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		} else if (this.type.equals("product")) {
 
 			layout = R.layout.row_product;
-			holder = new productHolder();
+			convertView = vi.inflate(layout, null);
+			holder = new productHolder(convertView, currentItem);
 
 		} else if (this.type.equals("order")) {
 

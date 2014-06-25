@@ -95,40 +95,42 @@ public final class R {
     }
     public static final class id {
         public static final int about=0x7f09000c;
-        public static final int action_settings=0x7f090023;
+        public static final int action_settings=0x7f090025;
         public static final int arabic=0x7f09000a;
         public static final int back=0x7f090013;
         public static final int button1=0x7f090003;
         public static final int cart=0x7f09000f;
-        public static final int divider=0x7f09001b;
+        public static final int divider=0x7f09001c;
         public static final int english=0x7f090009;
         public static final int forgotpass=0x7f090005;
         public static final int forgotpassword=0x7f090006;
-        public static final int image=0x7f090022;
+        public static final int image=0x7f090024;
         public static final int imageView1=0x7f09000b;
         public static final int imgLogo=0x7f09000d;
-        public static final int itemname=0x7f09001a;
-        public static final int itemnumber=0x7f090019;
+        public static final int itemname=0x7f09001b;
+        public static final int itemnumber=0x7f09001a;
         public static final int keeploggedin=0x7f090004;
-        public static final int languageSP=0x7f090016;
+        public static final int languageSP=0x7f090017;
         public static final int list=0x7f09000e;
         public static final int listoforders=0x7f090012;
         public static final int main=0x7f090000;
-        public static final int name=0x7f090018;
+        public static final int name=0x7f090019;
         public static final int ordersfooter=0x7f090014;
         public static final int pager=0x7f090008;
         public static final int password=0x7f090002;
-        public static final int password2=0x7f090015;
-        public static final int price=0x7f090020;
-        public static final int price_lira=0x7f090021;
-        public static final int price_txt=0x7f09001f;
-        public static final int qt_txt=0x7f09001c;
+        public static final int password2=0x7f090016;
+        public static final int price=0x7f090021;
+        public static final int price_lira=0x7f090022;
+        public static final int price_txt=0x7f090020;
+        public static final int qtTxt=0x7f090023;
+        public static final int qt_txt=0x7f09001d;
         public static final int quantity=0x7f090011;
         public static final int rightarrow=0x7f090007;
-        public static final int submit=0x7f090017;
+        public static final int submit=0x7f090018;
+        public static final int totalQuantity=0x7f090015;
         public static final int totalprice=0x7f090010;
-        public static final int unit=0x7f09001e;
-        public static final int unit_txt=0x7f09001d;
+        public static final int unit=0x7f09001f;
+        public static final int unit_txt=0x7f09001e;
         public static final int user_name=0x7f090001;
     }
     public static final class layout {

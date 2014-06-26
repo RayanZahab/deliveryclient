@@ -25,17 +25,28 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="info.androidhive.tabsswipe.LoginActivity"
+            android:name="info.androidhive.tabsswipe.SelectLanguageActivity"
             android:icon="@drawable/moto"
             android:label="@string/buttonlogin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="stateHidden" >
             <category android:name="android.intent.category.LAUNCHER" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="info.androidhive.tabsswipe.LoginActivity"
+            android:icon="@drawable/moto"
+            android:label="@string/buttonlogin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
     </application>

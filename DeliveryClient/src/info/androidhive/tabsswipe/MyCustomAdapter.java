@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,15 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	Context context;
 	private String type;
 	List<Integer> cartIds = new ArrayList<Integer>();
-
+	Activity activity ;
+	
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
 		super(context, textViewResourceId, navList);
 		this.currentList = new ArrayList<Item>();
 		this.currentList.addAll(navList);
 		this.context = context;
-		Activity activity = (Activity) context;
+		activity = (Activity) context;
 		cartIds = ((deliveryclient) activity.getApplication()).getMyCartIds();
 		this.setType();
 	}
@@ -58,11 +60,14 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			price.setText(""+item.getPrice());
 			quantity = (Button) convertView.findViewById(R.id.quantity);
 			qtTxt = (TextView) convertView.findViewById(R.id.qtTxt);
-			//int p = cartIds.get(item.getId());
-			//if(p>0)
-			//{
-				
-			//}
+			
+			int pId=item.getId();
+			Product cp = new Product(pId);
+			int pp = ((deliveryclient) activity.getApplication()).getMyCart().getProductPosition(cp);
+			if(pp>=0)
+			{
+				qtTxt.setText(""+((deliveryclient) activity.getApplication()).getMyCart().getProductCount(cp));
+			}
 			quantity.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
 					int qt = Integer.parseInt(qtTxt.getText().toString());
@@ -75,10 +80,10 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		}
 	}
 	public void addToCart(Item item){
-		Activity activity = (Activity) context;
+		
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
-		((deliveryclient) activity.getApplication()).addToCart(p);
+		((deliveryclient) activity.getApplication()).getMyCart().addToCart(p);
 	}
 
 	class orderHolder extends ViewHolder {

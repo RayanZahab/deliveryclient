@@ -323,16 +323,18 @@ public class OrdersFragment extends Fragment {
 		});
 	}
 	
-	public static void updateFooter(List<Product> cart)
+	public static void updateFooter()
 	{
+		Cart cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
 		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
 		TextView price = (TextView) view.findViewById(R.id.totalprice);
 		int totalPrice=0;
-		for(Product myP:cart)
+		
+		for(CartItem myP:cart.getCartItems())
 		{
-			totalPrice += myP.getPrice();
+			totalPrice += (myP.getCount() *  myP.getProduct().getPrice() );
 		}
 		price.setText(totalPrice+" L.L");
-		quantity.setText(""+cart.size());
+		quantity.setText(""+cart.getCartItems().size());
 	}
 }

@@ -33,6 +33,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:background="#dadcdb"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" >
 
@@ -40,6 +41,7 @@
             android:id="@+id/button1"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@drawable/mybutton"
@@ -49,6 +51,7 @@
         <EditText
             android:id="@+id/totalprice"
             android:layout_width="45dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/myedittext"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button1"
@@ -67,6 +70,17 @@
             android:layout_alignBottom="@+id/totalprice"
             android:layout_alignLeft="@+id/button1"
             android:ems="10" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/quantity"
+            android:layout_alignBottom="@+id/quantity"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="15sp"
+            android:text="Total" />
 
     </RelativeLayout>
 

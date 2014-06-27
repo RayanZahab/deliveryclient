@@ -57,8 +57,9 @@
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/button1"
-                android:layout_marginBottom="4dp"
                 android:layout_alignRight="@+id/button1"
+                android:layout_marginBottom="4dp"
+                android:layout_toRightOf="@+id/totalQuantity"
                 android:background="@drawable/myedittext"
                 android:ems="10" />
 

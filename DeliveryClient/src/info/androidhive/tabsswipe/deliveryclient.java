@@ -5,13 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class deliveryclient extends Application {
 	private String token, orderStatus;
@@ -21,12 +16,13 @@ public class deliveryclient extends Application {
 	public MyJs.TransparentProgressDialog loader;
 	public Activity current;
 	private UncaughtExceptionHandler defaultUEH;
-	private List<Product> myCart = new ArrayList<Product>();
+	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
 
 	public deliveryclient() {
 		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
 		//Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);
+		myCart =  new Cart();
 	}
 
 	// handler listener
@@ -214,11 +210,11 @@ public class deliveryclient extends Application {
 		this.loader = loader;
 	}
 
-	public List<Product> getMyCart() {
+	public Cart getMyCart() {
 		return myCart;
 	}
 
-	public void setMyCart(List<Product> myCart) {
+	public void setMyCart(Cart myCart) {
 		this.myCart = myCart;
 	}
 	
@@ -228,16 +224,5 @@ public class deliveryclient extends Application {
 
 	public void setMyCartIds(List<Integer> myIds) {
 		this.myCartIds = myIds;
-	}
-	public void addToCart(Product p)
-	{
-		myCart.add(p);
-		myCartIds.add(p.getId());
-		Log.d("ray","cart size"+myCart.size());
-		for(Product c:myCart)
-		{
-			Log.d("ray",","+c.getId());			
-		}
-		OrdersFragment.updateFooter(myCart);
 	}
 }

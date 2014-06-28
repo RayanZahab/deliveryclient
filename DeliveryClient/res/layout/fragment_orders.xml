@@ -57,8 +57,10 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_above="@+id/button1"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_alignLeft="@+id/button1"
                 android:layout_alignRight="@+id/button1"
-                android:layout_toRightOf="@+id/totalQuantity"
                 android:background="@drawable/myedittext"
                 android:ems="10" />
 
@@ -79,6 +81,8 @@
 	             android:layout_height="45dp"
 	             android:layout_above="@+id/button1"
 	             android:layout_marginLeft="15dp"
+	             android:layout_marginTop="8dp"
+	             android:gravity="center"
 	             android:layout_toRightOf="@+id/textView1"
 	             android:background="@drawable/myedittext"
 	             android:ems="10" />

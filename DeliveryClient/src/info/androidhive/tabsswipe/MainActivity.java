@@ -48,7 +48,7 @@ ActionBar.TabListener {
 			if (i == 1)
 				tab.setIcon(R.drawable.orders_tab);
 			else if (i == 0)
-				tab.setIcon(R.drawable.ic_launcher);
+				tab.setIcon(R.drawable.admin);
 			else
 				tab.setIcon(R.drawable.carttabs);
 			i++;

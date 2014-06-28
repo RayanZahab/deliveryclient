@@ -24,5 +24,9 @@ public class CartItem {
 	{
 		this.count = this.count +1;
 	}
+	public void rmvOne()
+	{
+		this.count = this.count -1;
+	}
 
 }

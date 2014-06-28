@@ -62,7 +62,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/quantity"
+            android:id="@+id/qtTxtttt"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
             android:background="@drawable/myedittext"
@@ -75,8 +75,8 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/quantity"
-            android:layout_alignBottom="@+id/quantity"
+            android:layout_alignBaseline="@+id/qtTxtttt"
+            android:layout_alignBottom="@+id/qtTxtttt"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:textSize="15sp"

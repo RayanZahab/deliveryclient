@@ -8,13 +8,16 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 class MyCustomAdapter extends ArrayAdapter<Item> {
 
@@ -27,12 +30,12 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
 		super(context, textViewResourceId, navList);
-		this.currentList = new ArrayList<Item>();
-		this.currentList.addAll(navList);
+		this.currentList = navList;
 		this.context = context;
 		activity = (Activity) context;
 		cartIds = ((deliveryclient) activity.getApplication()).getMyCartIds();
 		this.setType();
+		Log.d("ray", "mycustom: "+type + "->"+navList.size());
 	}
 
 	private void setType() {
@@ -55,6 +58,13 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		ImageView plus, minus;
 
 		public productHolder(View convertView, final Item item) {
+			convertView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					// OrdersFragment.move();
+				}
+			});
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
 			price = (TextView) convertView.findViewById(R.id.price);
@@ -86,7 +96,6 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			minus.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
 					int qt = Integer.parseInt(qtTxt.getText().toString());
-					Log.d("ray","Minus hit"+qt);
 					if (qt > 0) {
 						qt--;
 						qtTxt.setText("" + qt);
@@ -157,58 +166,57 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		Item currentItem = currentList.get(position);
 
 		if (convertView == null) {
-			convertView = setAttr(this.type, currentItem);
+			
+			int layout = 0;
+			LayoutInflater vi = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			Log.d("rays","Type:"+this.type);
+			if (this.type.equals("txt")) {
+				layout = R.layout.row_txt;
+				convertView = vi.inflate(layout, null);
+				holder = new txtHolder(convertView, currentItem);
+			} else if (this.type.equals("txtImg")) {
+
+				layout = R.layout.row_txtimg;
+				convertView = vi.inflate(layout, null);
+				holder = new txImgHolder(convertView, currentItem);
+
+			} else if (this.type.equals("product")) {
+				Log.d("ray", "setatt");
+				layout = R.layout.row_product;
+				convertView = vi.inflate(layout, null);
+				holder = new productHolder(convertView, currentItem);
+
+			} else if (this.type.equals("order")) {
+
+				layout = R.layout.activity_main;
+				holder = new orderHolder();
+
+			} else if (this.type.equals("cart")) {
+
+				layout = R.layout.row_product;
+				convertView = vi.inflate(layout, null);
+				holder = new productHolder(convertView, currentItem);
+
+			} else if (this.type.equals("address")) {
+
+				layout = R.layout.row_add;
+				holder = new orderHolder();
+
+			} else if (this.type.equals("orderItem")) {
+
+				layout = R.layout.activity_main;
+				holder = new radioHolder();
+			}else
+			{
+				Log.d("rays","nothing");
+			}
+			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		
 		return convertView;
 	}
-
-	public View setAttr(String type, Item currentItem) {
-		ViewHolder holder = null;
-		int layout = 0;
-		LayoutInflater vi = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View convertView = null;
-
-		if (this.type.equals("txt")) {
-			layout = R.layout.row_txt;
-			convertView = vi.inflate(layout, null);
-			holder = new txtHolder(convertView, currentItem);
-		} else if (this.type.equals("txtImg")) {
-
-			layout = R.layout.row_txtimg;
-			convertView = vi.inflate(layout, null);
-			holder = new txImgHolder(convertView, currentItem);
-
-		} else if (this.type.equals("product")) {
-
-			layout = R.layout.row_product;
-			convertView = vi.inflate(layout, null);
-			holder = new productHolder(convertView, currentItem);
-
-		} else if (this.type.equals("order")) {
-
-			layout = R.layout.activity_main;
-			holder = new orderHolder();
-
-		} else if (this.type.equals("cart")) {
-
-			layout = R.layout.row_product;
-			holder = new cartHolder();
-
-		} else if (this.type.equals("address")) {
-
-			layout = R.layout.row_add;
-			holder = new orderHolder();
-
-		} else if (this.type.equals("orderItem")) {
-
-			layout = R.layout.activity_main;
-			holder = new radioHolder();
-		}
-		convertView.setTag(holder);
-
-		return convertView;
-	}
+	
 }

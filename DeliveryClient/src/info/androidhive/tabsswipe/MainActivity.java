@@ -45,10 +45,11 @@ ActionBar.TabListener {
 		for (String tab_name : tabs) {
 			Tab tab = actionBar.newTab();
 			tab.setTag(tab_name);
+
 			if (i == 1)
-				tab.setIcon(R.drawable.orders_tab);
-			else if (i == 0)
 				tab.setIcon(R.drawable.admin);
+			else if (i == 0)
+				tab.setIcon(R.drawable.orders_tab);
 			else
 				tab.setIcon(R.drawable.carttabs);
 			i++;
@@ -68,6 +69,9 @@ ActionBar.TabListener {
 				// on changing the page
 				// make respected tab selected
 				actionBar.setSelectedNavigationItem(position);
+				if (position == 0) {
+					OrdersFragment.getBusinesses();
+				}
 			}
 
 			@Override

@@ -99,5 +99,14 @@ public class Cart {
 		}
 		return 0;
 	}
+	public int getAllCount()
+	{
+		int qte = 0;
+		for(CartItem ci:cartItems)
+		{
+			qte += getProductCount(ci.getProduct());
+		}
+		return qte;
+	}
 
 }

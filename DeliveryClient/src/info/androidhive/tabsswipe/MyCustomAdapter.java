@@ -22,8 +22,8 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	Context context;
 	private String type;
 	List<Integer> cartIds = new ArrayList<Integer>();
-	Activity activity ;
-	
+	Activity activity;
+
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
 		super(context, textViewResourceId, navList);
@@ -36,7 +36,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	}
 
 	private void setType() {
-		if(this.currentList.size()>0)
+		if (this.currentList.size() > 0)
 			this.type = this.currentList.get(0).getType();
 	}
 
@@ -52,38 +52,62 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		TextView name, qtTxt;
 		EditText input;
 		TextView price;
-		Button quantity;
-		public productHolder(View convertView,final Item item) {
+		ImageView plus, minus;
+
+		public productHolder(View convertView, final Item item) {
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
 			price = (TextView) convertView.findViewById(R.id.price);
-			price.setText(""+item.getPrice());
-			quantity = (Button) convertView.findViewById(R.id.quantity);
+			price.setText("" + item.getPrice());
+			plus = (ImageView) convertView.findViewById(R.id.plus);
+			minus = (ImageView) convertView.findViewById(R.id.minus);
 			qtTxt = (TextView) convertView.findViewById(R.id.qtTxt);
-			
-			int pId=item.getId();
+
+			int pId = item.getId();
 			Product cp = new Product(pId);
-			int pp = ((deliveryclient) activity.getApplication()).getMyCart().getProductPosition(cp);
-			if(pp>=0)
-			{
-				qtTxt.setText(""+((deliveryclient) activity.getApplication()).getMyCart().getProductCount(cp));
+			int pp = ((deliveryclient) activity.getApplication()).getMyCart()
+					.getProductPosition(cp);
+			if (pp >= 0) {
+				qtTxt.setText(""
+						+ ((deliveryclient) activity.getApplication())
+								.getMyCart().getProductCount(cp));
 			}
-			quantity.setOnClickListener(new Button.OnClickListener() {
+			plus.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
 					int qt = Integer.parseInt(qtTxt.getText().toString());
-					qt++;
-					qtTxt.setText(""+qt);
-					addToCart(item);
-					
+					if (qt < 10) {
+						qt++;
+						qtTxt.setText("" + qt);
+						addToCart(item);
+					}
+
+				}
+			});
+			minus.setOnClickListener(new Button.OnClickListener() {
+				public void onClick(View v) {
+					int qt = Integer.parseInt(qtTxt.getText().toString());
+					Log.d("ray","Minus hit"+qt);
+					if (qt > 0) {
+						qt--;
+						qtTxt.setText("" + qt);
+						rmvFromCart(item);
+					}
 				}
 			});
 		}
 	}
-	public void addToCart(Item item){
-		
+
+	public void addToCart(Item item) {
+
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
 		((deliveryclient) activity.getApplication()).getMyCart().addToCart(p);
+	}
+
+	public void rmvFromCart(Item item) {
+		Product p = new Product(item.getId());
+		p.setPrice(item.getPrice());
+		((deliveryclient) activity.getApplication()).getMyCart().rmvFromCart(p);
 	}
 
 	class orderHolder extends ViewHolder {
@@ -102,7 +126,8 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 	class txtHolder extends ViewHolder {
 		TextView name;
-		public txtHolder(View convertView,Item item) {
+
+		public txtHolder(View convertView, Item item) {
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
 		}
@@ -111,9 +136,11 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	class txImgHolder extends ViewHolder {
 		TextView name;
 		ImageView picture;
-		public txImgHolder(View convertView,Item item) {
+
+		public txImgHolder(View convertView, Item item) {
 			TextView name = (TextView) convertView.findViewById(R.id.name);
-			ImageView picture = (ImageView) convertView.findViewById(R.id.image);
+			ImageView picture = (ImageView) convertView
+					.findViewById(R.id.image);
 			picture.setImageResource(item.getImg());
 			name.setText(item.getName());
 		}
@@ -128,9 +155,9 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		ViewHolder holder = null;
 		Item currentItem = currentList.get(position);
-		
+
 		if (convertView == null) {
-			convertView= setAttr(this.type, currentItem);
+			convertView = setAttr(this.type, currentItem);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -143,7 +170,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		LayoutInflater vi = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View convertView = null;
-		
+
 		if (this.type.equals("txt")) {
 			layout = R.layout.row_txt;
 			convertView = vi.inflate(layout, null);
@@ -167,7 +194,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		} else if (this.type.equals("cart")) {
 
-			layout = R.layout.row_cart;
+			layout = R.layout.row_product;
 			holder = new cartHolder();
 
 		} else if (this.type.equals("address")) {
@@ -179,7 +206,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 			layout = R.layout.activity_main;
 			holder = new radioHolder();
-		}				
+		}
 		convertView.setTag(holder);
 
 		return convertView;

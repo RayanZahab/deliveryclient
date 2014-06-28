@@ -58,6 +58,18 @@ public class Cart {
 		}
 		OrdersFragment.updateFooter();
 	}
+
+	public void rmvFromCart(Product p) {
+		productIds = getProductIds();
+		
+		int position = getProductPosition(p);
+		if (cartItems.get(position).getCount()==1) {
+			cartItems.remove(position);
+		} else {
+			cartItems.get(position).rmvOne();
+		}
+		OrdersFragment.updateFooter();
+	}
 	public int getProductPosition(Product p)
 	{
 		int i = -1;

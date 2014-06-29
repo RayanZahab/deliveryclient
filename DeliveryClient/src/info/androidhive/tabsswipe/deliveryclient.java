@@ -13,14 +13,13 @@ import android.util.Log;
 public class deliveryclient extends Application {
 	private String token, orderStatus;
 	private int shopId = 0, branchId = 0, categoryId = 0, productId = 0,
-			orderId = 0, userId = 0;
+			orderId = 0, userId = 0 , addressId =0;
 	private boolean admin, prep, delivery, keepme;
 	public MyJs.TransparentProgressDialog loader;
 	public Activity current;
 	private UncaughtExceptionHandler defaultUEH;
 	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
-	private ParentFragment currentFragment;
 
 	public deliveryclient() {
 		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
@@ -75,6 +74,8 @@ public class deliveryclient extends Application {
 		this.prep = settings.getBoolean("preparer", false);
 		this.delivery = settings.getBoolean("delivery", false);
 		this.keepme = settings.getBoolean("isChecked", false);
+		this.userId = settings.getInt("id", 0);
+		this.setAddressId(settings.getInt("addressId", 0));
 	}
 
 	public void clear(String current) {
@@ -231,6 +232,14 @@ public class deliveryclient extends Application {
 
 	public Fragment getCurrentFragment() {
 		return MainActivity.getVisibleFragment();
+	}
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
 	}
 
 }

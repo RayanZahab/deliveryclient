@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,7 +27,18 @@ public class CartFragment extends ParentFragment {
 		currentActivity = getActivity();
 		
 		view = inflater.inflate(R.layout.fragment_cart, container, false);
+		Button submit = (Button) view.findViewById(R.id.submit);
+		submit.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				submitCart();
+			}
+		});
+		
 		return view;
+	}
+	public void submitCart()
+	{
+		
 	}
 
 	@Override
@@ -58,7 +70,6 @@ public class CartFragment extends ParentFragment {
 	}
 
 	public void updateList() {
-		Log.d("ray","CREATEDDDDDDDD: "+mylist.size());
 		ListView listView = (ListView) view.findViewById(R.id.cartList);
 		listView.setAdapter(new MyCustomAdapter(currentActivity,
 				R.layout.row_product, mylist));

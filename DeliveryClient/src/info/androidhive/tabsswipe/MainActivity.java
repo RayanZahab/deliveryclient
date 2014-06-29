@@ -25,7 +25,7 @@ public class MainActivity extends FragmentActivity implements
 	private ActionBar actionBar;
 	// Tab titles
 	static FragmentManager fragmentManager ;
-	private String[] tabs = { "Orders", "Cart" , "Profile"};
+	private String[] tabs = { "Orders", "Profile", "Cart" };
 
 	@SuppressLint("NewApi")
 	@Override
@@ -90,17 +90,25 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public void callMethod(String m, String s, String error) {
-		OrdersFragment f = (OrdersFragment) getVisibleFragment();
-		Method returnFunction;
-		try {
-			returnFunction = f.getClass().getDeclaredMethod(m, s.getClass(),
-					s.getClass());
-
-			returnFunction.invoke(f, s, error);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment fragment : fragments) {
+			if (fragment.getClass().equals(OrdersFragment.class))
+			{
+				Method returnFunction;
+				
+				try {
+					returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(),
+							s.getClass());
+					if(returnFunction != null)
+						returnFunction.invoke(fragment, s, error);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+				
 		}
+		
 	}
 
 	@Override

@@ -1,63 +1,46 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class CartFragment extends ParentFragment {
 	Cart cart;
 	static Activity currentActivity;
 	FragmentManager fragmentManager;
 	ArrayList<Item> mylist;
-	static View view;
-	private ArrayAdapter<String> listAdapter;
-	private ListView mainListView;
+	public static View view;
+	static View myview;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		currentActivity = getActivity();
-		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
+		
 		view = inflater.inflate(R.layout.fragment_cart, container, false);
-
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
+		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
 		getProducts();
 		updateFooter();
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		if (isVisible()) {
-			getProducts();
-			updateFooter();
-		}
+	public void onResume() {
+		super.onResume();
+		
 	}
 
 	public void getProducts() {
@@ -75,7 +58,8 @@ public class CartFragment extends ParentFragment {
 	}
 
 	public void updateList() {
-		final ListView listView = (ListView) view.findViewById(R.id.cartList);
+		Log.d("ray","CREATEDDDDDDDD: "+mylist.size());
+		ListView listView = (ListView) view.findViewById(R.id.cartList);
 		listView.setAdapter(new MyCustomAdapter(currentActivity,
 				R.layout.row_product, mylist));
 	}

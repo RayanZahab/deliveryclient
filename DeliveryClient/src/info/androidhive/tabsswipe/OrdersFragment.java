@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 public class OrdersFragment extends ParentFragment {
 
-	int depth = 0;
+	static int depth = 0;
 	private static List<String> sequence = new ArrayList<String>();
 	static ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
@@ -74,23 +74,21 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
-		
+
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);		
-		
+		super.onActivityCreated(savedInstanceState);
+
 	}
+
 	@Override
-	public void onStart() {
-	     super.onStart();
-	     if(isVisible())
-	     {
-			getList(sequence.get(0), 0);
-			Log.d("ray","on created");
-	     }
+	public void onResume() {
+		super.onResume();
+		getList(sequence.get(0), 0);
+		Log.d("ray", "resumed");
 	}
 
 	public void goUp() {
@@ -138,6 +136,7 @@ public class OrdersFragment extends ParentFragment {
 			branchId = 0;
 			categoryId = 0;
 			productId = 0;
+			depth =0;
 			getBusinesses();
 		} else if (type.equals("country")) {
 			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
@@ -176,7 +175,7 @@ public class OrdersFragment extends ParentFragment {
 		ft.commit();
 		ViewPager viewPager = (ViewPager) currentActivity
 				.findViewById(R.id.pager);
-		viewPager.setCurrentItem(1, true);
+		viewPager.setCurrentItem(2, true);
 	}
 
 	private void showToast(String msg) {
@@ -290,21 +289,20 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public static void getBusinesses() {
-		if(fragmentId == (MainActivity.getVisibleFragment()).getId())
-		{
-
-		countryId = 0;
-		cityId = 0;
-		areaId = 0;
-		shopId = 0;
-		branchId = 0;
-		categoryId = 0;
-		productId = 0;
-		String serverURL = new myURL("businesses", null, 0, 30).getURL();
-		MyJs mjs = new MyJs("setBusinesses", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
+		if (fragmentId == (MainActivity.getVisibleFragment()).getId()) {
+			depth = 0;
+			countryId = 0;
+			cityId = 0;
+			areaId = 0;
+			shopId = 0;
+			branchId = 0;
+			categoryId = 0;
+			productId = 0;
+			String serverURL = new myURL("businesses", null, 0, 30).getURL();
+			MyJs mjs = new MyJs("setBusinesses", currentActivity,
+					((deliveryclient) currentActivity.getApplication()), "GET",
+					true, true);
+			mjs.execute(serverURL);
 		}
 	}
 

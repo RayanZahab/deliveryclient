@@ -7,6 +7,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 
 public class deliveryclient extends Application {
 	private String token, orderStatus;
@@ -18,6 +20,7 @@ public class deliveryclient extends Application {
 	private UncaughtExceptionHandler defaultUEH;
 	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
+	private ParentFragment currentFragment;
 
 	public deliveryclient() {
 		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
@@ -225,4 +228,9 @@ public class deliveryclient extends Application {
 	public void setMyCartIds(List<Integer> myIds) {
 		this.myCartIds = myIds;
 	}
+
+	public Fragment getCurrentFragment() {
+		return MainActivity.getVisibleFragment();
+	}
+
 }

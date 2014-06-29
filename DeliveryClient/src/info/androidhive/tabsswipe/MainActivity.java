@@ -6,6 +6,7 @@ import java.util.List;
 import info.androidhive.tabsswipe.adapter.TabsPagerAdapter;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ActionBar.TabListener;
 import android.app.AlertDialog;
 import android.app.ActionBar.Tab;
 import android.content.DialogInterface;
@@ -16,14 +17,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 
 public class MainActivity extends FragmentActivity implements
-
-ActionBar.TabListener {
+	TabListener  {
+	
 	Fragment activeFragment;
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
-	private String[] tabs = { "Orders", "Profile", "Cart" };
+	static FragmentManager fragmentManager ;
+	private String[] tabs = { "Orders", "Cart" , "Profile"};
 
 	@SuppressLint("NewApi")
 	@Override
@@ -33,9 +35,12 @@ ActionBar.TabListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		fragmentManager = MainActivity.this
+				.getSupportFragmentManager();
+		
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		mAdapter = new TabsPagerAdapter(fragmentManager);
 
 		viewPager.setAdapter(mAdapter);
 		actionBar.setHomeButtonEnabled(false);
@@ -70,7 +75,7 @@ ActionBar.TabListener {
 				// make respected tab selected
 				actionBar.setSelectedNavigationItem(position);
 				if (position == 0) {
-					OrdersFragment.getBusinesses();
+					//OrdersFragment.getBusinesses();
 				}
 			}
 
@@ -120,9 +125,8 @@ ActionBar.TabListener {
 						}).setNegativeButton("No", null).show();
 	}
 
-	public Fragment getVisibleFragment() {
-		FragmentManager fragmentManager = MainActivity.this
-				.getSupportFragmentManager();
+	public static Fragment getVisibleFragment() {
+		
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment fragment : fragments) {
 			if (fragment != null && fragment.isVisible())

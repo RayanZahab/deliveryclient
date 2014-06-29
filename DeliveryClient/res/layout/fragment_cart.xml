@@ -6,10 +6,11 @@
     android:baselineAligned="true"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_horizontal_margin" >
+    android:paddingTop="@dimen/activity_horizontal_margin"
+     android:id="@+id/cart" >
 
     <LinearLayout
-        android:id="@+id/listoforders"
+        android:id="@+id/listofcart"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
@@ -19,9 +20,9 @@
 
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/cartList"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:divider="@android:color/transparent"
             android:dividerHeight="10px" >

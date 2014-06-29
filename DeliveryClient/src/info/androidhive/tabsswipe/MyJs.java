@@ -157,7 +157,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					sb.append(line + "\n");
 				}
 				Content = sb.toString();
-				Log.d("PUT", "ray: " + Content);
+				Log.d("GET", "ray: " + Content + "->"+returnFunction + " : "+mc.getLocalClassName());
 				if (conn.getResponseCode() != 200) {
 					Error = conn.getResponseMessage();
 					JSONObject jsonResponse = new JSONObject(Content);

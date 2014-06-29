@@ -284,7 +284,6 @@ public class APIManager {
 	public ArrayList<Branch> getBranchesByShop(String cont) {
 		JSONObject jsonResponse;
 		ArrayList<Branch> gridArray = new ArrayList<Branch>();
-		gridArray.add(new Branch(0, "Select", null, null));
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {

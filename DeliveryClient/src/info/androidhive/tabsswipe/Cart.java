@@ -46,29 +46,42 @@ public class Cart {
 		return pIds;
 	}
 
-	public void addToCart(Product p) {
+	public void addToCart(String fragmentClass , Product p) {
 		productIds = getProductIds();
 		
 		int position = getProductPosition(p);
+		
 		if (position>=0) {
-			cartItems.get(position).addOne();
+				cartItems.get(position).addOne();
 		} else {
 			CartItem ci = new CartItem(p, 1);
 			cartItems.add(ci);
+
 		}
-		OrdersFragment.updateFooter();
+		updateFooter(fragmentClass);
+	}
+	public void updateFooter(String fragmentClass)
+	{
+		if(fragmentClass.equals(OrdersFragment.class.getName()))
+			OrdersFragment.updateFooter();
+		else
+			CartFragment.updateFooter();
 	}
 
-	public void rmvFromCart(Product p) {
+	public void rmvFromCart(String fragmentClass , Product p) {
 		productIds = getProductIds();
 		
 		int position = getProductPosition(p);
-		if (cartItems.get(position).getCount()==1) {
-			cartItems.remove(position);
-		} else {
-			cartItems.get(position).rmvOne();
+		
+		if (position>-1 ) 
+		{
+			if (position>-1 && cartItems.get(position).getCount()==1) {
+				cartItems.remove(position);
+			} else {
+				cartItems.get(position).rmvOne();
+			}
+			updateFooter(fragmentClass);
 		}
-		OrdersFragment.updateFooter();
 	}
 	public int getProductPosition(Product p)
 	{

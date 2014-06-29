@@ -10,14 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 class MyCustomAdapter extends ArrayAdapter<Item> {
 
@@ -31,16 +29,19 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			ArrayList<Item> navList) {
 		super(context, textViewResourceId, navList);
 		this.currentList = navList;
+
+		this.setType();
+
 		this.context = context;
 		activity = (Activity) context;
 		cartIds = ((deliveryclient) activity.getApplication()).getMyCartIds();
-		this.setType();
-		Log.d("ray", "mycustom: "+type + "->"+navList.size());
 	}
 
 	private void setType() {
-		if (this.currentList.size() > 0)
+		if (currentList.size() > 0)
 			this.type = this.currentList.get(0).getType();
+		else
+			this.type = "empty";
 	}
 
 	public ArrayList<Item> getCurrentList() {
@@ -85,7 +86,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			plus.setOnClickListener(new Button.OnClickListener() {
 				public void onClick(View v) {
 					int qt = Integer.parseInt(qtTxt.getText().toString());
-					if (qt < 10) {
+					if (qt < 9) {
 						qt++;
 						qtTxt.setText("" + qt);
 						addToCart(item);
@@ -110,13 +111,20 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
-		((deliveryclient) activity.getApplication()).getMyCart().addToCart(p);
+		p.setName(item.getName());
+		String cn = ((deliveryclient) activity.getApplication())
+				.getCurrentFragment().getClass().getName();
+		((deliveryclient) activity.getApplication()).getMyCart().addToCart(cn,
+				p);
 	}
 
 	public void rmvFromCart(Item item) {
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
-		((deliveryclient) activity.getApplication()).getMyCart().rmvFromCart(p);
+		String cn = ((deliveryclient) activity.getApplication())
+				.getCurrentFragment().getClass().getName();
+		((deliveryclient) activity.getApplication()).getMyCart().rmvFromCart(
+				cn, p);
 	}
 
 	class orderHolder extends ViewHolder {
@@ -164,14 +172,13 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		ViewHolder holder = null;
 		Item currentItem = currentList.get(position);
-
+		
 		if (convertView == null) {
-			
+
 			int layout = 0;
 			LayoutInflater vi = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			Log.d("rays","Type:"+this.type);
-			if (this.type.equals("txt")) {
+			if (this.type.equals("txt") || this.type.equals("empty")) {
 				layout = R.layout.row_txt;
 				convertView = vi.inflate(layout, null);
 				holder = new txtHolder(convertView, currentItem);
@@ -182,7 +189,6 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 				holder = new txImgHolder(convertView, currentItem);
 
 			} else if (this.type.equals("product")) {
-				Log.d("ray", "setatt");
 				layout = R.layout.row_product;
 				convertView = vi.inflate(layout, null);
 				holder = new productHolder(convertView, currentItem);
@@ -207,16 +213,15 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 				layout = R.layout.activity_main;
 				holder = new radioHolder();
-			}else
-			{
-				Log.d("rays","nothing");
+			} else {
+				Log.d("rays", "nothing");
 			}
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		return convertView;
 	}
-	
+
 }

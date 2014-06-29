@@ -1,9 +1,11 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,35 +14,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends ParentFragment {
 	Cart cart;
 	static Activity currentActivity;
 	FragmentManager fragmentManager;
 	ArrayList<Item> mylist;
-	static View view ;
-	
+	static View view;
+	private ArrayAdapter<String> listAdapter;
+	private ListView mainListView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		currentActivity = getActivity();
+		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
+		view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-		view = inflater.inflate(R.layout.fragment_orders, container, false);
-		cart = ((deliveryclient) currentActivity.getApplication())
-				.getMyCart();
-		
 		return view;
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		getProducts();
 		updateFooter();
 	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (isVisible()) {
+			getProducts();
+			updateFooter();
+		}
+	}
+
 	public void getProducts() {
 		mylist = new ArrayList<Item>();
 		for (CartItem myP : cart.getCartItems()) {
@@ -51,16 +70,16 @@ public class CartFragment extends Fragment {
 			it.setPrice(myProduct.getPrice());
 			it.setId(myProduct.getId());
 			mylist.add(it);
-			Log.d("rays","Pro: "+myProduct.getId());
 		}
 		updateList();
 	}
+
 	public void updateList() {
-		final ListView listView = (ListView) currentActivity
-				.findViewById(R.id.list);
+		final ListView listView = (ListView) view.findViewById(R.id.cartList);
 		listView.setAdapter(new MyCustomAdapter(currentActivity,
-				R.layout.row_product, mylist));		
+				R.layout.row_product, mylist));
 	}
+
 	public static void updateFooter() {
 		Cart cart = ((deliveryclient) currentActivity.getApplication())
 				.getMyCart();

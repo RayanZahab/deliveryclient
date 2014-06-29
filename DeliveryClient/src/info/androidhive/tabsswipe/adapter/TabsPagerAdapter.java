@@ -6,6 +6,7 @@ import info.androidhive.tabsswipe.OrdersFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
@@ -15,19 +16,17 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int index) {
-
 		switch (index) {
 		case 0:
 			// Top Rated fragment activity
 			return new OrdersFragment();
 		case 1:
 			// Games fragment activity
-			return new ProfileFragment();
+			return new CartFragment();
 		case 2:
 			// Movies fragment activity
-			return new CartFragment();
+			return new ProfileFragment();
 		}
-
 		return null;
 	}
 

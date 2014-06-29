@@ -21,7 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OrdersFragment extends Fragment {
+public class OrdersFragment extends ParentFragment {
 
 	int depth = 0;
 	private static List<String> sequence = new ArrayList<String>();
@@ -38,7 +38,7 @@ public class OrdersFragment extends Fragment {
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	static Activity currentActivity;
 	static View view;
-	int fragmentId;
+	static int fragmentId;
 	FragmentManager fragmentManager;
 
 	@Override
@@ -54,33 +54,43 @@ public class OrdersFragment extends Fragment {
 		sequence.add("products");
 		sequence.add("info");
 		currentActivity = getActivity();
-		
+
 		view = inflater.inflate(R.layout.fragment_orders, container, false);
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
-	    fragmentManager = getFragmentManager();
-		
+		fragmentManager = getFragmentManager();
+
 		updateFooter();
 		Button buttonOne = (Button) view.findViewById(R.id.back);
 		buttonOne.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-					goUp();
+				goUp();
 			}
 		});
 		Button submit = (Button) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-					move();
+				move();
 			}
-		});		
+		});
+		mylist = null;
 		
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		getList(sequence.get(0), 0);
+		super.onActivityCreated(savedInstanceState);		
+		
+	}
+	@Override
+	public void onStart() {
+	     super.onStart();
+	     if(isVisible())
+	     {
+			getList(sequence.get(0), 0);
+			Log.d("ray","on created");
+	     }
 	}
 
 	public void goUp() {
@@ -121,7 +131,13 @@ public class OrdersFragment extends Fragment {
 	public void getList(String type, int id) {
 		mylist = new ArrayList<Item>();
 		if (type.equals("business")) {
-			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
+			countryId = 0;
+			cityId = 0;
+			areaId = 0;
+			shopId = 0;
+			branchId = 0;
+			categoryId = 0;
+			productId = 0;
 			getBusinesses();
 		} else if (type.equals("country")) {
 			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
@@ -160,7 +176,7 @@ public class OrdersFragment extends Fragment {
 		ft.commit();
 		ViewPager viewPager = (ViewPager) currentActivity
 				.findViewById(R.id.pager);
-		viewPager.setCurrentItem(2, true);
+		viewPager.setCurrentItem(1, true);
 	}
 
 	private void showToast(String msg) {
@@ -274,11 +290,22 @@ public class OrdersFragment extends Fragment {
 	}
 
 	public static void getBusinesses() {
+		if(fragmentId == (MainActivity.getVisibleFragment()).getId())
+		{
+
+		countryId = 0;
+		cityId = 0;
+		areaId = 0;
+		shopId = 0;
+		branchId = 0;
+		categoryId = 0;
+		productId = 0;
 		String serverURL = new myURL("businesses", null, 0, 30).getURL();
 		MyJs mjs = new MyJs("setBusinesses", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET",
 				true, true);
 		mjs.execute(serverURL);
+		}
 	}
 
 	public void setBusinesses(String s, String error) {
@@ -335,19 +362,28 @@ public class OrdersFragment extends Fragment {
 	}
 
 	public void updateList() {
-		final ListView listView = (ListView) currentActivity
-				.findViewById(R.id.list);
+		final ListView listView = (ListView) view.findViewById(R.id.list);
+		if (mylist.size() == 0) {
+			Item i = new Item();
+			i.setId(0);
+			i.setName("Empty");
+			i.setType("empty");
+			mylist.add(i);
+		}
 		listView.setAdapter(new MyCustomAdapter(currentActivity,
 				android.R.layout.simple_list_item_1, mylist));
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				depth++;
-				int itemId = mylist.get(position).getId();
-				getList(sequence.get(depth), itemId);
-				listView.setAdapter(new MyCustomAdapter(currentActivity,
-						android.R.layout.simple_list_item_1, mylist));
+				if (!mylist.get(0).getType().equals("empty")) {
+					depth++;
+					int itemId = mylist.get(position).getId();
+					getList(sequence.get(depth), itemId);
+					listView.setAdapter(new MyCustomAdapter(currentActivity,
+							android.R.layout.simple_list_item_1, mylist));
+				}
 			}
 		});
 	}

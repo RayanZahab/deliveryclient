@@ -22,12 +22,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			return new OrdersFragment();
 		case 1:
 			// Games fragment activity
-			return new CartFragment();
-		case 2:
-			// Movies fragment activity
 			return new ProfileFragment();
+		case 2:
+			return new CartFragment();
+			// Movies fragment activity
+		default:
+			return new OrdersFragment();
 		}
-		return null;
 	}
 
 	@Override

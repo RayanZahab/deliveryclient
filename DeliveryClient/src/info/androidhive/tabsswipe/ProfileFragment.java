@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +88,12 @@ public class ProfileFragment extends ParentFragment {
 				updateInfo();
 			}
 		});
+		Button addresses = (Button) rootView.findViewById(R.id.addresses);
+		addresses.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				showAddresses();
+			}
+		});
 		
 		return rootView;
 	}
@@ -155,6 +163,13 @@ public class ProfileFragment extends ParentFragment {
 			Toast.makeText(currentActivity.getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+	public void showAddresses()
+	{
+	     FragmentManager fm = getFragmentManager();
+	     FragmentTransaction ft = fm.beginTransaction();
+	     //ft.replace(R.id.layoutToReplace, fh);
+	     ft.commit();
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

@@ -34,14 +34,30 @@
                 android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/password"
+			<EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/user_name"
                 android:layout_alignRight="@+id/user_name"
                 android:layout_below="@+id/user_name"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext"
+                android:ellipsize="start"
+                android:ems="10"
+                 android:hint="@string/name"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#bdbdbd"
+                android:textColorHint="#bdbdbd"
+                android:textSize="16sp" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/name"
+                android:layout_alignRight="@+id/name"
+                android:layout_below="@+id/name"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
@@ -102,7 +118,6 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:onClick="updateInfo"
             android:text="Submit"
             android:textColor="#cdcccb"
             android:textSize="18sp" />

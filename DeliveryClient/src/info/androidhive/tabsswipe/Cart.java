@@ -31,7 +31,7 @@ public class Cart {
 	public double getTotalPrice() {
 		double tp = 0;
 		for (CartItem c : cartItems) {
-			tp += c.getProduct().getPrice();
+			tp +=( c.getProduct().getPrice() * c.getCount() );
 		}
 		totalPrice = tp;
 		return tp;

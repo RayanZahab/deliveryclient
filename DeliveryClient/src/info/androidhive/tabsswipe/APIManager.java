@@ -21,8 +21,8 @@ public class APIManager {
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
-				int id = Integer.parseInt(jsonResponse.optString("id")
-						.toString());
+				int id =1;// Integer.parseInt(jsonResponse.optString("id")
+						//.toString());
 				Log.d("rays", cont);
 				int branch_id = Integer.parseInt(jsonResponse.optString(
 						"branch_id").toString());
@@ -637,8 +637,7 @@ public class APIManager {
 								.toString();
 						updated_at = jsonChildNode.optString("update_at")
 								.toString();
-						customer_id = 0;// Integer.parseInt(jsonChildNode.optString(
-						// "customer_id").toString());
+						customer_id =Integer.parseInt(jsonChildNode.optString( "customer_id").toString());
 						gridArray.add(new Address(id, country, city, area,
 								building, floor, street, details, customer_id,
 								longitude, latitude, created_at, updated_at));
@@ -658,8 +657,8 @@ public class APIManager {
 					latitude = jsonResponse.optString("latitude").toString();
 					created_at = jsonResponse.optString("create_at").toString();
 					updated_at = jsonResponse.optString("update_at").toString();
-					customer_id = 0;// Integer.parseInt(jsonResponse.optString(
-					// "customer_id").toString());
+					customer_id = Integer.parseInt(jsonResponse.optString(
+					 "customer_id").toString());
 					gridArray.add(new Address(id, country, city, area,
 							building, floor, street, details, customer_id,
 							longitude, latitude, created_at, updated_at));
@@ -1045,7 +1044,49 @@ public class APIManager {
 
 	public JSONObject objToCreate(Object o) {
 		JSONObject jsonObjSend = new JSONObject();
-		if (o instanceof Country) {
+		if (o instanceof Order) {
+
+			Order c = (Order) o;
+			JSONObject body = new JSONObject();
+			try {
+				if (c.isCancel()) {
+					jsonObjSend.put("cancel_reason", c.getCancelReason());
+				} else {
+					if (c.getStatus() != null) {
+						jsonObjSend.put("status", c.getStatus());
+						if (c.getPreparer() != null) {
+							jsonObjSend.put("p_id", c.getPreparer().getId());
+							jsonObjSend.put("d_id", c.getDelivery().getId());
+							jsonObjSend.put("note", c.getNote());
+						}
+					} else {
+						JSONArray jsonArray = new JSONArray();
+						try {
+
+							ArrayList<OrderItem> oItems = c.getOrderItems();
+							for (int i = 0; i < oItems.size(); i++) {
+								JSONObject itemObj = new JSONObject();
+								itemObj.put("id", oItems.get(i).getId());
+								itemObj.put("qty", oItems.get(i).getQuantity());
+								jsonArray.put(itemObj);
+							}
+							body.put("items", jsonArray);
+							body.put("count", c.getCount());
+							body.put("total", c.getTotal());
+							body.put("address_id", c.getAddress_id());
+							body.put("customer_id", c.getCustomer_id());
+							jsonObjSend.put("order", body);
+							Log.d("ray","order:"+ body);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		} else if (o instanceof Country) {
 			Country c = (Country) o;
 
 			JSONObject body = new JSONObject();
@@ -1200,48 +1241,7 @@ public class APIManager {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-		}*/ else if (o instanceof Order) {
-			Order c = (Order) o;
-			JSONObject body = new JSONObject();
-			try {
-				if (c.isCancel()) {
-					jsonObjSend.put("cancel_reason", c.getCancelReason());
-				} else {
-					if (c.getStatus() != null) {
-						jsonObjSend.put("status", c.getStatus());
-						if(c.getPreparer()!=null)
-						{
-							jsonObjSend.put("p_id", c.getPreparer().getId());
-							jsonObjSend.put("d_id", c.getDelivery().getId());
-							jsonObjSend.put("note", c.getNote());
-						}
-					} else {
-						JSONArray jsonArray = new JSONArray();
-						try {
-
-							ArrayList<OrderItem> oItems = c.getOrderItems();
-							for (int i = 0; i < oItems.size(); i++) {
-								JSONObject itemObj = new JSONObject();
-								itemObj.put("id", oItems.get(i).getId());
-								itemObj.put("qty", oItems.get(i).getQuantity());
-								jsonArray.put(itemObj);
-							}
-							body.put("items", jsonArray);
-							body.put("count", jsonArray.length());
-							body.put("total", c.getTotal());
-							body.put("address_id", c.getAddress_id());
-							body.put("customer_id", c.getCustomer_id());
-							jsonObjSend.put("order", body);
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+		}*/
 
 		return jsonObjSend;
 	}

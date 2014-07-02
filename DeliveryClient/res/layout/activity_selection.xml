@@ -106,14 +106,70 @@
             android:textColor="#ffffff"
             android:layout_marginTop="10dip"  />
 
+        
         <TextView
-            android:id="@+id/detailsLabel"
+            android:id="@+id/streetlabel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/areasSP"
             android:layout_below="@+id/areasSP"
             android:layout_marginTop="5dip"
+            android:text="Street" />
+        
+        <EditText
+            android:id="@+id/street"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/detailsLabel"
+            android:layout_below="@+id/streetlabel"
+            android:layout_marginTop="5dip"
+            android:text="TextView" />
+        
+        <TextView
+            android:id="@+id/buildinglabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/areasSP"
+            android:layout_below="@+id/street"
+            android:layout_marginTop="5dip"
+            android:text="Building" />
+        
+        <EditText
+            android:id="@+id/building"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/detailsLabel"
+            android:layout_below="@+id/buildinglabel"
+            android:layout_marginTop="5dip"
+            android:text="TextView" />
+        
+        <TextView
+            android:id="@+id/floorlabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/areasSP"
+            android:layout_below="@+id/building"
+            android:layout_marginTop="5dip"
+            android:text="floor" />
+        
+        <EditText
+            android:id="@+id/floor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/detailsLabel"
+            android:layout_below="@+id/floorlabel"
+            android:layout_marginTop="5dip"
+            android:text="TextView" />
+        
+        <TextView
+            android:id="@+id/detailsLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/areasSP"
+            android:layout_below="@+id/floor"
+            android:layout_marginTop="5dip"
             android:text="Details" />
+        
         <EditText
             android:id="@+id/details"
             android:layout_width="fill_parent"
@@ -122,6 +178,8 @@
             android:layout_below="@+id/detailsLabel"
             android:layout_marginTop="5dip"
             android:text="TextView" />
+        
+        
 
     </RelativeLayout>
 

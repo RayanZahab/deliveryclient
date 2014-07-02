@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import info.androidhive.tabsswipe.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -166,10 +167,8 @@ public class ProfileFragment extends ParentFragment {
 	}
 	public void showAddresses()
 	{
-	     FragmentManager fm = getFragmentManager();
-	     FragmentTransaction ft = fm.beginTransaction();
-	     //ft.replace(R.id.layoutToReplace, fh);
-	     ft.commit();
+	     Intent i = new Intent (currentActivity,SelectAdress.class);
+	     startActivity(i);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

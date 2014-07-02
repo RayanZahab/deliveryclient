@@ -57,7 +57,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		EditText input;
 		TextView price;
 		ImageView plus, minus;
-
+		
 		public productHolder(View convertView, final Item item) {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
@@ -104,6 +104,42 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 					}
 				}
 			});
+		}
+	}
+
+	class previewHolder extends ViewHolder {
+		TextView name, qtTxt;
+		TextView input;
+		TextView price ,totalprice ;
+		ImageView plus, minus;
+
+		public previewHolder(View convertView, final Item item) {
+			convertView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					// OrdersFragment.move();
+				}
+			});
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+			price = (TextView) convertView.findViewById(R.id.price);
+			price.setText("" + item.getPrice());
+			qtTxt = (TextView) convertView.findViewById(R.id.qtTxt);
+			totalprice = (TextView) convertView.findViewById(R.id.totalprice);
+
+			int pId = item.getId();
+			Product cp = new Product(pId);
+			int pp = ((deliveryclient) activity.getApplication()).getMyCart()
+					.getProductPosition(cp);
+			if (pp >= 0) {
+				qtTxt.setText(""
+						+ ((deliveryclient) activity.getApplication())
+								.getMyCart().getProductCount(cp));
+				totalprice.setText(""
+						+ ((deliveryclient) activity.getApplication())
+						.getMyCart().getProductCount(cp) * item.getPrice());
+			}
 		}
 	}
 
@@ -213,6 +249,11 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 				layout = R.layout.activity_main;
 				holder = new radioHolder();
+			} else if (this.type.equals("preview")) {
+
+				layout = R.layout.row_preview;
+				convertView = vi.inflate(layout, null);
+				holder = new previewHolder(convertView, currentItem);
 			} else {
 				Log.d("rays", "nothing");
 			}

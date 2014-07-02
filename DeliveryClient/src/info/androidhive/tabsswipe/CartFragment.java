@@ -3,6 +3,7 @@ package info.androidhive.tabsswipe;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -36,9 +37,12 @@ public class CartFragment extends ParentFragment {
 		
 		return view;
 	}
+	
+	
 	public void submitCart()
 	{
-		
+		Intent i = new Intent(this.getActivity(), PreviewActivity.class);
+		startActivity(i);
 	}
 
 	@Override

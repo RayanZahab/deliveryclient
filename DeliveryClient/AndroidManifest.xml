@@ -49,6 +49,10 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+         <activity
+            android:name="info.androidhive.tabsswipe.PreviewActivity"
+            android:label="@string/title_activity_preview" >
+        </activity>
         <activity
             android:name="info.androidhive.tabsswipe.SelectAdress"
             android:label="@string/title_activity_select_adress" >

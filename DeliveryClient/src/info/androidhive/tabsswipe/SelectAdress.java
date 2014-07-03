@@ -38,7 +38,7 @@ public class SelectAdress extends Activity {
         
         
         
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_single_choice,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.row_radiobutton,arrayList);
         listView.setAdapter(arrayAdapter);
         
         listView.setOnItemClickListener(new OnItemClickListener() {

@@ -17,7 +17,7 @@ public class SelectAdress extends Activity {
 	ListView listView;
 	
 	ArrayList< String>arrayList; // list of the strings that should appear in ListView
-	ArrayAdapter<String> arrayAdapter;
+	ArrayAdapter<Item> arrayAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,20 @@ public class SelectAdress extends Activity {
         arrayList.add("Srilanka");
         arrayList.add("SouthAfrica");
         
+        ArrayList<Item> mylist = new ArrayList<Item>();
+        int i =0;
+		for (String myP : arrayList) {
+			
+			Item it = new Item();
+			it.setName(myP);
+			it.setType("address");
+			it.setId(i);
+			mylist.add(it);
+			i++;
+		}
         
-        
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.row_radiobutton,arrayList);
+        arrayAdapter = new MyCustomAdapter(this, android.R.layout.simple_list_item_single_choice,mylist);
+
         listView.setAdapter(arrayAdapter);
         
         listView.setOnItemClickListener(new OnItemClickListener() {

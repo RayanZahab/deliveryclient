@@ -159,5 +159,6 @@
     <string name="invalid_branch">Please select a branch</string>
     <string name="order_updated">Order updated successfully</string>
     <string name="title_activity_select_adress">SelectAdress</string>
+    <string name="title_activity_register">RegisterActivity</string>
 
 </resources>

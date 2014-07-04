@@ -12,8 +12,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
@@ -40,6 +42,13 @@ public class LoginActivity extends Activity {
 			Intent i = new Intent(LoginActivity.this, MainActivity.class);
 			startActivity(i);
 		}
+		RelativeLayout register = (RelativeLayout) findViewById(R.id.register);
+		register.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+				startActivity(i);
+			}
+		});
 
 	}
 

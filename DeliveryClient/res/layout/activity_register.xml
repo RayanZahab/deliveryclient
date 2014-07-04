@@ -24,26 +24,21 @@
             android:paddingBottom="18dp"
             android:paddingTop="18dp" >
 
-            <Button
-                android:id="@+id/addresses"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Addresses" />
-
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username" />
+                android:layout_marginTop="8dp"
+                android:text="Full Name" />
 
             <EditText
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
                 android:ems="10"
-                android:enabled="false"
                 android:hint="name"
                 android:inputType="text"
                 android:paddingLeft="10dp"
@@ -56,56 +51,38 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name" />
+                android:layout_marginTop="8dp"
+                android:text="Phone" />
 
             <EditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
                 android:ems="10"
                 android:hint="@string/name"
+                android:inputType="phone"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" >
-
-                <requestFocus />
             </EditText>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password" />
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
-                android:ellipsize="start"
-                android:ems="10"
-                android:hint="password"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
-                android:textColorHint="#bdbdbd"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Retype password" />
 
             <EditText
                 android:id="@+id/password2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
                 android:ems="10"
@@ -117,20 +94,28 @@
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
 
-            <Spinner
-                android:id="@+id/languageSP"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp" />
+                android:layout_marginTop="8dp"
+                android:text="Password" />
 
-            <CheckBox
-                android:id="@+id/keeploggedin"
+            <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="keep me logged in"
-                android:textColor="#818281"
-                android:textSize="18sp" />
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext"
+                android:ellipsize="start"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#bdbdbd"
+                android:textColorHint="#bdbdbd"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <Button
@@ -140,6 +125,7 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:onClick="addUser"
             android:text="Submit"
             android:textColor="#cdcccb"
             android:textSize="18sp" />

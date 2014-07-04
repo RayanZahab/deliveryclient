@@ -12,7 +12,8 @@ public class User {
 	private int is_fired;
 	private Address address;
 	private int branch_id;
-	private boolean is_admin, is_preparer, is_delivery, login;
+	private boolean is_admin, is_preparer, is_delivery, login, is_customer;
+	
 
 	public User(int id, String name, String password, String phone,
 			int is_fired, Address address, int branch_id, boolean is_admin,
@@ -63,6 +64,10 @@ public class User {
 	public User(int i, String name) {
 		this.setId(id);
 		this.setName(name);
+	}
+
+	public User() {
+		is_customer = true;
 	}
 
 	public String getPhone() {
@@ -177,9 +182,9 @@ public class User {
 			msg = R.string.invalid_name;
 		} else if (this.phone==null || this.phone.isEmpty() || this.phone.length() < 6) {
 			msg = R.string.invalid_phone;
-		} else if (!mine && !this.is_admin && !this.is_delivery && !this.is_preparer) {
+		} else if (!is_customer && !mine && !this.is_admin && !this.is_delivery && !this.is_preparer) {
 			msg = R.string.select_role;
-		} else if (this.branch_id == 0) {
+		} else if (!is_customer && this.branch_id == 0) {
 			msg = R.string.invalid_branch;
 		} else
 			valid = true;
@@ -200,5 +205,13 @@ public class User {
 
 	public void setLogin(boolean login) {
 		this.login = login;
+	}
+
+	public boolean isIs_customer() {
+		return is_customer;
+	}
+
+	public void setIs_customer(boolean is_customer) {
+		this.is_customer = is_customer;
 	}
 }

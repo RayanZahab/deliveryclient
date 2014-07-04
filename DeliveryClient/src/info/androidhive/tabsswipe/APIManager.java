@@ -21,8 +21,8 @@ public class APIManager {
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
-				int id =1;// Integer.parseInt(jsonResponse.optString("id")
-						//.toString());
+				int id = 1;// Integer.parseInt(jsonResponse.optString("id")
+							// .toString());
 				Log.d("rays", cont);
 				int branch_id = Integer.parseInt(jsonResponse.optString(
 						"branch_id").toString());
@@ -69,7 +69,7 @@ public class APIManager {
 
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
-						
+
 						name = jsonChildNode.optString("name").toString();
 						gridArray.add(new Country(id, name));
 					}
@@ -637,7 +637,8 @@ public class APIManager {
 								.toString();
 						updated_at = jsonChildNode.optString("update_at")
 								.toString();
-						customer_id =Integer.parseInt(jsonChildNode.optString( "customer_id").toString());
+						customer_id = Integer.parseInt(jsonChildNode.optString(
+								"customer_id").toString());
 						gridArray.add(new Address(id, country, city, area,
 								building, floor, street, details, customer_id,
 								longitude, latitude, created_at, updated_at));
@@ -658,7 +659,7 @@ public class APIManager {
 					created_at = jsonResponse.optString("create_at").toString();
 					updated_at = jsonResponse.optString("update_at").toString();
 					customer_id = Integer.parseInt(jsonResponse.optString(
-					 "customer_id").toString());
+							"customer_id").toString());
 					gridArray.add(new Address(id, country, city, area,
 							building, floor, street, details, customer_id,
 							longitude, latitude, created_at, updated_at));
@@ -920,7 +921,7 @@ public class APIManager {
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
-				int id, count, quantity,preparer_id,deliverer_id;
+				int id, count, quantity, preparer_id, deliverer_id;
 				String customer_str, add_str, item_str, status, date, customer_name_str, note_str;
 
 				double total;
@@ -929,14 +930,20 @@ public class APIManager {
 				ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
 				OrderItem orderItem;
 				Product product;
-				if(jsonResponse.has("preparer_id") && !jsonResponse.optString("preparer_id").toString().equals("null") && jsonResponse.optString("preparer_id").toString()!=null )
-				{
-					preparer_id = Integer.parseInt(jsonResponse.optString("preparer_id").toString());
+				if (jsonResponse.has("preparer_id")
+						&& !jsonResponse.optString("preparer_id").toString()
+								.equals("null")
+						&& jsonResponse.optString("preparer_id").toString() != null) {
+					preparer_id = Integer.parseInt(jsonResponse.optString(
+							"preparer_id").toString());
 					order.setPreparer(new User(preparer_id));
 				}
-				if(jsonResponse.has("deliverer_id") && !jsonResponse.optString("deliverer_id").toString().equals("null") && jsonResponse.optString("deliverer_id").toString()!="null" )
-				{
-					deliverer_id = Integer.parseInt(jsonResponse.optString("deliverer_id").toString());
+				if (jsonResponse.has("deliverer_id")
+						&& !jsonResponse.optString("deliverer_id").toString()
+								.equals("null")
+						&& jsonResponse.optString("deliverer_id").toString() != "null") {
+					deliverer_id = Integer.parseInt(jsonResponse.optString(
+							"deliverer_id").toString());
 					order.setDelivery(new User(deliverer_id));
 				}
 				id = Integer.parseInt(jsonResponse.optString("id").toString());
@@ -1076,7 +1083,7 @@ public class APIManager {
 							body.put("address_id", c.getAddress_id());
 							body.put("customer_id", c.getCustomer_id());
 							jsonObjSend.put("order", body);
-							Log.d("ray","order:"+ body);
+							Log.d("ray", "order:" + body);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -1154,15 +1161,14 @@ public class APIManager {
 					body.put("pass", c.getPassword());
 				} else {
 					if (c.getPassword() != null)
-						if (c.getId() == 0)
-						{
+						if (c.getId() == 0) {
 							c.setEncPassword(c.getPhone());
 							body.put("pass", c.getPassword());
 						}
 					if (c.getName() != null)
 						body.put("name", c.getName());
 					if (c.getBranch_id() != 0)
-						body.put("branch_id", c.getBranch_id());					
+						body.put("branch_id", c.getBranch_id());
 					body.put("is_fired", 0);
 
 				}
@@ -1209,19 +1215,15 @@ public class APIManager {
 				e.printStackTrace();
 			}
 
-		}/* else if (o instanceof Activate) {
-			Activate c = (Activate) o;
-			JSONArray jsonArray = new JSONArray();
-			try {
-				for (int i = 0; i < c.getToUpdate().size(); i++) {
-					jsonArray.put(c.getToUpdate().get(i));
-				}
-				jsonObjSend.put(c.getType(), jsonArray);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		}*/ else if (o instanceof OpenHours) {
+		}/*
+		 * else if (o instanceof Activate) { Activate c = (Activate) o;
+		 * JSONArray jsonArray = new JSONArray(); try { for (int i = 0; i <
+		 * c.getToUpdate().size(); i++) { jsonArray.put(c.getToUpdate().get(i));
+		 * } jsonObjSend.put(c.getType(), jsonArray); } catch (JSONException e)
+		 * { e.printStackTrace(); }
+		 * 
+		 * }
+		 */else if (o instanceof OpenHours) {
 			OpenHours oh = (OpenHours) o;
 			try {
 				jsonObjSend.put("opening_hours", oh.getOpenHours());
@@ -1229,19 +1231,15 @@ public class APIManager {
 				e.printStackTrace();
 			}
 
-		} /*else if (o instanceof Role) {
-			Role c = (Role) o;
-			JSONObject body = new JSONObject();
-			try {
-				body.put("is_admin", c.getAdmin() ? 1 : 0);
-				body.put("is_preparer", c.getPreparer() ? 1 : 0);
-				body.put("is_deliverer", c.getDelivery() ? 1 : 0);
-
-				jsonObjSend.put("roles", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}*/
+		} /*
+		 * else if (o instanceof Role) { Role c = (Role) o; JSONObject body =
+		 * new JSONObject(); try { body.put("is_admin", c.getAdmin() ? 1 : 0);
+		 * body.put("is_preparer", c.getPreparer() ? 1 : 0);
+		 * body.put("is_deliverer", c.getDelivery() ? 1 : 0);
+		 * 
+		 * jsonObjSend.put("roles", body); } catch (JSONException e) {
+		 * e.printStackTrace(); } }
+		 */
 
 		return jsonObjSend;
 	}

@@ -9,6 +9,34 @@
     android:paddingRight="@dimen/activity_left_margin"
     android:paddingTop="@dimen/activity_horizontal_margin" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myedittext"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/customerName"
+            style="@style/mytextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingTop="10dp"
+            android:text="@string/name"
+            android:textColor="#ed1c24" />
+
+        <TextView
+            android:id="@+id/customerAdd"
+            style="@style/mytextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:text="@string/address" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
@@ -19,12 +47,55 @@
         android:orientation="vertical"
         android:textColor="#cdcccb" >
     </ListView>
+     <RelativeLayout
+                android:id="@+id/totalamount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/myedittext" >
+
+                <TextView
+                    android:id="@+id/allTotal"
+                    style="@style/mytextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/totallabel"
+                    android:layout_alignBottom="@+id/totallabel"
+                    android:layout_toLeftOf="@+id/lira"
+                    android:gravity="center_vertical"
+                    android:text="25"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/lira"
+                    style="@style/mytextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/total"
+                    android:layout_alignBottom="@+id/total"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:paddingRight="7dp"
+                    android:text="@string/lira"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/totallabel"
+                    style="@style/mytextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="7dp"
+                    android:text="@string/total"
+                    android:textSize="19sp" />
+            </RelativeLayout>
 
     <Button
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:onClick="submit" />
+        android:onClick="submit"
+        android:text="Submit" />
 
 </LinearLayout>

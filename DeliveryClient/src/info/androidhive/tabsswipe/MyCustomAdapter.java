@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 class MyCustomAdapter extends ArrayAdapter<Item> {
@@ -23,7 +22,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	Context context;
 	private String type;
 	List<Integer> cartIds = new ArrayList<Integer>();
-	Activity activity;
+	Activity activity; 
 
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
@@ -186,6 +185,15 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		}
 	}
 
+	class radioHolder extends ViewHolder {
+		TextView name;
+
+		public radioHolder(View convertView, Item item) {
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+		}
+	} 
+
 	class txImgHolder extends ViewHolder {
 		TextView name;
 		ImageView picture;
@@ -197,10 +205,6 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			picture.setImageResource(item.getImg());
 			name.setText(item.getName());
 		}
-	}
-
-	class radioHolder extends ViewHolder {
-		RadioButton name;
 	}
 
 	@Override
@@ -242,13 +246,10 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 			} else if (this.type.equals("address")) {
 
-				layout = R.layout.row_add;
-				holder = new orderHolder();
+				layout = R.layout.row_radiobutton;
+				convertView = vi.inflate(layout, null);
+				holder = new radioHolder(convertView, currentItem);
 
-			} else if (this.type.equals("orderItem")) {
-
-				layout = R.layout.activity_main;
-				holder = new radioHolder();
 			} else if (this.type.equals("preview")) {
 
 				layout = R.layout.row_preview;

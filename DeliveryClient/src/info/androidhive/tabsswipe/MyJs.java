@@ -247,8 +247,8 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					Error = null;
 				}
 			} else if (this.method.equals("Upload")) {
-				Product p = (Product) this.objectToAdd;
-				Content = uploadProduct(p, url, token);
+				User p = (User) this.objectToAdd;
+				Content = register(p, url, token);
 			}
 		} catch (Exception ex) {
 			Error = ex.getLocalizedMessage();
@@ -308,17 +308,19 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private String uploadProduct(Product p, URL url, String token)
+	private String register(User p, URL url, String token)
 			throws Exception {
 
 		String USER_AGENT = "Mozilla/5.0";
 		String boundary = "*****";
 		String iFileName = "";
 		String fileUrl = "";
+		/*
 		if (p.getPhoto() != null) {
 			iFileName = p.getPhoto().getName();
 			fileUrl = p.getPhoto().getUrl();
 		}
+		*/
 		String lineEnd = "\r\n";
 		String twoHyphens = "--";
 		URL obj = url;
@@ -339,12 +341,10 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 		Map<String, String> paramsVal = new HashMap<String, String>();
 		paramsVal.put("name", "" + p.getName());
-		paramsVal.put("category_id", "" + p.getCategory().getId());
-		paramsVal.put("shop_id", "" + p.getShop_id());
-		paramsVal.put("price", "" + p.getPrice());
-		paramsVal.put("unit_id", "" + p.getUnit().getId());
-		paramsVal.put("photo_name", "" + iFileName);
-		paramsVal.put("description", "" + p.getDescription());
+		paramsVal.put("phone", "" + p.getPhone());
+		paramsVal.put("mobile", "" + p.getPhone());
+		paramsVal.put("encrypted_password", "" + p.getPassword());
+
 		Iterator iterator = paramsVal.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Map.Entry mapEntry = (Map.Entry) iterator.next();
@@ -358,7 +358,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			System.out.println("\n :" + mapEntry.getValue().toString());
 			dos.writeBytes(lineEnd);
 		}
-
+		/*
 		if (p.getPhoto() != null) {
 			dos.writeBytes(twoHyphens + boundary + lineEnd);
 			dos.writeBytes("Content-Disposition: form-data; name=\"photo\";filename=\""
@@ -387,6 +387,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			fileInputStream.close();
 		} else
 			dos.writeBytes("\r\n--" + boundary + "--\r\n");
+			*/
 		dos.flush();
 
 		dos.close();

@@ -4,15 +4,19 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class PreviewActivity extends Activity {
 	Cart cart;
 	ArrayList<Item> mylist;
 	MyCustomAdapter dataAdapter = null;
 	Order myOrder;
+	ArrayList<Address> myAddresses;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +25,30 @@ public class PreviewActivity extends Activity {
 
 		cart = ((deliveryclient) this.getApplication()).getMyCart();
 		myOrder = new Order();
+
 		preview();
+	}
+
+	public void getAddresses(int userId) {
+		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
+		MyJs mjs = new MyJs("setAdd", this,
+				((deliveryclient) this.getApplication()), "GET");
+		mjs.execute(serverURL);
+
+	}
+
+	public void getAdd(String s, String error) {
+		if (error == null) {
+			TextView customerName = (TextView) findViewById(R.id.customerName);
+			TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
+
+			SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
+
+			String name = settings1.getString("name", "");
+			customerName.setText(" " + name);
+			myAddresses = new APIManager().getAddress(s);
+			customerAdd.setText(myAddresses.get(0).toString());
+		}
 	}
 
 	public void submit(View v) {
@@ -32,7 +59,18 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void callMethod(String m, String s, String error) {
-		
+		if(m.equals("setAdd"))
+				getAdd(s, error);
+		else
+		{
+			gotomain();
+		}
+	}
+	public void gotomain()
+	{
+		((deliveryclient) this.getApplication()).emptyCart();
+		 Intent i = new Intent(this, MainActivity.class);
+		 startActivity(i);
 	}
 
 	public void preview() {
@@ -66,6 +104,10 @@ public class PreviewActivity extends Activity {
 
 		dataAdapter = new MyCustomAdapter(this, R.layout.row_preview, mylist);
 		listView.setAdapter(dataAdapter);
+		
+		TextView total = (TextView) findViewById(R.id.allTotal);
+		total.setText(""+((deliveryclient) this.getApplication()).getMyCart().getTotalPrice());
+		getAddresses(id);
 	}
 
 	@Override

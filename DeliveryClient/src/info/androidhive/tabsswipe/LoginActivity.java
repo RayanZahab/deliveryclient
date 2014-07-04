@@ -70,14 +70,6 @@ public class LoginActivity extends Activity {
 		mjs.execute(serverURL);
 
 	}
-
-	public void callMethod(String m, String s, String error) {
-		if (m.equals("getLoggedIn"))
-			getLoggedIn(s, error);
-		else if (m.equals("setAdd"))
-			getAdd(s, error);
-	}
-
 	public void getAdd(String s, String error) {
 		if (error == null) {
 			ArrayList<Address> address =  new APIManager().getAddress(s);
@@ -93,6 +85,15 @@ public class LoginActivity extends Activity {
 			startActivity(i);
 		}
 	}
+
+	public void callMethod(String m, String s, String error) {
+		if (m.equals("getLoggedIn"))
+			getLoggedIn(s, error);
+		else if (m.equals("setAdd"))
+			getAdd(s, error);
+	}
+
+	
 
 	public void getLoggedIn(String s, String error) {
 		if (error == null) {

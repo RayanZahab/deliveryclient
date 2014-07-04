@@ -21,6 +21,11 @@ public class deliveryclient extends Application {
 	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
 
+	public void emptyCart()
+	{
+		myCart =  new Cart();
+		myCartIds = new ArrayList<Integer>();
+	}
 	public deliveryclient() {
 		//defaultUEH = Thread.getDefaultUncaughtExceptionHandler();
 		//Thread.setDefaultUncaughtExceptionHandler(_unCaughtExceptionHandler);

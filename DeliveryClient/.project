@@ -32,12 +32,28 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1404504642824</id>
+			<id>1404556846224</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
 				<id>org.eclipse.team.svn.core.svnmeta</id>
 				<arguments>1.0-name-matches-false-false-.svn</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1404556848476</id>
+			<name></name>
+			<type>22</type>
+			<matcher>
+				<id>org.eclipse.team.svn.core.svnmeta</id>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1404556849721</id>
+			<name></name>
+			<type>22</type>
+			<matcher>
+				<id>org.eclipse.team.svn.core.svnmeta</id>
 			</matcher>
 		</filter>
 	</filteredResources>

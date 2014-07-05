@@ -43,7 +43,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/mybutton"
-                android:text="Submit" />
+                android:text="@string/submit" />
 
             <TextView
                 android:id="@+id/totalprice"
@@ -66,7 +66,7 @@
 	            android:layout_alignParentLeft="true"
 	            android:layout_marginLeft="20dp"
 	            android:textSize="15sp"
-	            android:text="Total" />
+	            android:text="@string/total" />
 
 	         <TextView
 	             android:id="@+id/totalQuantity"

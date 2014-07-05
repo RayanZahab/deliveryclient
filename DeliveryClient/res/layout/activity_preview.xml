@@ -43,7 +43,7 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10px"
+        android:dividerHeight="10dp"
         android:gravity="center"
         android:orientation="vertical"
         android:textColor="#cdcccb" >

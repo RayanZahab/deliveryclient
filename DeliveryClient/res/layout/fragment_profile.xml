@@ -28,13 +28,13 @@
                 android:id="@+id/addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Addresses" />
+                android:text="@string/addresses" />
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username" />
+                android:text="@string/username" />
 
             <EditText
                 android:id="@+id/user_name"
@@ -44,7 +44,7 @@
                 android:ellipsize="start"
                 android:ems="10"
                 android:enabled="false"
-                android:hint="name"
+                android:hint="@string/name"
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -56,7 +56,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name" />
+                android:text="@string/name" />
 
             <EditText
                 android:id="@+id/name"
@@ -79,7 +79,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password" />
+                android:text="@string/password" />
 
             <EditText
                 android:id="@+id/password"
@@ -88,7 +88,7 @@
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
                 android:ems="10"
-                android:hint="password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -100,7 +100,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Retype password" />
+                android:text="@string/retypepass" />
 
             <EditText
                 android:id="@+id/password2"
@@ -109,7 +109,7 @@
                 android:background="@drawable/edittext"
                 android:ellipsize="start"
                 android:ems="10"
-                android:hint="confirm password"
+                android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="keep me logged in"
+                android:text="@string/keeploggedin"
                 android:textColor="#818281"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -140,7 +140,7 @@
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textColor="#cdcccb"
             android:textSize="18sp" />
     </LinearLayout>

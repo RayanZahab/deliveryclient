@@ -95,7 +95,7 @@
                 android:layout_marginLeft="30dp"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
-                android:text="Register"
+                android:text="@string/register"
                 android:textColor="#818281"
                 android:textSize="12sp" />
 

@@ -138,7 +138,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_toLeftOf="@+id/picker"
                 android:background="@drawable/edittext"
-                android:text="Add to Cart" />
+                android:text="@string/addtocart" />
 
             <NumberPicker
                 android:id="@+id/picker"

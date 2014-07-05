@@ -71,6 +71,7 @@
     <string name="deletethiscat">Delete this Category?</string>
     <string name="deletethisuser">Delete this User?</string>
     <string name="deletethisprod">Delete this Product?</string>
+    <string name="deletethisbranch">Delete this Branch?</string>
     <string name="wrongcredentials">Wrong Credentialsss</string>
     <string name="exit">Exit</string>
     <string name="exitquest">Are you sure you want to exit?</string>
@@ -160,5 +161,15 @@
     <string name="order_updated">Order updated successfully</string>
     <string name="title_activity_select_adress">SelectAdress</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="register">Register</string>
+    <string name="fullname">Full Name</string>
+    <string name="retypepass">Retype Password</string>
+    <string name="street">Street</string>
+    <string name="building">Building</string>
+    <string name="floor">Floor</string>
+    <string name="back">Back</string>
+    <string name="addresses">Addresses</string>
+    <string name="addtocart">Add To Cart</string>
+    
 
 </resources>

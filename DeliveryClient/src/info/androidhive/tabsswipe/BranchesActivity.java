@@ -69,7 +69,7 @@ public class BranchesActivity extends Activity {
 	public void Delete(final int branchId) {
 
 		new AlertDialog.Builder(this)
-				.setTitle("Delete this branch?")
+				.setTitle(R.string.deletethisbranch)
 				.setIcon(R.drawable.branches)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {

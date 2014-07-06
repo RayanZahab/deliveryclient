@@ -52,6 +52,8 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void submit(View v) {
+		TextView noteTxt = (TextView) findViewById(R.id.note);
+		myOrder.setNote(noteTxt.getText().toString());
 		String serverURL = new myURL("orders", null, 0, 0).getURL();
 		new MyJs("afterCreation", this,
 				((deliveryclient) this.getApplication()), "POST",

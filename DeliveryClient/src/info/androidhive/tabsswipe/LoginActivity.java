@@ -152,7 +152,7 @@ public class LoginActivity extends Activity {
 		}
 		cities.get(cityP).setAreas(areas);
 		countries.get(countryP).setCities(cities);
-		if (countryP == countries.size() - 1) {
+		if (countryP == countries.size() - 1 && cityP == countries.get(countryP).getCities().size()-1) {
 			((deliveryclient) this.getApplication()).setCountries(countries);
 			getAddresses(user.getId());
 		}

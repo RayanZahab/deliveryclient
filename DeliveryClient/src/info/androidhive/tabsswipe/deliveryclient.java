@@ -7,7 +7,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.Log;
 
 public class deliveryclient extends Application {

@@ -39,7 +39,7 @@ public class OrdersFragment extends ParentFragment {
 	static Activity currentActivity;
 	static View view;
 	static int fragmentId;
-	FragmentManager fragmentManager;
+	static android.app.FragmentManager fragmentManager;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -170,13 +170,14 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void move() {
+		/*
 		CartFragment fh = new CartFragment();
 		FragmentTransaction ft = fragmentManager.beginTransaction();
 		ft.replace(fragmentId, fh);
 		ft.commit();
 		ViewPager viewPager = (ViewPager) currentActivity
 				.findViewById(R.id.pager);
-		viewPager.setCurrentItem(2, true);
+		viewPager.setCurrentItem(2, true);*/
 	}
 
 	private void showToast(String msg) {
@@ -307,7 +308,8 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public static void getBusinesses() {
-		if (fragmentId == (MainActivity.getVisibleFragment()).getId()) {
+		android.app.Fragment myFragment = fragmentManager.findFragmentById(fragmentId);
+		if (myFragment.isVisible())  {
 			depth = 0;
 			countryId = 0;
 			cityId = 0;
@@ -340,7 +342,7 @@ public class OrdersFragment extends ParentFragment {
 	
 
 	public void updateList() {
-		final ListView listView = (ListView) view.findViewById(R.id.list);
+		final ListView listView = (ListView) view.findViewById(R.id.orderslist);
 		if (mylist.size() == 0) {
 			Item i = new Item();
 			i.setId(0);

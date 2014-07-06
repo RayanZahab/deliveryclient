@@ -128,6 +128,7 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getList(String type, int id) {
 		mylist = new ArrayList<Item>();
+		Log.d("ray","type: "+type);
 		if (type.equals("business")) {
 			countryId = 0;
 			cityId = 0;
@@ -183,21 +184,39 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void getCountries() {
-		String serverURL = new myURL("countries", null, 0, 30).getURL();
-		MyJs mjs = new MyJs("setCountries", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
-	}
-
-	public void setCountries(String s, String error) {
-		countries = new APIManager().getCountries(s);
+		countries = ((deliveryclient) currentActivity.getApplication()).getCountries();
+		Log.d("rays","MYCOUNT"+countries.size());
 		mylist = new ArrayList<Item>();
 		for (Country myCountry : countries) {
 			Item it = new Item();
 			it.setName(myCountry.toString());
 			it.setType("txt");
 			it.setId(myCountry.getId());
+			mylist.add(it);
+		}
+		updateList();		
+	}
+
+
+	public void getCities(int CountryId) {
+		cities = countries.get(CountryId).getCities();
+		for (City myCity : cities) {
+			Item it = new Item();
+			it.setName(myCity.toString());
+			it.setType("txt");
+			it.setId(myCity.getId());
+			mylist.add(it);
+		}
+		updateList();
+	}
+
+	public void getAreas(int CityId) {
+		areas = cities.get(CityId).getAreas();
+		for (Area myArea : areas) {
+			Item it = new Item();
+			it.setName(myArea.toString());
+			it.setType("txt");
+			it.setId(myArea.getId());
 			mylist.add(it);
 		}
 		updateList();
@@ -247,7 +266,6 @@ public class OrdersFragment extends ParentFragment {
 	public void getCategories(int branchId) {
 		String serverURL = new myURL("categories", "branches", branchId, 30)
 				.getURL();
-		;
 		MyJs mjs = new MyJs("setCategories", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET");
 		mjs.execute(serverURL);
@@ -319,45 +337,7 @@ public class OrdersFragment extends ParentFragment {
 		updateList();
 	}
 
-	public void getCities(int CountryId) {
-		String serverURL = new myURL("cities", "countries", CountryId, 30)
-				.getURL();
-		new MyJs("setCities", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true).execute(serverURL);
-	}
-
-	public void setCities(String s, String error) {
-		cities = new APIManager().getCitiesByCountry(s);
-		for (City myCity : cities) {
-			Item it = new Item();
-			it.setName(myCity.toString());
-			it.setType("txt");
-			it.setId(myCity.getId());
-			mylist.add(it);
-		}
-		updateList();
-	}
-
-	public void getAreas(int CityId) {
-		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
-		MyJs mjs = new MyJs("setAreas", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
-	}
-
-	public void setAreas(String s, String error) {
-		areas = new APIManager().getAreasByCity(s);
-		for (Area myArea : areas) {
-			Item it = new Item();
-			it.setName(myArea.toString());
-			it.setType("txt");
-			it.setId(myArea.getId());
-			mylist.add(it);
-		}
-		updateList();
-	}
+	
 
 	public void updateList() {
 		final ListView listView = (ListView) view.findViewById(R.id.list);
@@ -378,7 +358,13 @@ public class OrdersFragment extends ParentFragment {
 				if (!mylist.get(0).getType().equals("empty")) {
 					depth++;
 					int itemId = mylist.get(position).getId();
-					getList(sequence.get(depth), itemId);
+					if(sequence.get(depth).equals("country") ||
+							sequence.get(depth).equals("city") ||sequence.get(depth).equals("area") )
+					{
+						getList(sequence.get(depth), position);
+					}
+					else
+						getList(sequence.get(depth), itemId);
 					listView.setAdapter(new MyCustomAdapter(currentActivity,
 							android.R.layout.simple_list_item_1, mylist));
 				}

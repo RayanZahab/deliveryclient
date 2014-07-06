@@ -23,7 +23,11 @@ public class LoginActivity extends Activity {
 	private EditText username;
 	private EditText password;
 	boolean isChecked = false;
-	int i;
+	int i, countryP, cityP, areaP;
+	ArrayList<Country> countries = new ArrayList<Country>();
+	ArrayList<City> cities = new ArrayList<City>();
+	ArrayList<Area> areas = new ArrayList<Area>();
+	User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,8 @@ public class LoginActivity extends Activity {
 		RelativeLayout register = (RelativeLayout) findViewById(R.id.register);
 		register.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+				Intent i = new Intent(LoginActivity.this,
+						RegisterActivity.class);
 				startActivity(i);
 			}
 		});
@@ -66,17 +71,17 @@ public class LoginActivity extends Activity {
 	public void getAddresses(int userId) {
 		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
 		MyJs mjs = new MyJs("setAdd", this,
-				((deliveryclient) this.getApplication()), "GET");
+				((deliveryclient) this.getApplication()), "GET", false, true);
 		mjs.execute(serverURL);
 
 	}
+
 	public void getAdd(String s, String error) {
 		if (error == null) {
-			ArrayList<Address> address =  new APIManager().getAddress(s);
+			ArrayList<Address> address = new APIManager().getAddress(s);
 			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 			SharedPreferences.Editor editor = settings.edit();
-			if(address.size()>0)
-			{
+			if (address.size() > 0) {
 				editor.putInt("addressId", address.get(0).getId());
 				editor.commit();
 			}
@@ -91,13 +96,71 @@ public class LoginActivity extends Activity {
 			getLoggedIn(s, error);
 		else if (m.equals("setAdd"))
 			getAdd(s, error);
+		else if (m.equals("setCountries"))
+			setCountries(s, error);
+		else if (m.equals("setCities"))
+			setCities(s, error);
+		else if (m.equals("setAreas"))
+			setAreas(s, error);
 	}
 
-	
+	public void getCountries() {
+		String serverURL = new myURL("countries", null, 0, 30).getURL();
+		MyJs mjs = new MyJs("setCountries", this,
+				((deliveryclient) getApplication()), "GET", true, false);
+		mjs.execute(serverURL);
+	}
+
+	public void setCountries(String s, String error) {
+		countries = new APIManager().getCountries(s);
+		for (int j = 0; j < countries.size(); j++) {
+			getCities(j);
+		}
+	}
+
+	public void getCities(int position) {
+		countryP = position;
+		int countryId = countries.get(position).getId();
+		Log.d("ray", "Country: " + countryId);
+		String serverURL = new myURL("cities", "countries", countryId, 30)
+				.getURL();
+		new MyJs("setCities", this, ((deliveryclient) getApplication()), "GET",
+				false, false).execute(serverURL);
+	}
+
+	public void setCities(String s, String error) {
+		cities = new APIManager().getCitiesByCountry(s);
+		for (int j = 0; j < cities.size(); j++) {
+			getAreas(j);
+		}
+	}
+
+	public void getAreas(int position) {
+		cityP = position;
+		int CityId = cities.get(position).getId();
+		Log.d("ray", "City: " + CityId);
+		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
+		MyJs mjs = new MyJs("setAreas", this,
+				((deliveryclient) this.getApplication()), "GET", false, false);
+		mjs.execute(serverURL);
+	}
+
+	public void setAreas(String s, String error) {
+		areas = new APIManager().getAreasByCity(s);
+		for (int j = 0; j < cities.size(); j++) {
+			Log.d("ray", "City: " + cities.get(j).getId());
+		}
+		cities.get(cityP).setAreas(areas);
+		countries.get(countryP).setCities(cities);
+		if (countryP == countries.size() - 1) {
+			((deliveryclient) this.getApplication()).setCountries(countries);
+			getAddresses(user.getId());
+		}
+	}
 
 	public void getLoggedIn(String s, String error) {
 		if (error == null) {
-			User user = new APIManager().getLogedInUser(s);
+			user = new APIManager().getLogedInUser(s);
 			CheckBox keeplog = (CheckBox) findViewById(R.id.keeploggedin);
 			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 			SharedPreferences.Editor editor = settings.edit();
@@ -116,8 +179,7 @@ public class LoginActivity extends Activity {
 			editor.putInt("branchId", user.getBranch_id());
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
-			getAddresses(user.getId());
-			
+			getCountries();
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();

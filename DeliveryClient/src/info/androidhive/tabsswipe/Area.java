@@ -5,7 +5,8 @@ public class Area {
 	private String name;
 	private Integer city_id;
 	private int country_id;
-
+	private String json;
+	
 	public Area(int id) {
 		this.id = id;
 	}
@@ -67,5 +68,11 @@ public class Area {
 		if(this.id == area.getId())
 			return true;
 		return false;
+	}
+	public String getJson() {
+		return json;
+	}
+	public void setJson(String json) {
+		this.json = json;
 	}
 }

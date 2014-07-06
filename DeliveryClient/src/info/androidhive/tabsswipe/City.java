@@ -7,7 +7,8 @@ public class City {
 	private int country_id;
 	private String name;
 	private ArrayList<Area> areas;
-
+	private String json;
+	
 	public City(int id,String name) {
 		this.setId(id);
 		this.setName(name);
@@ -60,5 +61,11 @@ public class City {
 	}
 	public void setAreas(ArrayList<Area> areas) {
 		this.areas = areas;
+	}
+	public String getJson() {
+		return json;
+	}
+	public void setJson(String json) {
+		this.json = json;
 	}
 }

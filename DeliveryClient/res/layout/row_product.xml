@@ -52,7 +52,6 @@
             android:gravity="center"
             android:maxLength="1"
             android:text="0" />
-
         <ImageView
             android:id="@+id/plus"
             android:layout_width="wrap_content"

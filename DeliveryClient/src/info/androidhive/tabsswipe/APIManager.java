@@ -1082,6 +1082,7 @@ public class APIManager {
 							body.put("total", c.getTotal());
 							body.put("address_id", c.getAddress_id());
 							body.put("customer_id", c.getCustomer_id());
+							body.put("note", c.getNote());
 							jsonObjSend.put("order", body);
 							Log.d("ray", "order:" + body);
 						} catch (JSONException e) {

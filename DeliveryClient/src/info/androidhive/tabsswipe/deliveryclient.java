@@ -20,7 +20,7 @@ public class deliveryclient extends Application {
 	private UncaughtExceptionHandler defaultUEH;
 	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
-
+	private ArrayList<Country> countries ;
 	public void emptyCart()
 	{
 		myCart =  new Cart();
@@ -245,6 +245,12 @@ public class deliveryclient extends Application {
 
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
+	}
+	public ArrayList<Country> getCountries() {
+		return countries;
+	}
+	public void setCountries(ArrayList<Country> countries) {
+		this.countries = countries;
 	}
 
 }

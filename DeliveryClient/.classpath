@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Users/Rayan/Desktop/DeliveryClient/libs/guava-16.0.1.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="src" path="/SlidingMenu"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

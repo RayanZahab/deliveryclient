@@ -16,7 +16,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int index) {
-		switch (index) {
+	/*	switch (index) {
 		case 0:
 			// Top Rated fragment activity
 			return new OrdersFragment();
@@ -28,7 +28,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 			// Movies fragment activity
 		default:
 			return new OrdersFragment();
-		}
+		}*/
+		return null;
 	}
 
 	@Override

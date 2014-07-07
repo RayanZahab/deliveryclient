@@ -62,7 +62,7 @@
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name="info.androidhive.tabsswipe.TestActivity"
+            android:name="info.androidhive.tabsswipe.AddAddressActivity"
             android:label="@string/title_activity_test" >
         </activity>
     </application>

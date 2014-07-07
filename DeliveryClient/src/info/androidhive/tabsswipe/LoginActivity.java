@@ -58,19 +58,45 @@ public class LoginActivity extends Activity {
 	}
 
 	public void login(View view) {
-
 		String serverURL = new myURL(null, "users", "login", 0).getURL();
 		User user = new User(username.getText().toString(), null);
 		user.setEncPassword(password.getText().toString());
 		MyJs mjs = new MyJs("getLoggedIn", this,
-				((deliveryclient) this.getApplication()), "POST", (Object) user);
+				((deliveryclient) this.getApplication()), "POST", (Object) user,true,false);
 		mjs.execute(serverURL);
-
 	}
+	
+	public void getLoggedIn(String s, String error) {
+		if (error == null) {
+			user = new APIManager().getLogedInUser(s);
+			CheckBox keeplog = (CheckBox) findViewById(R.id.keeploggedin);
+			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+			SharedPreferences.Editor editor = settings.edit();
 
+			editor.putInt("id", user.getId());
+			
+			editor.putBoolean("isChecked", keeplog.isChecked());
+			editor.putString("token", user.getToken());
+			editor.putString("name", user.getName());
+			editor.putString("pass", password.getText().toString());
+			editor.putString("phone", username.getText().toString());
+			editor.putBoolean("admin", user.isIs_admin());
+			editor.putBoolean("preparer", user.isIs_preparer());
+			editor.putBoolean("delivery", user.isIs_delivery());
+			editor.putInt("shopId", 6);
+			editor.putInt("branchId", user.getBranch_id());
+			editor.commit();
+			((deliveryclient) this.getApplication()).setGlobals();
+			getAddresses(user.getId());
+		} else {
+			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	public void getAddresses(int userId) {
 		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
-		MyJs mjs = new MyJs("setAdd", this,
+		MyJs mjs = new MyJs("getAdd", this,
 				((deliveryclient) this.getApplication()), "GET", false, true);
 		mjs.execute(serverURL);
 
@@ -90,102 +116,15 @@ public class LoginActivity extends Activity {
 			startActivity(i);
 		}
 	}
+	
 
+	
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("getLoggedIn"))
 			getLoggedIn(s, error);
-		else if (m.equals("setAdd"))
+		else if (m.equals("getAdd"))
 			getAdd(s, error);
-		else if (m.equals("setCountries"))
-			setCountries(s, error);
-		else if (m.equals("setCities"))
-			setCities(s, error);
-		else if (m.equals("setAreas"))
-			setAreas(s, error);
 	}
-
-	public void getCountries() {
-		String serverURL = new myURL("countries", null, 0, 30).getURL();
-		MyJs mjs = new MyJs("setCountries", this,
-				((deliveryclient) getApplication()), "GET", true, false);
-		mjs.execute(serverURL);
-	}
-
-	public void setCountries(String s, String error) {
-		countries = new APIManager().getCountries(s);
-		for (int j = 0; j < countries.size(); j++) {
-			getCities(j);
-		}
-	}
-
-	public void getCities(int position) {
-		countryP = position;
-		int countryId = countries.get(position).getId();
-		Log.d("ray", "Country: " + countryId);
-		String serverURL = new myURL("cities", "countries", countryId, 30)
-				.getURL();
-		new MyJs("setCities", this, ((deliveryclient) getApplication()), "GET",
-				false, false).execute(serverURL);
-	}
-
-	public void setCities(String s, String error) {
-		cities = new APIManager().getCitiesByCountry(s);
-		for (int j = 0; j < cities.size(); j++) {
-			getAreas(j);
-		}
-	}
-
-	public void getAreas(int position) {
-		cityP = position;
-		int CityId = cities.get(position).getId();
-		Log.d("ray", "City: " + CityId);
-		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
-		MyJs mjs = new MyJs("setAreas", this,
-				((deliveryclient) this.getApplication()), "GET", false, false);
-		mjs.execute(serverURL);
-	}
-
-	public void setAreas(String s, String error) {
-		areas = new APIManager().getAreasByCity(s);
-		for (int j = 0; j < cities.size(); j++) {
-			Log.d("ray", "City: " + cities.get(j).getId());
-		}
-		cities.get(cityP).setAreas(areas);
-		countries.get(countryP).setCities(cities);
-		if (countryP == countries.size() - 1 && cityP == countries.get(countryP).getCities().size()-1) {
-			((deliveryclient) this.getApplication()).setCountries(countries);
-			getAddresses(user.getId());
-		}
-	}
-
-	public void getLoggedIn(String s, String error) {
-		if (error == null) {
-			user = new APIManager().getLogedInUser(s);
-			CheckBox keeplog = (CheckBox) findViewById(R.id.keeploggedin);
-			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-			SharedPreferences.Editor editor = settings.edit();
-
-			editor.putInt("id", user.getId());
-			editor.putBoolean("isChecked", keeplog.isChecked());
-			editor.putString("token", user.getToken());
-			Log.d("ray", "Token: " + user.getToken());
-			editor.putString("name", user.getName());
-			editor.putString("pass", password.getText().toString());
-			editor.putString("phone", username.getText().toString());
-			editor.putBoolean("admin", user.isIs_admin());
-			editor.putBoolean("preparer", user.isIs_preparer());
-			editor.putBoolean("delivery", user.isIs_delivery());
-			editor.putInt("shopId", 6);
-			editor.putInt("branchId", user.getBranch_id());
-			editor.commit();
-			((deliveryclient) this.getApplication()).setGlobals();
-			getCountries();
-		} else {
-			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
-					Toast.LENGTH_SHORT).show();
-		}
-	}
-
 	public void forgotpassword(View view) {
 		// Intent i = new Intent(LoginActivity.this,
 		// ForgotPasswordActivity.class);

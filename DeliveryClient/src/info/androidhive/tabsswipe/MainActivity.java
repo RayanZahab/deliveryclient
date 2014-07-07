@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -51,6 +52,11 @@ public class MainActivity extends Activity  {
 	private NavDrawerListAdapter adapter;
 	static List<Fragment> fragments = new ArrayList<Fragment>();
 	
+	int i, countryP, cityP, areaP;
+	ArrayList<Country> countries = new ArrayList<Country>();
+	ArrayList<City> cities = new ArrayList<City>();
+	ArrayList<Area> areas = new ArrayList<Area>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,66 +77,6 @@ public class MainActivity extends Activity  {
 			displayView(0);
 		}
 	}
-
-	/*
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(false);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		fragmentManager = MainActivity.this
-				.getSupportFragmentManager();
-		
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(fragmentManager);
-
-		viewPager.setAdapter(mAdapter);
-		actionBar.setHomeButtonEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		int i = 0;
-		// Adding Tabs
-		for (String tab_name : tabs) {
-			Tab tab = actionBar.newTab();
-			tab.setTag(tab_name);
-
-			if (i == 1)
-				tab.setIcon(R.drawable.admin);
-			else if (i == 0)
-				tab.setIcon(R.drawable.orders_tab);
-			else
-				tab.setIcon(R.drawable.carttabs);
-			i++;
-
-			tab.setText(tab_name);
-			actionBar.addTab(tab.setTabListener(this));
-			// actionBar.setC
-		}
-	
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
-				actionBar.setSelectedNavigationItem(position);
-				if (position == 0) {
-					//OrdersFragment.getBusinesses();
-				}
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
-	}
-*/
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -210,7 +156,7 @@ public class MainActivity extends Activity  {
 		adapter = new NavDrawerListAdapter(getApplicationContext(),
 				navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-
+		getCountries();
 	}
 	
 	/**
@@ -221,11 +167,11 @@ public class MainActivity extends Activity  {
 		ParentFragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new OrdersFragment();
+			fragment = new CartFragment();
 			fragments.add(fragment);
 			break;
 		case 1:
-			fragment = new CartFragment();
+			fragment = new OrdersFragment();
 			fragments.add(fragment);
 			break;
 		case 2:
@@ -313,24 +259,32 @@ public class MainActivity extends Activity  {
 		
 	}
 	public void callMethod(String m, String s, String error) {
-		for (Fragment fragment : fragments) {
-			if (fragment.getClass().equals(OrdersFragment.class))
-			{
-				Method returnFunction;
-				Log.d("ray","method: "+m);
-				try {
-					returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(),
-							s.getClass());
-					if(returnFunction != null)
-						returnFunction.invoke(fragment, s, error);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		if (m.equals("setCountries"))
+			setCountries(s, error);
+		else if (m.equals("setCities"))
+			setCities(s, error);
+		else if (m.equals("setAreas"))
+			setAreas(s, error);
+		else
+		{
+			for (Fragment fragment : fragments) {
+				if (fragment.getClass().equals(OrdersFragment.class))
+				{
+					Method returnFunction;
+					Log.d("ray","method: "+m);
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(),
+								s.getClass());
+						if(returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+					
 			}
-				
 		}
-		
 	}
 
 	//@Override
@@ -362,5 +316,58 @@ public class MainActivity extends Activity  {
 		}
 		return null;
 	}
+	
+	public void getCountries() {
+		String serverURL = new myURL("countries", null, 0, 30).getURL();
+		MyJs mjs = new MyJs("setCountries", this,
+				((deliveryclient) getApplication()), "GET", true, false);
+		mjs.execute(serverURL);
+	}
 
+	public void setCountries(String s, String error) {
+		countries = new APIManager().getCountries(s);
+		for (int j = 0; j < countries.size(); j++) {
+			getCities(j);
+		}
+	}
+
+	public void getCities(int position) {
+		countryP = position;
+		int countryId = countries.get(position).getId();
+		Log.d("ray", "Country: " + countryId);
+		String serverURL = new myURL("cities", "countries", countryId, 30)
+				.getURL();
+		new MyJs("setCities", this, ((deliveryclient) getApplication()), "GET",
+				false, false).execute(serverURL);
+	}
+
+	public void setCities(String s, String error) {
+		cities = new APIManager().getCitiesByCountry(s);
+		for (int j = 0; j < cities.size(); j++) {
+			getAreas(j);
+		}
+	}
+
+	public void getAreas(int position) {
+		cityP = position;
+		int CityId = cities.get(position).getId();
+		Log.d("ray", "City: " + CityId);
+		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
+		MyJs mjs = new MyJs("setAreas", this,
+				((deliveryclient) this.getApplication()), "GET", false, false);
+		mjs.execute(serverURL);
+	}
+
+	public void setAreas(String s, String error) {
+		areas = new APIManager().getAreasByCity(s);
+		for (int j = 0; j < cities.size(); j++) {
+			Log.d("ray", "City: " + cities.get(j).getId());
+		}
+		cities.get(cityP).setAreas(areas);
+		countries.get(countryP).setCities(cities);
+		if (countryP == countries.size() - 1 && cityP == countries.get(countryP).getCities().size()-1) {
+			((deliveryclient) this.getApplication()).setCountries(countries);
+			((deliveryclient) this.getApplication()).loader.dismiss();
+		}
+	}
 }

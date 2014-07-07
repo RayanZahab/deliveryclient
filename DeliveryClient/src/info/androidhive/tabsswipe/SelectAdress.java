@@ -28,7 +28,7 @@ public class SelectAdress extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_select_adress);
+		setContentView(R.layout.activity_select_address);
 
 		listView = (ListView) findViewById(R.id.lstDemo);
 		myId = ((deliveryclient) this.getApplication()).getUserId();

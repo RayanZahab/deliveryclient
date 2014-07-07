@@ -61,6 +61,10 @@
             android:name="info.androidhive.tabsswipe.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
+        <activity
+            android:name="info.androidhive.tabsswipe.TestActivity"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>

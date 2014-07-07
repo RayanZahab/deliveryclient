@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 
 public class APIManager {
 
@@ -23,7 +22,6 @@ public class APIManager {
 			if (!errorCheck(jsonResponse)) {
 				int id = 1;// Integer.parseInt(jsonResponse.optString("id")
 							// .toString());
-				Log.d("rays", cont);
 				int branch_id = Integer.parseInt(jsonResponse.optString(
 						"branch_id").toString());
 				String token = jsonResponse.optString("auth_token").toString();
@@ -51,7 +49,6 @@ public class APIManager {
 	}
 
 	public ArrayList<Country> getCountries(String cont) {
-		Log.d("rays", cont);
 		JSONObject jsonResponse;
 		ArrayList<Country> gridArray = new ArrayList<Country>();
 		try {
@@ -386,8 +383,6 @@ public class APIManager {
 					froms.put(i, null);
 					tos.put(i, null);
 				}
-				Log.d("froms", openDays.get(i) + "->" + froms.get(i) + "->"
-						+ tos.get(i));
 			}
 			return new OpenHours(froms, tos, openDays);
 		} catch (JSONException e) {
@@ -771,15 +766,14 @@ public class APIManager {
 	}
 
 	public ArrayList<Customer> getCustomer(String cont) {
-		JSONObject jsonResponse, jsonRole;
+		JSONObject jsonResponse;
 		ArrayList<Customer> gridArray = new ArrayList<Customer>();
 
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				boolean is_fired, admin, preparer, delivery;
-				String name, phone, password, username, mobile, roles_str;
+				String name, phone, mobile;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -833,13 +827,12 @@ public class APIManager {
 	public ArrayList<Order> getOrders(String cont) {
 		JSONObject jsonResponse, jsonCustomer;
 		ArrayList<Order> gridArray = new ArrayList<Order>();
-		Log.d("ray", "get order" + cont);
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id, count;
-				boolean is_fired, admin, preparer, delivery, is_new;
-				String date, password, username, mobile, customer_str, status, customer_name_str;
+				boolean is_new;
+				String date,  customer_str, status, customer_name_str;
 				double total;
 				Customer customer = new Customer(0, null, null);
 				if (jsonResponse.has("elements")) {
@@ -859,7 +852,6 @@ public class APIManager {
 
 						customer_name_str = jsonChildNode.optString(
 								"customer_name").toString();
-						Log.d("rays", "cust: " + customer_name_str);
 						if (customer_name_str != null
 								&& !customer_name_str.isEmpty()
 								&& !jsonChildNode.isNull("customer_name")) {
@@ -1084,7 +1076,6 @@ public class APIManager {
 							body.put("customer_id", c.getCustomer_id());
 							body.put("note", c.getNote());
 							jsonObjSend.put("order", body);
-							Log.d("ray", "order:" + body);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}

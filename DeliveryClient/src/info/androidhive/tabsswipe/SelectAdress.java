@@ -1,11 +1,9 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
@@ -98,6 +96,10 @@ public class SelectAdress extends Activity {
 
 		}
 
+	}
+	public void addAddress (View v){
+		Intent i = new Intent(this, AddAddressActivity.class);
+		startActivity(i);
 	}
 
 	@Override

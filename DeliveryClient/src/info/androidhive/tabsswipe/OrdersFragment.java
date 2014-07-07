@@ -170,14 +170,11 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void move() {
-		/*
+		
 		CartFragment fh = new CartFragment();
-		FragmentTransaction ft = fragmentManager.beginTransaction();
+		android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
 		ft.replace(fragmentId, fh);
 		ft.commit();
-		ViewPager viewPager = (ViewPager) currentActivity
-				.findViewById(R.id.pager);
-		viewPager.setCurrentItem(2, true);*/
 	}
 
 	private void showToast(String msg) {

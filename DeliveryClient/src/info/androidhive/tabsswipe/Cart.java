@@ -60,12 +60,16 @@ public class Cart {
 		}
 		updateFooter(fragmentClass);
 	}
+	
 	public void updateFooter(String fragmentClass)
 	{
-		if(fragmentClass.equals(OrdersFragment.class.getName()))
-			OrdersFragment.updateFooter();
-		else
-			CartFragment.updateFooter();
+		if(fragmentClass != null)
+		{
+			if(fragmentClass.equals(OrdersFragment.class.getName()))
+				OrdersFragment.updateFooter();
+			else
+				CartFragment.updateFooter();
+		}
 	}
 
 	public void rmvFromCart(String fragmentClass , Product p) {

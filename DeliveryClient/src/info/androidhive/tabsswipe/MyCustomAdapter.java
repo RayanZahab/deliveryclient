@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	Context context;
 	private String type;
 	List<Integer> cartIds = new ArrayList<Integer>();
-	Activity activity; 
+	Activity activity;
 
 	public MyCustomAdapter(Context context, int textViewResourceId,
 			ArrayList<Item> navList) {
@@ -56,7 +57,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		EditText input;
 		TextView price;
 		ImageView plus, minus;
-		
+
 		public productHolder(View convertView, final Item item) {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
@@ -109,7 +110,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 	class previewHolder extends ViewHolder {
 		TextView name, qtTxt;
 		TextView input;
-		TextView price ,totalprice ;
+		TextView price, totalprice;
 		ImageView plus, minus;
 
 		public previewHolder(View convertView, final Item item) {
@@ -137,7 +138,8 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 								.getMyCart().getProductCount(cp));
 				totalprice.setText(""
 						+ ((deliveryclient) activity.getApplication())
-						.getMyCart().getProductCount(cp) * item.getPrice());
+								.getMyCart().getProductCount(cp)
+						* item.getPrice());
 			}
 		}
 	}
@@ -147,17 +149,27 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
 		p.setName(item.getName());
-		String cn = ((deliveryclient) activity.getApplication())
-				.getCurrentFragment().getClass().getName();
+		Fragment f = ((deliveryclient) activity.getApplication())
+				.getCurrentFragment();
+		String cn = null;
+		if (f != null) {
+			cn = f.getClass().getName();
+		}
+
 		((deliveryclient) activity.getApplication()).getMyCart().addToCart(cn,
 				p);
+
 	}
 
 	public void rmvFromCart(Item item) {
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
-		String cn = ((deliveryclient) activity.getApplication())
-				.getCurrentFragment().getClass().getName();
+		Fragment f = ((deliveryclient) activity.getApplication())
+				.getCurrentFragment();
+		String cn = null;
+		if (f != null) {
+			cn = f.getClass().getName();
+		}
 		((deliveryclient) activity.getApplication()).getMyCart().rmvFromCart(
 				cn, p);
 	}
@@ -192,7 +204,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
 		}
-	} 
+	}
 
 	class txImgHolder extends ViewHolder {
 		TextView name;
@@ -212,7 +224,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		ViewHolder holder = null;
 		Item currentItem = currentList.get(position);
-		
+
 		if (convertView == null) {
 
 			int layout = 0;

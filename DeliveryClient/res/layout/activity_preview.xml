@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_left_margin"
     android:paddingTop="@dimen/activity_horizontal_margin" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/myedittext"
@@ -18,24 +18,36 @@
         <TextView
             android:id="@+id/customerName"
             style="@style/mytextview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_alignParentTop="true"
             android:paddingLeft="8dp"
-            android:paddingTop="10dp"
+            android:paddingTop="8dp"
             android:text="@string/name"
             android:textColor="#ed1c24" />
 
         <TextView
             android:id="@+id/customerAdd"
             style="@style/mytextview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/customerName"
+            android:layout_marginTop="6dp"
             android:gravity="center"
             android:paddingLeft="8dp"
             android:text="@string/address" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/flech" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/list"
@@ -92,25 +104,21 @@
             android:textSize="19sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Notes:"/>
-
     <EditText
         android:id="@+id/note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext"
-        android:text="Notes:" />
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:hint="Notes:" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="submit"
+        android:background="@drawable/mybutton"
         android:text="@string/submit" />
 
 </LinearLayout>

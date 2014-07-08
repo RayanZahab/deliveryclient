@@ -305,8 +305,8 @@ public class MainActivity extends Activity  {
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setTitle("exit")
-				.setMessage("exitques")
+				.setTitle(R.string.exit)
+				.setMessage(R.string.exitquest)
 				.setPositiveButton("Yes",
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -322,7 +322,6 @@ public class MainActivity extends Activity  {
 		for (Fragment fragment : fragments) {
 			if (fragment != null && fragment.isVisible())
 			{
-				Log.d("ray","current: "+fragment.getClass().getSimpleName());
 				return fragment;
 			}
 		}

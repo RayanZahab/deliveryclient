@@ -17,8 +17,6 @@ public class SelectAdress extends Activity {
 
 	ListView listView;
 
-	ArrayList<String> arrayList; // list of the strings that should appear in
-									// ListView
 	ArrayAdapter<Item> arrayAdapter;
 	ArrayList<Address> myAddresses;
 	int myId;
@@ -31,16 +29,6 @@ public class SelectAdress extends Activity {
 		listView = (ListView) findViewById(R.id.lstDemo);
 		myId = ((deliveryclient) this.getApplication()).getUserId();
 		getAddresses(myId);
-		arrayList = new ArrayList<String>();
-		arrayList.add("India");
-		arrayList.add("USA");
-		arrayList.add("England");
-		arrayList.add("Singapur");
-		arrayList.add("China");
-		arrayList.add("Canada");
-		arrayList.add("Srilanka");
-		arrayList.add("SouthAfrica");
-
 	}
 
 	public void getAddresses(int userId) {

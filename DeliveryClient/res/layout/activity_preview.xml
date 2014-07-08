@@ -10,10 +10,12 @@
     android:paddingTop="@dimen/activity_horizontal_margin" >
 
     <RelativeLayout
+        android:id="@+id/customerInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/myedittext"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:onClick="selectAdd">
 
         <TextView
             android:id="@+id/customerName"

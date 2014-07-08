@@ -21,6 +21,7 @@ public class deliveryclient extends Application {
 	private Cart myCart;
 	private List<Integer> myCartIds = new ArrayList<Integer>();
 	private ArrayList<Country> countries ;
+	private Fragment currentFragment;
 	public void emptyCart()
 	{
 		myCart =  new Cart();
@@ -235,9 +236,6 @@ public class deliveryclient extends Application {
 		this.myCartIds = myIds;
 	}
 
-	public Fragment getCurrentFragment() {
-		return MainActivity.getVisibleFragment();
-	}
 
 	public int getAddressId() {
 		return addressId;
@@ -251,6 +249,12 @@ public class deliveryclient extends Application {
 	}
 	public void setCountries(ArrayList<Country> countries) {
 		this.countries = countries;
+	}
+	public Fragment getCurrentFragment() {
+		return currentFragment;
+	}
+	public void setCurrentFragment(Fragment currentFragment) {
+		this.currentFragment = currentFragment;
 	}
 
 }

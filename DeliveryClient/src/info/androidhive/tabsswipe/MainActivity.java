@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -32,10 +33,11 @@ public class MainActivity extends Activity  {
 	// Tab titles
 	static FragmentManager fragmentManager ;
 	private String[] tabs = { "Home", "find", "photos", "Home2", "find2", "photos2" };
+	private static Context context;
 	
 	//new
 	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
+	private static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	// nav drawer title
@@ -48,8 +50,8 @@ public class MainActivity extends Activity  {
 	private String[] navMenuTitles = {  "Cart","Orders", "Profile","Home", "find", "photos" };
 	private TypedArray navMenuIcons;
 
-	private ArrayList<NavDrawerItem> navDrawerItems;
-	private NavDrawerListAdapter adapter;
+	public static ArrayList<NavDrawerItem> navDrawerItems;
+	private static NavDrawerListAdapter adapter;
 	static List<Fragment> fragments = new ArrayList<Fragment>();
 	
 	int i, countryP, cityP, areaP;
@@ -65,8 +67,8 @@ public class MainActivity extends Activity  {
 		mTitle = mDrawerTitle = getTitle();
 		fragmentManager = MainActivity.this
 				.getFragmentManager();
+		context = this.getApplicationContext();
 		addSlideMenu();
-		
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
@@ -135,30 +137,37 @@ public class MainActivity extends Activity  {
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], R.drawable.ic_home));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], R.drawable.ic_home, true, "22"));
 		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], R.drawable.ic_people));
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], R.drawable.ic_communities));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], R.drawable.ic_photos, true, "22"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], R.drawable.ic_photos));
 		// Pages
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], R.drawable.ic_pages));
 		// What's hot, We will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], R.drawable.ic_whats_hot, true, "50+"));
-
+		
 		// Recycle the typed array
 		//navMenuIcons.recycle();
 
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(getApplicationContext(),
+		adapter = new NavDrawerListAdapter(context,
 				navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 		getCountries();
 	}
-	
+	public static void updateCounter(int count)
+	{
+		navDrawerItems.get(0).setCount(""+count);
+		// setting the nav drawer list adapter
+		adapter = new NavDrawerListAdapter(context,
+				navDrawerItems);
+		mDrawerList.setAdapter(adapter);
+	}
 	/**
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
@@ -312,7 +321,10 @@ public class MainActivity extends Activity  {
 		
 		for (Fragment fragment : fragments) {
 			if (fragment != null && fragment.isVisible())
+			{
+				Log.d("ray","current: "+fragment.getClass().getSimpleName());
 				return fragment;
+			}
 		}
 		return null;
 	}
@@ -334,7 +346,6 @@ public class MainActivity extends Activity  {
 	public void getCities(int position) {
 		countryP = position;
 		int countryId = countries.get(position).getId();
-		Log.d("ray", "Country: " + countryId);
 		String serverURL = new myURL("cities", "countries", countryId, 30)
 				.getURL();
 		new MyJs("setCities", this, ((deliveryclient) getApplication()), "GET",

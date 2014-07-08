@@ -81,7 +81,7 @@ public class OrdersFragment extends ParentFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		((deliveryclient) currentActivity.getApplication()).setCurrentFragment(this);
 	}
 
 	@Override
@@ -383,5 +383,6 @@ public class OrdersFragment extends ParentFragment {
 		}
 		price.setText(totalPrice + " L.L");
 		quantity.setText("" + cart.getAllCount());
+		MainActivity.updateCounter(cart.getAllCount());
 	}
 }

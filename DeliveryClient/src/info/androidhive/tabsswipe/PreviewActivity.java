@@ -36,6 +36,11 @@ public class PreviewActivity extends Activity {
 		mjs.execute(serverURL);
 
 	}
+	public void selectAdd(View v)
+	{
+		Intent i = new Intent(this, SelectAdress.class);
+		 startActivity(i);
+	}
 
 	public void getAdd(String s, String error) {
 		if (error == null) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -24,18 +25,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends Activity  {
-	
+public class MainActivity extends Activity {
+
 	Fragment activeFragment;
-	//private ViewPager viewPager;
-	//private TabsPagerAdapter mAdapter;
-	//private ActionBar actionBar;
+	// private ViewPager viewPager;
+	// private TabsPagerAdapter mAdapter;
+	// private ActionBar actionBar;
 	// Tab titles
-	static FragmentManager fragmentManager ;
-	private String[] tabs = { "Home", "find", "photos", "Home2", "find2", "photos2" };
+	static FragmentManager fragmentManager;
+	private String[] tabs = { "Home", "find", "photos", "Home2", "find2",
+			"photos2" };
 	private static Context context;
-	
-	//new
+
+	// new
 	private DrawerLayout mDrawerLayout;
 	private static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -47,44 +49,42 @@ public class MainActivity extends Activity  {
 	private CharSequence mTitle;
 
 	// slide menu items
-	private String[] navMenuTitles = {  "Cart","Orders", "Profile","Home", "find", "photos" };
+	private String[] navMenuTitles = { "Home", "Cart", "Profile", "Home",
+			"find", "photos" };
 	private TypedArray navMenuIcons;
 
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
 	static List<Fragment> fragments = new ArrayList<Fragment>();
-	
+
 	int i, countryP, cityP, areaP;
 	ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
 	ArrayList<Area> areas = new ArrayList<Area>();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		mTitle = mDrawerTitle = getTitle();
-		fragmentManager = MainActivity.this
-				.getFragmentManager();
+		fragmentManager = MainActivity.this.getFragmentManager();
 		context = this.getApplicationContext();
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		//toggler
+		// toggler
 		toggler();
-		if (savedInstanceState == null) {
-			// on first time display view for first nav item
-			displayView(0);
-		}
+		
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// toggle nav drawer on selecting action bar app icon/title
@@ -92,11 +92,12 @@ public class MainActivity extends Activity  {
 			return true;
 		}
 		// Handle action bar actions click
-		if(item.getItemId()== R.id.action_settings)
+		if (item.getItemId() == R.id.action_settings)
 			return true;
 		else
 			return super.onOptionsItemSelected(item);
 	}
+
 	/**
 	 * Slide menu item click listener
 	 * */
@@ -120,15 +121,15 @@ public class MainActivity extends Activity  {
 		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
 
 	public void addSlideMenu() {
 		// load slide menu items
-		//navMenuTitles ;//= getResources().getStringArray(R.array.nav_drawer_items);
+		// navMenuTitles ;//=
+		// getResources().getStringArray(R.array.nav_drawer_items);
 
 		// nav drawer icons from resources
-		//navMenuIcons = getResources()
-		//		.obtainTypedArray(R.array.nav_drawer_icons);
+		// navMenuIcons = getResources()
+		// .obtainTypedArray(R.array.nav_drawer_icons);
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
@@ -137,37 +138,42 @@ public class MainActivity extends Activity  {
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], R.drawable.ic_home, true, "22"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0],
+				R.drawable.ic_home, true, "22"));
 		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], R.drawable.ic_people));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],
+				R.drawable.ic_people));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
+				R.drawable.ic_communities));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], R.drawable.ic_photos));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],
+				R.drawable.ic_photos));
 		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], R.drawable.ic_pages));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
+				R.drawable.ic_pages));
 		// What's hot, We will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], R.drawable.ic_whats_hot, true, "50+"));
-		
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],
+				R.drawable.ic_whats_hot, true, "50+"));
+
 		// Recycle the typed array
-		//navMenuIcons.recycle();
+		// navMenuIcons.recycle();
 
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(context,
-				navDrawerItems);
+		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 		getCountries();
 	}
-	public static void updateCounter(int count)
-	{
-		navDrawerItems.get(0).setCount(""+count);
+
+	public static void updateCounter(int count) {
+		navDrawerItems.get(0).setCount("" + count);
 		// setting the nav drawer list adapter
-		adapter = new NavDrawerListAdapter(context,
-				navDrawerItems);
+		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 	}
+
 	/**
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
@@ -176,34 +182,29 @@ public class MainActivity extends Activity  {
 		ParentFragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new CartFragment();
+			fragment = new OrdersFragment();
 			fragments.add(fragment);
 			break;
 		case 1:
-			fragment = new OrdersFragment();
+			fragment = new CartFragment();
 			fragments.add(fragment);
 			break;
 		case 2:
 			fragment = new ProfileFragment();
 			fragments.add(fragment);
 			break;/*
-		case 3:
-			fragment = new CommunityFragment();
-			break;
-		case 4:
-			fragment = new PagesFragment();
-			break;
-		case 5:
-			fragment = new WhatsHotFragment();
-			break;
-*/
+				 * case 3: fragment = new CommunityFragment(); break; case 4:
+				 * fragment = new PagesFragment(); break; case 5: fragment = new
+				 * WhatsHotFragment(); break;
+				 */
 		default:
 			break;
 		}
 
 		if (fragment != null) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, (Fragment) fragment).commit();
+					.replace(R.id.frame_container, (Fragment) fragment)
+					.commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
@@ -241,8 +242,7 @@ public class MainActivity extends Activity  {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	public void toggler()
-	{
+	public void toggler() {
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, // nav menu toggle icon
@@ -265,8 +265,8 @@ public class MainActivity extends Activity  {
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-		
 	}
+
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("setCountries"))
 			setCountries(s, error);
@@ -274,29 +274,27 @@ public class MainActivity extends Activity  {
 			setCities(s, error);
 		else if (m.equals("setAreas"))
 			setAreas(s, error);
-		else
-		{
+		else {
 			for (Fragment fragment : fragments) {
-				if (fragment.getClass().equals(OrdersFragment.class))
-				{
+				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray","method: "+m);
+					Log.d("ray", "method: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(),
-								s.getClass());
-						if(returnFunction != null)
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-					
+
 			}
 		}
 	}
 
-	//@Override
+	// @Override
 	public void onAttachFragment(Fragment fragment) {
 		activeFragment = fragment;
 	}
@@ -318,16 +316,15 @@ public class MainActivity extends Activity  {
 	}
 
 	public static Fragment getVisibleFragment() {
-		
+
 		for (Fragment fragment : fragments) {
-			if (fragment != null && fragment.isVisible())
-			{
+			if (fragment != null && fragment.isVisible()) {
 				return fragment;
 			}
 		}
 		return null;
 	}
-	
+
 	public void getCountries() {
 		String serverURL = new myURL("countries", null, 0, 30).getURL();
 		MyJs mjs = new MyJs("setCountries", this,
@@ -375,9 +372,11 @@ public class MainActivity extends Activity  {
 		}
 		cities.get(cityP).setAreas(areas);
 		countries.get(countryP).setCities(cities);
-		if (countryP == countries.size() - 1 && cityP == countries.get(countryP).getCities().size()-1) {
+		if (countryP == countries.size() - 1
+				&& cityP == countries.get(countryP).getCities().size() - 1) {
 			((deliveryclient) this.getApplication()).setCountries(countries);
 			((deliveryclient) this.getApplication()).loader.dismiss();
+			displayView(0);
 		}
 	}
 }

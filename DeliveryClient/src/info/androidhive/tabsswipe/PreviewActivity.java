@@ -3,6 +3,7 @@ package info.androidhive.tabsswipe;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +26,8 @@ public class PreviewActivity extends Activity {
 
 		cart = ((deliveryclient) this.getApplication()).getMyCart();
 		myOrder = new Order();
-
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		preview();
 	}
 

@@ -74,7 +74,7 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
-
+		
 		return view;
 	}
 
@@ -82,13 +82,14 @@ public class OrdersFragment extends ParentFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		((deliveryclient) currentActivity.getApplication()).setCurrentFragment(this);
+		getList(sequence.get(0), 0);
+		Log.d("ray", "onActivityCreated");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		getList(sequence.get(0), 0);
-		Log.d("ray", "resumed");
+		
 	}
 
 	public void goUp() {

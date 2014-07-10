@@ -1,91 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">arabic_DeliveryClient</string>
-    <string name="hello_world">arabic_Hello world!</string>
-    <string name="action_settings">arabic_Settings</string>
-    <string name="username">arabic_Username </string>
-    <string name="password">arabic_Password </string>
-    <string name="confirm_password">arabic_Confirm Password </string>
-    <string name="submit">arabic_Submit</string>
-    <string name="categories">arabic_Categories</string>
-    <string name="from">arabic_From:</string>
-    <string name="to">arabic_To:</string>
-    <string name="title_activity_navigation">arabic_Menu</string>
-    <string name="title_activity_categories">arabic_Categories</string>
-    <string name="title_activity_branches">arabic_Branches</string>
-    <string name="title_activity_add_branch">arabic_Add Branch</string>
-    <string name="title_activity_users">arabic_Users</string>
-    <string name="title_activity_order_info">arabic_Order Info</string>
-    <string name="add">arabic_Add</string>
-    <string name="personalinfo">arabic_Personal Information:</string>
-    <string name="preparer">arabic_This is preparer</string>
-    <string name="opening_hours">arabic_Opening Hours</string>
-    <string name="clientinfo">arabic_Client Info</string>
-    <string name="address">arabic_Address</string>
-    <string name="total">arabic_Total</string>
-    <string name="status">arabic_Status</string>
-    <string name="notes">arabic_Notes:</string>
-    <string name="cancel">arabic_Cancel</string>
-    <string name="deliveryguy">arabic_Delivery Guy</string>
-    <string name="preparerguy">arabic_Preparer</string>
-    <string name="details">arabic_Details</string>
-    <string name="name">arabic_Name</string>
-    <string name="textButton">arabic_TextButton</string>
-    <string name="selectphoto">arabic_Select Photo</string>
-    <string name="slash">arabic_/</string>
-    <string name="priceunit">arabic_Price/Unit</string>
-    <string name="producticon">arabic_Product Icon:</string>
-    <string name="estimatedtime">arabic_Estimated Time:</string>
-    <string name="description">arabic_Description:</string>
-    <string name="productname">arabic_Product Name:</string>
-    <string name="selectlanguage">arabic_Select Language</string>
-    <string name="buttonlogin">arabic_Login</string>
-    <string name="products">arabic_Products</string>
-    <string name="reason">arabic_Reason:</string>
-    <string name="item">arabic_Item</string>
-    <string name="textview">arabic_TextView</string>
-    <string name="checkbox">arabic_CheckBox</string>
-    <string name="estimation">arabic_Estimated Time</string>
-    <string name="About">arabic_About us</string>
-    <string name="navigation">arabic_Navigation Menu</string>
-    <string name="Logout">arabic_Logout</string>
-    <string name="search_hint">arabic_Search Here</string>
-    <string name="settings">arabic_Settings</string>
-    <string name="keeploggedin">arabic_Keep me Logged in</string>
-    <string name="monday">arabic_Monday</string>
-    <string name="tuseday">arabic_Tuseday</string>
-    <string name="wednesday">arabic_Wednesday</string>
-    <string name="thursday">arabic_Thursday</string>
-    <string name="friday">arabic_Friday</string>
-    <string name="saturday">arabic_Saturday</string>
-    <string name="sunday">arabic_Sunday</string>
-    <string name="invalednameentered">arabic_Invalid Name Entered</string>
-    <string name="youselected">arabic_You selected: </string>
-    <string name="areaselected">arabic_Area selected: </string>
-    <string name="selected">arabic_Selected</string>
-    <string name="editing">arabic_Editing: </string>
-    <string name="activate">arabic_Activate: </string>
-    <string name="deactivate">arabic_Deactivate: </string>
-    <string name="categoryname">arabic_Category Name</string>
-    <string name="deletethiscat">arabic_Delete this Category?</string>
-    <string name="deletethisuser">arabic_Delete this User?</string>
-    <string name="deletethisprod">arabic_Delete this Product?</string>
-    <string name="wrongcredentials">arabic_Wrong Credentialsss</string>
-    <string name="exit">arabic_Exit</string>
-    <string name="exitquest">arabic_Are you sure you want to exit?</string>
-    <string name="cancelreason">arabic_Please enter a reason</string>
-    <string name="ordercanceled">arabic_Order Canceled</string>
-    <string name="forgotpass">arabic_Forgot Password</string>
 
-    <string-array name="acc_type">arabic_
+    <string name="app_name">ar_DeliveryClient</string>
+    <string name="hello_world">ar_Hello world!</string>
+    <string name="action_settings">ar_Settings</string>
+    <string name="username">ar_Username </string>
+    <string name="password">ar_Password </string>
+    <string name="confirm_password">ar_Confirm Password </string>
+    <string name="submit">ar_Submit</string>
+    <string name="categories">ar_Categories</string>
+    <string name="from">ar_From:</string>
+    <string name="to">ar_To:</string>
+    <string name="title_activity_navigation">ar_Menu</string>
+    <string name="title_activity_categories">ar_Categories</string>
+    <string name="title_activity_branches">ar_Branches</string>
+    <string name="title_activity_add_branch">ar_Add Branch</string>
+    <string name="title_activity_users">ar_Users</string>
+    <string name="title_activity_order_info">ar_Order Info</string>
+    <string name="add">ar_Add</string>
+    <string name="personalinfo">ar_Personal Information:</string>
+    <string name="preparer">ar_This is preparer</string>
+    <string name="opening_hours">ar_Opening Hours</string>
+    <string name="clientinfo">ar_Client Info</string>
+    <string name="address">ar_Address</string>
+    <string name="total">ar_Total</string>
+    <string name="status">ar_Status</string>
+    <string name="notes">ar_Notes:</string>
+    <string name="cancel">ar_Cancel</string>
+    <string name="deliveryguy">ar_Delivery Guy</string>
+    <string name="preparerguy">ar_Preparer</string>
+    <string name="details">ar_Details</string>
+    <string name="name">ar_Name</string>
+    <string name="textButton">ar_TextButton</string>
+    <string name="selectphoto">ar_Select Photo</string>
+    <string name="slash">ar_/</string>
+    <string name="priceunit">ar_Price/Unit</string>
+    <string name="producticon">ar_Product Icon:</string>
+    <string name="estimatedtime">ar_Estimated Time:</string>
+    <string name="description">ar_Description:</string>
+    <string name="productname">ar_Product Name:</string>
+    <string name="selectlanguage">ar_Select Language</string>
+    <string name="buttonlogin">ar_Login</string>
+    <string name="products">ar_Products</string>
+    <string name="reason">ar_Reason:</string>
+    <string name="item">ar_Item</string>
+    <string name="textview">ar_TextView</string>
+    <string name="checkbox">ar_CheckBox</string>
+    <string name="estimation">ar_Estimated Time</string>
+    <string name="About">ar_About us</string>
+    <string name="navigation">ar_Navigation Menu</string>
+    <string name="Logout">ar_Logout</string>
+    <string name="search_hint">ar_Search Here</string>
+    <string name="settings">ar_Settings</string>
+    <string name="keeploggedin">ar_Keep me Logged in</string>
+    <string name="monday">ar_Monday</string>
+    <string name="tuseday">ar_Tuseday</string>
+    <string name="wednesday">ar_Wednesday</string>
+    <string name="thursday">ar_Thursday</string>
+    <string name="friday">ar_Friday</string>
+    <string name="saturday">ar_Saturday</string>
+    <string name="sunday">ar_Sunday</string>
+    <string name="invalednameentered">ar_Invalid Name Entered</string>
+    <string name="youselected">ar_You selected: </string>
+    <string name="areaselected">ar_Area selected: </string>
+    <string name="selected">ar_Selected</string>
+    <string name="editing">ar_Editing: </string>
+    <string name="activate">ar_Activate: </string>
+    <string name="deactivate">ar_Deactivate: </string>
+    <string name="categoryname">ar_Category Name</string>
+    <string name="deletethiscat">ar_Delete this Category?</string>
+    <string name="deletethisuser">ar_Delete this User?</string>
+    <string name="deletethisprod">ar_Delete this Product?</string>
+    <string name="deletethisbranch">ar_Delete this Branch?</string>
+    <string name="wrongcredentials">ar_Wrong Credentialsss</string>
+    <string name="exit">ar_Exit</string>
+    <string name="exitquest">ar_Are you sure you want to exit?</string>
+    <string name="cancelreason">ar_Please enter a reason</string>
+    <string name="ordercanceled">ar_Order Canceled</string>
+    <string name="forgotpass">ar_Forgot Password</string>
+    <string name="lira">ar_L.L</string>
+
+    <string-array name="acc_type">ar_
         <item>Income</item>
         <item>Expense</item>
     </string-array>
-    <string-array name="languages">arabic_
+    <string-array name="languages">ar_
         <item>English</item>
         <item>Arabic</item>
     </string-array>
-    <string-array name="country_arr">arabic_
+    <string-array name="country_arr">ar_
         <item>Afghanistan</item>
         <item>Bangladesh</item>
         <item>Bhutan</item>
@@ -96,63 +99,98 @@
         <item>Pakistan</item>
     </string-array>
 
-    <string name="select_location">arabic_Select Your location And Business Category</string>
-    <string name="select_business">arabic_Select A Business Category</string>
-    <string name="select_country">arabic_Country</string>
-    <string name="select_city">arabic_City</string>
-    <string name="select_area">arabic_Area</string>
-    <string name="select">arabic_Confirm Selection</string>
-    <string name="pick">arabic_Pick</string>
-    <string name="lblCountry">arabic_Select Country</string>
-    <string name="lblAdd">arabic_Add New Mobile Name</string>
-    <string name="btnAdd">arabic_Add Name</string>
-    <string name="txtHint">arabic_HTC</string>
-    <string name="lblDisp">arabic_Select Name</string>
-    <string name="lblSubAcc">arabic_Select Account Head</string>
-    <string name="title_activity_user_info">arabic_User Info</string>
-    <string name="title_activity_selection">arabic_Select Activity</string>
-    <string name="country_name">arabic_Country Name</string>
-    <string name="add_country">arabic_Add Country</string>
-    <string name="add_city">arabic_Add City</string>
-    <string name="add_area">arabic_Add Area</string>
-    <string name="add_business">arabic_Add Business</string>
-    <string name="title_activity_add_category">arabic_Add Category</string>
-    <string name="title_activity_orders">arabic_Orders</string>
-    <string name="title_activity_product">arabic_Products</string>
-    <string name="title_activity_add_product">arabic_Add Product</string>
-    <string name="title_activity_old_orders">arabic_Old Orders</string>
-    <string name="title_activity_old_orders_info">arabic_Old Orders Info</string>
-    <string name="title_activity_splash_screen">arabic_SplashScreenActivity</string>
-    <string name="title_activity_search_results">arabic_Search Results</string>
-    <string name="title_activity_user_profile">arabic_User Profile</string>
-    <string name="no_net">arabic_No net Connection</string>
-    <string name="loding">arabic_Loading please wait</string>
-    <string name="restore_pass">arabic_Restore</string>
-    <string name="new_orders">arabic_New Orders</string>
-    <string name="assigned_orders">arabic_Assigned Orders</string>
-    <string name="prepared_orders">arabic_Prepared Orders</string>
-    <string name="canceled_orders">arabic_Canceled Orders</string>
-    <string name="closed_orders">arabic_Closed Orders</string>
-    <string name="branches">arabic_Branches</string>
-    <string name="users">arabic_Users</string>
-    <string name="empty_list">arabic_No items</string>
-    <string name="open_status">arabic_Open</string>
-    <string name="prepared_status">arabic_Prepared</string>
-    <string name="delivered_status">arabic_Closed</string>
-    <string name="english">arabic_English</string>
-    <string name="arabic">arabic_Arabic</string>
-    <string name="pass_dnt_match">arabic_Passwords do not match </string>
-    <string name="branch">arabic_Branch</string>
-    <string name="phonenum">arabic_Phone number</string>
-    <string name="invalid_phone">arabic_Invalid Phone number</string>
-    <string name="admin">arabic_Admin</string>
-    <string name="from_bigger">arabic_Make sure all from is less than to</string>
-    <string name="open_missing">arabic_Please select FROM And TO</string>
-    <string name="invalid_name">arabic_Invalid Name</string>
-    <string name="invalid_add">arabic_Invalid Address</string>
-    <string name="invalid_area">arabic_Invalid Area</string>
-    <string name="invalid_time">arabic_Invalid Estimation time</string>
-    <string name="select_role">arabic_Please select a role</string>
-	<string name="invalid_branch">arabic_Please select a branch</string>
-	<string name="order_updated">arabic_Order updated successfully</string>
+    <string name="select_location">ar_Select Your location And Business Category</string>
+    <string name="select_business">ar_Select A Business Category</string>
+    <string name="select_country">ar_Country</string>
+    <string name="select_city">ar_City</string>
+    <string name="select_area">ar_Area</string>
+    <string name="select">ar_Confirm Selection</string>
+    <string name="pick">ar_Pick</string>
+    <string name="lblCountry">ar_Select Country</string>
+    <string name="lblAdd">ar_Add New Mobile Name</string>
+    <string name="btnAdd">ar_Add Name</string>
+    <string name="txtHint">ar_HTC</string>
+    <string name="lblDisp">ar_Select Name</string>
+    <string name="lblSubAcc">ar_Select Account Head</string>
+    <string name="title_activity_user_info">ar_User Info</string>
+    <string name="title_activity_selection">ar_Select Activity</string>
+    <string name="country_name">ar_Country Name</string>
+    <string name="add_country">ar_Add Country</string>
+    <string name="add_city">ar_Add City</string>
+    <string name="add_area">ar_Add Area</string>
+    <string name="add_business">ar_Add Business</string>
+    <string name="title_activity_add_category">ar_Add Category</string>
+    <string name="title_activity_orders">ar_Orders</string>
+    <string name="title_activity_product">ar_Products</string>
+    <string name="title_activity_add_product">ar_Add Product</string>
+    <string name="title_activity_old_orders">ar_Old Orders</string>
+    <string name="title_activity_old_orders_info">ar_Old Orders Info</string>
+    <string name="title_activity_splash_screen">ar_SplashScreenActivity</string>
+    <string name="title_activity_search_results">ar_Search Results</string>
+    <string name="title_activity_user_profile">ar_User Profile</string>
+    <string name="no_net">ar_No net Connection</string>
+    <string name="loding">ar_Loading please wait</string>
+    <string name="restore_pass">ar_Restore</string>
+    <string name="new_orders">ar_New Orders</string>
+    <string name="assigned_orders">ar_Assigned Orders</string>
+    <string name="prepared_orders">ar_Prepared Orders</string>
+    <string name="canceled_orders">ar_Canceled Orders</string>
+    <string name="closed_orders">ar_Closed Orders</string>
+    <string name="branches">ar_Branches</string>
+    <string name="users">ar_Users</string>
+    <string name="empty_list">ar_No items</string>
+    <string name="open_status">ar_Open</string>
+    <string name="prepared_status">ar_Prepared</string>
+    <string name="delivered_status">ar_Closed</string>
+    <string name="english">ar_English</string>
+    <string name="arabic">ar_Arabic</string>
+    <string name="pass_dnt_match">ar_Passwords do not match </string>
+    <string name="branch">ar_Branch</string>
+    <string name="phonenum">ar_Phone number</string>
+    <string name="invalid_phone">ar_Invalid Phone number</string>
+    <string name="admin">ar_Admin</string>
+    <string name="from_bigger">ar_Make sure all from is less than to</string>
+    <string name="open_missing">ar_Please select FROM And TO</string>
+    <string name="invalid_name">ar_Invalid Name</string>
+    <string name="invalid_add">ar_Invalid Address</string>
+    <string name="invalid_area">ar_Invalid Area</string>
+    <string name="invalid_time">ar_Invalid Estimation time</string>
+    <string name="select_role">ar_Please select a role</string>
+    <string name="title_activity_preview">ar_PreviewActivity</string>
+    <string name="invalid_branch">ar_Please select a branch</string>
+    <string name="order_updated">ar_Order updated successfully</string>
+    <string name="title_activity_select_adress">ar_SelectAdress</string>
+    <string name="title_activity_register">ar_RegisterActivity</string>
+    <string name="register">ar_Register</string>
+    <string name="fullname">الأسم</string>
+    <string name="retypepass">ar_Retype Password</string>
+    <string name="street">ar_Street</string>
+    <string name="building">ar_Building</string>
+    <string name="floor">ar_Floor</string>
+    <string name="back">ar_Back</string>
+    <string name="addresses">ar_Addresses</string>
+    <string name="addtocart">ar_Add To Cart</string>
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Find People</item>
+        <item>Photos</item>
+        <item>Communities</item>
+        <item>Pages</item>
+        <item>What\'s Hot</item>
+    </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">ar_
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_pages</item>
+        <item>@drawable/ic_whats_hot</item>
+    </array>
+
+    <string name="title_activity_test">ar_TestActivity</string>
+
 </resources>

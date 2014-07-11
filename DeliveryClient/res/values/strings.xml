@@ -79,7 +79,9 @@
     <string name="ordercanceled">Order Canceled</string>
     <string name="forgotpass">Forgot Password</string>
     <string name="lira">L.L</string>
-
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
     <string-array name="acc_type">
         <item>Income</item>
         <item>Expense</item>
@@ -170,6 +172,9 @@
     <string name="back">Back</string>
     <string name="addresses">Addresses</string>
     <string name="addtocart">Add To Cart</string>
+    <string name="home">Home</string>
+        <string name="cart">Cart</string>
+        <string name="profile">My Profile</string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>
@@ -192,5 +197,6 @@
     </array>
 
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_product_info">ProductInfoActivity</string>
 
 </resources>

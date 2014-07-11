@@ -26,6 +26,16 @@ public class GlobalM {
 			}
 		}
 	}
+	public String getSelected(ArrayAdapter<?> list, Object o) {
+
+		for (int position = list.getCount()-1; position >=0; position--) {
+			if (list.getItem(position).equals(o)) {
+				
+				return list.getItem(position).toString();
+			}
+		}
+		return null;
+	}
 
 	public void bkToNav(Activity a, String msg) {
 

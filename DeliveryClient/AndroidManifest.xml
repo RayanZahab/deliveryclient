@@ -65,6 +65,10 @@
             android:name="info.androidhive.tabsswipe.AddAddressActivity"
             android:label="@string/title_activity_test" >
         </activity>
+        <activity
+            android:name="info.androidhive.tabsswipe.ProductInfoActivity"
+            android:label="@string/title_activity_product_info" >
+        </activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,8 +33,7 @@ public class MainActivity extends Activity {
 	// private ActionBar actionBar;
 	// Tab titles
 	static FragmentManager fragmentManager;
-	private String[] tabs = { "Home", "find", "photos", "Home2", "find2",
-			"photos2" };
+	
 	private static Context context;
 
 	// new
@@ -49,9 +48,7 @@ public class MainActivity extends Activity {
 	private CharSequence mTitle;
 
 	// slide menu items
-	private String[] navMenuTitles = { "Home", "Cart", "Profile", "Home",
-			"find", "photos" };
-	private TypedArray navMenuIcons;
+	private String[] navMenuTitles = { getString(R.string.home),  getString(R.string.cart),  getString(R.string.profile)  };
 
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
@@ -62,6 +59,7 @@ public class MainActivity extends Activity {
 	ArrayList<City> cities = new ArrayList<City>();
 	ArrayList<Area> areas = new ArrayList<Area>();
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -139,26 +137,14 @@ public class MainActivity extends Activity {
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0],
-				R.drawable.ic_home, true, "22"));
+				R.drawable.ic_home, true, "0"));
 		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],
 				R.drawable.ic_people));
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
 				R.drawable.ic_communities));
-		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3],
-				R.drawable.ic_photos));
-		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4],
-				R.drawable.ic_pages));
-		// What's hot, We will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5],
-				R.drawable.ic_whats_hot, true, "50+"));
-
-		// Recycle the typed array
-		// navMenuIcons.recycle();
-
+		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
@@ -305,14 +291,15 @@ public class MainActivity extends Activity {
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.exit)
 				.setMessage(R.string.exitquest)
-				.setPositiveButton("Yes",
+				.setPositiveButton(R.string.yes,
 						new DialogInterface.OnClickListener() {
+							@SuppressLint("NewApi")
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
 								MainActivity.this.finishAffinity();
 							}
-						}).setNegativeButton("No", null).show();
+						}).setNegativeButton(R.string.no, null).show();
 	}
 
 	public static Fragment getVisibleFragment() {
@@ -367,9 +354,7 @@ public class MainActivity extends Activity {
 
 	public void setAreas(String s, String error) {
 		areas = new APIManager().getAreasByCity(s);
-		for (int j = 0; j < cities.size(); j++) {
-			Log.d("ray", "City: " + cities.get(j).getId());
-		}
+		
 		cities.get(cityP).setAreas(areas);
 		countries.get(countryP).setCities(cities);
 		if (countryP == countries.size() - 1

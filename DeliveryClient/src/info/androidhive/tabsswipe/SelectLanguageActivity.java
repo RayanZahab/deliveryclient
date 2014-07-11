@@ -79,7 +79,7 @@ public class SelectLanguageActivity extends Activity {
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.exit)
 				.setMessage(R.string.exitquest)
-				.setPositiveButton("Yes",
+				.setPositiveButton(R.string.yes,
 						new DialogInterface.OnClickListener() {
 							@SuppressLint("NewApi")
 							@Override
@@ -87,7 +87,7 @@ public class SelectLanguageActivity extends Activity {
 									int which) {
 								SelectLanguageActivity.this.finishAffinity();
 							}
-						}).setNegativeButton("No", null).show();
+						}).setNegativeButton(R.string.no, null).show();
 	}
 
 	@Override

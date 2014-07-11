@@ -90,7 +90,7 @@ public class CartFragment extends ParentFragment {
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
-		price.setText(totalPrice + " L.L");
+		price.setText(totalPrice + R.string.lira);
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

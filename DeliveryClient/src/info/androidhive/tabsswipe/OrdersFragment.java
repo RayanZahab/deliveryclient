@@ -83,13 +83,12 @@ public class OrdersFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((deliveryclient) currentActivity.getApplication()).setCurrentFragment(this);
 		getList(sequence.get(0), 0);
-		Log.d("ray", "onActivityCreated");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+		getList(sequence.get(0), 0);
 	}
 
 	public void goUp() {
@@ -129,7 +128,6 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getList(String type, int id) {
 		mylist = new ArrayList<Item>();
-		Log.d("ray","type: "+type);
 		if (type.equals("business")) {
 			countryId = 0;
 			cityId = 0;
@@ -344,7 +342,7 @@ public class OrdersFragment extends ParentFragment {
 		if (mylist.size() == 0) {
 			Item i = new Item();
 			i.setId(0);
-			i.setName("Empty");
+			i.setName(currentActivity.getString(R.string.empty_list));
 			i.setType("empty");
 			mylist.add(i);
 		}
@@ -382,7 +380,7 @@ public class OrdersFragment extends ParentFragment {
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
-		price.setText(totalPrice + " L.L");
+		price.setText(totalPrice + currentActivity.getString(R.string.lira));
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

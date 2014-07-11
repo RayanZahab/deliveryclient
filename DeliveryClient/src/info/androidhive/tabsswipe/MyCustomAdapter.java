@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +63,10 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					// OrdersFragment.move();
+					Intent i = new Intent(activity.getBaseContext(),
+							ProductInfoActivity.class);
+					((deliveryclient) activity.getApplication()).setProductId(item.getId());
+					activity.startActivity(i);
 				}
 			});
 			name = (TextView) convertView.findViewById(R.id.name);

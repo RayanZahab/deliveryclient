@@ -77,7 +77,6 @@
                 android:background="@drawable/edittext"
                 android:ems="10"
                 android:hint="@string/productname"
-                android:inputType="text"
                 android:minWidth="30dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"

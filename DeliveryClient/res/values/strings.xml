@@ -133,6 +133,7 @@
     <string name="no_net">No net Connection</string>
     <string name="loding">Loading please wait</string>
     <string name="restore_pass">Restore</string>
+    <string name="pending_orders">Penidng Orders</string>
     <string name="new_orders">New Orders</string>
     <string name="assigned_orders">Assigned Orders</string>
     <string name="prepared_orders">Prepared Orders</string>

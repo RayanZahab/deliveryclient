@@ -157,7 +157,8 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					sb.append(line + "\n");
 				}
 				Content = sb.toString();
-				Log.d("GET", "ray: " + Content + "->"+returnFunction + " : "+mc.getLocalClassName());
+				Log.d("GET", "ray: " + Content + "->" + returnFunction + " : "
+						+ mc.getLocalClassName());
 				if (conn.getResponseCode() != 200) {
 					Error = conn.getResponseMessage();
 					JSONObject jsonResponse = new JSONObject(Content);
@@ -308,19 +309,10 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private String register(User p, URL url, String token)
-			throws Exception {
+	private String register(User p, URL url, String token) throws Exception {
 
 		String USER_AGENT = "Mozilla/5.0";
 		String boundary = "*****";
-		String iFileName = "";
-		String fileUrl = "";
-		/*
-		if (p.getPhoto() != null) {
-			iFileName = p.getPhoto().getName();
-			fileUrl = p.getPhoto().getUrl();
-		}
-		*/
 		String lineEnd = "\r\n";
 		String twoHyphens = "--";
 		URL obj = url;
@@ -355,39 +347,9 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					+ mapEntry.getKey() + "\"" + lineEnd);
 			dos.writeBytes(lineEnd);
 			dos.writeBytes(mapEntry.getValue().toString());
-			System.out.println("\n :" + mapEntry.getValue().toString());
 			dos.writeBytes(lineEnd);
 		}
-		/*
-		if (p.getPhoto() != null) {
-			dos.writeBytes(twoHyphens + boundary + lineEnd);
-			dos.writeBytes("Content-Disposition: form-data; name=\"photo\";filename=\""
-					+ iFileName + "\"" + lineEnd);
-			dos.writeBytes(lineEnd);
-			FileInputStream fileInputStream = new FileInputStream(fileUrl);
-			int bytesAvailable = fileInputStream.available();
 
-			int maxBufferSize = 1024;
-			int bufferSize = Math.min(bytesAvailable, maxBufferSize);
-			byte[] buffer = new byte[bufferSize];
-
-			// read file and write it into form...
-			int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-			System.out.println("\nRay:" + buffer);
-
-			while (bytesRead > 0) {
-				dos.write(buffer, 0, bufferSize);
-				bytesAvailable = fileInputStream.available();
-				bufferSize = Math.min(bytesAvailable, maxBufferSize);
-				bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-			}
-			dos.writeBytes(lineEnd);
-			dos.writeBytes("\r\n--" + boundary + "--\r\n");
-			// close streams
-			fileInputStream.close();
-		} else
-			dos.writeBytes("\r\n--" + boundary + "--\r\n");
-			*/
 		dos.flush();
 
 		dos.close();
@@ -406,9 +368,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			response.append(inputLine);
 		}
 		in.close();
-
-		// print result
-		System.out.println(response.toString());
 		return response.toString();
 
 	}

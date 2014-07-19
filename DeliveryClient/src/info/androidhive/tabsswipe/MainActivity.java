@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 	private CharSequence mTitle;
 
 	// slide menu items
-	private String[] navMenuTitles = { getString(R.string.home),  getString(R.string.cart),  getString(R.string.profile)  };
+	private List navMenuTitles = new ArrayList<String>();
 
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
@@ -58,7 +58,8 @@ public class MainActivity extends Activity {
 	ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
 	ArrayList<Area> areas = new ArrayList<Area>();
-
+	int CityId;
+	boolean last = false;
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,12 @@ public class MainActivity extends Activity {
 		mTitle = mDrawerTitle = getTitle();
 		fragmentManager = MainActivity.this.getFragmentManager();
 		context = this.getApplicationContext();
+		navMenuTitles.add(getString(R.string.home));
+		navMenuTitles.add(getString(R.string.cart));
+		navMenuTitles.add(getString(R.string.profile));
+		navMenuTitles.add(getString(R.string.pending_orders));
+		navMenuTitles.add(getString(R.string.closed_orders));
+		
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -136,13 +143,19 @@ public class MainActivity extends Activity {
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0],
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),
 				R.drawable.ic_home, true, "0"));
 		// Find People
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1],
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),
 				R.drawable.ic_people));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2],
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),
+				R.drawable.ic_communities));		
+		// Photos
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),
+				R.drawable.ic_communities));		
+		// Photos
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),
 				R.drawable.ic_communities));
 		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -184,6 +197,8 @@ public class MainActivity extends Activity {
 				 * WhatsHotFragment(); break;
 				 */
 		default:
+			fragment = new ProfileFragment();
+			fragments.add(fragment);
 			break;
 		}
 
@@ -195,7 +210,7 @@ public class MainActivity extends Activity {
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
-			setTitle(navMenuTitles[position]);
+			setTitle(navMenuTitles.get(position).toString());
 			mDrawerLayout.closeDrawer(mDrawerList);
 		} else {
 			// error in creating fragment
@@ -338,13 +353,15 @@ public class MainActivity extends Activity {
 	public void setCities(String s, String error) {
 		cities = new APIManager().getCitiesByCountry(s);
 		for (int j = 0; j < cities.size(); j++) {
+			if(j==cities.size()-1)
+				last = true;
 			getAreas(j);
 		}
 	}
 
 	public void getAreas(int position) {
 		cityP = position;
-		int CityId = cities.get(position).getId();
+		CityId = cities.get(position).getId();
 		Log.d("ray", "City: " + CityId);
 		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
 		MyJs mjs = new MyJs("setAreas", this,
@@ -357,11 +374,12 @@ public class MainActivity extends Activity {
 		
 		cities.get(cityP).setAreas(areas);
 		countries.get(countryP).setCities(cities);
-		if (countryP == countries.size() - 1
-				&& cityP == countries.get(countryP).getCities().size() - 1) {
+		if (last) {
 			((deliveryclient) this.getApplication()).setCountries(countries);
 			((deliveryclient) this.getApplication()).loader.dismiss();
+			Log.d("rayzz","AREA: "+countryP+" , "+CityId);
 			displayView(0);
+			last = false;
 		}
 	}
 }

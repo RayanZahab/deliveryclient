@@ -1,25 +1,17 @@
 package info.androidhive.tabsswipe;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class OrdersFragment extends ParentFragment {
 
@@ -40,6 +32,7 @@ public class OrdersFragment extends ParentFragment {
 	static View view;
 	static int fragmentId;
 	static android.app.FragmentManager fragmentManager;
+	android.app.Fragment mContent;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +47,10 @@ public class OrdersFragment extends ParentFragment {
 		sequence.add("products");
 		sequence.add("info");
 		currentActivity = getActivity();
-
+		if (savedInstanceState != null) {
+			mContent = getFragmentManager().getFragment(savedInstanceState,
+					"mContent");
+		}
 		view = inflater.inflate(R.layout.fragment_orders, container, false);
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
@@ -74,21 +70,39 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
-		
+
 		return view;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		((deliveryclient) currentActivity.getApplication()).setCurrentFragment(this);
-		getList(sequence.get(0), 0);
+		((deliveryclient) currentActivity.getApplication())
+				.setCurrentFragment(this);
+		getList(sequence.get(((deliveryclient) currentActivity.getApplication())
+				.getDepth()),
+				((deliveryclient) currentActivity.getApplication())
+						.getDepthVal());
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		getList(sequence.get(0), 0);
+		if (sequence.size() < 1) {
+			sequence.add("business");
+			sequence.add("country");
+			sequence.add("city");
+			sequence.add("area");
+			sequence.add("shops");
+			sequence.add("branches");
+			sequence.add("categories");
+			sequence.add("products");
+			sequence.add("info");
+		}
+		getList(sequence.get(((deliveryclient) currentActivity.getApplication())
+				.getDepth()),
+				((deliveryclient) currentActivity.getApplication())
+						.getDepthVal());
 	}
 
 	public void goUp() {
@@ -128,6 +142,10 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getList(String type, int id) {
 		mylist = new ArrayList<Item>();
+		((deliveryclient) currentActivity.getApplication()).setDepth(sequence
+				.indexOf(type));
+		((deliveryclient) currentActivity.getApplication()).setDepthVal(id);
+
 		if (type.equals("business")) {
 			countryId = 0;
 			cityId = 0;
@@ -136,7 +154,7 @@ public class OrdersFragment extends ParentFragment {
 			branchId = 0;
 			categoryId = 0;
 			productId = 0;
-			depth =0;
+			depth = 0;
 			getBusinesses();
 		} else if (type.equals("country")) {
 			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
@@ -169,7 +187,7 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void move() {
-		
+
 		CartFragment fh = new CartFragment();
 		android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
 		ft.replace(fragmentId, fh);
@@ -181,8 +199,8 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void getCountries() {
-		countries = ((deliveryclient) currentActivity.getApplication()).getCountries();
-		Log.d("rays","MYCOUNT"+countries.size());
+		countries = ((deliveryclient) currentActivity.getApplication())
+				.getCountries();
 		mylist = new ArrayList<Item>();
 		for (Country myCountry : countries) {
 			Item it = new Item();
@@ -191,12 +209,12 @@ public class OrdersFragment extends ParentFragment {
 			it.setId(myCountry.getId());
 			mylist.add(it);
 		}
-		updateList();		
+		updateList();
 	}
-
 
 	public void getCities(int CountryId) {
 		cities = countries.get(CountryId).getCities();
+		mylist = new ArrayList<Item>();
 		for (City myCity : cities) {
 			Item it = new Item();
 			it.setName(myCity.toString());
@@ -209,6 +227,7 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getAreas(int CityId) {
 		areas = cities.get(CityId).getAreas();
+		mylist = new ArrayList<Item>();
 		for (Area myArea : areas) {
 			Item it = new Item();
 			it.setName(myArea.toString());
@@ -304,8 +323,9 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public static void getBusinesses() {
-		android.app.Fragment myFragment = fragmentManager.findFragmentById(fragmentId);
-		if (myFragment.isVisible())  {
+		android.app.Fragment myFragment = fragmentManager
+				.findFragmentById(fragmentId);
+		if (myFragment.isVisible()) {
 			depth = 0;
 			countryId = 0;
 			cityId = 0;
@@ -335,8 +355,6 @@ public class OrdersFragment extends ParentFragment {
 		updateList();
 	}
 
-	
-
 	public void updateList() {
 		final ListView listView = (ListView) view.findViewById(R.id.orderslist);
 		if (mylist.size() == 0) {
@@ -356,12 +374,11 @@ public class OrdersFragment extends ParentFragment {
 				if (!mylist.get(0).getType().equals("empty")) {
 					depth++;
 					int itemId = mylist.get(position).getId();
-					if(sequence.get(depth).equals("country") ||
-							sequence.get(depth).equals("city") ||sequence.get(depth).equals("area") )
-					{
+					if (sequence.get(depth).equals("country")
+							|| sequence.get(depth).equals("city")
+							|| sequence.get(depth).equals("area")) {
 						getList(sequence.get(depth), position);
-					}
-					else
+					} else
 						getList(sequence.get(depth), itemId);
 					listView.setAdapter(new MyCustomAdapter(currentActivity,
 							android.R.layout.simple_list_item_1, mylist));

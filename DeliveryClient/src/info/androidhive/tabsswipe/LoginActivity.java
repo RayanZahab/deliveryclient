@@ -87,7 +87,10 @@ public class LoginActivity extends Activity {
 			editor.putInt("branchId", user.getBranch_id());
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
-			getAddresses(user.getId());
+			//getAddresses(user.getId());
+			((deliveryclient) this.getApplication()).setGlobals();
+			Intent i = new Intent(this, MainActivity.class);
+			startActivity(i);
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();

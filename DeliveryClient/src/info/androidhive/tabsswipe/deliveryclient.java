@@ -22,6 +22,8 @@ public class deliveryclient extends Application {
 	private List<Integer> myCartIds = new ArrayList<Integer>();
 	private ArrayList<Country> countries ;
 	private Fragment currentFragment;
+	private int depth = 0;
+	private int depthVal = 0;
 	public void emptyCart()
 	{
 		myCart =  new Cart();
@@ -255,6 +257,20 @@ public class deliveryclient extends Application {
 	}
 	public void setCurrentFragment(Fragment currentFragment) {
 		this.currentFragment = currentFragment;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		Log.d("ray","dep: "+depth);
+		this.depth = depth;
+	}
+	public int getDepthVal() {
+		Log.d("ray","depV: "+depthVal);
+		return depthVal;
+	}
+	public void setDepthVal(int depthVal) {
+		this.depthVal = depthVal;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
 
 public class APIManager {
 
@@ -25,6 +26,7 @@ public class APIManager {
 				int branch_id = Integer.parseInt(jsonResponse.optString(
 						"branch_id").toString());
 				String token = jsonResponse.optString("auth_token").toString();
+				Log.d("ray","token: "+token);
 				String name = jsonResponse.optString("name").toString();
 				String role_str = jsonResponse.optString("roles").toString();
 				jsonRole = new JSONObject(role_str);
@@ -832,7 +834,7 @@ public class APIManager {
 			if (!errorCheck(jsonResponse)) {
 				int id, count;
 				boolean is_new;
-				String date,  customer_str, status, customer_name_str;
+				String date, customer_str, status, customer_name_str;
 				double total;
 				Customer customer = new Customer(0, null, null);
 				if (jsonResponse.has("elements")) {
@@ -1085,83 +1087,22 @@ public class APIManager {
 				e.printStackTrace();
 			}
 
-		} else if (o instanceof Country) {
-			Country c = (Country) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				jsonObjSend.put("country", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} else if (o instanceof City) {
-			City c = (City) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				body.put("country_id", c.getCountry_id());
-				jsonObjSend.put("city", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} else if (o instanceof Area) {
-			Area c = (Area) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				body.put("city_id", c.getCity_id());
-				jsonObjSend.put("area", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} else if (o instanceof Business) {
-			Business c = (Business) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				jsonObjSend.put("business", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} else if (o instanceof Category) {
-			Category c = (Category) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				body.put("shop_id", c.getShopId());
-				jsonObjSend.put("category", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
 		} else if (o instanceof User) {
 			User c = (User) o;
 
 			JSONObject body = new JSONObject();
 			try {
 				body.put("phone", c.getPhone());
+				body.put("mobile", c.getPhone());
 				if (c.isLogin()) {
 					body.put("pass", c.getPassword());
 				} else {
 					if (c.getPassword() != null)
 						if (c.getId() == 0) {
-							c.setEncPassword(c.getPhone());
-							body.put("pass", c.getPassword());
+							body.put("encrypted_password", c.getPassword());
 						}
 					if (c.getName() != null)
 						body.put("name", c.getName());
-					if (c.getBranch_id() != 0)
-						body.put("branch_id", c.getBranch_id());
-					body.put("is_fired", 0);
 
 				}
 
@@ -1170,69 +1111,7 @@ public class APIManager {
 				e.printStackTrace();
 			}
 
-		} else if (o instanceof Product) {
-			Product c = (Product) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				body.put("price", c.getPrice());
-				body.put("description", c.getDescription());
-				body.put("shop_id", c.getShop_id());
-				body.put("category_id", c.getCategory().getId());
-				body.put("unit_id", c.getUnit().getId());
-				body.put("photo", c.getPhoto().getUrl());
-
-				jsonObjSend.put("item", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} else if (o instanceof Branch) {
-			Branch c = (Branch) o;
-
-			JSONObject body = new JSONObject();
-			try {
-				body.put("name", c.getName());
-				body.put("address", c.getAddress());
-				body.put("description", c.getDescription());
-				body.put("shop_id", c.getShop().getId());
-				body.put("area_id", c.getArea().getId());
-				body.put("long", c.getLongitude());
-				body.put("lat", c.getLatitude());
-				body.put("estimation_time", c.getEstimation_time());
-
-				jsonObjSend.put("branch", body);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		}/*
-		 * else if (o instanceof Activate) { Activate c = (Activate) o;
-		 * JSONArray jsonArray = new JSONArray(); try { for (int i = 0; i <
-		 * c.getToUpdate().size(); i++) { jsonArray.put(c.getToUpdate().get(i));
-		 * } jsonObjSend.put(c.getType(), jsonArray); } catch (JSONException e)
-		 * { e.printStackTrace(); }
-		 * 
-		 * }
-		 */else if (o instanceof OpenHours) {
-			OpenHours oh = (OpenHours) o;
-			try {
-				jsonObjSend.put("opening_hours", oh.getOpenHours());
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-
-		} /*
-		 * else if (o instanceof Role) { Role c = (Role) o; JSONObject body =
-		 * new JSONObject(); try { body.put("is_admin", c.getAdmin() ? 1 : 0);
-		 * body.put("is_preparer", c.getPreparer() ? 1 : 0);
-		 * body.put("is_deliverer", c.getDelivery() ? 1 : 0);
-		 * 
-		 * jsonObjSend.put("roles", body); } catch (JSONException e) {
-		 * e.printStackTrace(); } }
-		 */
-
+		}
 		return jsonObjSend;
 	}
 }

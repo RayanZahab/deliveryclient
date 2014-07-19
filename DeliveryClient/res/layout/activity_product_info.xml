@@ -116,32 +116,33 @@
 
             <TextView
                 android:id="@+id/qtTxt"
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_alignBottom="@+id/plus"
-                android:layout_toLeftOf="@+id/plus"
+                android:layout_width="65dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:background="@drawable/middlebox"
                 android:ems="10"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:maxLength="1"
                 android:text="0" />
 
             <ImageView
-                android:id="@+id/minus"
+                android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_alignBottom="@+id/plus"
-                android:layout_toLeftOf="@+id/qtTxt"
-                android:src="@drawable/minussign" />
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/qtTxt"
+                android:src="@drawable/plussignproduct" />
 
             <ImageView
-                android:id="@+id/plus"
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/plussign" />
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/qtTxt"
+                android:layout_toLeftOf="@+id/qtTxt"
+                android:src="@drawable/minussignproduct" />
+
         </RelativeLayout>
 
         <Button

@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
 	ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
 	ArrayList<Area> areas = new ArrayList<Area>();
-	User user;
+	Customer user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class LoginActivity extends Activity {
 	}
 
 	public void login(View view) {
-		String serverURL = new myURL(null, "users", "login", 0).getURL();
+		String serverURL = new myURL(null, "customers", "login", 0).getURL();
 		User user = new User(username.getText().toString(), null);
 		user.setEncPassword(password.getText().toString());
 		MyJs mjs = new MyJs("getLoggedIn", this,
@@ -80,14 +80,9 @@ public class LoginActivity extends Activity {
 			editor.putString("name", user.getName());
 			editor.putString("pass", password.getText().toString());
 			editor.putString("phone", username.getText().toString());
-			editor.putBoolean("admin", user.isIs_admin());
-			editor.putBoolean("preparer", user.isIs_preparer());
-			editor.putBoolean("delivery", user.isIs_delivery());
-			editor.putInt("shopId", 6);
-			editor.putInt("branchId", user.getBranch_id());
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
-			//getAddresses(user.getId());
+			getAddresses(user.getId());
 			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);

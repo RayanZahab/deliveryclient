@@ -2,11 +2,12 @@ package info.androidhive.tabsswipe;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -160,9 +161,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 				Log.d("GET", "ray: " + Content + "->" + returnFunction + " : "
 						+ mc.getLocalClassName());
 				if (conn.getResponseCode() != 200) {
-					Error = conn.getResponseMessage();
-					JSONObject jsonResponse = new JSONObject(Content);
-					Error = jsonResponse.optString("error").toString();
+					Error = getConnError(conn);
 				} else {
 					Error = null;
 				}
@@ -190,7 +189,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					Log.d("ray",
 							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = conn.getResponseMessage();
-					Error = conn.getResponseMessage();
+					Error = getConnError(conn);
 				} else {
 					BufferedReader responseContent = new BufferedReader(
 							new InputStreamReader(conn.getInputStream()));
@@ -227,7 +226,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					Log.d("ray",
 							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = null;
-					Error = conn.getResponseMessage();
+					Error = getConnError(conn);
 				} else {
 					Content = "done";
 					Error = null;
@@ -242,7 +241,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					Log.d("ray",
 							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = null;
-					Error = conn.getResponseMessage();
+					Error = getConnError(conn);
 				} else {
 					Content = "done";
 					Error = null;
@@ -265,6 +264,26 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		return null;
 	}
 
+	private String getConnError(HttpURLConnection conn) {
+		try {
+			Error = conn.getResponseMessage();
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					conn.getErrorStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			return response.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	protected void onPostExecute(Void unused) {
 		Log.d("raya", "post: " + returnFunction + ": " + last + ": "
 				+ global.loader.isShowing());
@@ -276,9 +295,14 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			if (Content == null)
 				Content = "";
 			if (Error != null) {
-				// new GlobalM().bkToNav(mc, getError(Content,Error));
+				if (global.loader != null ) 
+					global.loader.dismiss();
+				Log.d("raya", "backkkkkkkkkk: ");
+				
+				new GlobalM().bkToNav(mc, getError(Content, Error));
+				
 			}
-
+			else
 			{
 				Method returnFunction = this.mc.getClass().getMethod(
 						"callMethod", Content.getClass(), Content.getClass(),
@@ -320,7 +344,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
-		con.setRequestProperty("auth_token", token);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		con.setRequestProperty("Connection", "Keep-Alive");
 		con.setRequestProperty("Content-Type", "multipart/form-data;boundary="
@@ -345,10 +368,97 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					+ mapEntry.getKey() + "\"" + lineEnd);
 			System.out.println("\n Content-Disposition: form-data; name=\""
 					+ mapEntry.getKey() + "\"" + lineEnd);
+			System.out.println(mapEntry.getValue().toString());
 			dos.writeBytes(lineEnd);
 			dos.writeBytes(mapEntry.getValue().toString());
 			dos.writeBytes(lineEnd);
 		}
+		dos.writeBytes("\r\n--" + boundary + "--\r\n");
+		dos.flush();
+
+		dos.close();
+
+		int responseCode = con.getResponseCode();
+		if (responseCode != 201 && responseCode != 200 ) {
+			System.out.println("\nSending 'POST' request to URL : " + url);
+			System.out.println("Response Code : " + responseCode);
+			Error =  getConnError(con);
+			System.out.println("Response Code : " + Error);
+			
+			return null;
+		} else {
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			return response.toString();
+		}
+
+	}
+
+	public String reg() throws Exception {
+		String boundary = "*****";
+		String iFileName = "16.png";
+		String lineEnd = "\r\n";
+		String USER_AGENT = "Mozilla/5.0";
+		String twoHyphens = "--";
+		// String url =
+		// "http://enigmatic-springs-5176.herokuapp.com/api/v1/items";
+		// String url = "http://localhost:3000/api/v1/items";
+		String url = "http://107.170.86.46/api/v1/customers/register";
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		// add reuqest header
+		con.setRequestMethod("POST");
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		// con.setRequestProperty("auth_token", "b73168df58206c2fb477");
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+		con.setRequestProperty("Connection", "Keep-Alive");
+		con.setRequestProperty("Content-Type", "multipart/form-data;boundary="
+				+ boundary);
+
+		con.setDoInput(true);
+
+		// Send post request
+		con.setDoOutput(true);
+		con.setUseCaches(false);
+		DataOutputStream dos = new DataOutputStream(con.getOutputStream());
+
+		dos.writeBytes(twoHyphens + boundary + lineEnd);
+		dos.writeBytes("Content-Disposition: form-data; name=\"name\""
+				+ lineEnd);
+		dos.writeBytes(lineEnd);
+		dos.writeBytes("test");
+		dos.writeBytes(lineEnd);
+
+		dos.writeBytes(twoHyphens + boundary + lineEnd);
+		dos.writeBytes("Content-Disposition: form-data; name=\"phone\""
+				+ lineEnd);
+		dos.writeBytes(lineEnd);
+		dos.writeBytes("123123");
+		dos.writeBytes(lineEnd);
+
+		dos.writeBytes(twoHyphens + boundary + lineEnd);
+		dos.writeBytes("Content-Disposition: form-data; name=\"mobile\""
+				+ lineEnd);
+		dos.writeBytes(lineEnd);
+		dos.writeBytes("123123");
+		dos.writeBytes(lineEnd);
+
+		dos.writeBytes(twoHyphens + boundary + lineEnd);
+		dos.writeBytes("Content-Disposition: form-data; name=\"encrypted_password\""
+				+ lineEnd);
+		dos.writeBytes(lineEnd);
+		dos.writeBytes("1");
+		dos.writeBytes(lineEnd);
+		dos.writeBytes("\r\n--" + boundary + "--\r\n");
+		// close streams
+		// fileInputStream.close();
 
 		dos.flush();
 
@@ -356,11 +466,10 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode + "->"
-				+ con.getResponseMessage());
+		System.out.println("Response Code : " + responseCode);
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(
-				con.getInputStream()));
+				con.getErrorStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
@@ -368,8 +477,10 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			response.append(inputLine);
 		}
 		in.close();
-		return response.toString();
+		System.out.println(response.toString());
+		// print result
 
+		return "";
 	}
 
 	public void showProg() {
@@ -441,10 +552,9 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	}
 
 	public String getError(String cont, String Error) {
-		Log.d("rays", "error: " + cont + "," + Error + "->" + returnFunction);
 		JSONObject jsonResponse;
 		try {
-			jsonResponse = new JSONObject(cont);
+			jsonResponse = new JSONObject(Error);
 			if (jsonResponse.has("error"))
 				return jsonResponse.optString("error").toString();
 			else

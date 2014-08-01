@@ -15,30 +15,18 @@ public class APIManager {
 
 	}
 
-	public User getLogedInUser(String cont) {
+	public Customer getLogedInUser(String cont) {
 		JSONObject jsonResponse, jsonRole;
 
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
-				int id = 1;// Integer.parseInt(jsonResponse.optString("id")
-							// .toString());
-				int branch_id = Integer.parseInt(jsonResponse.optString(
-						"branch_id").toString());
+				int id =  Integer.parseInt(jsonResponse.optString("id")
+							 .toString());
 				String token = jsonResponse.optString("auth_token").toString();
 				Log.d("ray","token: "+token);
-				String name = jsonResponse.optString("name").toString();
-				String role_str = jsonResponse.optString("roles").toString();
-				jsonRole = new JSONObject(role_str);
-				boolean admin = Boolean.parseBoolean(jsonRole
-						.optString("admin").toString());
-				boolean preparer = Boolean.parseBoolean(jsonRole.optString(
-						"preparer").toString());
-				boolean delivery = Boolean.parseBoolean(jsonRole.optString(
-						"deliverer").toString());
-
-				return new User(id, name, token, branch_id, admin, preparer,
-						delivery);
+				String name = jsonResponse.optString("name").toString();				
+				return new Customer(id, name, token);
 
 			}
 		} catch (JSONException e) {
@@ -1093,7 +1081,6 @@ public class APIManager {
 			JSONObject body = new JSONObject();
 			try {
 				body.put("phone", c.getPhone());
-				body.put("mobile", c.getPhone());
 				if (c.isLogin()) {
 					body.put("pass", c.getPassword());
 				} else {
@@ -1106,7 +1093,7 @@ public class APIManager {
 
 				}
 
-				jsonObjSend.put("user", body);
+				jsonObjSend.put("customer", body);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

@@ -10,6 +10,7 @@ public class Customer {
 	private int is_allowed;
 	private int default_address_id;
 	private Photo photo;
+	private String token;
 
 	public Customer(int id, String name, String username, String password,
 			String phone, String mobile, int is_allowed, int default_address_id) {
@@ -33,10 +34,10 @@ public class Customer {
 		this.setPhoto(photo);
 	}
 
-	public Customer(int id, String name,String mobile) {
+	public Customer(int id, String name,String token) {
 		this.setId(id);
 		this.setName(name);
-		this.setMobile(mobile);
+		this.setToken(token);
 	}
 
 	public int getIs_allowed() {
@@ -113,5 +114,13 @@ public class Customer {
 	public String toString()
 	{
 		return this.name;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

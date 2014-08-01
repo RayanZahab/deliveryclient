@@ -15,6 +15,7 @@ public class RegisterActivity extends Activity {
 	}
 
 	public void addUser(View view) {
+		
 		EditText username = (EditText) findViewById(R.id.name);
 		EditText inputphone = (EditText) findViewById(R.id.phone);
 		EditText pass = (EditText) findViewById(R.id.password);

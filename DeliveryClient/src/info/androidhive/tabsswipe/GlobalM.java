@@ -6,6 +6,7 @@ import java.util.TimeZone;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -39,23 +40,33 @@ public class GlobalM {
 
 	public void bkToNav(Activity a, String msg) {
 
-		boolean admin = ((deliveryclient) a.getApplication()).isAdmin();
 		Intent i;
+		Log.d("raya", "backkkkkkkkkk2: "+msg);
+		
 		/*
 		if (admin)
 			i = new Intent(a, NavigationActivity.class);
 		else
 			i = new Intent(a, OrdersActivity.class);
-
+*/
 		if (msg != null && !msg.isEmpty()) {
 			Toast t = Toast.makeText(a.getApplicationContext(), msg,
 					Toast.LENGTH_SHORT);
 			t.setGravity(Gravity.TOP, 0, 0);
+			Log.d("raya", "backkkkkkkkkk3: ");
+			
 			t.show();
-		}
+		}/*
 		if (((DeliveryClient) a.getApplication()).getToken() != null)
-			a.startActivity(i);
-			*/
+			a.startActivity(i);*/
+			
+	}
+	public void showError(Activity from, String msg)
+	{
+		Toast t = Toast.makeText(from.getApplicationContext(), msg,
+				Toast.LENGTH_SHORT);
+		t.setGravity(Gravity.TOP, 0, 0);
+		t.show();
 	}
 
 	public void goTo(Activity from,Class to, String msg) {

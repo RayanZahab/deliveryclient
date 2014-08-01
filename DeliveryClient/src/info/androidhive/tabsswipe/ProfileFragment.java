@@ -131,7 +131,7 @@ public class ProfileFragment extends ParentFragment {
 
 	public void getLoggedIn(String s, String error) {
 		if (error == null) {
-			User user = new APIManager().getLogedInUser(s);
+			Customer user = new APIManager().getLogedInUser(s);
 			CheckBox keeplog = (CheckBox) rootView.findViewById(R.id.keeploggedin);
 			SharedPreferences settings = currentActivity.getSharedPreferences("PREFS_NAME", 0);
 			SharedPreferences.Editor editor = settings.edit();

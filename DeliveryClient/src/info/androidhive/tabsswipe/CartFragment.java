@@ -83,14 +83,14 @@ public class CartFragment extends ParentFragment {
 	public static void updateFooter() {
 		Cart cart = ((deliveryclient) currentActivity.getApplication())
 				.getMyCart();
+		TextView price = (TextView) view.findViewById(R.id.carttotalprice);
 		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
-		TextView price = (TextView) view.findViewById(R.id.totalprice);
 		int totalPrice = 0;
 
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
-		price.setText(totalPrice + R.string.lira);
+		price.setText( 	"" +totalPrice+currentActivity.getString(R.string.lira));
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

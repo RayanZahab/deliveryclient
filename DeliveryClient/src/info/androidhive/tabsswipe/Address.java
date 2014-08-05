@@ -14,14 +14,19 @@ public class Address {
 	private String latitude;
 	private String update_at;
 	private String created_at;
+	private boolean isDefault;
 
-	public Address(int id){
-		this.id=id;
+	public Address() {
 	}
+
+	public Address(int id) {
+		this.id = id;
+	}
+
 	public Address(int id, String country, String city, String area,
 			String building, String floor, String street, String details,
 			int customer_id, String longitude, String latitude,
-			String created_at, String update_at) {
+			String created_at, String update_at, Boolean is_default) {
 		this.id = id;
 		this.country = country;
 		this.city = city;
@@ -35,11 +40,12 @@ public class Address {
 		this.latitude = latitude;
 		this.setCreated_at(created_at);
 		this.setUpdate_at(update_at);
+		this.isDefault = is_default;
 
 	}
+
 	public Address(int id, String country, String city, String area,
-			String building, String floor, String street, String details)
-	{
+			String building, String floor, String street, String details) {
 		this.id = id;
 		this.country = country;
 		this.city = city;
@@ -49,6 +55,7 @@ public class Address {
 		this.street = street;
 		this.details = details;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -154,7 +161,16 @@ public class Address {
 	}
 
 	public String toString() {
-		return this.country +" , "+this.city+" , "+this.area+"\n"+this.building+" , "+this.floor+" \n"+this.details;
+		return this.country + " , " + this.city + " , " + this.area + "\n"
+				+ this.building + " , " + this.floor + " \n" + this.details;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 }

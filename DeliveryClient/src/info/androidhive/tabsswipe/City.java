@@ -6,7 +6,7 @@ public class City {
 	private int id;
 	private int country_id;
 	private String name;
-	private ArrayList<Area> areas;
+	private ArrayList<Area> areas = new ArrayList<Area>();
 	private String json;
 	
 	public City(int id,String name) {

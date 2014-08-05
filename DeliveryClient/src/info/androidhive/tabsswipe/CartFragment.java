@@ -33,8 +33,7 @@ public class CartFragment extends ParentFragment {
 			public void onClick(View v) {
 				submitCart();
 			}
-		});
-		
+		});		
 		return view;
 	}
 	

@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -121,7 +120,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			new GlobalM().bkToNav(mc, mc.getString(R.string.no_net));
 		} else {
 			if (this.first) {
-				Log.d("rays", "method: " + returnFunction + "->" + last);
 				showProg();
 			}
 		}
@@ -136,7 +134,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		try {
 
 			URL url = new URL(urls[0]);
-
+			Log.d("ray","URL: "+url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.addRequestProperty("auth_token", token);
 
@@ -149,22 +147,21 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			}
 
 			if (this.method.equals("GET")) {
-				reader = new BufferedReader(new InputStreamReader(
-						conn.getInputStream()));
-				StringBuilder sb = new StringBuilder();
-				String line = null;
-
-				while ((line = reader.readLine()) != null) {
-					sb.append(line + "\n");
-				}
-				Content = sb.toString();
-				Log.d("GET", "ray: " + Content + "->" + returnFunction + " : "
-						+ mc.getLocalClassName());
 				if (conn.getResponseCode() != 200) {
 					Error = getConnError(conn);
 				} else {
 					Error = null;
+					reader = new BufferedReader(new InputStreamReader(
+							conn.getInputStream()));
+					StringBuilder sb = new StringBuilder();
+					String line = null;
+
+					while ((line = reader.readLine()) != null) {
+						sb.append(line + "\n");
+					}
+					Content = sb.toString();					
 				}
+
 			} else if (this.method.equals("POST")) {
 				conn.addRequestProperty("Accept", "application/json");
 				conn.addRequestProperty("Accept-Encoding", "gzip");
@@ -177,17 +174,12 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 						.objToCreate(this.objectToAdd);
 				OutputStreamWriter wr = new OutputStreamWriter(
 						conn.getOutputStream());
-				Log.d("ray",
-						"ray writing: " + urls[0] + "->"
-								+ jsonObjSend.toString());
 				wr.write(jsonObjSend.toString());
 				wr.flush();
 				wr.close();
 
 				if (conn.getResponseCode() != 201
 						&& conn.getResponseCode() != 200) {
-					Log.d("ray",
-							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = conn.getResponseMessage();
 					Error = getConnError(conn);
 				} else {
@@ -209,22 +201,15 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 						"max-stale=0,max-age=60");
 				conn.setDoOutput(true);
 				conn.setDoInput(true);
-				Log.d("ray", "ray req: "
-						+ conn.getRequestProperties().toString());
 				JSONObject jsonObjSend = (new APIManager())
 						.objToCreate(this.objectToAdd);
 				OutputStreamWriter wr = new OutputStreamWriter(
 						conn.getOutputStream());
-				Log.d("ray",
-						"ray writing: " + urls[0] + "->"
-								+ jsonObjSend.toString());
 				wr.write(jsonObjSend.toString());
 				wr.flush();
 				wr.close();
 
 				if (conn.getResponseCode() != 200) {
-					Log.d("ray",
-							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = null;
 					Error = getConnError(conn);
 				} else {
@@ -238,8 +223,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 				conn.addRequestProperty("Cache-Control",
 						"max-stale=0,max-age=60");
 				if (conn.getResponseCode() != 204) {
-					Log.d("ray",
-							"Failed: " + url + "\n" + conn.getResponseMessage());
 					Content = null;
 					Error = getConnError(conn);
 				} else {
@@ -253,7 +236,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		} catch (Exception ex) {
 			Error = ex.getLocalizedMessage();
 			ex.printStackTrace();
-			Log.d("ray", "ray err:" + Error);
 		} finally {
 			try {
 				reader.close();
@@ -285,25 +267,18 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	}
 
 	protected void onPostExecute(Void unused) {
-		Log.d("raya", "post: " + returnFunction + ": " + last + ": "
-				+ global.loader.isShowing());
 		if (global.loader != null && last) {
 			global.loader.dismiss();
-			Log.d("raya", "dismissing: ");
 		}
 		try {
 			if (Content == null)
 				Content = "";
 			if (Error != null) {
-				if (global.loader != null ) 
+				if (global.loader != null)
 					global.loader.dismiss();
-				Log.d("raya", "backkkkkkkkkk: ");
-				
 				new GlobalM().bkToNav(mc, getError(Content, Error));
-				
-			}
-			else
-			{
+
+			} else {
 				Method returnFunction = this.mc.getClass().getMethod(
 						"callMethod", Content.getClass(), Content.getClass(),
 						Content.getClass());
@@ -379,12 +354,12 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		dos.close();
 
 		int responseCode = con.getResponseCode();
-		if (responseCode != 201 && responseCode != 200 ) {
+		if (responseCode != 201 && responseCode != 200) {
 			System.out.println("\nSending 'POST' request to URL : " + url);
 			System.out.println("Response Code : " + responseCode);
-			Error =  getConnError(con);
+			Error = getConnError(con);
 			System.out.println("Response Code : " + Error);
-			
+
 			return null;
 		} else {
 			BufferedReader in = new BufferedReader(new InputStreamReader(

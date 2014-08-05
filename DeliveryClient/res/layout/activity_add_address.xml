@@ -39,7 +39,7 @@
             android:paddingLeft="4dp" />
 
         <Spinner
-            android:id="@+id/country"
+            android:id="@+id/countriesSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/nameinput"
@@ -48,20 +48,20 @@
             android:background="@drawable/myspinner" />
 
         <Spinner
-            android:id="@+id/city"
-            android:layout_width="wrap_content"
+            android:id="@+id/citiesSP"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/country"
-            android:layout_below="@+id/country"
+            android:layout_alignLeft="@+id/countriesSP"
+            android:layout_below="@+id/countriesSP"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner" />
 
         <Spinner
-            android:id="@+id/area"
-            android:layout_width="wrap_content"
+            android:id="@+id/areasSP"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/city"
-            android:layout_below="@+id/city"
+            android:layout_alignLeft="@+id/citiesSP"
+            android:layout_below="@+id/citiesSP"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner" />
 
@@ -69,8 +69,8 @@
             android:id="@+id/streetlabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/area"
-            android:layout_below="@+id/area"
+            android:layout_alignLeft="@+id/areasSP"
+            android:layout_below="@+id/areasSP"
             android:layout_marginTop="10dp"
             android:text="@string/street" />
 

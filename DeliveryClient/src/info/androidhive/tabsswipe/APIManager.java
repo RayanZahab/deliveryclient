@@ -596,6 +596,7 @@ public class APIManager {
 			if (!errorCheck(jsonResponse)) {
 				int id, customer_id;
 				String country, city, area, street, building, floor, details, longitude, latitude, created_at, updated_at;
+				Boolean is_default;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -622,11 +623,13 @@ public class APIManager {
 								.toString();
 						updated_at = jsonChildNode.optString("update_at")
 								.toString();
+						is_default = Boolean.parseBoolean(jsonChildNode.optString("is_default")
+								.toString());
 						customer_id = Integer.parseInt(jsonChildNode.optString(
 								"customer_id").toString());
 						gridArray.add(new Address(id, country, city, area,
 								building, floor, street, details, customer_id,
-								longitude, latitude, created_at, updated_at));
+								longitude, latitude, created_at, updated_at, is_default));
 
 					}
 				} else {
@@ -645,9 +648,11 @@ public class APIManager {
 					updated_at = jsonResponse.optString("update_at").toString();
 					customer_id = Integer.parseInt(jsonResponse.optString(
 							"customer_id").toString());
+					is_default = Boolean.parseBoolean(jsonResponse.optString("is_default")
+							.toString());
 					gridArray.add(new Address(id, country, city, area,
 							building, floor, street, details, customer_id,
-							longitude, latitude, created_at, updated_at));
+							longitude, latitude, created_at, updated_at, is_default));
 				}
 			} else {
 				return gridArray;
@@ -1094,6 +1099,25 @@ public class APIManager {
 				}
 
 				jsonObjSend.put("customer", body);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		} else if (o instanceof Address) {
+			Address c = (Address) o;
+
+			JSONObject body = new JSONObject();
+			try {
+				body.put("country", c.getCountry());
+				body.put("city", c.getCity());
+				body.put("area", c.getArea());
+				body.put("street", c.getStreet());
+				body.put("building", c.getBuilding());
+				body.put("floor", c.getFloor());
+				body.put("details", c.getDetails());
+				body.put("is_default", c.isDefault());
+				Log.d("ray","sending: "+c.getCountry()+"-"+c.getCity()+"-"+c.getArea());
+				jsonObjSend.put("customer_address", body);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

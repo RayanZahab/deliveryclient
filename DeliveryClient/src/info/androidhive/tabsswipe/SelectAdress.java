@@ -1,6 +1,7 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -32,7 +33,7 @@ public class SelectAdress extends Activity {
 	}
 
 	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
+		String serverURL = new myURL("addresses", "customers", ((deliveryclient) this.getApplication()).getUserId(), 0).getURL();
 		MyJs mjs = new MyJs("setAdd", this,
 				((deliveryclient) this.getApplication()), "GET");
 		mjs.execute(serverURL);

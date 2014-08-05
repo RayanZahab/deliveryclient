@@ -7,7 +7,7 @@ import android.util.Log;
 public class Country {
 	private Integer id;
 	private String name;
-	private ArrayList<City> cities;
+	private ArrayList<City> cities = new ArrayList<City>();
 	private String json;
 	public Country(Integer id, String name) {
 		this.setId(id);
@@ -37,15 +37,6 @@ public class Country {
 		return name;
 	}
 
-	public ArrayList<City> getCities(ArrayList<City> cities) {
-		ArrayList<City> currentCities = new ArrayList<City>();
-		for (int i = 0; i < cities.size(); i++) {
-			if (cities.get(i).getCountry_id() == id) {
-				currentCities.add(cities.get(i));
-			}
-		}
-		return currentCities;
-	}
 	@Override
 	public boolean equals(Object obj) {
 		Country c = (Country) obj;

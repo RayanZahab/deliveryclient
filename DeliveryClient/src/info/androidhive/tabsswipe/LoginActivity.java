@@ -93,7 +93,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
+		String serverURL = new myURL("addresses", "customers", user.getId(), 0).getURL();
 		MyJs mjs = new MyJs("getAdd", this,
 				((deliveryclient) this.getApplication()), "GET", false, true);
 		mjs.execute(serverURL);
@@ -102,17 +102,27 @@ public class LoginActivity extends Activity {
 
 	public void getAdd(String s, String error) {
 		if (error == null) {
+			Log.d("ray","error add not null");
 			ArrayList<Address> address = new APIManager().getAddress(s);
 			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 			SharedPreferences.Editor editor = settings.edit();
-			if (address.size() > 0) {
-				editor.putInt("addressId", address.get(0).getId());
-				editor.commit();
+			for(int i =0;i<address.size();i++)
+			{
+				Log.d("ray","add: "+i);
+				if (address.get(i).isDefault()) {
+					Log.d("ray","add found ");
+					editor.putInt("addressId", address.get(i).getId());
+					editor.commit();
+					break;
+				}
 			}
+			
 			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
-		}
+		}else
+			Log.d("ray","error:"+error);
+			
 	}
 	
 

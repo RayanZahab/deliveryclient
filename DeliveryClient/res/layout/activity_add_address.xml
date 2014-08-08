@@ -45,6 +45,7 @@
             android:layout_alignLeft="@+id/nameinput"
             android:layout_below="@+id/nameinput"
             android:layout_marginTop="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/myspinner" />
 
         <Spinner
@@ -54,6 +55,7 @@
             android:layout_alignLeft="@+id/countriesSP"
             android:layout_below="@+id/countriesSP"
             android:layout_marginTop="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/myspinner" />
 
         <Spinner
@@ -62,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/citiesSP"
             android:layout_below="@+id/citiesSP"
+            android:paddingRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner" />
 

@@ -18,35 +18,13 @@
         android:paddingRight="@dimen/activity_left_margin"
         android:paddingTop="@dimen/activity_horizontal_margin" >
 
-        <TextView
-            android:id="@+id/namelabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:text="@string/name" />
-
-        <EditText
-            android:id="@+id/nameinput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/namelabel"
-            android:layout_below="@+id/namelabel"
-            android:layout_marginTop="5dp"
-            android:ems="10"
-            android:hint="@string/name"
-            android:paddingLeft="4dp" />
-
         <Spinner
             android:id="@+id/countriesSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/nameinput"
-            android:layout_below="@+id/nameinput"
             android:layout_marginTop="10dp"
-            android:paddingRight="10dp"
-            android:background="@drawable/myspinner" />
+            android:background="@drawable/myspinner"
+            android:paddingRight="10dp" />
 
         <Spinner
             android:id="@+id/citiesSP"

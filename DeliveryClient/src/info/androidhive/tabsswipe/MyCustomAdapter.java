@@ -14,8 +14,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 class MyCustomAdapter extends ArrayAdapter<Item> {
@@ -63,14 +65,20 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
+					return;
+				}
+			});
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+			name.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
 					Intent i = new Intent(activity.getBaseContext(),
 							ProductInfoActivity.class);
 					((deliveryclient) activity.getApplication()).setProductId(item.getId());
 					activity.startActivity(i);
 				}
 			});
-			name = (TextView) convertView.findViewById(R.id.name);
-			name.setText(item.getName());
 			price = (TextView) convertView.findViewById(R.id.price);
 			price.setText("" + item.getPrice());
 			plus = (ImageView) convertView.findViewById(R.id.plus);
@@ -202,9 +210,28 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 	class radioHolder extends ViewHolder {
 		TextView name;
-
-		public radioHolder(View convertView, Item item) {
+		Button makeDefault;
+		public radioHolder(View convertView, final Item item) {
 			name = (TextView) convertView.findViewById(R.id.name);
+			makeDefault = (Button) convertView.findViewById(R.id.makeDefault);
+			if(item.isDefault())
+			{
+				makeDefault.setVisibility(View.GONE);
+			}
+			else
+			{				
+				makeDefault.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View arg0) {
+						
+						String serverURL = new myURL("set_default", "customers/addresses", item.getId(), 0).getURL();
+						MyJs mjs = new MyJs("nothing", activity,
+								((deliveryclient) activity.getApplication()), "PUT");
+						mjs.execute(serverURL);						
+					}
+				});
+				
+			}
 			name.setText(item.getName());
 		}
 	}
@@ -261,7 +288,7 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 
 			} else if (this.type.equals("address")) {
 
-				layout = R.layout.row_radiobutton;
+				layout = R.layout.row_address;
 				convertView = vi.inflate(layout, null);
 				holder = new radioHolder(convertView, currentItem);
 

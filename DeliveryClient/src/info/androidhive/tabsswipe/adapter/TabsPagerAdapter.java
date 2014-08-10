@@ -1,12 +1,8 @@
 package info.androidhive.tabsswipe.adapter;
 
-import info.androidhive.tabsswipe.ProfileFragment;
-import info.androidhive.tabsswipe.CartFragment;
-import info.androidhive.tabsswipe.OrdersFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 

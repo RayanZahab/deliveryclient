@@ -3,9 +3,8 @@ package info.androidhive.tabsswipe;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -14,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -313,6 +311,8 @@ public class MainActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								MainActivity.this.finishAffinity();
+								SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
+								settings1.edit().remove("PREFS_NAME").commit();
 							}
 						}).setNegativeButton(R.string.no, null).show();
 	}

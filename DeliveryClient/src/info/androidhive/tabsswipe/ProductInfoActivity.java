@@ -28,7 +28,7 @@ public class ProductInfoActivity extends Activity {
 	TextView price;
 	Spinner unitsSP;
 	GlobalM glob = new GlobalM();
-
+	ImageView plus,minus ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,8 +56,8 @@ public class ProductInfoActivity extends Activity {
 		final Item item = new Item();
 		item.setId(productId);
 
-		ImageView plus = (ImageView) findViewById(R.id.plus);
-		ImageView minus = (ImageView) findViewById(R.id.minus);
+		plus = (ImageView) findViewById(R.id.plus);
+		minus = (ImageView) findViewById(R.id.minus);
 		final TextView qtTxt = (TextView) findViewById(R.id.qtTxt);
 		
 		plus.setOnClickListener(new Button.OnClickListener() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CartFragment extends ParentFragment {
 	Cart cart;
@@ -21,12 +23,14 @@ public class CartFragment extends ParentFragment {
 	ArrayList<Item> mylist;
 	public static View view;
 	static View myview;
+	int userId = 0;
+	ArrayList<Address> Addresses ;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		currentActivity = getActivity();
-		
+		userId = ((deliveryclient) currentActivity.getApplication()).getUserId();
 		view = inflater.inflate(R.layout.fragment_cart, container, false);
 		Button submit = (Button) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
@@ -37,11 +41,60 @@ public class CartFragment extends ParentFragment {
 		return view;
 	}
 	
+	public void getAddresses() {
+		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
+		MyJs mjs = new MyJs("getAdd", currentActivity,
+				((deliveryclient) currentActivity.getApplication()), "GET", false, true);
+		mjs.execute(serverURL);
+
+	}
+
+	public void getAdd(String s, String error) {
+		if (error == null) {
+			Log.d("ray","error add not null");
+			Addresses = new APIManager().getAddress(s);
+			Intent intent;
+			int addressId = 0;
+			if(Addresses.size()>0)
+			{
+				SharedPreferences settings = currentActivity.getSharedPreferences("PREFS_NAME", 0);
+				SharedPreferences.Editor editor = settings.edit();
+				for(int i =0;i<Addresses.size();i++) 
+				{
+					Log.d("ray","add: "+i);
+					if (Addresses.get(i).isDefault()) {
+						addressId = Addresses.get(i).getId();
+						Log.d("ray","add found ");
+						editor.putInt("addressId", Addresses.get(i).getId());
+						editor.commit();
+						break;
+					}
+				}
+				intent = new Intent(this.getActivity(), PreviewActivity.class);
+			}
+			else
+			{
+				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address",
+						Toast.LENGTH_SHORT).show();
+				intent = new Intent(this.getActivity(), AddAddressActivity.class);
+			}
+			Toast.makeText(currentActivity.getApplicationContext(), "address: "+addressId,
+					Toast.LENGTH_SHORT).show();
+			startActivity(intent);
+		}else
+			Log.d("ray","error:"+error);
+			
+	}
 	
+
+	
+	public void callMethod(String m, String s, String error) {
+		if (m.equals("getAdd"))
+			getAdd(s, error);
+	}
 	public void submitCart()
-	{
-		Intent i = new Intent(this.getActivity(), PreviewActivity.class);
-		startActivity(i);
+	{		
+		getAddresses();		
 	}
 
 	@Override

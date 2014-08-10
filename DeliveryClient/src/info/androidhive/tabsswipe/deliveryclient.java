@@ -13,7 +13,7 @@ import android.util.Log;
 public class deliveryclient extends Application {
 	private String token, orderStatus;
 	private int shopId = 0, branchId = 0, categoryId = 0, productId = 0,
-			orderId = 0, userId = 0 , addressId =0;
+			orderId = 0, userId = 0 , addressId =0, businessId =0;
 	private boolean admin, prep, delivery, keepme;
 	public MyJs.TransparentProgressDialog loader;
 	public Activity current;
@@ -271,6 +271,12 @@ public class deliveryclient extends Application {
 	}
 	public void setDepthVal(int depthVal) {
 		this.depthVal = depthVal;
+	}
+	public int getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
 	}
 
 }

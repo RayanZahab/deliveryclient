@@ -8,7 +8,8 @@ public class Item {
 	private String type, name;
 	// txt, txtImg, product,order,cart,address
 	private int img, id,price;
-
+	private boolean isDefault;
+	
 	public String getType() {
 		return type;
 	}
@@ -51,5 +52,13 @@ public class Item {
 	public String toString()
 	{
 		return getName();
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 }

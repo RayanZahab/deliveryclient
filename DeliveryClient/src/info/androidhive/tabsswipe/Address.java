@@ -2,7 +2,7 @@ package info.androidhive.tabsswipe;
 
 public class Address {
 	private Integer id;
-	private String country;
+	private String country, countryName,cityName,areaName;
 	private String city;
 	private String area;
 	private String building;
@@ -161,7 +161,7 @@ public class Address {
 	}
 
 	public String toString() {
-		return this.country + " , " + this.city + " , " + this.area + "\n"
+		return this.getCountryName() + " , " + this.getCityName() + " , " + this.getAreaName() + "\n"
 				+ this.building + " , " + this.floor + " \n" + this.details;
 	}
 
@@ -171,6 +171,30 @@ public class Address {
 
 	public void setDefault(boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 }

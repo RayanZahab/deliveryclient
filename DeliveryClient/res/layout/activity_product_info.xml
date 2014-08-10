@@ -77,7 +77,6 @@
                 android:background="@drawable/edittext"
                 android:ems="10"
                 android:hint="@string/productname"
-                android:minWidth="30dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:textSize="12sp" />
@@ -94,7 +93,6 @@
                 android:ems="10"
                 android:gravity="top"
                 android:hint="@string/description"
-                android:inputType="text"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingStart="8dp"
@@ -127,7 +125,7 @@
                 android:text="0" />
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/plus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -135,7 +133,7 @@
                 android:src="@drawable/plussignproduct" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/minus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/qtTxt"

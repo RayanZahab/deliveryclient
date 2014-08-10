@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,28 +40,48 @@ public class SelectAdress extends Activity {
 		mjs.execute(serverURL);
 
 	}
-
 	public void callMethod(String m, String s, String error) {
-		getAdd(s, error);
+		if(m.equals("setAdd"))
+			getAdd(s, error);
+		else
+		{
+			Intent i = new Intent(getBaseContext(),
+					SelectAdress.class);
+			startActivity(i);
+		}
 	}
 
 	public void getAdd(String s, String error) {
 		if (error == null) {
+			ArrayList<Country> countries = ((deliveryclient) this.getApplication())
+					.getCountries();
 			myAddresses = new APIManager().getAddress(s);
 			ArrayList<Item> mylist = new ArrayList<Item>();
 			for (Address add : myAddresses) {
 				Item it = new Item();
-				it.setName(add.toString());
 				it.setType("address");
 				it.setId(add.getId());
+				it.setDefault(add.isDefault());
+				int countryIndex = countries.indexOf(new Country(Integer.parseInt(add.getCountry())));
+				Country country = countries.get(countryIndex);
+				int cityIndex = country.getCities().indexOf(new City(Integer.parseInt(add.getCity())));
+				City city = country.getCities().get(cityIndex);
+				int areaIndex = city.getAreas().indexOf(new Area(Integer.parseInt(add.getArea())));
+				Area area = city.getAreas().get(areaIndex);
+				add.setCountryName(country.toString());
+				add.setCityName(city.toString());
+				add.setAreaName(area.toString());
+				it.setName(add.toString());
 				mylist.add(it);
+				//Log.d("ray","ray count: "+l+"-"+countries.get(l).getName());
 			}
 
 			arrayAdapter = new MyCustomAdapter(this, R.layout.row_radiobutton,
 					mylist);
 
 			listView.setAdapter(arrayAdapter);
-
+			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+			
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -72,8 +93,7 @@ public class SelectAdress extends Activity {
 						if (textView != null) {
 							textView.setTextColor(Color.BLACK);
 						}
-
-					}
+					}	
 					listView.invalidate();
 					textView = (CheckedTextView) view;
 					if (textView != null) {

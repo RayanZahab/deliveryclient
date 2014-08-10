@@ -16,7 +16,7 @@ public class APIManager {
 	}
 
 	public Customer getLogedInUser(String cont) {
-		JSONObject jsonResponse, jsonRole;
+		JSONObject jsonResponse;
 
 		try {
 			jsonResponse = new JSONObject(cont);

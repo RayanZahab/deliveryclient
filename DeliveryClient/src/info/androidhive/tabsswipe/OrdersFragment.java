@@ -158,6 +158,7 @@ public class OrdersFragment extends ParentFragment {
 			getBusinesses();
 		} else if (type.equals("country")) {
 			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
+			((deliveryclient) currentActivity.getApplication()).setBusinessId(id);
 			getCountries();
 		} else if (type.equals("city")) {
 			cityId = areaId = shopId = branchId = categoryId = 0;
@@ -214,6 +215,7 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getCities(int CountryId) {
 		cities = countries.get(CountryId).getCities();
+		
 		mylist = new ArrayList<Item>();
 		for (City myCity : cities) {
 			Item it = new Item();
@@ -239,7 +241,8 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void getShops(int areaId) {
-		String serverURL = new myURL("shops", "areas", areaId, 30).getURL();
+		String serverURL = new myURL("shops?business_id="+((deliveryclient) currentActivity.getApplication()).getBusinessId()
+				, "areas", areaId, 0).getURL();
 		MyJs mjs = new MyJs("setShops", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET",
 				true, true);

@@ -39,12 +39,16 @@ public class LoginActivity extends Activity {
 
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);
+		
 		i++;
 
 		if (isChecked) {
 			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(LoginActivity.this, MainActivity.class);
 			startActivity(i);
+		}else
+		{
+			settings1.edit().remove("PREFS_NAME").commit();
 		}
 		RelativeLayout register = (RelativeLayout) findViewById(R.id.register);
 		register.setOnClickListener(new Button.OnClickListener() {
@@ -83,9 +87,6 @@ public class LoginActivity extends Activity {
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
 			getAddresses(user.getId());
-			((deliveryclient) this.getApplication()).setGlobals();
-			Intent i = new Intent(this, MainActivity.class);
-			startActivity(i);
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
@@ -106,7 +107,7 @@ public class LoginActivity extends Activity {
 			ArrayList<Address> address = new APIManager().getAddress(s);
 			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 			SharedPreferences.Editor editor = settings.edit();
-			for(int i =0;i<address.size();i++)
+			for(int i =0;i<address.size();i++) 
 			{
 				Log.d("ray","add: "+i);
 				if (address.get(i).isDefault()) {

@@ -5,11 +5,39 @@ public class Item {
 	// order(text+number+number), address(radiogroupbutton),
 	// cart(text+inputnumb+int total+intprice)
 
-	private String type, name;
+	private String type, name, date;
 	// txt, txtImg, product,order,cart,address
 	private int img, id,price;
 	private boolean isDefault;
+	private String title;
+	private boolean isNew;
+	private Integer quantity;
+	private double totalPrice;
+
+	public Item(){}
 	
+	public Item(int id, String title, Integer quantity, double price, boolean status) {
+		super();
+		this.setTitle(title);
+		this.setNew(status);
+		this.id = id;
+		this.setQuantity(quantity);
+		this.setTotalPrice(price);
+	}
+	public Item(int id,String title, Integer quantity, double price) {
+		super();
+		this.id= id;
+		this.title = title;
+		this.setQuantity(quantity);
+		this.setTotalPrice(price);
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public String getType() {
 		return type;
 	}
@@ -60,5 +88,30 @@ public class Item {
 
 	public void setDefault(boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public boolean isNew() {
+		return isNew;
+	}
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getDate() {
+		return this.date;
 	}
 }

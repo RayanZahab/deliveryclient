@@ -61,17 +61,8 @@ public class SelectAdress extends Activity {
 				Item it = new Item();
 				it.setType("address");
 				it.setId(add.getId());
-				it.setDefault(add.isDefault());
-				int countryIndex = countries.indexOf(new Country(Integer.parseInt(add.getCountry())));
-				Country country = countries.get(countryIndex);
-				int cityIndex = country.getCities().indexOf(new City(Integer.parseInt(add.getCity())));
-				City city = country.getCities().get(cityIndex);
-				int areaIndex = city.getAreas().indexOf(new Area(Integer.parseInt(add.getArea())));
-				Area area = city.getAreas().get(areaIndex);
-				add.setCountryName(country.toString());
-				add.setCityName(city.toString());
-				add.setAreaName(area.toString());
-				it.setName(add.toString());
+				it.setDefault(add.isDefault());				
+				it.setName(add.toString(countries));
 				mylist.add(it);
 				//Log.d("ray","ray count: "+l+"-"+countries.get(l).getName());
 			}

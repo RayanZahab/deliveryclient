@@ -86,53 +86,18 @@ public class LoginActivity extends Activity {
 			editor.putString("phone", username.getText().toString());
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
-			getAddresses(user.getId());
+			Intent i = new Intent(this, MainActivity.class);
+			startActivity(i);
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 	
-	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", user.getId(), 0).getURL();
-		MyJs mjs = new MyJs("getAdd", this,
-				((deliveryclient) this.getApplication()), "GET", false, true);
-		mjs.execute(serverURL);
-
-	}
-
-	public void getAdd(String s, String error) {
-		if (error == null) {
-			Log.d("ray","error add not null");
-			ArrayList<Address> address = new APIManager().getAddress(s);
-			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-			SharedPreferences.Editor editor = settings.edit();
-			for(int i =0;i<address.size();i++) 
-			{
-				Log.d("ray","add: "+i);
-				if (address.get(i).isDefault()) {
-					Log.d("ray","add found ");
-					editor.putInt("addressId", address.get(i).getId());
-					editor.commit();
-					break;
-				}
-			}
-			
-			((deliveryclient) this.getApplication()).setGlobals();
-			Intent i = new Intent(this, MainActivity.class);
-			startActivity(i);
-		}else
-			Log.d("ray","error:"+error);
-			
-	}
-	
-
 	
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("getLoggedIn"))
 			getLoggedIn(s, error);
-		else if (m.equals("getAdd"))
-			getAdd(s, error);
 	}
 	public void forgotpassword(View view) {
 		// Intent i = new Intent(LoginActivity.this,

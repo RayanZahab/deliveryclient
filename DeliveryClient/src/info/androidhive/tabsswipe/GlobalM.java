@@ -89,7 +89,7 @@ public class GlobalM {
 			long now = System.currentTimeMillis();
 			long time = System.currentTimeMillis();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-			TimeZone tz = TimeZone.getDefault();
+			TimeZone tz = TimeZone.getTimeZone("GMT");
 			sdf.setTimeZone(tz);
 			time = sdf.parse(date).getTime();
 

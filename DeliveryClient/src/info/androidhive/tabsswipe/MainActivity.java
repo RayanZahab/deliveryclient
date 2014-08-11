@@ -178,6 +178,7 @@ public class MainActivity extends Activity {
 	private void displayView(int position) {
 		// update the main content by replacing fragments
 		ParentFragment fragment = null;
+		Bundle args = new Bundle();
 		switch (position) {
 		case 0:
 			fragment = new OrdersFragment();
@@ -194,6 +195,15 @@ public class MainActivity extends Activity {
 
 		case 3:
 			fragment = new PendingOrdersFragment();
+		    args.putString("orders", "pending");
+		    fragment.setArguments(args);
+			fragments.add(fragment);
+			break;
+
+		case 4:
+			fragment = new PendingOrdersFragment();
+		    args.putString("orders", "closed");
+		    fragment.setArguments(args);
 			fragments.add(fragment);
 			break;
 

@@ -3,6 +3,7 @@ package info.androidhive.tabsswipe;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 			}
 			else
 			{
+				Log.d("ray","empty adapt");
 				convertView = vi.inflate(R.layout.categories_list, null);
 				holder.address = (TextView) convertView.findViewById(R.id.name);
 				holder.address.setText(orderList.get(0).getTitle());

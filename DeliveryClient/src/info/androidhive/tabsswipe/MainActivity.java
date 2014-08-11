@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 	// private ActionBar actionBar;
 	// Tab titles
 	static FragmentManager fragmentManager;
-	
+
 	private static Context context;
 
 	// new
@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
-	static List<Fragment> fragments = new ArrayList<Fragment>();
+	public static List<Fragment> fragments = new ArrayList<Fragment>();
 
 	int i, countryP, cityP, areaP;
 	ArrayList<Country> countries = new ArrayList<Country>();
@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
 	ArrayList<Area> areas = new ArrayList<Area>();
 	int CityId;
 	boolean last = false;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,14 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.profile));
 		navMenuTitles.add(getString(R.string.pending_orders));
 		navMenuTitles.add(getString(R.string.closed_orders));
-		
+
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		// toggler
 		toggler();
-		
+
 	}
 
 	@Override
@@ -148,14 +149,14 @@ public class MainActivity extends Activity {
 				R.drawable.ic_people));
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),
-				R.drawable.ic_communities));		
+				R.drawable.ic_communities));
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),
-				R.drawable.ic_communities));		
+				R.drawable.ic_communities));
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),
 				R.drawable.ic_communities));
-		
+
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
@@ -189,16 +190,19 @@ public class MainActivity extends Activity {
 		case 2:
 			fragment = new ProfileFragment();
 			fragments.add(fragment);
-			break;/*
-				 * case 3: fragment = new CommunityFragment(); break; case 4:
-				 * fragment = new PagesFragment(); break; case 5: fragment = new
-				 * WhatsHotFragment(); break;
-				 */
+			break;
+
+		case 3:
+			fragment = new PendingOrdersFragment();
+			fragments.add(fragment);
+			break;
+
 		default:
 			fragment = new ProfileFragment();
 			fragments.add(fragment);
 			break;
 		}
+		Log.e("ray", "currentf"+position);
 
 		if (fragment != null) {
 			fragmentManager.beginTransaction()
@@ -267,17 +271,60 @@ public class MainActivity extends Activity {
 	}
 
 	public void callMethod(String m, String s, String error) {
+		Log.d("ray", "calling method: " + m);
+		
 		if (m.equals("setCountries"))
 			setCountries(s, error);
 		else if (m.equals("setCities"))
 			setCities(s, error);
 		else if (m.equals("setAreas"))
 			setAreas(s, error);
+		else if(m.equals("setOrders"))
+		{
+			Log.d("ray", "Here5: " + m);
+			for (Fragment fragment : fragments) {
+				if (fragment.getClass().equals(PendingOrdersFragment.class)) {
+					Method returnFunction;
+					Log.d("ray", "Here52: " + m);
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		else if(m.equals("getAdd"))
+		{
+			Log.d("ray", "Here3: " + m);
+			for (Fragment fragment : fragments) {
+				Log.d("ray", "Here30: " + fragment.getClass() + "=="+CartFragment.class);					
+				if (fragment.getClass().equals(CartFragment.class)) {
+					Method returnFunction;
+					Log.d("ray", "Here31: " + m);					
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}
 		else {
+			Log.d("ray", "Here4: " + m);
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "method: " + m);
+					Log.d("ray", "Here41: " + m);
 					try {
 						returnFunction = fragment.getClass().getDeclaredMethod(
 								m, s.getClass(), s.getClass());
@@ -311,7 +358,8 @@ public class MainActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								MainActivity.this.finishAffinity();
-								SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
+								SharedPreferences settings1 = getSharedPreferences(
+										"PREFS_NAME", 0);
 								settings1.edit().remove("PREFS_NAME").commit();
 							}
 						}).setNegativeButton(R.string.no, null).show();
@@ -353,7 +401,7 @@ public class MainActivity extends Activity {
 	public void setCities(String s, String error) {
 		cities = new APIManager().getCitiesByCountry(s);
 		for (int j = 0; j < cities.size(); j++) {
-			if(j==cities.size()-1)
+			if (j == cities.size() - 1)
 				last = true;
 			getAreas(j);
 		}
@@ -371,13 +419,13 @@ public class MainActivity extends Activity {
 
 	public void setAreas(String s, String error) {
 		areas = new APIManager().getAreasByCity(s);
-		
+
 		cities.get(cityP).setAreas(areas);
 		countries.get(countryP).setCities(cities);
 		if (last) {
 			((deliveryclient) this.getApplication()).setCountries(countries);
 			((deliveryclient) this.getApplication()).loader.dismiss();
-			Log.d("rayzz","AREA: "+countryP+" , "+CityId);
+			Log.d("rayzz", "AREA: " + countryP + " , " + CityId);
 			displayView(0);
 			last = false;
 		}

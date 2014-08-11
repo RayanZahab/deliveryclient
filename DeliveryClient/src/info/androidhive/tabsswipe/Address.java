@@ -1,5 +1,7 @@
 package info.androidhive.tabsswipe;
 
+import java.util.ArrayList;
+
 public class Address {
 	private Integer id;
 	private String country, countryName,cityName,areaName;
@@ -160,7 +162,17 @@ public class Address {
 		this.created_at = created_at;
 	}
 
-	public String toString() {
+	public String toString(ArrayList<Country> countries) {
+		int countryIndex = countries.indexOf(new Country(Integer.parseInt(this.getCountry())));
+		Country country = countries.get(countryIndex);
+		int cityIndex = country.getCities().indexOf(new City(Integer.parseInt(this.getCity())));
+		City city = country.getCities().get(cityIndex);
+		int areaIndex = city.getAreas().indexOf(new Area(Integer.parseInt(this.getArea())));
+		Area area = city.getAreas().get(areaIndex);
+		this.setCountryName(country.toString());
+		this.setCityName(city.toString());
+		this.setAreaName(area.toString());
+		
 		return this.getCountryName() + " , " + this.getCityName() + " , " + this.getAreaName() + "\n"
 				+ this.building + " , " + this.floor + " \n" + this.details;
 	}

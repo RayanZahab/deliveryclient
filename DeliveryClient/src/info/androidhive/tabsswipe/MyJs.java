@@ -389,7 +389,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			}
 		};
 		global.loader.show();
-		h.postDelayed(r, 10000);
+		h.postDelayed(r, 1000);
 	}
 
 	public boolean isLast() {

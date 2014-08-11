@@ -191,6 +191,7 @@ public class OrdersFragment extends ParentFragment {
 
 		CartFragment fh = new CartFragment();
 		android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
+		MainActivity.fragments.add(fh);
 		ft.replace(fragmentId, fh);
 		ft.commit();
 	}

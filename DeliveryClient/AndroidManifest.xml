@@ -26,6 +26,14 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name="info.androidhive.tabsswipe.OrderInfoActivity"
+            android:icon="@drawable/moto"
+            android:label="@string/title_activity_order_info"
+            android:parentActivityName="OrderInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
             android:name="info.androidhive.tabsswipe.SelectLanguageActivity"
             android:icon="@drawable/moto"
             android:label="@string/buttonlogin"

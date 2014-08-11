@@ -42,6 +42,8 @@ public class CartFragment extends ParentFragment {
 	}
 	
 	public void getAddresses() {
+		Log.d("ray","cart getting add");
+		
 		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
 		MyJs mjs = new MyJs("getAdd", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET", false, true);
@@ -78,8 +80,6 @@ public class CartFragment extends ParentFragment {
 						Toast.LENGTH_SHORT).show();
 				intent = new Intent(this.getActivity(), AddAddressActivity.class);
 			}
-			Toast.makeText(currentActivity.getApplicationContext(), "address: "+addressId,
-					Toast.LENGTH_SHORT).show();
 			startActivity(intent);
 		}else
 			Log.d("ray","error:"+error);

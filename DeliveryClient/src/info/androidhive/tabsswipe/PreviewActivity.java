@@ -32,7 +32,7 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", 1, 0).getURL();
+		String serverURL = new myURL("addresses", "customers", ((deliveryclient) this.getApplication()).getUserId(), 0).getURL();
 		MyJs mjs = new MyJs("setAdd", this,
 				((deliveryclient) this.getApplication()), "GET");
 		mjs.execute(serverURL);
@@ -54,7 +54,17 @@ public class PreviewActivity extends Activity {
 			String name = settings1.getString("name", "");
 			customerName.setText(" " + name);
 			myAddresses = new APIManager().getAddress(s);
-			customerAdd.setText(myAddresses.get(0).toString());
+			ArrayList<Country> countries = ((deliveryclient) this.getApplication())
+					.getCountries();
+			for(int i =0;i<myAddresses.size();i++)
+			{
+				if(myAddresses.get(i).isDefault())
+				{
+					customerAdd.setText(myAddresses.get(i).toString(countries));
+					break;
+				}
+			}
+			
 		}
 	}
 
@@ -69,7 +79,7 @@ public class PreviewActivity extends Activity {
 
 	public void callMethod(String m, String s, String error) {
 		if(m.equals("setAdd"))
-				getAdd(s, error);
+			getAdd(s, error);
 		else
 		{
 			gotomain();

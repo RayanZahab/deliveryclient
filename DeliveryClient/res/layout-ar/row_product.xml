@@ -21,15 +21,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/plus"
             android:checked="true"
             android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:text="shi \n shi"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/price"
             style="@style/mytextview"
-            android:layout_width="40dp"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
@@ -62,7 +64,7 @@
             android:id="@+id/minus"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginLeft="18dp"
+            android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/price"
             android:src="@drawable/minussign" />
     </RelativeLayout>

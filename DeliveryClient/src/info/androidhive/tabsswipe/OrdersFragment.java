@@ -36,6 +36,7 @@ public class OrdersFragment extends ParentFragment {
 	static android.app.FragmentManager fragmentManager;
 	android.app.Fragment mContent;
 	boolean passedByOnCreate = false;
+	int call =0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +83,8 @@ public class OrdersFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((deliveryclient) currentActivity.getApplication())
 				.setCurrentFragment(this);
+		Log.d("ra","called from onact");
+		
 		getList(sequence.get(((deliveryclient) currentActivity.getApplication())
 				.getDepth()),
 				((deliveryclient) currentActivity.getApplication())
@@ -102,15 +105,19 @@ public class OrdersFragment extends ParentFragment {
 			sequence.add("products");
 			sequence.add("info");			
 		}
-			Log.d("ra","dep: "+((deliveryclient) currentActivity.getApplication())
-					.getDepth()+" val: "+((deliveryclient) currentActivity.getApplication())
-					.getDepthVal());
+		int hcall = ((deliveryclient) currentActivity.getApplication())
+				.getDepth() * ((deliveryclient) currentActivity.getApplication())
+				.getDepthVal();
+		if(call!=hcall)
+		{
+			Log.d("ra","called from resume");
 			getList(sequence.get(
 					((deliveryclient) currentActivity.getApplication())
 					.getDepth()
 					),
 					((deliveryclient) currentActivity.getApplication())
-							.getDepthVal());		
+							.getDepthVal());	
+		}
 	}
 
 	public void goUp() {
@@ -150,6 +157,9 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getList(String type, int id) {
 		mylist = new ArrayList<Item>();
+		call = ((deliveryclient) currentActivity.getApplication())
+				.getDepth() * ((deliveryclient) currentActivity.getApplication())
+				.getDepthVal();
 		((deliveryclient) currentActivity.getApplication()).setDepth(sequence
 				.indexOf(type));
 		((deliveryclient) currentActivity.getApplication()).setDepthVal(id);
@@ -191,6 +201,7 @@ public class OrdersFragment extends ParentFragment {
 		} else if (type.equals("products")) {
 			categoryId = id;
 			getProducts(branchId, id);
+			Log.d("rya","here");
 		}
 
 	}

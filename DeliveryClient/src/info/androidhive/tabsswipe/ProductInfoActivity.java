@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,11 +25,12 @@ public class ProductInfoActivity extends Activity {
 	Product currentProduct = null;
 	Photo uploaded;
 	TextView name, unitsTxt;
-	TextView desc;
+	TextView desc, qtTxt;
 	TextView price;
 	Spinner unitsSP;
 	GlobalM glob = new GlobalM();
-	ImageView plus,minus ;
+	ImageView plus, minus;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,7 +39,8 @@ public class ProductInfoActivity extends Activity {
 		desc = (TextView) findViewById(R.id.description);
 		price = (TextView) findViewById(R.id.price);
 		unitsTxt = (TextView) findViewById(R.id.units);
-
+		qtTxt = (TextView) findViewById(R.id.qtTxt);
+		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -59,7 +62,7 @@ public class ProductInfoActivity extends Activity {
 		plus = (ImageView) findViewById(R.id.plus);
 		minus = (ImageView) findViewById(R.id.minus);
 		final TextView qtTxt = (TextView) findViewById(R.id.qtTxt);
-		
+
 		plus.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				int qt = Integer.parseInt(qtTxt.getText().toString());
@@ -84,34 +87,35 @@ public class ProductInfoActivity extends Activity {
 
 	}
 
+	public void submit(View view) {
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
+	}
+
 	public void addToCart(Item item) {
 
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
 		p.setName(item.getName());
-		Fragment f = ((deliveryclient) getApplication())
-				.getCurrentFragment();
+		Fragment f = ((deliveryclient) getApplication()).getCurrentFragment();
 		String cn = null;
 		if (f != null) {
 			cn = f.getClass().getName();
 		}
 
-		((deliveryclient) getApplication()).getMyCart().addToCart(cn,
-				p);
+		((deliveryclient) getApplication()).getMyCart().addToCart(cn, p);
 
 	}
 
 	public void rmvFromCart(Item item) {
 		Product p = new Product(item.getId());
 		p.setPrice(item.getPrice());
-		Fragment f = ((deliveryclient) getApplication())
-				.getCurrentFragment();
+		Fragment f = ((deliveryclient) getApplication()).getCurrentFragment();
 		String cn = null;
 		if (f != null) {
 			cn = f.getClass().getName();
 		}
-		((deliveryclient) getApplication()).getMyCart().rmvFromCart(
-				cn, p);
+		((deliveryclient) getApplication()).getMyCart().rmvFromCart(cn, p);
 	}
 
 	public void callMethod(String m, String s, String error) {
@@ -137,10 +141,12 @@ public class ProductInfoActivity extends Activity {
 			name.setText(n);
 			desc.setText(currentProduct.getDescription());
 			price.setText("" + currentProduct.getPrice());
-
+			
 			new ImageTask((ImageView) findViewById(R.id.preview),
 					ProductInfoActivity.this).execute(currentProduct.getPhoto()
 					.getUrl());
+			int i = ((deliveryclient) getApplication()).getMyCart().getProductCount(currentProduct);
+			qtTxt.setText(i+"");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

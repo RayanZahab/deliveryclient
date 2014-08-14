@@ -16,7 +16,7 @@ public class myURL {
 	public myURL(String api, String by, String svalue, int limit) {
 		this.api = api;
 		this.by = by;
-		this.setSvalue(svalue);
+		this.setSvalue(svalue); 
 		this.limit = limit;
 	}
 

@@ -388,7 +388,8 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 				}
 			}
 		};
-		global.loader.show();
+		if (!global.loader.isShowing()) 
+			global.loader.show();
 		h.postDelayed(r, 1000);
 	}
 

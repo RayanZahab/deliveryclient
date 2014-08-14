@@ -7,9 +7,11 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
@@ -21,8 +23,8 @@ public class SelectAdress extends ListActivity {
 
 	ArrayAdapter<Item> arrayAdapter;
 	ArrayList<Address> myAddresses;
-	ArrayList<String> addOut=new ArrayList<String>();
-
+	ArrayList<String> addOut = new ArrayList<String>();
+	Activity current; 
 	int myId;
 
 	@Override
@@ -30,15 +32,19 @@ public class SelectAdress extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_address);
 
-		listView= getListView();
+		listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setTextFilterEnabled(true);
 		myId = ((deliveryclient) this.getApplication()).getUserId();
-		getAddresses(myId);
+		getAddresses(myId);		
+		current = this;
 	}
 
+
 	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", ((deliveryclient) this.getApplication()).getUserId(), 0).getURL();
+		String serverURL = new myURL("addresses", "customers",
+				((deliveryclient) this.getApplication()).getUserId(), 0)
+				.getURL();
 		MyJs mjs = new MyJs("setAdd", this,
 				((deliveryclient) this.getApplication()), "GET");
 		mjs.execute(serverURL);
@@ -46,32 +52,33 @@ public class SelectAdress extends ListActivity {
 	}
 
 	public void callMethod(String m, String s, String error) {
-		getAdd(s, error);
+		if(m.equals("setAdd"))
+			getAdd(s, error);
 	}
 
 	public void getAdd(String s, String error) {
-		int defaultPosition = 0,i =0;
+		int defaultPosition = 0, i = 0;
 		ArrayList<Country> countries = ((deliveryclient) this.getApplication())
 				.getCountries();
 		if (error == null) {
 			myAddresses = new APIManager().getAddress(s);
-			ArrayList<Item> mylist = new ArrayList<Item>();
+			final ArrayList<Item> mylist = new ArrayList<Item>();
 			for (Address add : myAddresses) {
 				Item it = new Item();
 				it.setName(add.toString(countries));
 				it.setType("address");
 				it.setId(add.getId());
 				mylist.add(it);
-				if(add.isDefault())
+				if (add.isDefault())
 					defaultPosition = i;
 				i++;
 				addOut.add(add.toString(countries));
 			}
-			
 
-			setListAdapter (new ArrayAdapter<String>(this,R.layout.row_radiobutton,addOut));
+			setListAdapter(new ArrayAdapter<String>(this,
+					R.layout.row_radiobutton, addOut));
 			listView.setItemChecked(defaultPosition, true);
-
+			
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -90,6 +97,11 @@ public class SelectAdress extends ListActivity {
 					if (textView != null) {
 						textView.setTextColor(Color.RED);
 					}
+					MyJs defaultJs = new MyJs("nothing", current,
+							((deliveryclient) current.getApplication()), "PUT");
+					String serverURL = new myURL("set_default", "customers/addresses", mylist.get(position).getId(), 0).getURL();
+					
+					defaultJs.execute(serverURL);				
 
 				}
 			});
@@ -97,7 +109,8 @@ public class SelectAdress extends ListActivity {
 		}
 
 	}
-	public void addAddress (View v){
+
+	public void addAddress(View v) {
 		Intent i = new Intent(this, AddAddressActivity.class);
 		startActivity(i);
 	}

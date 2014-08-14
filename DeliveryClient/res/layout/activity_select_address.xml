@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_horizontal_margin" >
 
     <ListView
-        android:id="@+id/lstDemo"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"

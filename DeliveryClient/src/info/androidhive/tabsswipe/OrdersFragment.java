@@ -1,8 +1,10 @@
 package info.androidhive.tabsswipe;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -33,6 +35,7 @@ public class OrdersFragment extends ParentFragment {
 	static int fragmentId;
 	static android.app.FragmentManager fragmentManager;
 	android.app.Fragment mContent;
+	boolean passedByOnCreate = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +73,7 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
-
+		Log.d("ray","called");
 		return view;
 	}
 
@@ -97,12 +100,17 @@ public class OrdersFragment extends ParentFragment {
 			sequence.add("branches");
 			sequence.add("categories");
 			sequence.add("products");
-			sequence.add("info");
+			sequence.add("info");			
 		}
-		getList(sequence.get(((deliveryclient) currentActivity.getApplication())
-				.getDepth()),
-				((deliveryclient) currentActivity.getApplication())
-						.getDepthVal());
+			Log.d("ra","dep: "+((deliveryclient) currentActivity.getApplication())
+					.getDepth()+" val: "+((deliveryclient) currentActivity.getApplication())
+					.getDepthVal());
+			getList(sequence.get(
+					((deliveryclient) currentActivity.getApplication())
+					.getDepth()
+					),
+					((deliveryclient) currentActivity.getApplication())
+							.getDepthVal());		
 	}
 
 	public void goUp() {
@@ -309,6 +317,7 @@ public class OrdersFragment extends ParentFragment {
 				+ "/categories", categoryId, 30).getURL();
 		MyJs mjs = new MyJs("setProducts", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET");
+		Log.d("ray","setting pr");
 		mjs.execute(serverURL);
 	}
 

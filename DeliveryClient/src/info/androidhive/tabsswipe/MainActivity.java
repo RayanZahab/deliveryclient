@@ -162,7 +162,9 @@ public class MainActivity extends Activity {
 		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-		getCountries();
+		countries = ((deliveryclient) this.getApplication()).getCountries();
+		if(countries==null)
+			getCountries();
 	}
 
 	public static void updateCounter(int count) {

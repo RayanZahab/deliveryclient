@@ -151,8 +151,8 @@
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/vertical_margin"
             android:background="@drawable/mybutton"
-            android:onClick="addProduct"
-            android:text="@string/submit"
+            android:onClick="submit"
+            android:text="@string/back"
             android:textColor="#6f6f71"
             android:textSize="18sp" />
     </RelativeLayout>

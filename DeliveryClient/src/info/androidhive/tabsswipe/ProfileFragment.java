@@ -165,6 +165,7 @@ public class ProfileFragment extends ParentFragment {
 	public void showAddresses()
 	{
 	     Intent i = new Intent (currentActivity,SelectAdress.class);
+	     i.putExtra("previous", "profile");
 	     startActivity(i);
 	}
 	@Override

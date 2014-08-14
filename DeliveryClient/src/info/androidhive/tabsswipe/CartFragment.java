@@ -79,6 +79,7 @@ public class CartFragment extends ParentFragment {
 				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address",
 						Toast.LENGTH_SHORT).show();
 				intent = new Intent(this.getActivity(), AddAddressActivity.class);
+				intent.putExtra("previous", "preview");
 			}
 			startActivity(intent);
 		}else

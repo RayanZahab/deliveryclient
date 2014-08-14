@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +27,8 @@ public class AddAddressActivity extends Activity implements
 	ArrayList<Area> areas = new ArrayList<Area>();
 	Activity currentActivity;
 	static ArrayList<Item> mylist = new ArrayList<Item>();
-
+	String previous ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,6 +37,9 @@ public class AddAddressActivity extends Activity implements
 		countrySpinner = (Spinner) findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) findViewById(R.id.citiesSP);
 		areaSpinner = (Spinner) findViewById(R.id.areasSP);
+		Bundle extras = getIntent().getExtras();
+		if(extras!=null)
+			previous = extras.getString("previous");
 		getCountries();
 	}
 
@@ -63,6 +68,7 @@ public class AddAddressActivity extends Activity implements
 	}
 	public void callMethod(String m, String s, String error) {
 		Intent i = new Intent(this, SelectAdress.class);
+		i.putExtra("previous", previous);
 		startActivity(i);
 	}
 	@Override

@@ -36,6 +36,9 @@ public class SelectAdress extends ListActivity {
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setTextFilterEnabled(true);
 		myId = ((deliveryclient) this.getApplication()).getUserId();
+		Bundle extras = getIntent().getExtras();
+		String previous = extras.getString("previous");
+		Log.d("ray","prev: "+previous);
 		getAddresses(myId);		
 		current = this;
 	}
@@ -113,6 +116,23 @@ public class SelectAdress extends ListActivity {
 	public void addAddress(View v) {
 		Intent i = new Intent(this, AddAddressActivity.class);
 		startActivity(i);
+	}
+	@Override
+	public void onBackPressed() {
+		Bundle extras = getIntent().getExtras();
+		Log.d("ray","In back: ");
+		if (extras != null) {
+			String previous = extras.getString("previous");
+			Log.d("ray","prev: "+previous);
+			if(previous.equals("preview"))
+			{
+				Intent i = new Intent(this, PreviewActivity.class);
+				startActivity(i);
+			}else
+				super.onBackPressed();
+				
+		}else
+			super.onBackPressed();
 	}
 
 	@Override

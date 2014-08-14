@@ -41,6 +41,7 @@ public class PreviewActivity extends Activity {
 	public void selectAdd(View v)
 	{
 		Intent i = new Intent(this, SelectAdress.class);
+		i.putExtra("previous", "preview");
 		 startActivity(i);
 	}
 

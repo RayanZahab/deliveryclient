@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,12 +15,14 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class SelectAdress extends Activity {
+public class SelectAdress extends ListActivity {
 
 	ListView listView;
 
 	ArrayAdapter<Item> arrayAdapter;
 	ArrayList<Address> myAddresses;
+	ArrayList<String> addOut=new ArrayList<String>();
+
 	int myId;
 
 	@Override
@@ -28,7 +30,9 @@ public class SelectAdress extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_address);
 
-		listView = (ListView) findViewById(R.id.lstDemo);
+		listView= getListView();
+		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listView.setTextFilterEnabled(true);
 		myId = ((deliveryclient) this.getApplication()).getUserId();
 		getAddresses(myId);
 	}
@@ -40,39 +44,34 @@ public class SelectAdress extends Activity {
 		mjs.execute(serverURL);
 
 	}
+
 	public void callMethod(String m, String s, String error) {
-		if(m.equals("setAdd"))
-			getAdd(s, error);
-		else
-		{
-			Intent i = new Intent(getBaseContext(),
-					SelectAdress.class);
-			startActivity(i);
-		}
+		getAdd(s, error);
 	}
 
 	public void getAdd(String s, String error) {
+		int defaultPosition = 0,i =0;
+		ArrayList<Country> countries = ((deliveryclient) this.getApplication())
+				.getCountries();
 		if (error == null) {
-			ArrayList<Country> countries = ((deliveryclient) this.getApplication())
-					.getCountries();
 			myAddresses = new APIManager().getAddress(s);
 			ArrayList<Item> mylist = new ArrayList<Item>();
 			for (Address add : myAddresses) {
 				Item it = new Item();
+				it.setName(add.toString(countries));
 				it.setType("address");
 				it.setId(add.getId());
-				it.setDefault(add.isDefault());				
-				it.setName(add.toString(countries));
 				mylist.add(it);
-				//Log.d("ray","ray count: "+l+"-"+countries.get(l).getName());
+				if(add.isDefault())
+					defaultPosition = i;
+				i++;
+				addOut.add(add.toString(countries));
 			}
-
-			arrayAdapter = new MyCustomAdapter(this, R.layout.row_radiobutton,
-					mylist);
-
-			listView.setAdapter(arrayAdapter);
-			listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 			
+
+			setListAdapter (new ArrayAdapter<String>(this,R.layout.row_radiobutton,addOut));
+			listView.setItemChecked(defaultPosition, true);
+
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -84,7 +83,8 @@ public class SelectAdress extends Activity {
 						if (textView != null) {
 							textView.setTextColor(Color.BLACK);
 						}
-					}	
+
+					}
 					listView.invalidate();
 					textView = (CheckedTextView) view;
 					if (textView != null) {

@@ -23,10 +23,7 @@ public class LoginActivity extends Activity {
 	private EditText username;
 	private EditText password;
 	boolean isChecked = false;
-	int i, countryP, cityP, areaP;
-	ArrayList<Country> countries = new ArrayList<Country>();
-	ArrayList<City> cities = new ArrayList<City>();
-	ArrayList<Area> areas = new ArrayList<Area>();
+	int i;
 	Customer user;
 
 	@Override
@@ -66,7 +63,7 @@ public class LoginActivity extends Activity {
 		User user = new User(username.getText().toString(), null);
 		user.setEncPassword(password.getText().toString());
 		MyJs mjs = new MyJs("getLoggedIn", this,
-				((deliveryclient) this.getApplication()), "POST", (Object) user,true,false);
+				((deliveryclient) this.getApplication()), "POST", (Object) user,true,true);
 		mjs.execute(serverURL);
 	}
 	
@@ -88,6 +85,7 @@ public class LoginActivity extends Activity {
 			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+			
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
@@ -98,6 +96,7 @@ public class LoginActivity extends Activity {
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("getLoggedIn"))
 			getLoggedIn(s, error);
+
 	}
 	public void forgotpassword(View view) {
 		// Intent i = new Intent(LoginActivity.this,

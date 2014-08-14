@@ -274,7 +274,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			if (Content == null)
 				Content = "";
 			if (Error != null) {
-				if (global.loader != null)
+				if (global.loader != null && last)
 					global.loader.dismiss();
 				new GlobalM().bkToNav(mc, getError(Content, Error));
 
@@ -390,7 +390,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		};
 		if (!global.loader.isShowing()) 
 			global.loader.show();
-		h.postDelayed(r, 1000);
+		h.postDelayed(r, 100000);
 	}
 
 	public boolean isLast() {
@@ -399,8 +399,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 	public void setLast(boolean last) {
 		this.last = last;
-		if (last && global.loader != null)
-			global.loader.dismiss();
 	}
 
 	public class TransparentProgressDialog extends Dialog {

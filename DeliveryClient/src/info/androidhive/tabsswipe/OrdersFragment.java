@@ -36,7 +36,7 @@ public class OrdersFragment extends ParentFragment {
 	static android.app.FragmentManager fragmentManager;
 	android.app.Fragment mContent;
 	boolean passedByOnCreate = false;
-	int call =0;
+	int call =-1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,7 +74,6 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
-		Log.d("ray","called");
 		return view;
 	}
 
@@ -83,12 +82,13 @@ public class OrdersFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((deliveryclient) currentActivity.getApplication())
 				.setCurrentFragment(this);
-		Log.d("ra","called from onact");
-		
-		getList(sequence.get(((deliveryclient) currentActivity.getApplication())
-				.getDepth()),
-				((deliveryclient) currentActivity.getApplication())
-						.getDepthVal());
+		if(call!=-1)
+		{
+			getList(sequence.get(((deliveryclient) currentActivity.getApplication())
+					.getDepth()),
+					((deliveryclient) currentActivity.getApplication())
+							.getDepthVal());
+		}
 	}
 
 	@Override
@@ -108,9 +108,10 @@ public class OrdersFragment extends ParentFragment {
 		int hcall = ((deliveryclient) currentActivity.getApplication())
 				.getDepth() * ((deliveryclient) currentActivity.getApplication())
 				.getDepthVal();
-		if(call!=hcall)
+		Log.d("ra","called from resume"+call+" - "+hcall);
+
+		if(call!=hcall || call==-1)
 		{
-			Log.d("ra","called from resume");
 			getList(sequence.get(
 					((deliveryclient) currentActivity.getApplication())
 					.getDepth()
@@ -163,7 +164,7 @@ public class OrdersFragment extends ParentFragment {
 		((deliveryclient) currentActivity.getApplication()).setDepth(sequence
 				.indexOf(type));
 		((deliveryclient) currentActivity.getApplication()).setDepthVal(id);
-
+		Log.d("ray","getting "+type);
 		if (type.equals("business")) {
 			countryId = 0;
 			cityId = 0;
@@ -347,23 +348,20 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public static void getBusinesses() {
-		android.app.Fragment myFragment = fragmentManager
-				.findFragmentById(fragmentId);
-		if (myFragment.isVisible()) {
-			depth = 0;
-			countryId = 0;
-			cityId = 0;
-			areaId = 0;
-			shopId = 0;
-			branchId = 0;
-			categoryId = 0;
-			productId = 0;
-			String serverURL = new myURL("businesses", null, 0, 30).getURL();
-			MyJs mjs = new MyJs("setBusinesses", currentActivity,
-					((deliveryclient) currentActivity.getApplication()), "GET",
-					true, true);
-			mjs.execute(serverURL);
-		}
+		depth = 0;
+		countryId = 0;
+		cityId = 0;
+		areaId = 0;
+		shopId = 0;
+		branchId = 0;
+		categoryId = 0;
+		productId = 0;
+		String serverURL = new myURL("businesses", null, 0, 30).getURL();
+		MyJs mjs = new MyJs("setBusinesses", currentActivity,
+				((deliveryclient) currentActivity.getApplication()), "GET",
+				true, true);
+		mjs.execute(serverURL);
+		
 	}
 
 	public void setBusinesses(String s, String error) {

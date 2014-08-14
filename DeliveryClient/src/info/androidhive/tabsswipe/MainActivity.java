@@ -78,6 +78,8 @@ public class MainActivity extends Activity {
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		countries = ((deliveryclient) this.getApplication()).getCountries();
+		
 		// toggler
 		toggler();
 
@@ -162,9 +164,7 @@ public class MainActivity extends Activity {
 		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-		countries = ((deliveryclient) this.getApplication()).getCountries();
-		if(countries==null)
-			getCountries();
+		displayView(0);
 	}
 
 	public static void updateCounter(int count) {
@@ -332,7 +332,8 @@ public class MainActivity extends Activity {
 			}
 		}
 		else {
-			Log.d("ray", "Here4: " + m);
+			if(m.equals("setBusinesses") && countries==null)
+				getCountries();
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;

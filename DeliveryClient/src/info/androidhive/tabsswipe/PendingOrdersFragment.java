@@ -1,17 +1,13 @@
 package info.androidhive.tabsswipe;
+import info.androidhive.tabsswipe.PullToRefreshListView.OnRefreshListener;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import eu.erikw.PullToRefreshListView;
-import eu.erikw.PullToRefreshListView.OnRefreshListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

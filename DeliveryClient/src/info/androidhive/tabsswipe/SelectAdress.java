@@ -1,7 +1,6 @@
 package info.androidhive.tabsswipe;
 
 import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;

@@ -1,8 +1,7 @@
-package eu.erikw;
+package info.androidhive.tabsswipe;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.*;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.*;
@@ -11,6 +10,8 @@ import android.widget.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+
 
 /**
  * A generic, customizable Android ListView implementation that has 'Pull to Refresh' functionality.
@@ -295,10 +296,9 @@ public class PullToRefreshListView extends ListView{
                             bounceBackHeader();
 
                             break;
-
-                        case PULL_TO_REFRESH:
+					default:
                             resetHeader();
-                            break;
+						break;
                     }
                 }
                 break;

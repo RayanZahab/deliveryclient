@@ -1,18 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/myred"
+    android:background="@color/gris"
     android:fillViewport="true"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_left_margin"
-    android:paddingRight="@dimen/activity_left_margin"
-    android:paddingTop="@dimen/activity_horizontal_margin" >
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/myborder"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_left_margin"
         android:paddingRight="@dimen/activity_left_margin"
@@ -53,6 +48,7 @@
             android:layout_alignLeft="@+id/areasSP"
             android:layout_below="@+id/areasSP"
             android:layout_marginTop="10dp"
+            android:textColor="@color/redbg"
             android:text="@string/street" />
 
         <EditText
@@ -64,6 +60,9 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="@string/street"
+            android:background="@drawable/edittextbg"
+			android:textColor="@color/redbg"
+			android:textColorHint="#bdbdbd"
             android:paddingLeft="4dp" />
 
         <TextView
@@ -73,6 +72,7 @@
             android:layout_alignLeft="@+id/street"
             android:layout_below="@+id/street"
             android:layout_marginTop="10dp"
+            android:textColor="@color/redbg"
             android:text="@string/building" />
 
         <EditText
@@ -84,6 +84,9 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="@string/building"
+            android:background="@drawable/edittextbg"
+			android:textColor="@color/redbg"
+			android:textColorHint="#bdbdbd"
             android:paddingLeft="4dp" />
 
         <TextView
@@ -93,6 +96,7 @@
             android:layout_alignLeft="@+id/building"
             android:layout_below="@+id/building"
             android:layout_marginTop="10dp"
+            android:textColor="@color/redbg"
             android:text="@string/floor" />
 
         <EditText
@@ -104,6 +108,9 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="@string/floor"
+            android:background="@drawable/edittextbg"
+			android:textColor="@color/redbg"
+			android:textColorHint="#bdbdbd"
             android:paddingLeft="4dp" />
 
         <TextView
@@ -113,6 +120,7 @@
             android:layout_alignLeft="@+id/floor"
             android:layout_below="@+id/floor"
             android:layout_marginTop="10dp"
+            android:textColor="@color/redbg"
             android:text="@string/details" />
 
         <EditText
@@ -122,6 +130,9 @@
             android:layout_alignLeft="@+id/detailsLabel"
             android:layout_below="@+id/detailsLabel"
             android:layout_marginTop="5dp"
+            android:background="@drawable/edittextbg"
+			android:textColor="@color/redbg"
+			android:textColorHint="#bdbdbd"
             android:hint="@string/details" />
 
         <Button
@@ -133,7 +144,8 @@
             android:layout_below="@+id/details"
             android:layout_marginTop="10dp"
             android:onClick="submit"
-            android:background="@drawable/mybutton"
+            android:textColor="@color/redbg"
+            android:background="@color/yellow"
             android:text="@string/submit" />
     </RelativeLayout>
 

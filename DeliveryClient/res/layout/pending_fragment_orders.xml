@@ -24,6 +24,7 @@
             android:layout_weight="1"
             android:divider="@android:color/transparent"
             android:dividerHeight="10px" >
+
         </info.androidhive.tabsswipe.PullToRefreshListView>
     </LinearLayout>
 

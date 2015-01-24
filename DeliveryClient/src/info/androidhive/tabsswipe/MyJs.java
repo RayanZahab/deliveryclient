@@ -267,15 +267,15 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	}
 
 	protected void onPostExecute(Void unused) {
-		if (global.loader != null && last) {
-			global.loader.dismiss();
+		if (deliveryclient.loader != null && last) {
+			deliveryclient.loader.dismiss();
 		}
 		try {
 			if (Content == null)
 				Content = "";
 			if (Error != null) {
-				if (global.loader != null && last)
-					global.loader.dismiss();
+				if (deliveryclient.loader != null && last)
+					deliveryclient.loader.dismiss();
 				new GlobalM().bkToNav(mc, getError(Content, Error));
 
 			} else {
@@ -379,17 +379,17 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		Handler h;
 		Runnable r;
 		h = new Handler();
-		global.loader = new TransparentProgressDialog(mc, R.drawable.spinner);
+		deliveryclient.loader = new TransparentProgressDialog(mc, R.drawable.spinner);
 		r = new Runnable() {
 			@Override
 			public void run() {
-				if (global.loader.isShowing()) {
-					global.loader.dismiss();
+				if (deliveryclient.loader.isShowing()) {
+					deliveryclient.loader.dismiss();
 				}
 			}
 		};
-		if (!global.loader.isShowing()) 
-			global.loader.show();
+		if (!deliveryclient.loader.isShowing()) 
+			deliveryclient.loader.show();
 		h.postDelayed(r, 100000);
 	}
 
@@ -401,46 +401,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		this.last = last;
 	}
 
-	public class TransparentProgressDialog extends Dialog {
-
-		private ImageView iv;
-
-		public TransparentProgressDialog(Context context, int resourceIdOfImage) {
-			super(context, R.style.TransparentProgressDialog);
-			WindowManager.LayoutParams wlmp = getWindow().getAttributes();
-			wlmp.gravity = Gravity.CENTER_HORIZONTAL;
-			getWindow().setAttributes(wlmp);
-			setTitle(null);
-			setCancelable(false);
-			setOnCancelListener(null);
-			LinearLayout layout = new LinearLayout(context);
-			layout.setOrientation(LinearLayout.VERTICAL);
-			DisplayMetrics dm = new DisplayMetrics();
-			mc.getWindowManager().getDefaultDisplay().getMetrics(dm);
-			int w = dm.widthPixels;
-
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					w / 2, w / 2);
-			iv = new ImageView(context);
-			iv.setImageResource(resourceIdOfImage);
-			layout.addView(iv, params);
-			addContentView(layout, params);
-		}
-
-		@Override
-		public void show() {
-			super.show();
-
-			RotateAnimation anim = new RotateAnimation(360.0f, 0.0f,
-					Animation.RELATIVE_TO_SELF, .5f,
-					Animation.RELATIVE_TO_SELF, .5f);
-			anim.setInterpolator(new LinearInterpolator());
-			anim.setRepeatCount(Animation.INFINITE);
-			anim.setDuration(2000);
-			iv.setAnimation(anim);
-			iv.startAnimation(anim);
-		}
-	}
+	
 
 	public String getError(String cont, String Error) {
 		JSONObject jsonResponse;

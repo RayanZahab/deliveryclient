@@ -289,8 +289,8 @@ public class APIManager {
 						name = jsonChildNode.optString("name").toString();
 						address = jsonChildNode.optString("address").toString();
 						area_str = jsonChildNode.optString("area").toString();
-						areas = getAreasByCity(area_str);
-						gridArray.add(new Branch(id, name, areas.get(0),
+						//areas = getAreasByCity(area_str);
+						gridArray.add(new Branch(id, name, new Area(1,"area"),
 								address));
 					}
 				}
@@ -431,15 +431,19 @@ public class APIManager {
 		JSONObject jsonResponse;
 		String url = "", thumb = "";
 		Photo photo = new Photo(0, url, thumb);
-		try {
-			jsonResponse = new JSONObject(cont);
-
-			url = jsonResponse.optString("url").toString();
-			thumb = jsonResponse.optString("thumb").toString();
-			photo.setUrl(url);
-			photo.setThumb(thumb);
-		} catch (JSONException e) {
-			e.printStackTrace();
+		Log.d("ray","Photo: "+cont);
+		if(!cont.isEmpty())
+		{
+			try {
+				jsonResponse = new JSONObject(cont);
+	
+				url = jsonResponse.optString("url").toString();
+				thumb = jsonResponse.optString("thumb").toString();
+				photo.setUrl(url);
+				photo.setThumb(thumb);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 		return photo;
 	}
@@ -455,7 +459,7 @@ public class APIManager {
 				boolean is_available;
 				String name, description, photo_str, unit_str;
 				int price;
-				Unit unit;
+				Unit unit=null;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -479,11 +483,13 @@ public class APIManager {
 						photo_str = jsonChildNode.optString("photo").toString();
 						Photo p = getPhoto(photo_str);
 						unit_str = jsonChildNode.optString("unit").toString();
+						if(! unit_str.isEmpty())
+						{
 						jsonUnit = new JSONObject(unit_str);
 						unit = new Unit(Integer.parseInt(jsonUnit.optString(
 								"id").toString()), jsonUnit.optString("name")
 								.toString());
-
+						}
 						is_available = Boolean.valueOf(jsonChildNode.optString(
 								"is_available").toString());
 						Product pro = new Product(id, price, name, description,
@@ -1116,8 +1122,9 @@ public class APIManager {
 				body.put("floor", c.getFloor());
 				body.put("details", c.getDetails());
 				body.put("is_default", c.isDefault());
-				Log.d("ray","sending: "+c.getCountry()+"-"+c.getCity()+"-"+c.getArea());
 				jsonObjSend.put("customer_address", body);
+				Log.d("ray","sending: "+c.getCountry()+"-"+c.getCity()+"-"+c.getArea()+"->"
+						+jsonObjSend.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

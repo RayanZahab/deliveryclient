@@ -15,7 +15,7 @@ public class deliveryclient extends Application {
 	private int shopId = 0, branchId = 0, categoryId = 0, productId = 0,
 			orderId = 0, userId = 0 , addressId =0, businessId =0;
 	private boolean admin, prep, delivery, keepme;
-	public MyJs.TransparentProgressDialog loader;
+	public static TransparentProgressDialog loader;
 	public Activity current;
 	private UncaughtExceptionHandler defaultUEH;
 	private Cart myCart;
@@ -216,11 +216,11 @@ public class deliveryclient extends Application {
 		this.userId = userId;
 	}
 
-	public MyJs.TransparentProgressDialog getLoader() {
+	public TransparentProgressDialog getLoader() {
 		return loader;
 	}
 
-	public void setLoader(MyJs.TransparentProgressDialog loader) {
+	public void setLoader(TransparentProgressDialog loader) {
 		this.loader = loader;
 	}
 

@@ -13,7 +13,7 @@ public class BlockUser extends Activity {
 	Customer currentCustomer;
 	int orderId;
 	Order currentOrder;
-
+ 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

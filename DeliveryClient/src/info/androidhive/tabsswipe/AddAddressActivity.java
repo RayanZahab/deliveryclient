@@ -103,7 +103,6 @@ public class AddAddressActivity extends Activity implements
 
 	public void getCities(int CountryId) {
 		cities = countries.get(CountryId).getCities();
-		Log.d("ray","country: "+CountryId+"->"+cities.size()+"-"+ citySpinner.getCount());
 		updateList("city");
 	}
 

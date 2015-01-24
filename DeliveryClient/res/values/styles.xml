@@ -36,7 +36,7 @@
     </style>
     
     <style name="myActionbarTransparent" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">#3c5a99</item>
+        <item name="android:background">@color/redbg</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:textColorHint">#ffffff</item>
         <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>

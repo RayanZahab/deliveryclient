@@ -40,8 +40,8 @@
     <string name="priceunit">Price/Unit</string>
     <string name="producticon">Product Icon:</string>
     <string name="estimatedtime">Estimated Time:</string>
-    <string name="description">Description:</string>
-    <string name="productname">Product Name:</string>
+    <string name="description">Description</string>
+    <string name="productname">Product Name</string>
     <string name="selectlanguage">Select Language</string>
     <string name="buttonlogin">Login</string>
     <string name="products">Products</string>
@@ -147,6 +147,7 @@
     <string name="branches">Branches</string>
     <string name="users">Users</string>
     <string name="empty_list">No items</string>
+    <string name="items">Items</string>
     <string name="open_status">Open</string>
     <string name="prepared_status">Prepared</string>
     <string name="delivered_status">Closed</string>

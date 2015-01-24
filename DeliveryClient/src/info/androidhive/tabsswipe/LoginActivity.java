@@ -64,13 +64,20 @@ public class LoginActivity extends Activity {
 
 	public void login(View view) {
 		String serverURL = new myURL(null, "customers", "login", 0).getURL();
-		User user = new User(username.getText().toString(), null);
+		/*User user = new User(username.getText().toString(), null);
 		user.setEncPassword(password.getText().toString());
 		MyJs mjs = new MyJs("getLoggedIn", this,
 				((deliveryclient) this.getApplication()), "POST",
 				(Object) user, true, false);
 
 		mjs.execute(serverURL);
+		
+		String serverURL = new myURL(null, "users", "login", 0).getURL();*/
+		User user = new User(username.getText().toString(), null);
+		user.setEncPassword(password.getText().toString());
+
+		RZHelper p = new RZHelper(serverURL, this, "getLoggedIn", true);
+		p.post(user);
 	}
 
 	public void getLoggedIn(String s, String error) {

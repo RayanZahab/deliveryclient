@@ -27,7 +27,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="12dp"
 	        android:text="@string/name"
-	        android:textColor="@color/redbg" />
+	        android:textColor="@color/bluebg" />
 
             <EditText
                 android:id="@+id/name"
@@ -40,7 +40,7 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="@color/redbg"
+                android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
             
@@ -50,7 +50,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="8dp"
 	        android:text="@string/phonenum"
-	        android:textColor="@color/redbg" />
+	        android:textColor="@color/bluebg" />
 
             <EditText
                 android:id="@+id/phone"
@@ -63,7 +63,7 @@
                 android:inputType="phone"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="@color/redbg"
+                android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" >
             </EditText>
@@ -74,7 +74,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="8dp"
 	        android:text="@string/password"
-	        android:textColor="@color/redbg" />
+	        android:textColor="@color/bluebg" />
 
             <EditText
                 android:id="@+id/password"
@@ -87,7 +87,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="@color/redbg"
+                android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
             
@@ -97,7 +97,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="8dp"
 	        android:text="@string/confirm_password"
-	        android:textColor="@color/redbg" />
+	        android:textColor="@color/bluebg" />
 
             <EditText
                 android:id="@+id/password2"
@@ -110,7 +110,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="@color/redbg"
+                android:textColor="#bdbdbd"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -123,9 +123,9 @@
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onClick="addUser"
-            android:background="@color/yellow"
+            android:background="@color/turquoise"
             android:text="@string/submit"
-            android:textColor="@color/redbg"
+            android:textColor="@color/bluebg"
             android:textSize="18sp" />
     </LinearLayout>
 

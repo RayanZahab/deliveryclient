@@ -1,7 +1,7 @@
 package info.androidhive.tabsswipe;
 
 public class myURL {
-	private String urlPrefix = "http://107.170.86.46/api/v1/";
+	private String urlPrefix = "http://delivery.zaher.info/api/v1/";
 	private String url = "", by, api;
 	private int limit, value;
 	private String svalue;

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/redbg">
+    android:background="@color/bluebg">
     
     <ScrollView
         android:id="@+id/Scrollview"
@@ -26,7 +26,6 @@
         android:hint="@string/phonenum"
         android:paddingLeft="50dp"
         android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
         android:background="@drawable/phonebg"
         android:inputType="phone" >
     </EditText>
@@ -42,8 +41,7 @@
         android:textColor="#ffffff"
         android:paddingLeft="50dp"
         android:hint="@string/password"
-        android:textColorHint="#ffffff"
-        android:background="@drawable/phonebg"
+        android:background="@drawable/passwordbg"
         android:inputType="textPassword" />
 
     <CheckBox
@@ -90,13 +88,13 @@
         android:id="@+id/button1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@color/yellow"
+        android:background="#1ea4aa"
         android:layout_below="@+id/register"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/enter"
         android:onClick="login"
-        android:textColor="@color/redbg" />
+        android:textColor="#234666" />
 
     <TextView
         android:id="@+id/forgotpassword"

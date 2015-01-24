@@ -1,4 +1,5 @@
 package info.androidhive.tabsswipe;
+
 import info.androidhive.tabsswipe.PullToRefreshListView.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -36,13 +37,13 @@ public class PendingOrdersFragment extends ParentFragment {
 	android.app.Fragment mContent;
 	ArrayList<Item> orderItems = new ArrayList<Item>();
 	ArrayList<Order> morders;
-	OrdersAdapter dataAdapter ;
+	OrdersAdapter dataAdapter;
 	String orderStatus = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+
 		currentActivity = getActivity();
 		Bundle args = getArguments();
 		orderStatus = args.getString("orders");
@@ -50,11 +51,12 @@ public class PendingOrdersFragment extends ParentFragment {
 			mContent = getFragmentManager().getFragment(savedInstanceState,
 					"mContent");
 		}
-		view = inflater.inflate(R.layout.pending_fragment_orders, container, false);
+		view = inflater.inflate(R.layout.pending_fragment_orders, container,
+				false);
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
 		fragmentManager = getFragmentManager();
-		
+
 		return view;
 	}
 
@@ -69,13 +71,14 @@ public class PendingOrdersFragment extends ParentFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		getOrders();
 	}
 
 	public void getOrders() {
 		String serverURL;
-		serverURL = new myURL(null, "customers", orderStatus+"_orders", 30).getURL();
+		serverURL = new myURL(null, "customers", orderStatus + "_orders", 30)
+				.getURL();
 		MyJs mjs = new MyJs("setOrders", currentActivity,
 				((deliveryclient) currentActivity.getApplication()), "GET",
 				true, true);
@@ -83,8 +86,8 @@ public class PendingOrdersFragment extends ParentFragment {
 	}
 
 	public void fetchTimelineAsync(int page) {
-		Toast.makeText(currentActivity.getApplicationContext(), "Refreshed", Toast.LENGTH_SHORT)
-				.show();
+		Toast.makeText(currentActivity.getApplicationContext(), "Refreshed",
+				Toast.LENGTH_SHORT).show();
 		getOrders();
 	}
 
@@ -100,14 +103,14 @@ public class PendingOrdersFragment extends ParentFragment {
 				fetchTimelineAsync(0);
 			}
 		});
-		boolean empty =false;
+		boolean empty = false;
 		if (morders.size() == 0) {
 			Item i = new Item();
 			i.setId(0);
 			i.setName(currentActivity.getString(R.string.empty_list));
 			i.setType("empty");
 			orderItems.add(i);
-			Log.d("ray","empty");
+			Log.d("ray", "empty");
 			empty = true;
 		} else {
 			for (int i = 0; i < morders.size(); i++) {
@@ -118,20 +121,21 @@ public class PendingOrdersFragment extends ParentFragment {
 				orderItems.add(itm);
 			}
 		}
-		Log.d("ray","ray orders: "+orderItems.size());
+		Log.d("ray", "ray orders: " + orderItems.size());
 
 		OrdersAdapter dataAdapter = new OrdersAdapter(currentActivity,
 				R.layout.row_order, orderItems);
 		dataAdapter.empty = empty;
 		lvTweets.setAdapter(dataAdapter);
-		
+
 		lvTweets.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (morders.size() > 0) {
 					Intent i;
 					if (orderItems.get(position).isNew()) {
-						i = new Intent(currentActivity.getBaseContext(), BlockUser.class);
+						i = new Intent(currentActivity.getBaseContext(),
+								BlockUser.class);
 					} else {
 						i = new Intent(currentActivity.getBaseContext(),
 								OrderInfoActivity.class);

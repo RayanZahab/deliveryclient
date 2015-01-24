@@ -35,7 +35,7 @@ public class ProductInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_info);
-		name = (TextView) findViewById(R.id.productname);
+		name = (TextView) findViewById(R.id.productName);
 		desc = (TextView) findViewById(R.id.description);
 		price = (TextView) findViewById(R.id.price);
 		unitsTxt = (TextView) findViewById(R.id.units);
@@ -142,7 +142,7 @@ public class ProductInfoActivity extends Activity {
 			desc.setText(currentProduct.getDescription());
 			price.setText("" + currentProduct.getPrice());
 			
-			new ImageTask((ImageView) findViewById(R.id.productimg),
+			new ImageTask((ImageView) findViewById(R.id.preview),
 					ProductInfoActivity.this).execute(currentProduct.getPhoto()
 					.getUrl());
 			int i = ((deliveryclient) getApplication()).getMyCart().getProductCount(currentProduct);

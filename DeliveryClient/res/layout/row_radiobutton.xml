@@ -20,7 +20,7 @@
     android:id="@+id/name"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@drawable/mylistview"
+    android:background="@color/gris"
     android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:gravity="center_vertical"
     android:paddingLeft="10dp"

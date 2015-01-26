@@ -54,7 +54,7 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 				holder.address = (TextView) convertView
 						.findViewById(R.id.useraddress);
 				holder.numbofitems = (TextView) convertView
-						.findViewById(R.id.agoTxt);
+						.findViewById(R.id.numbofitems);
 				holder.totalamount = (TextView) convertView
 						.findViewById(R.id.totalamount);
 			}

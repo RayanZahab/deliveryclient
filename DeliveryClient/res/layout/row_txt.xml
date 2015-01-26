@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/mylistview" >
+    android:background="@color/gris" >
 
     <TextView
         android:id="@+id/name"
@@ -17,6 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:text="text"
+        android:textColor="@color/redbg"
         android:textSize="16sp" />
     
  </RelativeLayout>

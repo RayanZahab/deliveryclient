@@ -10,6 +10,6 @@
     <color name="yellow">#fece68</color>
     <color name="textview">#234666</color>
     <color name="gris">#e7e7e7</color>
-        <color name="bluebg">#3c5a99</color>
+    <color name="bluebg">#3c5a99</color>
     <color name="turquoise">#1ea4aa</color>
 </resources>

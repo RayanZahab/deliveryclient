@@ -3,23 +3,24 @@
     android:id="@+id/roworder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/mylistview"
-	android:layout_marginLeft="8dp" >
+    android:background="@color/gris" >
 
     <TextView
-        android:id="@+id/agoTxt"
+        android:id="@+id/numbofitems"
         style="@style/mytextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/useraddress"
         android:layout_marginTop="14dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/redbg"
         android:text="@string/item" />
 
     <ImageView
         android:id="@+id/newImg"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/neworder" />
@@ -28,12 +29,13 @@
         android:id="@+id/totalamount"
         style="@style/mytextview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/useraddress"
-        android:layout_alignBottom="@+id/useraddress"
+        android:layout_height="26dp"
+        android:minWidth="90dp"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/bar"
         android:gravity="center"
+        android:textColor="@color/redbg"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="@string/total" />
@@ -54,6 +56,6 @@
         android:text="@string/address"
         android:textAlignment="gravity"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ed1c24" />
+        android:textColor="@color/redbg" />
 
 </RelativeLayout>

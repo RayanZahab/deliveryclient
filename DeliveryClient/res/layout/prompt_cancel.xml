@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/reason"
+        android:textColor="@color/redbg"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textColor="#6f6f71"
-        android:background="@drawable/mypromptedittext"
+        android:background="@drawable/edittextbg"
         android:hint="@string/reason" />
 
 </LinearLayout>

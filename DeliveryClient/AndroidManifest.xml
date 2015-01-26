@@ -88,6 +88,7 @@
         <activity
             android:name="info.androidhive.tabsswipe.ProductInfoActivity"
             android:label="@string/title_activity_product_info"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
             android:screenOrientation="portrait" >
         </activity>
     </application>

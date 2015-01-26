@@ -35,17 +35,15 @@ public class ProductInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_info);
-		name = (TextView) findViewById(R.id.productName);
+		name = (TextView) findViewById(R.id.productname);
 		desc = (TextView) findViewById(R.id.description);
 		price = (TextView) findViewById(R.id.price);
 		unitsTxt = (TextView) findViewById(R.id.units);
 		qtTxt = (TextView) findViewById(R.id.qtTxt);
-		
+
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 		((deliveryclient) this.getApplication()).clear("product");
 		branchId = ((deliveryclient) this.getApplication()).getBranchId();
 		categoryId = ((deliveryclient) this.getApplication()).getCategoryId();
@@ -133,23 +131,18 @@ public class ProductInfoActivity extends Activity {
 
 	public void setProduct(String s, String error) {
 		currentProduct = new APIManager().getItemsByCategoryAndBranch(s).get(0);
-		String n;
-		try {
-			n = new String((currentProduct.getName()).getBytes("iso-8859-1"),
-					"UTF-8");
 
-			name.setText(n);
-			desc.setText(currentProduct.getDescription());
-			price.setText("" + currentProduct.getPrice());
-			
-			new ImageTask((ImageView) findViewById(R.id.preview),
-					ProductInfoActivity.this).execute(currentProduct.getPhoto()
-					.getUrl());
-			int i = ((deliveryclient) getApplication()).getMyCart().getProductCount(currentProduct);
-			qtTxt.setText(i+"");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		name.setText(currentProduct.getName());
+		desc.setText(currentProduct.getDescription());
+		price.setText("" + currentProduct.getPrice());
+
+		new ImageTask((ImageView) findViewById(R.id.productimg),
+				ProductInfoActivity.this).execute(currentProduct.getPhoto()
+				.getUrl());
+		int i = ((deliveryclient) getApplication()).getMyCart()
+				.getProductCount(currentProduct);
+		qtTxt.setText(i + "");
+
 		getUnits(false);
 	}
 

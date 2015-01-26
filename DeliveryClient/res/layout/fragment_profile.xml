@@ -19,23 +19,23 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
     		android:paddingRight="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
-            android:paddingBottom="18dp"
+            android:paddingBottom="18dp" 
             android:paddingTop="18dp" >
 
             <Button
                 android:id="@+id/addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/turquoise"
+                android:background="@color/yellow"
                 android:text="@string/addresses"
-                android:textColor="@color/bluebg" />
+                android:textColor="@color/redbg" />
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bluebg"
+                android:textColor="@color/redbg"
                 android:text="@string/username" />
 
             <EditText
@@ -50,7 +50,7 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
 
@@ -59,7 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bluebg"
+                android:textColor="@color/redbg"
                 android:text="@string/name" />
 
             <EditText
@@ -72,7 +72,7 @@
                 android:hint="@string/name"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" >
             </EditText>
@@ -80,7 +80,7 @@
             <TextView
                 android:id="@+id/textView3"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/bluebg"
+                android:textColor="@color/redbg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password" />
@@ -96,13 +96,13 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView4"
-                android:textColor="@color/bluebg"
+                android:textColor="@color/redbg"
                 android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
 
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/keeploggedin"
-                android:textColor="#818281"
+                android:textColor="@color/redbg"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -147,8 +147,8 @@
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:text="@string/submit"
-            android:background="@color/turquoise"
-            android:textColor="@color/bluebg"
+            android:background="@color/yellow"
+            android:textColor="@color/redbg"
             android:textSize="18sp" />
     </LinearLayout>
 

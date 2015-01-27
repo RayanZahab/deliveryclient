@@ -15,35 +15,39 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/countrySp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView1"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="18dp"
-                android:text="@string/login"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff" />
-            <Spinner
-                android:id="@+id/countrySp"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login"
-                android:layout_centerHorizontal="true" />
+                android:background="@drawable/mymainspinner"
+                android:paddingRight="10dp" />
+            
               <Spinner
                 android:id="@+id/citySP"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="18dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/countrySp"
+                android:background="@drawable/mymainspinner"
+	            android:paddingRight="10dp"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
                 android:layout_centerHorizontal="true" />
+              
                 <Spinner
                 android:id="@+id/areaSP"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="18dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/mymainspinner"
+	            android:paddingRight="10dp"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
                 android:layout_below="@+id/citySP"
                 android:layout_centerHorizontal="true" />
 
@@ -53,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="27dp"
                 android:src="@drawable/sublogologin" />
 
             <Button
@@ -65,7 +69,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/yellow"
                 android:onClick="login"
-                android:text="@string/enter"
+                android:text="@string/search"
                 android:textColor="@color/redbg" />
 
             

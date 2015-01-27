@@ -21,6 +21,7 @@
     <string name="title_activity_users">Users</string>
     <string name="title_activity_order_info">Order Info</string>
     <string name="add">Add</string>
+    <string name="search">Search</string>
     <string name="personalinfo">Personal Information:</string>
     <string name="preparer">This is preparer</string>
     <string name="opening_hours">Opening Hours</string>

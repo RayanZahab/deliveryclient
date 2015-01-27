@@ -184,8 +184,6 @@ public class User {
 			msg = R.string.invalid_phone;
 		} else if (!is_customer && !mine && !this.is_admin && !this.is_delivery && !this.is_preparer) {
 			msg = R.string.select_role;
-		} else if (!is_customer && this.branch_id == 0) {
-			msg = R.string.invalid_branch;
 		} else
 			valid = true;
 		return new ValidationError(valid, msg);

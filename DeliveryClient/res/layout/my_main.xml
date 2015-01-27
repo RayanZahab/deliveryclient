@@ -1,0 +1,76 @@
+  
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/redbg">
+    
+    <ScrollView
+        android:id="@+id/Scrollview"
+    	android:layout_width="fill_parent"
+    	android:layout_height="match_parent">
+    	
+        <RelativeLayout
+            android:id="@+id/rlayout02"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:text="@string/login"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff" />
+            <Spinner
+                android:id="@+id/countrySp"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login"
+                android:layout_centerHorizontal="true" />
+              <Spinner
+                android:id="@+id/citySP"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/countrySp"
+                android:layout_centerHorizontal="true" />
+                <Spinner
+                android:id="@+id/areaSP"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/citySP"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/sublogologin" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/areaSP"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/yellow"
+                android:onClick="login"
+                android:text="@string/enter"
+                android:textColor="@color/redbg" />
+
+            
+
+        </RelativeLayout>
+
+</ScrollView>
+</RelativeLayout>

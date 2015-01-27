@@ -108,7 +108,8 @@ public class ProfileFragment extends ParentFragment {
 			ValidationError valid = user.validate(true);
 			if(valid.isValid(currentActivity))
 			{
-				new MyJs("done", currentActivity, ((deliveryclient) currentActivity.getApplication()),
+				new MyJs("done", currentActivity, 
+						((deliveryclient) currentActivity.getApplication()),
 						method, (Object) user, true, true).execute(serverURL);
 			}
 			
@@ -121,9 +122,11 @@ public class ProfileFragment extends ParentFragment {
 		String serverURL = new myURL(null, "users", "login", 0).getURL();
 		User user = new User(phone, pass);
 		user.setEncPassword(pass);
-		MyJs mjs = new MyJs("getLoggedIn", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "POST", (Object) user);
-		mjs.execute(serverURL);
+		//MyJs mjs = new MyJs("getLoggedIn", currentActivity,
+		//		((deliveryclient) currentActivity.getApplication()), "POST", (Object) user);
+		//mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
+		p.post(user);
 	}
 
 	public void getLoggedIn(String s, String error) {

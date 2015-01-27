@@ -37,6 +37,18 @@ public class APIManager {
 		return null;
 
 	}
+	public int getLocId(String cont){
+		JSONObject jsonResponse;
+		int id = 0;
+		try {
+			jsonResponse = new JSONObject(cont);
+			id = Integer.parseInt(jsonResponse.optString("id")
+					.toString());
+		}catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
 
 	public ArrayList<Country> getCountries(String cont) {
 		JSONObject jsonResponse;
@@ -613,21 +625,22 @@ public class APIManager {
 
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
-						country = jsonChildNode.optString("country").toString();
-						city = jsonChildNode.optString("city").toString();
-						area = jsonChildNode.optString("area").toString();
+						country = getLocId(jsonChildNode.optString("country").toString())+"";
+						
+						city = getLocId(jsonChildNode.optString("city").toString())+"";
+						area = getLocId(jsonChildNode.optString("area").toString())+"";
 						street = jsonChildNode.optString("street").toString();
 						building = jsonChildNode.optString("building")
 								.toString();
 						floor = jsonChildNode.optString("floor").toString();
 						details = jsonChildNode.optString("details").toString();
-						longitude = jsonChildNode.optString("longitude")
+						longitude = jsonChildNode.optString("long")
 								.toString();
-						latitude = jsonChildNode.optString("latitude")
+						latitude = jsonChildNode.optString("lat")
 								.toString();
-						created_at = jsonChildNode.optString("create_at")
+						created_at = jsonChildNode.optString("created_at")
 								.toString();
-						updated_at = jsonChildNode.optString("update_at")
+						updated_at = jsonChildNode.optString("updated_at")
 								.toString();
 						is_default = Boolean.parseBoolean(jsonChildNode.optString("is_default")
 								.toString());
@@ -648,10 +661,10 @@ public class APIManager {
 					building = jsonResponse.optString("building").toString();
 					floor = jsonResponse.optString("floor").toString();
 					details = jsonResponse.optString("details").toString();
-					longitude = jsonResponse.optString("longitude").toString();
-					latitude = jsonResponse.optString("latitude").toString();
-					created_at = jsonResponse.optString("create_at").toString();
-					updated_at = jsonResponse.optString("update_at").toString();
+					longitude = jsonResponse.optString("long").toString();
+					latitude = jsonResponse.optString("lat").toString();
+					created_at = jsonResponse.optString("created_at").toString();
+					updated_at = jsonResponse.optString("updated_at").toString();
 					customer_id = Integer.parseInt(jsonResponse.optString(
 							"customer_id").toString());
 					is_default = Boolean.parseBoolean(jsonResponse.optString("is_default")

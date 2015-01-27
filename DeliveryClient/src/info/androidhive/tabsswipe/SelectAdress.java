@@ -23,7 +23,7 @@ public class SelectAdress extends ListActivity {
 	ArrayAdapter<Item> arrayAdapter;
 	ArrayList<Address> myAddresses;
 	ArrayList<String> addOut = new ArrayList<String>();
-	Activity current; 
+	Activity current;
 	int myId;
 
 	@Override
@@ -37,11 +37,10 @@ public class SelectAdress extends ListActivity {
 		myId = ((deliveryclient) this.getApplication()).getUserId();
 		Bundle extras = getIntent().getExtras();
 		String previous = extras.getString("previous");
-		Log.d("ray","prev: "+previous);
-		getAddresses(myId);		
+		Log.d("ray", "prev: " + previous);
+		getAddresses(myId);
 		current = this;
 	}
-
 
 	public void getAddresses(int userId) {
 		String serverURL = new myURL("addresses", "customers",
@@ -54,7 +53,7 @@ public class SelectAdress extends ListActivity {
 	}
 
 	public void callMethod(String m, String s, String error) {
-		if(m.equals("setAdd"))
+		if (m.equals("setAdd"))
 			getAdd(s, error);
 	}
 
@@ -62,6 +61,8 @@ public class SelectAdress extends ListActivity {
 		int defaultPosition = 0, i = 0;
 		ArrayList<Country> countries = ((deliveryclient) this.getApplication())
 				.getCountries();
+		Log.d("ray", "adds: " + countries.size());
+
 		if (error == null) {
 			myAddresses = new APIManager().getAddress(s);
 			final ArrayList<Item> mylist = new ArrayList<Item>();
@@ -80,7 +81,7 @@ public class SelectAdress extends ListActivity {
 			setListAdapter(new ArrayAdapter<String>(this,
 					R.layout.row_radiobutton, addOut));
 			listView.setItemChecked(defaultPosition, true);
-			
+
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -101,9 +102,11 @@ public class SelectAdress extends ListActivity {
 					}
 					MyJs defaultJs = new MyJs("nothing", current,
 							((deliveryclient) current.getApplication()), "PUT");
-					String serverURL = new myURL("set_default", "customers/addresses", mylist.get(position).getId(), 0).getURL();
-					
-					defaultJs.execute(serverURL);				
+					String serverURL = new myURL("set_default",
+							"customers/addresses",
+							mylist.get(position).getId(), 0).getURL();
+
+					defaultJs.execute(serverURL);
 
 				}
 			});
@@ -116,21 +119,21 @@ public class SelectAdress extends ListActivity {
 		Intent i = new Intent(this, AddAddressActivity.class);
 		startActivity(i);
 	}
+
 	@Override
 	public void onBackPressed() {
 		Bundle extras = getIntent().getExtras();
-		Log.d("ray","In back: ");
+		Log.d("ray", "In back: ");
 		if (extras != null) {
 			String previous = extras.getString("previous");
-			Log.d("ray","prev: "+previous);
-			if(previous.equals("preview"))
-			{
+			Log.d("ray", "prev: " + previous);
+			if (previous.equals("preview")) {
 				Intent i = new Intent(this, PreviewActivity.class);
 				startActivity(i);
-			}else
+			} else
 				super.onBackPressed();
-				
-		}else
+
+		} else
 			super.onBackPressed();
 	}
 

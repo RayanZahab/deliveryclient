@@ -163,12 +163,15 @@ public class Address {
 	}
 
 	public String toString(ArrayList<Country> countries) {
-		int countryIndex = countries.indexOf(new Country(Integer.parseInt(this.getCountry())));
+		int countryIndex = countries.indexOf(new Country(Converter.toInt(this.getCountry())));
 		Country country = countries.get(countryIndex);
-		int cityIndex = country.getCities().indexOf(new City(Integer.parseInt(this.getCity())));
+		
+		int cityIndex = country.getCities().indexOf(new City(Converter.toInt(this.getCity())));
 		City city = country.getCities().get(cityIndex);
-		int areaIndex = city.getAreas().indexOf(new Area(Integer.parseInt(this.getArea())));
+		
+		int areaIndex = city.getAreas().indexOf(new Area(Converter.toInt(this.getArea())));
 		Area area = city.getAreas().get(areaIndex);
+		
 		this.setCountryName(country.toString());
 		this.setCityName(city.toString());
 		this.setAreaName(area.toString());

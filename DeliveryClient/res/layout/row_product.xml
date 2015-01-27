@@ -62,7 +62,7 @@
 	    	    android:layout_gravity="center_vertical"
 	    	    android:gravity="center"
 	    	    android:layout_marginLeft="8dp"
-	    	    android:text="3"
+	    	    android:text="0"
 	    	    android:textColor="@color/redbg" />
     	    <TextView 
 	    	    android:id="@+id/quantityX"

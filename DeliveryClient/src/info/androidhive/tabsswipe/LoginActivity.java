@@ -91,6 +91,7 @@ public class LoginActivity extends Activity {
 
 			editor.putBoolean("isChecked", keeplog.isChecked());
 			editor.putString("token", user.getToken());
+			Log.d("ray","token: "+user.getToken());
 			editor.putString("name", user.getName());
 			editor.putString("pass", password.getText().toString());
 			editor.putString("phone", username.getText().toString());

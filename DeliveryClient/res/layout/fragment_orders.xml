@@ -72,6 +72,16 @@
                 android:background="@drawable/myedittext"
                 android:ems="10"
                 android:gravity="center" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/submit"
+                android:layout_alignBottom="@+id/submit"
+                android:layout_alignLeft="@+id/textView1"
+                android:text="Back" />
+
         </RelativeLayout>
     </LinearLayout>
 

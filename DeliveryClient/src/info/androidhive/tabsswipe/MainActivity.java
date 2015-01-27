@@ -330,6 +330,24 @@ public class MainActivity extends Activity {
 				}
 
 			}
+		}else if(m.equals("done"))
+		{
+			for (Fragment fragment : fragments) {
+				if (fragment.getClass().equals(ProfileFragment.class)) {
+					Method returnFunction;
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+			
 		}
 		else {
 			if(m.equals("setBusinesses") && countries==null)

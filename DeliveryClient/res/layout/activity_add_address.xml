@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:background="@color/gris"
     android:fillViewport="true"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:scaleType="fitXY" >
 
     <RelativeLayout
         android:layout_width="match_parent"

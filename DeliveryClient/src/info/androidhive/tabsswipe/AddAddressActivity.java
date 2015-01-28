@@ -61,9 +61,8 @@ public class AddAddressActivity extends Activity implements
 		newAdd.setDefault(true);
 
 		String serverURL = new myURL(null, "customers", "addresses", 0).getURL();
-		new MyJs("afterCreation", this,
-				((deliveryclient) this.getApplication()), "POST",
-				(Object) newAdd).execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "afterCreation", true);
+		p.post(newAdd);
 		
 	}
 	public void callMethod(String m, String s, String error) {

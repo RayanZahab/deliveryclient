@@ -164,17 +164,24 @@ public class Address {
 
 	public String toString(ArrayList<Country> countries) {
 		int countryIndex = countries.indexOf(new Country(Converter.toInt(this.getCountry())));
-		Country country = countries.get(countryIndex);
+		if(countryIndex>-1)
+		{
+			Country country = countries.get(countryIndex);
+			this.setCountryName(country.toString());
 		
-		int cityIndex = country.getCities().indexOf(new City(Converter.toInt(this.getCity())));
-		City city = country.getCities().get(cityIndex);
-		
-		int areaIndex = city.getAreas().indexOf(new Area(Converter.toInt(this.getArea())));
-		Area area = city.getAreas().get(areaIndex);
-		
-		this.setCountryName(country.toString());
-		this.setCityName(city.toString());
-		this.setAreaName(area.toString());
+			int cityIndex = country.getCities().indexOf(new City(Converter.toInt(this.getCity())));
+			if(countryIndex>-1)
+			{
+				City city = country.getCities().get(cityIndex);
+				this.setCityName(city.toString());
+				int areaIndex = city.getAreas().indexOf(new Area(Converter.toInt(this.getArea())));
+				if(areaIndex>-1)
+				{
+					Area area = city.getAreas().get(areaIndex);
+					this.setAreaName(area.toString());
+				}
+			}			
+		}
 		
 		return this.getCountryName() + " , " + this.getCityName() + " , " + this.getAreaName() + "\n"
 				+ this.building + " , " + this.floor + " \n" + this.details;

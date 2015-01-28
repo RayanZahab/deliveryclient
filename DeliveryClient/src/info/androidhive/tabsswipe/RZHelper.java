@@ -66,12 +66,11 @@ public class RZHelper {
 					} else {
 						Method returnFunction;
 						try {
-							returnFunction = currentActivity.getClass()
-									.getMethod(returnMethod,
-											stringType.getClass(),
-											stringType.getClass());
-							returnFunction
-									.invoke(currentActivity, reply, error);
+							returnFunction = currentActivity.getClass().getMethod(
+									"callMethod", stringType.getClass(), stringType.getClass(),
+									stringType.getClass());
+							returnFunction.invoke(currentActivity, returnMethod, reply,
+									error);
 							Log.d("ray callback", url + ": " + "error: "
 									+ error + " => reply: " + reply);
 						} catch (Exception e) {
@@ -117,7 +116,7 @@ public class RZHelper {
 				loader = new TransparentProgressDialog(currentActivity,
 						R.drawable.spinner);
 				deliveryclient.loader = loader;
-				loader.show();
+				deliveryclient.loader.show();
 			}
 
 			callBack = new AjaxCallback<JSONObject>() {
@@ -139,15 +138,14 @@ public class RZHelper {
 
 					} else {
 						Method returnFunction;
-						try {
-							returnFunction = currentActivity.getClass()
-									.getMethod(returnMethod,
-											stringType.getClass(),
-											stringType.getClass());
-							returnFunction
-									.invoke(currentActivity, reply, error);
+						try {							
 							Log.d("ray callback", url + ": " + "error: "
 									+ error + " => reply: " + reply);
+							returnFunction = currentActivity.getClass().getMethod(
+									"callMethod", stringType.getClass(), stringType.getClass(),
+									stringType.getClass());
+							returnFunction.invoke(currentActivity, returnMethod, reply,
+									error);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

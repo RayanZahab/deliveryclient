@@ -45,10 +45,9 @@ public class CartFragment extends ParentFragment {
 		Log.d("ray","cart getting add");
 		
 		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
-		MyJs mjs = new MyJs("getAdd", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET", false, true);
-		mjs.execute(serverURL);
-
+				
+		RZHelper p = new RZHelper(serverURL, currentActivity, "getAdd", false,true);
+		p.get();
 	}
 
 	public void getAdd(String s, String error) {

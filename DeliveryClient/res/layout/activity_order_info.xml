@@ -178,45 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp" >
-
-                <TextView
-                    android:id="@+id/textView6"
-                    style="@style/mytextview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="8dp"
-                    android:text="@string/deliveryguy" />
-
-                <Spinner
-                    android:id="@+id/delivery_Spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_below="@+id/textView6"
-                    android:background="@drawable/myspinner"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:paddingLeft="8dp"
-                    android:spinnerMode="dialog" />
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textView7"
-                style="@style/mytextview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="@string/preparer" />
-
-            <Spinner
-                android:id="@+id/preparer_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/myspinner"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:paddingLeft="8dp"
-                android:spinnerMode="dialog" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -267,28 +229,6 @@
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginTop="10dp" >
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:background="@color/yellow"
-            android:onClick="submit"
-            android:text="@string/submit"
-            android:textColor="@color/redbg"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:background="@color/redbg"
-            android:onClick="cancel"
-            android:text="@string/cancel"
-            android:textColor="@color/yellow"
-            android:textSize="18sp" />
     </RelativeLayout>
 
 </LinearLayout>

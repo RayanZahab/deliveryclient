@@ -83,10 +83,9 @@ public class OrderInfoActivity extends Activity {
 	}
 
 	public void getCurrentOrder(int orderId) {
-		String serverURL = new myURL(null, "orders", orderId, 0).getURL();
-		MyJs mjs = new MyJs("setOrderInfo", this,
-				((deliveryclient) this.getApplication()), "GET", true, false);
-		mjs.execute(serverURL);
+		String serverURL = new myURL(null, "orders", orderId, 0).getURL();		
+		RZHelper p = new RZHelper(serverURL, this, "setOrderInfo", true,true);
+		p.get();
 	}
 
 	public void callMethod(String m, String s, String error) {

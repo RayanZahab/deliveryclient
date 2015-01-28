@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/redbg">
+    android:background="@color/gris">
     
     <ScrollView
         android:id="@+id/Scrollview"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent" >
 
             <Spinner
-                android:id="@+id/countrySp"
+                android:id="@+id/countriesSP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView1"
@@ -28,11 +28,11 @@
                 android:paddingRight="10dp" />
             
               <Spinner
-                android:id="@+id/citySP"
+                android:id="@+id/citiesSP"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="18dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/countrySp"
+                android:layout_below="@+id/countriesSP"
                 android:background="@drawable/mymainspinner"
 	            android:paddingRight="10dp"
 	            android:layout_marginLeft="20dp"
@@ -40,7 +40,7 @@
                 android:layout_centerHorizontal="true" />
               
                 <Spinner
-                android:id="@+id/areaSP"
+                android:id="@+id/areasSP"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="18dp"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
 	            android:paddingRight="10dp"
 	            android:layout_marginLeft="20dp"
 	            android:layout_marginRight="20dp"
-                android:layout_below="@+id/citySP"
+                android:layout_below="@+id/citiesSP"
                 android:layout_centerHorizontal="true" />
 
             <ImageView
@@ -64,7 +64,7 @@
                 android:id="@+id/button1"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/areaSP"
+                android:layout_below="@+id/areasSP"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@color/yellow"

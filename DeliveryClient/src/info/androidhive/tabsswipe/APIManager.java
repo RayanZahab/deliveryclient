@@ -21,11 +21,11 @@ public class APIManager {
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
-				int id =  Integer.parseInt(jsonResponse.optString("id")
-							 .toString());
+				int id = Integer.parseInt(jsonResponse.optString("id")
+						.toString());
 				String token = jsonResponse.optString("auth_token").toString();
-				Log.d("ray","token: "+token);
-				String name = jsonResponse.optString("name").toString();				
+				Log.d("ray", "token: " + token);
+				String name = jsonResponse.optString("name").toString();
 				return new Customer(id, name, token);
 
 			}
@@ -37,14 +37,14 @@ public class APIManager {
 		return null;
 
 	}
-	public int getLocId(String cont){
+
+	public int getLocId(String cont) {
 		JSONObject jsonResponse;
 		int id = 0;
 		try {
 			jsonResponse = new JSONObject(cont);
-			id = Integer.parseInt(jsonResponse.optString("id")
-					.toString());
-		}catch (JSONException e) {
+			id = Integer.parseInt(jsonResponse.optString("id").toString());
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return id;
@@ -301,8 +301,8 @@ public class APIManager {
 						name = jsonChildNode.optString("name").toString();
 						address = jsonChildNode.optString("address").toString();
 						area_str = jsonChildNode.optString("area").toString();
-						//areas = getAreasByCity(area_str);
-						gridArray.add(new Branch(id, name, new Area(1,"area"),
+						// areas = getAreasByCity(area_str);
+						gridArray.add(new Branch(id, name, new Area(1, "area"),
 								address));
 					}
 				}
@@ -443,12 +443,11 @@ public class APIManager {
 		JSONObject jsonResponse;
 		String url = "", thumb = "";
 		Photo photo = new Photo(0, url, thumb);
-		Log.d("ray","Photo: "+cont);
-		if(!cont.isEmpty())
-		{
+		Log.d("ray", "Photo: " + cont);
+		if (!cont.isEmpty()) {
 			try {
 				jsonResponse = new JSONObject(cont);
-	
+
 				url = jsonResponse.optString("url").toString();
 				thumb = jsonResponse.optString("thumb").toString();
 				photo.setUrl(url);
@@ -471,7 +470,7 @@ public class APIManager {
 				boolean is_available;
 				String name, description, photo_str, unit_str;
 				int price;
-				Unit unit=null;
+				Unit unit = null;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -495,12 +494,11 @@ public class APIManager {
 						photo_str = jsonChildNode.optString("photo").toString();
 						Photo p = getPhoto(photo_str);
 						unit_str = jsonChildNode.optString("unit").toString();
-						if(! unit_str.isEmpty())
-						{
-						jsonUnit = new JSONObject(unit_str);
-						unit = new Unit(Integer.parseInt(jsonUnit.optString(
-								"id").toString()), jsonUnit.optString("name")
-								.toString());
+						if (!unit_str.isEmpty()) {
+							jsonUnit = new JSONObject(unit_str);
+							unit = new Unit(Integer.parseInt(jsonUnit
+									.optString("id").toString()), jsonUnit
+									.optString("name").toString());
 						}
 						is_available = Boolean.valueOf(jsonChildNode.optString(
 								"is_available").toString());
@@ -608,6 +606,7 @@ public class APIManager {
 
 	public ArrayList<Address> getAddress(String cont) {
 		JSONObject jsonResponse;
+		Log.d("ray add: ","add:"+cont);
 		ArrayList<Address> gridArray = new ArrayList<Address>();
 		try {
 			jsonResponse = new JSONObject(cont);
@@ -625,53 +624,62 @@ public class APIManager {
 
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
-						country = getLocId(jsonChildNode.optString("country").toString())+"";
-						
-						city = getLocId(jsonChildNode.optString("city").toString())+"";
-						area = getLocId(jsonChildNode.optString("area").toString())+"";
+						country = getLocId(jsonChildNode.optString("country")
+								.toString()) + "";
+
+						city = getLocId(jsonChildNode.optString("city")
+								.toString()) + "";
+						area = getLocId(jsonChildNode.optString("area")
+								.toString()) + "";
 						street = jsonChildNode.optString("street").toString();
 						building = jsonChildNode.optString("building")
 								.toString();
 						floor = jsonChildNode.optString("floor").toString();
 						details = jsonChildNode.optString("details").toString();
-						longitude = jsonChildNode.optString("long")
-								.toString();
-						latitude = jsonChildNode.optString("lat")
-								.toString();
+						longitude = jsonChildNode.optString("long").toString();
+						latitude = jsonChildNode.optString("lat").toString();
 						created_at = jsonChildNode.optString("created_at")
 								.toString();
 						updated_at = jsonChildNode.optString("updated_at")
 								.toString();
-						is_default = Boolean.parseBoolean(jsonChildNode.optString("is_default")
-								.toString());
+						is_default = Boolean.parseBoolean(jsonChildNode
+								.optString("is_default").toString());
 						customer_id = Integer.parseInt(jsonChildNode.optString(
 								"customer_id").toString());
 						gridArray.add(new Address(id, country, city, area,
 								building, floor, street, details, customer_id,
-								longitude, latitude, created_at, updated_at, is_default));
+								longitude, latitude, created_at, updated_at,
+								is_default));
 
 					}
 				} else {
 					id = Integer.parseInt(jsonResponse.optString("id")
 							.toString());
-					country = jsonResponse.optString("country").toString();
-					city = jsonResponse.optString("city").toString();
-					area = jsonResponse.optString("area").toString();
+					country = getLocId(jsonResponse.optString("country")
+							.toString()) + "";
+					city = getLocId(jsonResponse.optString("city").toString())
+							+ "";
+					area = getLocId(jsonResponse.optString("area").toString())
+							+ "";
+
 					street = jsonResponse.optString("street").toString();
 					building = jsonResponse.optString("building").toString();
 					floor = jsonResponse.optString("floor").toString();
 					details = jsonResponse.optString("details").toString();
 					longitude = jsonResponse.optString("long").toString();
 					latitude = jsonResponse.optString("lat").toString();
-					created_at = jsonResponse.optString("created_at").toString();
-					updated_at = jsonResponse.optString("updated_at").toString();
+					created_at = jsonResponse.optString("created_at")
+							.toString();
+					updated_at = jsonResponse.optString("updated_at")
+							.toString();
 					customer_id = Integer.parseInt(jsonResponse.optString(
 							"customer_id").toString());
-					is_default = Boolean.parseBoolean(jsonResponse.optString("is_default")
-							.toString());
+					is_default = Boolean.parseBoolean(jsonResponse.optString(
+							"is_default").toString());
 					gridArray.add(new Address(id, country, city, area,
 							building, floor, street, details, customer_id,
-							longitude, latitude, created_at, updated_at, is_default));
+							longitude, latitude, created_at, updated_at,
+							is_default));
 				}
 			} else {
 				return gridArray;
@@ -969,14 +977,19 @@ public class APIManager {
 						&& !jsonResponse.isNull("customer")) {
 
 					jsonAdd = new JSONObject(add_str);
+					String country = getLocId(jsonAdd.optString("country")
+							.toString()) + "";
+
+					String city = getLocId(jsonAdd.optString("city").toString())
+							+ "";
+					String area = getLocId(jsonAdd.optString("area").toString())
+							+ "";
 					address = new Address(Integer.parseInt(jsonAdd.optString(
-							"id").toString()), jsonAdd.optString("country")
-							.toString(), jsonAdd.optString("city").toString(),
-							jsonAdd.optString("area").toString(), jsonAdd
-									.optString("street").toString(), jsonAdd
-									.optString("building").toString(), jsonAdd
-									.optString("floor").toString(), jsonAdd
-									.optString("details").toString());
+							"id").toString()), country, city, area, jsonAdd
+							.optString("street").toString(), jsonAdd.optString(
+							"building").toString(), jsonAdd.optString("floor")
+							.toString(), jsonAdd.optString("details")
+							.toString());
 					order.setAddress(address);
 				} else {
 					order.setAddress(new Address(0));
@@ -1105,6 +1118,7 @@ public class APIManager {
 			JSONObject body = new JSONObject();
 			try {
 				body.put("phone", c.getPhone());
+				body.put("mobile", c.getPhone());
 				if (c.isLogin()) {
 					body.put("pass", c.getPassword());
 				} else {
@@ -1136,8 +1150,8 @@ public class APIManager {
 				body.put("details", c.getDetails());
 				body.put("is_default", c.isDefault());
 				jsonObjSend.put("customer_address", body);
-				Log.d("ray","sending: "+c.getCountry()+"-"+c.getCity()+"-"+c.getArea()+"->"
-						+jsonObjSend.toString());
+				Log.d("ray", "sending: " + c.getCountry() + "-" + c.getCity()
+						+ "-" + c.getArea() + "->" + jsonObjSend.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

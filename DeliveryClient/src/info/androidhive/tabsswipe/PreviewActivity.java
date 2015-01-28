@@ -33,10 +33,9 @@ public class PreviewActivity extends Activity {
 
 	public void getAddresses(int userId) {
 		String serverURL = new myURL("addresses", "customers", ((deliveryclient) this.getApplication()).getUserId(), 0).getURL();
-		MyJs mjs = new MyJs("setAdd", this,
-				((deliveryclient) this.getApplication()), "GET");
-		mjs.execute(serverURL);
-
+		
+		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
+		p.get();
 	}
 	public void selectAdd(View v)
 	{
@@ -73,9 +72,9 @@ public class PreviewActivity extends Activity {
 		TextView noteTxt = (TextView) findViewById(R.id.note);
 		myOrder.setNote(noteTxt.getText().toString());
 		String serverURL = new myURL("orders", null, 0, 0).getURL();
-		new MyJs("afterCreation", this,
-				((deliveryclient) this.getApplication()), "POST",
-				(Object) myOrder).execute(serverURL);
+		
+		RZHelper p = new RZHelper(serverURL, this, "afterCreation", true);
+		p.post(myOrder);
 	}
 
 	public void callMethod(String m, String s, String error) {

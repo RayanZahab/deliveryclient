@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		countries = ((deliveryclient) this.getApplication()).getCountries();
-		
+
 		// toggler
 		toggler();
 
@@ -197,15 +197,15 @@ public class MainActivity extends Activity {
 
 		case 3:
 			fragment = new PendingOrdersFragment();
-		    args.putString("orders", "pending");
-		    fragment.setArguments(args);
+			args.putString("orders", "pending");
+			fragment.setArguments(args);
 			fragments.add(fragment);
 			break;
 
 		case 4:
 			fragment = new PendingOrdersFragment();
-		    args.putString("orders", "closed");
-		    fragment.setArguments(args);
+			args.putString("orders", "closed");
+			fragment.setArguments(args);
 			fragments.add(fragment);
 			break;
 
@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 			fragments.add(fragment);
 			break;
 		}
-		Log.e("ray", "currentf"+position);
+		Log.e("ray", "currentf" + position);
 
 		if (fragment != null) {
 			fragmentManager.beginTransaction()
@@ -226,10 +226,7 @@ public class MainActivity extends Activity {
 			mDrawerList.setSelection(position);
 			setTitle(navMenuTitles.get(position).toString());
 			mDrawerLayout.closeDrawer(mDrawerList);
-		} else {
-			// error in creating fragment
-			Log.e("MainActivity", "Error in creating fragment");
-		}
+		} 
 	}
 
 	@Override
@@ -284,15 +281,14 @@ public class MainActivity extends Activity {
 
 	public void callMethod(String m, String s, String error) {
 		Log.d("ray", "calling method: " + m);
-		
+
 		if (m.equals("setCountries"))
 			setCountries(s, error);
 		else if (m.equals("setCities"))
 			setCities(s, error);
 		else if (m.equals("setAreas"))
 			setAreas(s, error);
-		else if(m.equals("setOrders"))
-		{
+		else if (m.equals("setOrders")) {
 			Log.d("ray", "Here5: " + m);
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(PendingOrdersFragment.class)) {
@@ -309,15 +305,14 @@ public class MainActivity extends Activity {
 					}
 				}
 			}
-		}
-		else if(m.equals("getAdd"))
-		{
+		} else if (m.equals("getAdd")) {
 			Log.d("ray", "Here3: " + m);
 			for (Fragment fragment : fragments) {
-				Log.d("ray", "Here30: " + fragment.getClass() + "=="+CartFragment.class);					
+				Log.d("ray", "Here30: " + fragment.getClass() + "=="
+						+ CartFragment.class);
 				if (fragment.getClass().equals(CartFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here31: " + m);					
+					Log.d("ray", "Here31: " + m);
 					try {
 						returnFunction = fragment.getClass().getDeclaredMethod(
 								m, s.getClass(), s.getClass());
@@ -330,8 +325,7 @@ public class MainActivity extends Activity {
 				}
 
 			}
-		}else if(m.equals("done"))
-		{
+		} else if (m.equals("done")) {
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(ProfileFragment.class)) {
 					Method returnFunction;
@@ -347,10 +341,9 @@ public class MainActivity extends Activity {
 				}
 
 			}
-			
-		}
-		else {
-			if(m.equals("setBusinesses") && countries==null)
+
+		} else {
+			if (m.equals("setBusinesses") && countries == null)
 				getCountries();
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
@@ -408,9 +401,8 @@ public class MainActivity extends Activity {
 
 	public void getCountries() {
 		String serverURL = new myURL("countries", null, 0, 30).getURL();
-		MyJs mjs = new MyJs("setCountries", this,
-				((deliveryclient) getApplication()), "GET", true, false);
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, this, "setCountries", false);
+		p.get();
 	}
 
 	public void setCountries(String s, String error) {
@@ -425,8 +417,8 @@ public class MainActivity extends Activity {
 		int countryId = countries.get(position).getId();
 		String serverURL = new myURL("cities", "countries", countryId, 30)
 				.getURL();
-		new MyJs("setCities", this, ((deliveryclient) getApplication()), "GET",
-				false, false).execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, this, "setCities", false);
+		p.get();
 	}
 
 	public void setCities(String s, String error) {
@@ -441,24 +433,19 @@ public class MainActivity extends Activity {
 	public void getAreas(int position) {
 		cityP = position;
 		CityId = cities.get(position).getId();
-		Log.d("ray", "City: " + CityId);
 		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
-		MyJs mjs = new MyJs("setAreas", this,
-				((deliveryclient) this.getApplication()), "GET", false, false);
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, this, "setAreas",false,last);
+		p.get();
 	}
 
 	public void setAreas(String s, String error) {
 		areas = new APIManager().getAreasByCity(s);
 
 		cities.get(cityP).setAreas(areas);
-		countries.get(countryP).setCities(cities);
+		countries.get(countryP).setCities(cities);	
 		if (last) {
-			((deliveryclient) this.getApplication()).setCountries(countries);
-			((deliveryclient) this.getApplication()).loader.dismiss();
-			Log.d("rayzz", "AREA: " + countryP + " , " + CityId);
-			displayView(0);
-			last = false;
+			((deliveryclient) this.getApplication()).setCountries(countries);			
+			Log.d("ray", "setting countries: " + CityId + "->"+areas.size());
 		}
 	}
 }

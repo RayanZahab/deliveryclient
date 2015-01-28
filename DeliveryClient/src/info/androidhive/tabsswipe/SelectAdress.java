@@ -46,10 +46,8 @@ public class SelectAdress extends ListActivity {
 		String serverURL = new myURL("addresses", "customers",
 				((deliveryclient) this.getApplication()).getUserId(), 0)
 				.getURL();
-		MyJs mjs = new MyJs("setAdd", this,
-				((deliveryclient) this.getApplication()), "GET");
-		mjs.execute(serverURL);
-
+		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
+		p.get();
 	}
 
 	public void callMethod(String m, String s, String error) {
@@ -65,52 +63,52 @@ public class SelectAdress extends ListActivity {
 
 		if (error == null) {
 			myAddresses = new APIManager().getAddress(s);
-			final ArrayList<Item> mylist = new ArrayList<Item>();
-			for (Address add : myAddresses) {
-				Item it = new Item();
-				it.setName(add.toString(countries));
-				it.setType("address");
-				it.setId(add.getId());
-				mylist.add(it);
-				if (add.isDefault())
-					defaultPosition = i;
-				i++;
-				addOut.add(add.toString(countries));
-			}
-
-			setListAdapter(new ArrayAdapter<String>(this,
-					R.layout.row_radiobutton, addOut));
-			listView.setItemChecked(defaultPosition, true);
-
-			listView.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View view,
-						int position, long itemId) {
-					CheckedTextView textView = (CheckedTextView) view;
-					for (int i = 0; i < listView.getCount(); i++) {
-						textView = (CheckedTextView) listView.getChildAt(i);
-						if (textView != null) {
-							textView.setTextColor(Color.BLACK);
-						}
-
-					}
-					listView.invalidate();
-					textView = (CheckedTextView) view;
-					if (textView != null) {
-						textView.setTextColor(Color.RED);
-					}
-					MyJs defaultJs = new MyJs("nothing", current,
-							((deliveryclient) current.getApplication()), "PUT");
-					String serverURL = new myURL("set_default",
-							"customers/addresses",
-							mylist.get(position).getId(), 0).getURL();
-
-					defaultJs.execute(serverURL);
-
+			if (myAddresses.size() > 0) {
+				final ArrayList<Item> mylist = new ArrayList<Item>();
+				for (Address add : myAddresses) {
+					Item it = new Item();
+					it.setName(add.toString(countries));
+					it.setType("address");
+					it.setId(add.getId());
+					mylist.add(it);
+					if (add.isDefault())
+						defaultPosition = i;
+					i++;
+					addOut.add(add.toString(countries));
 				}
-			});
 
+				setListAdapter(new ArrayAdapter<String>(this,
+						R.layout.row_radiobutton, addOut));
+				listView.setItemChecked(defaultPosition, true);
+
+				listView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View view,
+							int position, long itemId) {
+						CheckedTextView textView = (CheckedTextView) view;
+						for (int i = 0; i < listView.getCount(); i++) {
+							textView = (CheckedTextView) listView.getChildAt(i);
+							if (textView != null) {
+								textView.setTextColor(Color.BLACK);
+							}
+
+						}
+						listView.invalidate();
+						textView = (CheckedTextView) view;
+						if (textView != null) {
+							textView.setTextColor(Color.RED);
+						}
+						String serverURL = new myURL("set_default",
+								"customers/addresses", mylist.get(position)
+										.getId(), 0).getURL();
+
+						RZHelper p = new RZHelper(serverURL, current,
+								"nothing", true);
+						p.put(null);
+					}
+				});
+			}
 		}
 
 	}

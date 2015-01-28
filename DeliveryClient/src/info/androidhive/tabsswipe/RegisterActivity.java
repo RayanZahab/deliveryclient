@@ -34,7 +34,6 @@ public class RegisterActivity extends Activity {
 			if (valid.isValid(this)) {
 				new MyJs("login", this, ((deliveryclient) this.getApplication()),
 						method, (Object) user, true, false).execute(serverURL);
-	
 			}
 		}
 		else

@@ -17,14 +17,6 @@
         android:textColor="@color/redbg"
         android:text="@string/item" />
 
-    <ImageView
-        android:id="@+id/newImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/neworder" />
-
     <TextView
         android:id="@+id/totalamount"
         style="@style/mytextview"
@@ -47,10 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="right"
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="14dp"
-        android:layout_toRightOf="@+id/newImg"
         android:layout_toLeftOf="@+id/totalamount"
         android:gravity="left"
         android:text="@string/address"

@@ -225,9 +225,12 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 					public void onClick(View arg0) {
 						
 						String serverURL = new myURL("set_default", "customers/addresses", item.getId(), 0).getURL();
-						MyJs mjs = new MyJs("nothing", activity,
+						/*MyJs mjs = new MyJs("nothing", activity,
 								((deliveryclient) activity.getApplication()), "PUT");
-						mjs.execute(serverURL);						
+						mjs.execute(serverURL);	
+						*/	
+						RZHelper p = new RZHelper(serverURL, activity, "nothing", true);
+						p.put(null);
 					}
 				});
 				

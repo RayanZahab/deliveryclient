@@ -264,10 +264,8 @@ public class OrdersFragment extends ParentFragment {
 	public void getShops(int areaId) {
 		String serverURL = new myURL("shops?business_id="+((deliveryclient) currentActivity.getApplication()).getBusinessId()
 				, "areas", areaId, 0).getURL();
-		MyJs mjs = new MyJs("setShops", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setShops", true,true);
+		p.get();
 	}
 
 	public void setShops(String s, String error) {
@@ -285,9 +283,8 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getBranches(int shopId) {
 		String serverURL = new myURL("branches", "shops", shopId, 30).getURL();
-		MyJs mjs = new MyJs("setBranches", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET");
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true,true);
+		p.get();
 	}
 
 	public void setBranches(String s, String error) {
@@ -306,9 +303,8 @@ public class OrdersFragment extends ParentFragment {
 	public void getCategories(int branchId) {
 		String serverURL = new myURL("categories", "branches", branchId, 30)
 				.getURL();
-		MyJs mjs = new MyJs("setCategories", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET");
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true,true);
+		p.get();
 	}
 
 	public void setCategories(String s, String error) {
@@ -327,10 +323,9 @@ public class OrdersFragment extends ParentFragment {
 	public void getProducts(int branchId, int categoryId) {
 		String serverURL = new myURL("items", "branches/" + branchId
 				+ "/categories", categoryId, 30).getURL();
-		MyJs mjs = new MyJs("setProducts", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET");
-		Log.d("ray","setting pr");
-		mjs.execute(serverURL);
+		
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setProducts", true,true);
+		p.get();
 	}
 
 	public void setProducts(String s, String error) {
@@ -357,11 +352,11 @@ public class OrdersFragment extends ParentFragment {
 		categoryId = 0;
 		productId = 0;
 		String serverURL = new myURL("businesses", null, 0, 30).getURL();
-		MyJs mjs = new MyJs("setBusinesses", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
-		
+		boolean onlyBusiness = true;
+		if(((deliveryclient) currentActivity.getApplication()).getCountries() == null ) 
+			onlyBusiness = false;
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setBusinesses", true,onlyBusiness);
+		p.get();
 	}
 
 	public void setBusinesses(String s, String error) {
@@ -387,7 +382,7 @@ public class OrdersFragment extends ParentFragment {
 			mylist.add(i);
 		}
 		listView.setAdapter(new MyCustomAdapter(currentActivity,
-				android.R.layout.simple_list_item_1, mylist));
+				R.layout.row_txtimg, mylist));
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -403,7 +398,7 @@ public class OrdersFragment extends ParentFragment {
 					} else
 						getList(sequence.get(depth), itemId);
 					listView.setAdapter(new MyCustomAdapter(currentActivity,
-							android.R.layout.simple_list_item_1, mylist));
+							R.layout.row_txtimg, mylist));
 				}
 			}
 		});

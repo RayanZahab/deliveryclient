@@ -205,6 +205,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 						.objToCreate(this.objectToAdd);
 				OutputStreamWriter wr = new OutputStreamWriter(
 						conn.getOutputStream());
+				Log.d("ray","sending : "+jsonObjSend.toString());
 				wr.write(jsonObjSend.toString());
 				wr.flush();
 				wr.close();

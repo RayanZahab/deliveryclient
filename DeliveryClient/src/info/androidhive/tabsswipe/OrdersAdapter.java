@@ -43,13 +43,7 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 			holder = new ViewHolder();
 			if(!empty)
 			{
-				convertView = vi.inflate(R.layout.row_order, null);
-	
-				if (!this.orderList.get(position).isNew()) {
-					RelativeLayout main = (RelativeLayout) convertView
-							.findViewById(R.id.roworder);
-					main.findViewById(R.id.newImg).setVisibility(View.GONE);
-				}
+				convertView = vi.inflate(R.layout.row_order, null);				
 	
 				holder.address = (TextView) convertView
 						.findViewById(R.id.useraddress);

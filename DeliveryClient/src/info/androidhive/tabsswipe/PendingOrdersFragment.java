@@ -76,13 +76,10 @@ public class PendingOrdersFragment extends ParentFragment {
 	}
 
 	public void getOrders() {
-		String serverURL;
-		serverURL = new myURL(null, "customers", orderStatus + "_orders", 30)
+		String serverURL = new myURL(null, "customers", orderStatus + "_orders", 30)
 				.getURL();
-		MyJs mjs = new MyJs("setOrders", currentActivity,
-				((deliveryclient) currentActivity.getApplication()), "GET",
-				true, true);
-		mjs.execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setOrders",true);
+		p.get();
 	}
 
 	public void fetchTimelineAsync(int page) {
@@ -132,14 +129,9 @@ public class PendingOrdersFragment extends ParentFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (morders.size() > 0) {
-					Intent i;
-					if (orderItems.get(position).isNew()) {
-						i = new Intent(currentActivity.getBaseContext(),
-								BlockUser.class);
-					} else {
-						i = new Intent(currentActivity.getBaseContext(),
+					Intent i = new Intent(currentActivity.getBaseContext(),
 								OrderInfoActivity.class);
-					}
+					
 					((deliveryclient) currentActivity.getApplication())
 							.setOrderId(orderItems.get(position).getId());
 					startActivity(i);

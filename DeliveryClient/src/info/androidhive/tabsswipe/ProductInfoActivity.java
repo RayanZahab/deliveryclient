@@ -125,8 +125,8 @@ public class ProductInfoActivity extends Activity {
 
 	public void getProduct(int id) {
 		String serverURL = new myURL(null, "items", id, 1).getURL();
-		new MyJs("setProduct", this, ((deliveryclient) this.getApplication()),
-				"GET", true, false).execute(serverURL);
+		RZHelper p = new RZHelper(serverURL, this, "setProduct", true,false);
+		p.get();
 	}
 
 	public void setProduct(String s, String error) {
@@ -160,9 +160,8 @@ public class ProductInfoActivity extends Activity {
 	public void getUnits(boolean first) {
 		// getUnits
 		String serverURL = new myURL("units", null, 0, 30).getURL();
-		new MyJs("setUnits", this, ((deliveryclient) this.getApplication()),
-				"GET", first, true).execute(serverURL);
-
+		RZHelper p = new RZHelper(serverURL, this, "setUnits", first,true);
+		p.get();
 	}
 
 }

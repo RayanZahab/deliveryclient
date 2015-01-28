@@ -100,17 +100,17 @@ public class ProfileFragment extends ParentFragment {
 			Toast.makeText(currentActivity, R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
 		} else {
-			String serverURL = new myURL(null, "users", id, 0).getURL();
+			String serverURL = new myURL(null, "customers", id, 0).getURL();
 			User user = new User(nameTxt.getText().toString(), phone, null, branchId, 0);
 			user.setEncPassword(passTxt
 					.getText().toString());
-			String method = "PUT";
 			ValidationError valid = user.validate(true);
 			if(valid.isValid(currentActivity))
 			{
-				new MyJs("done", currentActivity, 
-						((deliveryclient) currentActivity.getApplication()),
-						method, (Object) user, true, true).execute(serverURL);
+				//RZHelper p = new RZHelper(serverURL, currentActivity, "done", true);
+				//p.put(user);
+				new MyJs("done", currentActivity, ((deliveryclient) currentActivity.getApplication()),
+						"PUT", (Object) user, true, true).execute(serverURL);
 			}
 			
 		}
@@ -119,12 +119,9 @@ public class ProfileFragment extends ParentFragment {
 	public void done(String s, String error) {
 		Toast.makeText(currentActivity, "GOOD", Toast.LENGTH_SHORT)
 				.show();
-		String serverURL = new myURL(null, "users", "login", 0).getURL();
+		String serverURL = new myURL(null, "customers", "login", 0).getURL();
 		User user = new User(phone, pass);
 		user.setEncPassword(pass);
-		//MyJs mjs = new MyJs("getLoggedIn", currentActivity,
-		//		((deliveryclient) currentActivity.getApplication()), "POST", (Object) user);
-		//mjs.execute(serverURL);
 		RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
 		p.post(user);
 	}

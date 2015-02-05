@@ -12,7 +12,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <application
         android:name="info.androidhive.tabsswipe.deliveryclient"
@@ -78,11 +78,13 @@
         <activity
             android:name="info.androidhive.tabsswipe.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:parentActivityName="LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="info.androidhive.tabsswipe.AddAddressActivity"
             android:label="@string/title_activity_test"
+            android:parentActivityName="SelectAdress"
             android:screenOrientation="portrait" >
         </activity>
         <activity

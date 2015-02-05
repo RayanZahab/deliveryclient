@@ -87,6 +87,7 @@
     <string name="no">No</string>
     <string name="enter">Enter</string>
     <string name="login">Login</string>
+    <string name="gender">Gender</string>
     
     <string-array name="acc_type">
         <item>Income</item>

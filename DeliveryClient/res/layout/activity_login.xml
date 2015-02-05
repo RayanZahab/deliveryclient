@@ -43,7 +43,7 @@
         android:paddingLeft="50dp"
         android:hint="@string/password"
         android:textColorHint="#ffffff"
-        android:background="@drawable/phonebg"
+        android:background="@drawable/passbg"
         android:inputType="textPassword" />
 
     <CheckBox

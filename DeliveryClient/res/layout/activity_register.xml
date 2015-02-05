@@ -27,7 +27,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="12dp"
 	        android:text="@string/name"
-	        android:textColor="@color/bluebg" />
+	        android:textColor="@color/redbg" />
 
             <EditText
                 android:id="@+id/name"
@@ -40,33 +40,69 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
             
             <TextView
-	        android:id="@+id/phonenum"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="8dp"
-	        android:text="@string/phonenum"
-	        android:textColor="@color/bluebg" />
-
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittextbg"
-                android:ellipsize="start"
-                android:ems="10"
-                android:hint="@string/phonenum"
-                android:inputType="phone"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
-                android:textColorHint="#bdbdbd"
-                android:textSize="16sp" >
-            </EditText>
+		        android:id="@+id/choosecountry"
+		        style="@style/mytextview"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:text="@string/select_country"
+		        android:textColor="@color/redbg" />
+		
+		    <Spinner
+		        android:id="@+id/countriesSP"
+		        android:layout_width="fill_parent"
+		        android:layout_height="30dp"
+		        android:background="@drawable/myspinner"
+		        android:paddingRight="22dp"
+		        android:spinnerMode="dialog" />
+		
+			<TextView
+		        android:id="@+id/phonenum"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:text="@string/phonenum"
+		        android:textColor="@color/redbg" />
+			
+			<LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+				
+			<EditText
+			    android:id="@+id/countrycode"
+			    android:layout_width="60dp"
+			    android:layout_height="45dp"
+			    android:layout_weight="0.3"
+			    android:background="@drawable/edittextbg"
+			    android:ems="10"
+			    android:gravity="center"
+			    android:inputType="none"
+			    android:enabled="false"
+			    android:paddingLeft="2dp"
+			    android:paddingRight="2dp" >
+		
+		    </EditText>
+		
+		    <EditText
+		        android:id="@+id/phone"
+		        android:layout_width="wrap_content"
+		        android:layout_height="45dp"
+		        android:layout_weight="0.7"
+		        android:layout_marginLeft="5dp"
+		        android:background="@drawable/edittextbg"
+		        android:ems="10"
+		        android:hint="@string/phonenum"
+		        android:inputType="phone"
+		        android:paddingLeft="8dp"
+		        android:paddingRight="8dp" >
+		    </EditText>
+		    </LinearLayout>
             
             <TextView
 	        android:id="@+id/passwordtext"
@@ -74,7 +110,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="8dp"
 	        android:text="@string/password"
-	        android:textColor="@color/bluebg" />
+	        android:textColor="@color/redbg" />
 
             <EditText
                 android:id="@+id/password"
@@ -87,9 +123,26 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
+            
+            <TextView
+		        android:id="@+id/choosegender"
+		        style="@style/mytextview"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:text="@string/gender"
+		        android:textColor="@color/redbg" />
+		
+		    <Spinner
+		        android:id="@+id/genderSP"
+		        android:layout_width="fill_parent"
+		        android:layout_height="30dp"
+		        android:background="@drawable/myspinner"
+		        android:paddingRight="22dp"
+		        android:spinnerMode="dialog" />
             
             <TextView
 	        android:id="@+id/confirmpass"
@@ -97,7 +150,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="8dp"
 	        android:text="@string/confirm_password"
-	        android:textColor="@color/bluebg" />
+	        android:textColor="@color/redbg" />
 
             <EditText
                 android:id="@+id/password2"
@@ -110,7 +163,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="#bdbdbd"
+                android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -123,9 +176,9 @@
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onClick="addUser"
-            android:background="@color/turquoise"
+            android:background="@color/redbg"
             android:text="@string/submit"
-            android:textColor="@color/bluebg"
+            android:textColor="@color/yellow"
             android:textSize="18sp" />
     </LinearLayout>
 

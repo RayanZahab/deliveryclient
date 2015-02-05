@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -41,6 +42,9 @@ public class AddAddressActivity extends Activity implements
 		if(extras!=null)
 			previous = extras.getString("previous");
 		getCountries();
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	public void submit(View v) {

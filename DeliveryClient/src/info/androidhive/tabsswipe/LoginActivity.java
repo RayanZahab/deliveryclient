@@ -27,6 +27,11 @@ public class LoginActivity extends Activity {
 	private EditText password;
 	boolean isChecked = false;
 	int i, countryP, cityP, areaP;
+	ArrayList<Country> countries = new ArrayList<Country>();
+	ArrayList<City> cities = new ArrayList<City>();
+	ArrayList<Area> areas = new ArrayList<Area>();
+	int CityId;
+	boolean last = false;
 
 	Customer user;
 
@@ -64,7 +69,7 @@ public class LoginActivity extends Activity {
 
 	public void login(View view) {
 		String serverURL = new myURL(null, "customers", "login", 0).getURL();
-		
+
 		User user = new User(username.getText().toString(), null);
 		user.setEncPassword(password.getText().toString());
 
@@ -83,7 +88,7 @@ public class LoginActivity extends Activity {
 
 			editor.putBoolean("isChecked", keeplog.isChecked());
 			editor.putString("token", user.getToken());
-			Log.d("ray","token: "+user.getToken());
+			Log.d("ray", "token: " + user.getToken());
 			editor.putString("name", user.getName());
 			editor.putString("pass", password.getText().toString());
 			editor.putString("phone", username.getText().toString());
@@ -91,7 +96,6 @@ public class LoginActivity extends Activity {
 			((deliveryclient) this.getApplication()).setGlobals();
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
-			
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
 					Toast.LENGTH_SHORT).show();
@@ -160,5 +164,4 @@ public class LoginActivity extends Activity {
 							}
 						}).setNegativeButton(R.string.no, null).show();
 	}
-
 }

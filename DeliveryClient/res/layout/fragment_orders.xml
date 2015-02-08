@@ -39,7 +39,7 @@
                 />
             
             <ImageView 
-                android:id="@+id/cartpicto"
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -49,10 +49,10 @@
                 android:src="@drawable/cart"
                 />
             <TextView
-		        android:id="@+id/counter"
+		        android:id="@+id/totalQuantity"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_toStartOf="@+id/cartpicto"
+		        android:layout_toStartOf="@+id/submit"
 		        android:layout_margin="1dp"
 		        android:gravity="center"
 		        android:text="0"

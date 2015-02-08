@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ public class LoginActivity extends Activity {
 	boolean last = false;
 
 	Customer user;
+	private TextView forgotpassword, loginTxt;
+	private CheckBox keeploggedin;
+	private Button submit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,14 @@ public class LoginActivity extends Activity {
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);
 
+		String lang = settings1.getString("lang", null);
+		if (lang != null) {
+			if (lang.equals("en")) {
+				changeLangById(R.id.english);
+			} else {
+				changeLangById(R.id.arabic);
+			}
+		}
 		i++;
 
 		if (isChecked) {
@@ -65,6 +77,77 @@ public class LoginActivity extends Activity {
 			}
 		});
 
+	}
+	public void changeLang(View view) {
+		int viewId = view.getId();
+		changeLangById(viewId);
+	}
+
+	@SuppressLint("NewApi")
+	public void changeLangById(int viewId) {
+		String lang_ab = "en";
+		switch (viewId) {
+		case R.id.english:
+			lang_ab = "en";
+			break;
+		case R.id.arabic:
+			lang_ab = "ar";
+			break;
+		}
+		username = (EditText) findViewById(R.id.user_name);
+		password = (EditText) findViewById(R.id.password);
+		forgotpassword = (TextView) findViewById(R.id.forgotpassword);
+		loginTxt = (TextView) findViewById(R.id.login);
+		keeploggedin = (CheckBox) findViewById(R.id.keeploggedin);
+		submit = (Button) findViewById(R.id.submit);
+
+		Locale locale = new Locale(lang_ab);
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.locale = locale;
+
+		getBaseContext().getResources().updateConfiguration(config,
+				getBaseContext().getResources().getDisplayMetrics());
+
+		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString("lang", lang_ab);
+		editor.commit();
+
+		int bgId = 0;
+		ImageView img = (ImageView) findViewById(viewId);
+		switch (viewId) {
+		case R.id.english:
+			img = (ImageView) findViewById(R.id.english);
+			if (img != null) {
+				img.setImageResource(R.drawable.arlanguage);
+				img.setId(R.id.arabic);
+			}
+			bgId = R.drawable.phonebg;
+			break;
+		case R.id.arabic:
+			img = (ImageView) findViewById(R.id.arabic);
+			img.setImageResource(R.drawable.enlanguage);
+			img.setId(R.id.english);
+			bgId = R.drawable.phonebgar;
+			break;
+		}
+		int sdk = android.os.Build.VERSION.SDK_INT;
+		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+			username.setBackgroundDrawable(getResources().getDrawable(bgId));
+
+			// password.setBackgroundDrawable(getResources().getDrawable(R.drawable.passwordbgar));
+		} else {
+			username.setBackground(getResources().getDrawable(bgId));
+			// password.setBackground(getResources().getDrawable(R.drawable.passwordbgar));
+		}
+		username.setText(null);
+		username.setHint(getString(R.string.username));
+		password.setHint(getString(R.string.password));
+		forgotpassword.setText(getString(R.string.forgotpass));
+		keeploggedin.setText(getString(R.string.keeploggedin));
+		loginTxt.setText(getString(R.string.login));
+		submit.setText(getString(R.string.enter));
 	}
 
 	public void login(View view) {
@@ -102,7 +185,7 @@ public class LoginActivity extends Activity {
 		}
 	}
 
-	public void changeLang(View view) {
+	public void changeLangs(View view) {
 		String lang_ab = "en";
 
 		switch (view.getId()) {

@@ -11,6 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private static ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
+	int areaId= 0;
 
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -73,6 +75,7 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.profile));
 		navMenuTitles.add(getString(R.string.pending_orders));
 		navMenuTitles.add(getString(R.string.closed_orders));
+		navMenuTitles.add(getString(R.string.home));
 
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
@@ -158,7 +161,6 @@ public class MainActivity extends Activity {
 		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),
 				R.drawable.ic_communities));
-
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
@@ -183,7 +185,7 @@ public class MainActivity extends Activity {
 		Bundle args = new Bundle();
 		switch (position) {
 		case 0:
-			fragment = new OrdersFragment();
+			fragment = new HomeFragment();
 			fragments.add(fragment);
 			break;
 		case 1:
@@ -208,6 +210,12 @@ public class MainActivity extends Activity {
 			fragment.setArguments(args);
 			fragments.add(fragment);
 			break;
+		case 5:
+			fragment = new HomeFragment();
+			args.putString("orders", "closed");
+			fragment.setArguments(args);
+			fragments.add(fragment);
+			break;
 
 		default:
 			fragment = new ProfileFragment();
@@ -217,6 +225,7 @@ public class MainActivity extends Activity {
 		Log.e("ray", "currentf" + position);
 
 		if (fragment != null) {
+			
 			fragmentManager.beginTransaction()
 					.replace(R.id.frame_container, (Fragment) fragment)
 					.commit();
@@ -342,9 +351,42 @@ public class MainActivity extends Activity {
 
 			}
 
-		} else {
-			if (m.equals("setBusinesses") && countries == null)
-				getCountries();
+		} else if (m.equals("setBusinesses")){			
+			for (Fragment fragment : fragments) {
+				if (fragment.getClass().equals(OrdersFragment.class)) {
+					Method returnFunction;
+					Log.d("ray", "Here41: " + m);
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+		} else if(m.contains("Home"))
+		{
+			for (Fragment fragment : fragments) {
+				if (fragment.getClass().equals(HomeFragment.class)) {
+					Method returnFunction;
+					Log.d("ray", "Here51: " + m);
+					try {
+						returnFunction = fragment.getClass().getDeclaredMethod(
+								m, s.getClass(), s.getClass());
+						if (returnFunction != null)
+							returnFunction.invoke(fragment, s, error);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}else {
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;

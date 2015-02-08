@@ -34,22 +34,45 @@ public class HomeFragment extends ParentFragment implements
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	String previous;
 	ArrayList<Business> businesses = new ArrayList<Business>();
+	static int fragmentId;
+	static android.app.FragmentManager fragmentManager;
+	android.app.Fragment mContent;
+	int i, countryP, cityP, areaP;
+	int CityId;
+	boolean last = false;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		currentActivity = getActivity();
+		if (savedInstanceState != null) {
+			mContent = getFragmentManager().getFragment(savedInstanceState,
+					"mContent");
+		}
+		fragmentId = this.getId();
+		fragmentManager = getFragmentManager();
 		view = inflater.inflate(R.layout.my_main, container, false);
 		countrySpinner = (Spinner) view.findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) view.findViewById(R.id.citiesSP);
 		areaSpinner = (Spinner) view.findViewById(R.id.areasSP);
-
+		
+		Button buttonOne = (Button) view.findViewById(R.id.search);
+		buttonOne.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				search();
+			}
+		});
 		return view;
 	}
 
 	public void callMethod(String m, String s, String error) {
-		// if (m.equals("getAdd"))
-		// getAdd(s, error);
+		if (m.equals("setHomeCountries"))
+			setHomeCountries(s, error);
+		else if (m.equals("setHomeCities"))
+			setHomeCities(s, error);
+		else if (m.equals("setHomeAreas"))
+			setHomeAreas(s, error);
+
 	}
 
 	public void submitCart() {
@@ -62,33 +85,19 @@ public class HomeFragment extends ParentFragment implements
 		((deliveryclient) currentActivity.getApplication())
 				.setCurrentFragment(this);
 		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
-		getBusinesses();
-		//((MainActivity) currentActivity).getCountries();
-		//updateFooter();
-		
-
-	}
-	
-	public static void getBusinesses() {		
-		String serverURL = new myURL("businesses", null, 0, 30).getURL();
-		
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setBusinesses", true);
-		p.get();
-	}
-
-	public void setBusinesses(String s, String error) {
-		/*
-		businesses = new APIManager().getBusinesses(s);
-		mylist = new ArrayList<Item>();
-		for (Business myCountry : businesses) {
-			Item it = new Item();
-			it.setName(myCountry.toString());
-			it.setType("txt");
-			it.setId(myCountry.getId());
-			mylist.add(it);
+		countries = ((deliveryclient) currentActivity.getApplication()).getCountries();
+		if(countries==null)
+			getCountries();
+		else
+		{
+			for (int j = 0; j < countries.size(); j++) {
+				getCities(j);
+			}
+			updateList("country");
 		}
-		updateList();
-		*/
+			
+		// ((MainActivity) currentActivity).getCountries();
+		// updateFooter();
 	}
 
 	@Override
@@ -103,10 +112,20 @@ public class HomeFragment extends ParentFragment implements
 
 		Object sp1 = arg0.getSelectedItem();
 		if (sp1 instanceof Country) {
-			getCities(position);
-		} else if (sp1 instanceof City) {
-			getAreas(position);
+			getCachedCities(position);
+		} else if (sp1 instanceof City) {			
+			getCachedAreas(position);
 		}
+	}
+
+	public void getCachedCities(int CountryId) {
+		cities = countries.get(CountryId).getCities();
+		updateList("city");
+	}
+
+	public void getCachedAreas(int CityId) {
+		areas = cities.get(CityId).getAreas();
+		updateList("area");
 	}
 
 	@Override
@@ -115,19 +134,59 @@ public class HomeFragment extends ParentFragment implements
 	}
 
 	public void getCountries() {
-		countries = ((deliveryclient) currentActivity.getApplication())
-				.getCountries();
+		String serverURL = new myURL("countries", null, 0, 30).getURL();
+		RZHelper p = new RZHelper(serverURL, currentActivity,
+				"setHomeCountries", true, false);
+		p.get();
+	}
+
+	public void setHomeCountries(String s, String error) {
+		countries = new APIManager().getCountries(s);
+		for (int j = 0; j < countries.size(); j++) {
+			getCities(j);
+		}
 		updateList("country");
 	}
 
-	public void getCities(int CountryId) {
-		cities = countries.get(CountryId).getCities();
-		updateList("city");
+	public void getCities(int position) {
+		countryP = position;
+		int countryId = countries.get(position).getId();
+		String serverURL = new myURL("cities", "countries", countryId, 30)
+				.getURL();
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setHomeCities",
+				false);
+		p.get();
 	}
 
-	public void getAreas(int CityId) {
-		areas = cities.get(CityId).getAreas();
-		updateList("area");
+	public void setHomeCities(String s, String error) {
+		cities = new APIManager().getCitiesByCountry(s);
+		for (int j = 0; j < cities.size(); j++) {
+			if (j == cities.size() - 1)
+				last = true;
+			getAreas(j);
+		}
+	}
+
+	public void getAreas(int position) {
+		cityP = position;
+		CityId = cities.get(position).getId();
+		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setHomeAreas",
+				false, last);
+		p.get();
+	}
+
+	public void setHomeAreas(String s, String error) {
+		areas = new APIManager().getAreasByCity(s);
+
+		cities.get(cityP).setAreas(areas);
+		countries.get(countryP).setCities(cities);
+		if (last) {
+			((deliveryclient) currentActivity.getApplication())
+					.setCountries(countries);
+			Log.d("ray", "setting countries: " + CityId + "->" + areas.size());
+
+		}
 	}
 
 	public void updateList(String type) {
@@ -136,20 +195,21 @@ public class HomeFragment extends ParentFragment implements
 		areaSpinner = (Spinner) view.findViewById(R.id.areasSP);
 		if (type.equals("country")) {
 			ArrayAdapter<Country> counrytAdapter = new ArrayAdapter<Country>(
-					currentActivity, android.R.layout.simple_spinner_item, countries);
+					currentActivity, android.R.layout.simple_spinner_item,
+					countries);
 			counrytAdapter
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			counrytAdapter.notifyDataSetChanged();
 			areaSpinner.setAdapter(null);
-			Log.d("ray","countr: "+countries.size());
-			if(countrySpinner!=null)
-			{
-			//countrySpinner.setAdapter(counrytAdapter);
-			//countrySpinner.setOnItemSelectedListener(this);
-				}
+			Log.d("ray", "countr: " + countries.size());
+			if (countrySpinner != null) {
+				countrySpinner.setAdapter(counrytAdapter);
+				countrySpinner.setOnItemSelectedListener(this);
+			}
 		} else if (type.equals("city")) {
-			ArrayAdapter<City> cityAdapter = new ArrayAdapter<City>(currentActivity,
-					android.R.layout.simple_spinner_item, cities);
+			ArrayAdapter<City> cityAdapter = new ArrayAdapter<City>(
+					currentActivity, android.R.layout.simple_spinner_item,
+					cities);
 			cityAdapter
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			cityAdapter.notifyDataSetChanged();
@@ -157,8 +217,9 @@ public class HomeFragment extends ParentFragment implements
 			citySpinner.setAdapter(cityAdapter);
 			citySpinner.setOnItemSelectedListener(this);
 		} else if (type.equals("area")) {
-			ArrayAdapter<Area> areaAdapter = new ArrayAdapter<Area>(currentActivity,
-					android.R.layout.simple_spinner_item, areas);
+			ArrayAdapter<Area> areaAdapter = new ArrayAdapter<Area>(
+					currentActivity, android.R.layout.simple_spinner_item,
+					areas);
 			areaAdapter
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			areaAdapter.notifyDataSetChanged();
@@ -168,19 +229,16 @@ public class HomeFragment extends ParentFragment implements
 
 	}
 
-	public static void updateFooter() {
-		Cart cart = ((deliveryclient) currentActivity.getApplication())
-				.getMyCart();
-		TextView price = (TextView) view.findViewById(R.id.carttotalprice);
-		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
-		int totalPrice = 0;
+	public void search() {
+		OrdersFragment fh = new OrdersFragment();
+		android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
+		MainActivity.fragments.add(fh);
+		ft.replace(fragmentId, fh);	
+		Bundle arguments = new Bundle();
+		Log.d("ray","sending myarea: "+((Area)areaSpinner.getSelectedItem()).getId());
+        arguments.putInt("areaId", ((Area)areaSpinner.getSelectedItem()).getId());
 
-		for (CartItem myP : cart.getCartItems()) {
-			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
-		}
-		price.setText("" + totalPrice
-				+ currentActivity.getString(R.string.lira));
-		quantity.setText("" + cart.getAllCount());
-		MainActivity.updateCounter(cart.getAllCount());
+		fh.setArguments(arguments);
+		ft.commit();
 	}
 }

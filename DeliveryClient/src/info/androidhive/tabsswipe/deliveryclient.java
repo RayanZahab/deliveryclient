@@ -266,9 +266,10 @@ public class deliveryclient extends Application {
 	public void setDepth(int depth) {
 		Log.d("ray","dep: "+depth);
 		this.depth = depth;
+		
 	}
 	public int getDepthVal() {
-		Log.d("ray","depV: "+depthVal);
+		Log.d("ray","depV: "+depthVal);		
 		return depthVal;
 	}
 	public void setDepthVal(int depthVal) {

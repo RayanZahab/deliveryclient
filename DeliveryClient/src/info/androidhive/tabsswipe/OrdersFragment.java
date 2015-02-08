@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,15 +20,12 @@ public class OrdersFragment extends ParentFragment {
 
 	static int depth = 0;
 	private static List<String> sequence = new ArrayList<String>();
-	static ArrayList<Country> countries = new ArrayList<Country>();
-	ArrayList<City> cities = new ArrayList<City>();
-	ArrayList<Area> areas = new ArrayList<Area>();
 	ArrayList<Business> businesses = new ArrayList<Business>();
 	ArrayList<Shop> shops = new ArrayList<Shop>();
 	ArrayList<Branch> branches = new ArrayList<Branch>();
 	ArrayList<Category> categories = new ArrayList<Category>();
 	ArrayList<Product> products = new ArrayList<Product>();
-	static int countryId = 0, cityId = 0, areaId = 0, shopId = 0, branchId = 0,
+	static int areaId = 0, shopId = 0, branchId = 0,
 			categoryId = 0, productId = 0;
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	static Activity currentActivity;
@@ -41,16 +39,21 @@ public class OrdersFragment extends ParentFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		sequence.add("business");
-		sequence.add("country");
-		sequence.add("city");
-		sequence.add("area");
+		sequence.add("business");		
 		sequence.add("shops");
 		sequence.add("branches");
 		sequence.add("categories");
 		sequence.add("products");
 		sequence.add("info");
 		currentActivity = getActivity();
+		 
+		if(getArguments()!=null)
+		{
+			areaId = getArguments().getInt("areaId");
+			mylist = null;
+			depth=0;
+		}
+		Log.d("ray","getting myarea: "+areaId);
 		if (savedInstanceState != null) {
 			mContent = getFragmentManager().getFragment(savedInstanceState,
 					"mContent");
@@ -61,13 +64,13 @@ public class OrdersFragment extends ParentFragment {
 		fragmentManager = getFragmentManager();
 
 		updateFooter();
-		Button buttonOne = (Button) view.findViewById(R.id.back);
+		ImageView buttonOne = (ImageView) view.findViewById(R.id.back);
 		buttonOne.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				goUp();
 			}
 		});
-		Button submit = (Button) view.findViewById(R.id.submit);
+		ImageView submit = (ImageView) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				move();
@@ -95,10 +98,7 @@ public class OrdersFragment extends ParentFragment {
 	public void onResume() {
 		super.onResume();
 		if (sequence.size() < 1) {
-			sequence.add("business");
-			sequence.add("country");
-			sequence.add("city");
-			sequence.add("area");
+			sequence.add("business");			
 			sequence.add("shops");
 			sequence.add("branches");
 			sequence.add("categories");
@@ -131,23 +131,14 @@ public class OrdersFragment extends ParentFragment {
 				break;
 			case 1:
 				id = 0;
-				break;
+				break;			
 			case 2:
-				id = countryId;
-				break;
-			case 3:
-				id = cityId;
-				break;
-			case 4:
-				id = areaId;
-				break;
-			case 5:
 				id = shopId;
 				break;
-			case 6:
+			case 3:
 				id = branchId;
 				break;
-			case 7:
+			case 4:
 				id = categoryId;
 				break;
 			}
@@ -165,32 +156,17 @@ public class OrdersFragment extends ParentFragment {
 				.indexOf(type));
 		((deliveryclient) currentActivity.getApplication()).setDepthVal(id);
 		Log.d("ray","getting "+type);
-		if (type.equals("business")) {
-			countryId = 0;
-			cityId = 0;
-			areaId = 0;
+		if (type.equals("business")) {			
 			shopId = 0;
 			branchId = 0;
 			categoryId = 0;
 			productId = 0;
 			depth = 0;
+			
 			getBusinesses();
-		} else if (type.equals("country")) {
-			countryId = cityId = areaId = shopId = branchId = categoryId = 0;
-			((deliveryclient) currentActivity.getApplication()).setBusinessId(id);
-			getCountries();
-		} else if (type.equals("city")) {
-			cityId = areaId = shopId = branchId = categoryId = 0;
-			countryId = id;
-			getCities(id);
-		} else if (type.equals("area")) {
-			areaId = shopId = branchId = categoryId = 0;
-			cityId = id;
-			getAreas(id);
-		} else if (type.equals("shops")) {
+		}  else if (type.equals("shops")) {
 			shopId = branchId = categoryId = 0;
-			areaId = id;
-			getShops(id);
+			getShops(areaId);
 		} else if (type.equals("branches")) {
 			branchId = categoryId = 0;
 			shopId = id;
@@ -220,48 +196,10 @@ public class OrdersFragment extends ParentFragment {
 		Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
 	}
 
-	public void getCountries() {
-		countries = ((deliveryclient) currentActivity.getApplication())
-				.getCountries();
-		mylist = new ArrayList<Item>();
-		for (Country myCountry : countries) {
-			Item it = new Item();
-			it.setName(myCountry.toString());
-			it.setType("txt");
-			it.setId(myCountry.getId());
-			mylist.add(it);
-		}
-		updateList();
-	}
-
-	public void getCities(int CountryId) {
-		cities = countries.get(CountryId).getCities();
-		
-		mylist = new ArrayList<Item>();
-		for (City myCity : cities) {
-			Item it = new Item();
-			it.setName(myCity.toString());
-			it.setType("txt");
-			it.setId(myCity.getId());
-			mylist.add(it);
-		}
-		updateList();
-	}
-
-	public void getAreas(int CityId) {
-		areas = cities.get(CityId).getAreas();
-		mylist = new ArrayList<Item>();
-		for (Area myArea : areas) {
-			Item it = new Item();
-			it.setName(myArea.toString());
-			it.setType("txt");
-			it.setId(myArea.getId());
-			mylist.add(it);
-		}
-		updateList();
-	}
-
+	
 	public void getShops(int areaId) {
+		Log.d("ray","getting shop myarea: "+areaId);
+
 		String serverURL = new myURL("shops?business_id="+((deliveryclient) currentActivity.getApplication()).getBusinessId()
 				, "areas", areaId, 0).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setShops", true,true);
@@ -269,6 +207,8 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void setShops(String s, String error) {
+		Log.d("ray","setting shops "+areaId);
+
 		shops = new APIManager().getShopsByArea(s);
 		mylist = new ArrayList<Item>();
 		for (Shop myShop : shops) {
@@ -343,30 +283,25 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public static void getBusinesses() {
-		depth = 0;
-		countryId = 0;
-		cityId = 0;
-		areaId = 0;
+		depth = 0;		
 		shopId = 0;
 		branchId = 0;
 		categoryId = 0;
 		productId = 0;
 		String serverURL = new myURL("businesses", null, 0, 30).getURL();
-		boolean onlyBusiness = true;
-		if(((deliveryclient) currentActivity.getApplication()).getCountries() == null ) 
-			onlyBusiness = false;
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setBusinesses", true,onlyBusiness);
+		
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setBusinesses", true);
 		p.get();
 	}
 
 	public void setBusinesses(String s, String error) {
 		businesses = new APIManager().getBusinesses(s);
 		mylist = new ArrayList<Item>();
-		for (Business myCountry : businesses) {
+		for (Business myBusin : businesses) {
 			Item it = new Item();
-			it.setName(myCountry.toString());
+			it.setName(myBusin.toString());
 			it.setType("txt");
-			it.setId(myCountry.getId());
+			it.setId(myBusin.getId());
 			mylist.add(it);
 		}
 		updateList();
@@ -389,14 +324,14 @@ public class OrdersFragment extends ParentFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (!mylist.get(0).getType().equals("empty")) {
-					depth++;
 					int itemId = mylist.get(position).getId();
-					if (sequence.get(depth).equals("country")
-							|| sequence.get(depth).equals("city")
-							|| sequence.get(depth).equals("area")) {
-						getList(sequence.get(depth), position);
-					} else
-						getList(sequence.get(depth), itemId);
+					if(depth==0)
+					{
+						((deliveryclient) currentActivity.getApplication()).setBusinessId(itemId);
+					}
+					depth++;
+					Log.d("ray","setting: "+depth+ " - "+itemId);
+					getList(sequence.get(depth), itemId);
 					listView.setAdapter(new MyCustomAdapter(currentActivity,
 							R.layout.row_txtimg, mylist));
 				}
@@ -414,7 +349,7 @@ public class OrdersFragment extends ParentFragment {
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
-		price.setText(totalPrice + currentActivity.getString(R.string.lira));
+		//price.setText(totalPrice + currentActivity.getString(R.string.lira));
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

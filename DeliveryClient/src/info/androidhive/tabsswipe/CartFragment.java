@@ -25,6 +25,7 @@ public class CartFragment extends ParentFragment {
 	static View myview;
 	int userId = 0;
 	ArrayList<Address> Addresses ;
+	TextView name,phone,address;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +39,9 @@ public class CartFragment extends ParentFragment {
 				submitCart();
 			}
 		});		
+		name = (TextView) view.findViewById(R.id.customerName);
+		address = (TextView) view.findViewById(R.id.customerAdd);
+		phone = (TextView) view.findViewById(R.id.customerphone);
 		return view;
 	}
 	
@@ -67,6 +71,9 @@ public class CartFragment extends ParentFragment {
 						addressId = Addresses.get(i).getId();
 						Log.d("ray","add found ");
 						editor.putInt("addressId", Addresses.get(i).getId());
+						ArrayList<Country> countries = ((deliveryclient) currentActivity.getApplication())
+								.getCountries();
+						editor.putString("addressName", Addresses.get(i).toString(countries));
 						editor.commit();
 						break;
 					}
@@ -102,6 +109,16 @@ public class CartFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((deliveryclient) currentActivity.getApplication()).setCurrentFragment(this);
 		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
+		SharedPreferences settings1 = currentActivity.getSharedPreferences(
+				"PREFS_NAME", 0);
+		String nameVal = settings1.getString("name", "");
+		String phoneVal = settings1.getString("phone", "");
+		String addVal = settings1.getString("addressName", "");
+		name.setText(nameVal);
+		phone.setText(phoneVal);
+		address.setText(addVal);
+		
+		
 		getProducts();
 		updateFooter();
 	}

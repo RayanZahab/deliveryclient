@@ -34,13 +34,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        <activity
-            android:name="info.androidhive.tabsswipe.SelectLanguageActivity"
-            android:icon="@drawable/moto"
-            android:label="@string/buttonlogin"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+       
         <activity
             android:name="info.androidhive.tabsswipe.SplashScreenActivity"
             android:icon="@drawable/moto"

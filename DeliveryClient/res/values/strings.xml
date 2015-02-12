@@ -147,6 +147,7 @@
     <string name="canceled_orders">Canceled Orders</string>
     <string name="closed_orders">Closed Orders</string>
     <string name="branches">Branches</string>
+    <string name="shop">Shop</string>
     <string name="users">Users</string>
     <string name="empty_list">No items</string>
     <string name="items">Items</string>

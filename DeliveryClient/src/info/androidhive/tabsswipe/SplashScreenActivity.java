@@ -35,20 +35,17 @@ public class SplashScreenActivity extends Activity {
 						"PREFS_NAME", 0);
 				String lang = settings1.getString("lang", null);
 				Intent i;
-				if (lang == null) {
+				
+				boolean isChecked = settings1
+						.getBoolean("isChecked", false);
+				if (isChecked) {
 					i = new Intent(SplashScreenActivity.this,
-							SelectLanguageActivity.class);
+							MainActivity.class);
 				} else {
-					boolean isChecked = settings1
-							.getBoolean("isChecked", false);
-					if (isChecked) {
-						i = new Intent(SplashScreenActivity.this,
-								MainActivity.class);
-					} else {
-						i = new Intent(SplashScreenActivity.this,
-								LoginActivity.class);
-					}
+					i = new Intent(SplashScreenActivity.this,
+							LoginActivity.class);
 				}
+				
 				startActivity(i);
 				finish();
 			}

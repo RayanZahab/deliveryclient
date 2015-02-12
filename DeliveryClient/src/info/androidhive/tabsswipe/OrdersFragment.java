@@ -214,7 +214,7 @@ public class OrdersFragment extends ParentFragment {
 		for (Shop myShop : shops) {
 			Item it = new Item();
 			it.setName(myShop.toString());
-			it.setType("txt");
+			it.setType("shop");
 			it.setId(myShop.getId());
 			mylist.add(it);
 		}
@@ -233,7 +233,7 @@ public class OrdersFragment extends ParentFragment {
 		for (Branch myBranch : branches) {
 			Item it = new Item();
 			it.setName(myBranch.toString());
-			it.setType("txt");
+			it.setType("branch");
 			it.setId(myBranch.getId());
 			mylist.add(it);
 		}
@@ -243,7 +243,7 @@ public class OrdersFragment extends ParentFragment {
 	public void getCategories(int branchId) {
 		String serverURL = new myURL("categories", "branches", branchId, 30)
 				.getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true,true);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setCategories", true,true);
 		p.get();
 	}
 
@@ -253,7 +253,7 @@ public class OrdersFragment extends ParentFragment {
 		for (Category myCat : categories) {
 			Item it = new Item();
 			it.setName(myCat.toString());
-			it.setType("txt");
+			it.setType("txtImg");
 			it.setId(myCat.getId());
 			mylist.add(it);
 		}

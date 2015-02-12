@@ -208,6 +208,15 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 		}
 	}
 
+	class shopHolder extends ViewHolder {
+		TextView name;
+
+		public shopHolder(View convertView, Item item) {
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+		}
+	}
+
 	class radioHolder extends ViewHolder {
 		TextView name;
 		Button makeDefault;
@@ -248,7 +257,20 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 			ImageView picture = (ImageView) convertView
 					.findViewById(R.id.image);
 			picture.setImageResource(item.getImg());
-			name.setText(item.getName());
+			name.setText(
+					item.getName());
+		}
+	}
+
+	class branchHolder extends ViewHolder {
+		TextView name;
+		ImageView picture;
+
+		public branchHolder(View convertView, Item item) {
+			TextView name = (TextView) convertView.findViewById(R.id.name);
+			
+			name.setText(
+					item.getName());
 		}
 	}
 
@@ -267,11 +289,23 @@ class MyCustomAdapter extends ArrayAdapter<Item> {
 				layout = R.layout.row_txt;
 				convertView = vi.inflate(layout, null);
 				holder = new txtHolder(convertView, currentItem);
-			} else if (this.type.equals("txtImg")) {
+			} else if (this.type.equals("txtImg") ) {
 
 				layout = R.layout.row_txtimg;
 				convertView = vi.inflate(layout, null);
 				holder = new txImgHolder(convertView, currentItem);
+
+			} else if (this.type.equals("shop") ) {
+
+				layout = R.layout.row_shop;
+				convertView = vi.inflate(layout, null);
+				holder = new txImgHolder(convertView, currentItem);
+
+			}  else if (this.type.equals("branch") ) {
+
+				layout = R.layout.row_branch;
+				convertView = vi.inflate(layout, null);
+				holder = new branchHolder(convertView, currentItem);
 
 			} else if (this.type.equals("product")) {
 				layout = R.layout.row_product;

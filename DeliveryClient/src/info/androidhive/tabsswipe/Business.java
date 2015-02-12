@@ -26,6 +26,6 @@ public class Business {
 	}
 
 	public String toString() {
-		return id + " - " + name;
+		return name;
 	}
 }

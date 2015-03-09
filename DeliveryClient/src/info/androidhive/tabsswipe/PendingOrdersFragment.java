@@ -106,6 +106,7 @@ public class PendingOrdersFragment extends ParentFragment {
 			i.setId(0);
 			i.setName(currentActivity.getString(R.string.empty_list));
 			i.setType("empty");
+			i.setTitle(currentActivity.getString(R.string.empty_list));
 			orderItems.add(i);
 			Log.d("ray", "empty");
 			empty = true;

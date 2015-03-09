@@ -55,7 +55,7 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 			else
 			{
 				Log.d("ray","empty adapt");
-				convertView = vi.inflate(R.layout.categories_list, null);
+				convertView = vi.inflate(R.layout.row_txt, null);
 				holder.address = (TextView) convertView.findViewById(R.id.name);
 				holder.address.setText(orderList.get(0).getTitle());
 			}

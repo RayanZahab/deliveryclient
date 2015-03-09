@@ -335,6 +335,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		paramsVal.put("phone", "" + p.getPhone());
 		paramsVal.put("mobile", "" + p.getPhone());
 		paramsVal.put("encrypted_password", "" + p.getPassword());
+		paramsVal.put("gender", "Male");
 
 		Iterator iterator = paramsVal.entrySet().iterator();
 		while (iterator.hasNext()) {

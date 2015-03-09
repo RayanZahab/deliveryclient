@@ -82,7 +82,13 @@ public class MainActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		countries = ((deliveryclient) this.getApplication()).getCountries();
-
+		Bundle extras = getIntent().getExtras();
+		int fragmentIndex = 0;
+		if(extras!=null)
+		{
+			fragmentIndex = extras.getInt("fragmentIndex");
+			displayView(fragmentIndex);
+		}
 		// toggler
 		toggler();
 
@@ -319,7 +325,7 @@ public class MainActivity extends Activity {
 			for (Fragment fragment : fragments) {
 				Log.d("ray", "Here30: " + fragment.getClass() + "=="
 						+ CartFragment.class);
-				if (fragment.getClass().equals(CartFragment.class)) {
+				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
 					Log.d("ray", "Here31: " + m);
 					try {

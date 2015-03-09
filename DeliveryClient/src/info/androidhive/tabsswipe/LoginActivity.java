@@ -38,7 +38,8 @@ public class LoginActivity extends Activity {
 	private TextView forgotpassword, loginTxt;
 	private CheckBox keeploggedin;
 	private Button submit;
-
+	String lang ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,14 +52,15 @@ public class LoginActivity extends Activity {
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);
 
-		String lang = settings1.getString("lang", null);
+		lang = settings1.getString("lang", null);
 		if (lang != null) {
 			if (lang.equals("en")) {
 				changeLangById(R.id.english);
 			} else {
 				changeLangById(R.id.arabic);
 			}
-		}
+		}else
+			lang = "en";
 		i++;
 
 		if (isChecked) {
@@ -168,6 +170,8 @@ public class LoginActivity extends Activity {
 			SharedPreferences.Editor editor = settings.edit();
 
 			editor.putInt("id", user.getId());
+			editor.putString("lang", lang);
+			editor.commit();
 
 			editor.putBoolean("isChecked", keeplog.isChecked());
 			editor.putString("token", user.getToken());

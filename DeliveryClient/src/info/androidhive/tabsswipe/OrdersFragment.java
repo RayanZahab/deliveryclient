@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,8 @@ public class OrdersFragment extends ParentFragment {
 	android.app.Fragment mContent;
 	boolean passedByOnCreate = false;
 	int call =-1;
+	int userId = 0;
+	ArrayList<Address> Addresses ;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +50,7 @@ public class OrdersFragment extends ParentFragment {
 		sequence.add("products");
 		sequence.add("info");
 		currentActivity = getActivity();
-		 
+		userId = ((deliveryclient) currentActivity.getApplication()).getUserId();
 		if(getArguments()!=null)
 		{
 			areaId = getArguments().getInt("areaId");
@@ -73,7 +77,7 @@ public class OrdersFragment extends ParentFragment {
 		ImageView submit = (ImageView) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				move();
+				getAddresses();
 			}
 		});
 		mylist = null;
@@ -152,9 +156,8 @@ public class OrdersFragment extends ParentFragment {
 		call = ((deliveryclient) currentActivity.getApplication())
 				.getDepth() * ((deliveryclient) currentActivity.getApplication())
 				.getDepthVal();
-		((deliveryclient) currentActivity.getApplication()).setDepth(sequence
-				.indexOf(type));
-		((deliveryclient) currentActivity.getApplication()).setDepthVal(id);
+		((deliveryclient) currentActivity.getApplication()).setDepths(sequence
+				.indexOf(type),id);
 		Log.d("ray","getting "+type);
 		if (type.equals("business")) {			
 			shopId = 0;
@@ -190,6 +193,61 @@ public class OrdersFragment extends ParentFragment {
 		MainActivity.fragments.add(fh);
 		ft.replace(fragmentId, fh);
 		ft.commit();
+	}
+	public void getAddresses() {
+		Log.d("ray","cart getting add");
+		
+		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
+				
+		RZHelper p = new RZHelper(serverURL, currentActivity, "getAdd", false,true);
+		p.get();
+	}
+
+	public void getAdd(String s, String error) {
+		if (error == null) {
+			Log.d("ray","error add not null");
+			Addresses = new APIManager().getAddress(s);
+			Intent intent;
+			int addressId = 0;
+			int addCount = Addresses.size();
+			if(addCount>0)
+			{
+				SharedPreferences settings = currentActivity.getSharedPreferences("PREFS_NAME", 0);
+				SharedPreferences.Editor editor = settings.edit();
+				
+				if(addCount==1)
+					Addresses.get(0).setDefault(true);
+				Address currentAddress = null;
+				for(int i =0;i<addCount;i++) 
+				{
+					currentAddress = Addresses.get(i);
+					Log.d("ray","add: "+i);
+					if (currentAddress.isDefault() ) {
+						addressId = currentAddress.getId();
+						Log.d("ray","add found ");
+						editor.putInt("addressId", currentAddress.getId());
+						ArrayList<Country> countries = ((deliveryclient) currentActivity.getApplication())
+								.getCountries();
+						editor.putString("addressName", currentAddress.toString(countries));
+						editor.commit();
+						break;
+					}
+				}
+				//intent = new Intent(this.getActivity(), PreviewActivity.class);
+				move();
+			}
+			else
+			{
+				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address",
+						Toast.LENGTH_SHORT).show();
+				intent = new Intent(this.getActivity(), AddAddressActivity.class);
+				intent.putExtra("previous", "preview");
+				startActivity(intent);
+			}
+			//startActivity(intent);
+		}else
+			Log.d("ray","error:"+error);
+			
 	}
 
 	private void showToast(String msg) {

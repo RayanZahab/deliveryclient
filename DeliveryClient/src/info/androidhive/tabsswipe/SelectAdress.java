@@ -7,9 +7,12 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
@@ -34,17 +37,14 @@ public class SelectAdress extends ListActivity {
 		listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setTextFilterEnabled(true);
-		myId = ((deliveryclient) this.getApplication()).getUserId();
-		Bundle extras = getIntent().getExtras();
-		String previous = extras.getString("previous");
-		Log.d("ray", "prev: " + previous);
+		myId = ((deliveryclient) this.getApplication()).getUserId();		
 		getAddresses(myId);
 		current = this;
 	}
 
 	public void getAddresses(int userId) {
 		String serverURL = new myURL("addresses", "customers",
-				((deliveryclient) this.getApplication()).getUserId(), 0)
+				((deliveryclient) this.getApplication()).getUserId(), 30)
 				.getURL();
 		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
 		p.get();
@@ -80,7 +80,8 @@ public class SelectAdress extends ListActivity {
 				setListAdapter(new ArrayAdapter<String>(this,
 						R.layout.row_radiobutton, addOut));
 				listView.setItemChecked(defaultPosition, true);
-
+				
+				
 				listView.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
@@ -120,19 +121,15 @@ public class SelectAdress extends ListActivity {
 
 	@Override
 	public void onBackPressed() {
-		Bundle extras = getIntent().getExtras();
-		Log.d("ray", "In back: ");
-		if (extras != null) {
-			String previous = extras.getString("previous");
-			Log.d("ray", "prev: " + previous);
-			if (previous.equals("preview")) {
-				Intent i = new Intent(this, PreviewActivity.class);
-				startActivity(i);
-			} else
-				super.onBackPressed();
-
-		} else
-			super.onBackPressed();
+		Intent i = new Intent(this, MainActivity.class);
+		i.putExtra("fragmentIndex", 2);
+		startActivity(i);
+	}
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.clearHeader();
+		menu.add(0, v.getId(), 0, "Delete");
 	}
 
 	@Override

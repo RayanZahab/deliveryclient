@@ -156,6 +156,10 @@ public class ProductInfoActivity extends Activity {
 					currentProduct.getUnit()));
 		}
 	}
+	public void back(View v)
+	{
+		onBackPressed();
+	}
 
 	public void getUnits(boolean first) {
 		// getUnits

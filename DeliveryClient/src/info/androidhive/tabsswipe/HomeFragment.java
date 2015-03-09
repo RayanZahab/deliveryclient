@@ -32,7 +32,6 @@ public class HomeFragment extends ParentFragment implements
 	ArrayList<Area> areas = new ArrayList<Area>();
 	static Activity currentActivity;
 	static ArrayList<Item> mylist = new ArrayList<Item>();
-	String previous;
 	ArrayList<Business> businesses = new ArrayList<Business>();
 	static int fragmentId;
 	static android.app.FragmentManager fragmentManager;
@@ -62,6 +61,7 @@ public class HomeFragment extends ParentFragment implements
 				search();
 			}
 		});
+		((deliveryclient) currentActivity.getApplication()).setDepths(0,0);
 		return view;
 	}
 

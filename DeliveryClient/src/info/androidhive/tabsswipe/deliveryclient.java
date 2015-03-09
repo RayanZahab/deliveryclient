@@ -263,16 +263,21 @@ public class deliveryclient extends Application {
 	public int getDepth() {
 		return depth;
 	}
-	public void setDepth(int depth) {
+	private void setDepth(int depth) {
 		Log.d("ray","dep: "+depth);
 		this.depth = depth;
 		
+	}
+	public void setDepths(int depth,int depthval)
+	{
+		this.setDepth(depth);
+		this.setDepthVal(depthval);
 	}
 	public int getDepthVal() {
 		Log.d("ray","depV: "+depthVal);		
 		return depthVal;
 	}
-	public void setDepthVal(int depthVal) {
+	private void setDepthVal(int depthVal) {
 		this.depthVal = depthVal;
 	}
 	public int getBusinessId() {

@@ -150,7 +150,7 @@
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="@dimen/vertical_margin"
             android:background="@color/yellow"
-            android:onClick="submit"
+            android:onClick="back"
             android:text="@string/back"
             android:textColor="@color/redbg"
             android:textSize="18sp" />

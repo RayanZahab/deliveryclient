@@ -26,6 +26,7 @@ public class CartFragment extends ParentFragment {
 	int userId = 0;
 	ArrayList<Address> Addresses ;
 	TextView name,phone,address;
+	int addressId = 0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,63 +46,14 @@ public class CartFragment extends ParentFragment {
 		return view;
 	}
 	
-	public void getAddresses() {
-		Log.d("ray","cart getting add");
-		
-		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
-				
-		RZHelper p = new RZHelper(serverURL, currentActivity, "getAdd", false,true);
-		p.get();
-	}
-
-	public void getAdd(String s, String error) {
-		if (error == null) {
-			Log.d("ray","error add not null");
-			Addresses = new APIManager().getAddress(s);
-			Intent intent;
-			int addressId = 0;
-			if(Addresses.size()>0)
-			{
-				SharedPreferences settings = currentActivity.getSharedPreferences("PREFS_NAME", 0);
-				SharedPreferences.Editor editor = settings.edit();
-				for(int i =0;i<Addresses.size();i++) 
-				{
-					Log.d("ray","add: "+i);
-					if (Addresses.get(i).isDefault()) {
-						addressId = Addresses.get(i).getId();
-						Log.d("ray","add found ");
-						editor.putInt("addressId", Addresses.get(i).getId());
-						ArrayList<Country> countries = ((deliveryclient) currentActivity.getApplication())
-								.getCountries();
-						editor.putString("addressName", Addresses.get(i).toString(countries));
-						editor.commit();
-						break;
-					}
-				}
-				intent = new Intent(this.getActivity(), PreviewActivity.class);
-			}
-			else
-			{
-				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address",
-						Toast.LENGTH_SHORT).show();
-				intent = new Intent(this.getActivity(), AddAddressActivity.class);
-				intent.putExtra("previous", "preview");
-			}
-			startActivity(intent);
-		}else
-			Log.d("ray","error:"+error);
-			
-	}
-	
-
 	
 	public void callMethod(String m, String s, String error) {
-		if (m.equals("getAdd"))
-			getAdd(s, error);
+		
 	}
 	public void submitCart()
 	{		
-		getAddresses();		
+		Intent intent = new Intent(this.getActivity(), PreviewActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -114,10 +66,10 @@ public class CartFragment extends ParentFragment {
 		String nameVal = settings1.getString("name", "");
 		String phoneVal = settings1.getString("phone", "");
 		String addVal = settings1.getString("addressName", "");
+		addressId = settings1.getInt("addressId", 0);
 		name.setText(nameVal);
 		phone.setText(phoneVal);
-		address.setText(addVal);
-		
+		address.setText(addVal);		
 		
 		getProducts();
 		updateFooter();

@@ -181,7 +181,7 @@ public class LoginActivity extends Activity {
 			editor.putString("phone", username.getText().toString());
 			editor.commit();
 			((deliveryclient) this.getApplication()).setGlobals();
-			Intent i = new Intent(this, MainActivity.class);
+			Intent i = new Intent(this, LoadingActivity.class);
 			startActivity(i);
 		} else {
 			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,

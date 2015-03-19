@@ -25,6 +25,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
+	
 	Fragment activeFragment;
 	// private ViewPager viewPager;
 	// private TabsPagerAdapter mAdapter;

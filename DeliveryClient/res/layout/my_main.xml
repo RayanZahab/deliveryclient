@@ -18,23 +18,23 @@
             <Spinner
                 android:id="@+id/countriesSP"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@+id/imageView1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/mymainspinner"
-                android:paddingRight="10dp" />
+                android:paddingRight="20dp" />
             
               <Spinner
                 android:id="@+id/citiesSP"
                 android:layout_width="match_parent"
                 android:layout_marginTop="18dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@+id/countriesSP"
                 android:background="@drawable/mymainspinner"
-	            android:paddingRight="10dp"
+	            android:paddingRight="20dp"
 	            android:layout_marginLeft="20dp"
 	            android:layout_marginRight="20dp"
                 android:layout_centerHorizontal="true" />
@@ -43,9 +43,9 @@
                 android:id="@+id/areasSP"
                 android:layout_width="match_parent"
                 android:layout_marginTop="18dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@drawable/mymainspinner"
-	            android:paddingRight="10dp"
+	            android:paddingRight="20dp"
 	            android:layout_marginLeft="20dp"
 	            android:layout_marginRight="20dp"
                 android:layout_below="@+id/citiesSP"

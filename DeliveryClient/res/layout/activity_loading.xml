@@ -20,6 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="Loading Data Please Wait"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceLarge" />
  
 </RelativeLayout>

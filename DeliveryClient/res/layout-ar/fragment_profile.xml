@@ -140,7 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right|center_vertical"
-                android:paddingRight="10dp"
+                android:paddingRight="20dp"
+                android:spinnerMode="dialog"
                 android:background="@drawable/myspinner"
                 android:layout_marginTop="22dp" />
 

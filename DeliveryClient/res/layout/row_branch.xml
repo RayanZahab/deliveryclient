@@ -18,7 +18,7 @@
         android:layout_weight="0.5"
         android:gravity="left"
         android:text="text"
-        android:textColor="@color/redbg"
+        android:textStyle="bold"
         android:textSize="18sp" />
 
     <ImageView

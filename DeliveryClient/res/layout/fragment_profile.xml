@@ -132,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/myspinner"
+                android:spinnerMode="dialog"
                 android:layout_marginTop="22dp" />
 
             <CheckBox

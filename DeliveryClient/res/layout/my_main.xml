@@ -25,7 +25,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/mymainspinner"
-                android:paddingRight="20dp" />
+                android:paddingRight="20dp"
+                android:spinnerMode="dialog" />
             
               <Spinner
                 android:id="@+id/citiesSP"
@@ -37,6 +38,7 @@
 	            android:paddingRight="20dp"
 	            android:layout_marginLeft="20dp"
 	            android:layout_marginRight="20dp"
+	            android:spinnerMode="dialog"
                 android:layout_centerHorizontal="true" />
               
                 <Spinner
@@ -46,6 +48,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/mymainspinner"
 	            android:paddingRight="20dp"
+	            android:spinnerMode="dialog"
 	            android:layout_marginLeft="20dp"
 	            android:layout_marginRight="20dp"
                 android:layout_below="@+id/citiesSP"

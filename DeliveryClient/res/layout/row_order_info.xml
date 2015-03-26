@@ -43,6 +43,7 @@
     	    android:singleLine="false"
     	    android:textColor="@color/redbg"
     	    android:text="shiiiiiiiiiiiii"
+    	    android:gravity="left"
     	    android:layout_gravity="left|center_vertical"/>
     	
     	<LinearLayout 

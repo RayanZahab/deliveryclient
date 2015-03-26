@@ -191,7 +191,7 @@
                 android:id="@+id/orderbuttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp" >
+                android:layout_marginTop="8dp" >
             </RelativeLayout>
 
             <TextView
@@ -211,8 +211,9 @@
                 android:background="@drawable/myspinner"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="8dp" />
+                android:paddingRight="20dp"
+                android:paddingLeft="8dp"
+                android:spinnerMode="dialog" />
 
             <TextView
                 android:id="@+id/notes"

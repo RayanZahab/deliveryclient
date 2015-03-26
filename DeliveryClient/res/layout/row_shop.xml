@@ -23,6 +23,7 @@
         android:layout_toRightOf="@+id/image"
         android:singleLine="true"
         android:text="@string/shop"
+        android:gravity="left"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/redbg"
         android:textStyle="bold" />

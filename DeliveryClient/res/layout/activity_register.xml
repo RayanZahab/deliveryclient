@@ -98,6 +98,8 @@
 		        android:background="@drawable/edittextbg"
 		        android:ems="10"
 		        android:hint="@string/phonenum"
+		        android:textColor="@color/redbg"
+                android:textColorHint="#bdbdbd"
 		        android:inputType="phone"
 		        android:paddingLeft="8dp"
 		        android:paddingRight="8dp" >
@@ -128,23 +130,6 @@
                 android:textSize="16sp" />
             
             <TextView
-		        android:id="@+id/choosegender"
-		        style="@style/mytextview"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="12dp"
-		        android:text="@string/gender"
-		        android:textColor="@color/redbg" />
-		
-		    <Spinner
-		        android:id="@+id/genderSP"
-		        android:layout_width="fill_parent"
-		        android:layout_height="30dp"
-		        android:background="@drawable/myspinner"
-		        android:paddingRight="22dp"
-		        android:spinnerMode="dialog" />
-            
-            <TextView
 	        android:id="@+id/confirmpass"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -166,6 +151,23 @@
                 android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
+            
+            <TextView
+		        android:id="@+id/choosegender"
+		        style="@style/mytextview"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:text="@string/gender"
+		        android:textColor="@color/redbg" />
+		
+		    <Spinner
+		        android:id="@+id/genderSP"
+		        android:layout_width="fill_parent"
+		        android:layout_height="30dp"
+		        android:background="@drawable/myspinner"
+		        android:paddingRight="22dp"
+		        android:spinnerMode="dialog" />
         </LinearLayout>
 
         <Button

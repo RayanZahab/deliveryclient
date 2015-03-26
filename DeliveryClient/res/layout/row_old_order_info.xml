@@ -20,6 +20,7 @@
     	    android:layout_weight="0.5"
     	    android:singleLine="false"
     	    android:layout_marginLeft="4dp"
+    	    android:gravity="left"
     	    android:textColor="@color/redbg"
     	    android:text="shiiiiiiiiiiiii"
     	    android:layout_gravity="left|center_vertical"/>

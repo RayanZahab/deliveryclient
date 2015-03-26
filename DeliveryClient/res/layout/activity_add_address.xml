@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner"
+            android:spinnerMode="dialog"
             android:paddingRight="10dp" />
 
         <Spinner
@@ -30,6 +31,7 @@
             android:layout_below="@+id/countriesSP"
             android:layout_marginTop="10dp"
             android:paddingRight="10dp"
+            android:spinnerMode="dialog"
             android:background="@drawable/myspinner" />
 
         <Spinner
@@ -39,6 +41,7 @@
             android:layout_alignLeft="@+id/citiesSP"
             android:layout_below="@+id/citiesSP"
             android:paddingRight="10dp"
+            android:spinnerMode="dialog"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner" />
 

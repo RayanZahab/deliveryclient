@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -118,12 +119,16 @@ public class OrderInfoActivity extends Activity {
 		new Helper().getListViewSize(listView);
 		totalTxt.setText(total + "");
 		TextView customerName = (TextView) findViewById(R.id.customerName);
+		TextView customerphone = (TextView) findViewById(R.id.customerphone);
 		customerName.setText(" " + currentOrder.getCustomer().toString());
 		TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
 		ArrayList<Country> countries = ((deliveryclient) this.getApplication())
 				.getCountries();
 		customerAdd.setText(currentOrder.getAddress().toString(countries));
-
+		
+		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+		String phoneVal = settings.getString("phone", "");
+		customerphone.setText(phoneVal);
 		notes.setText(currentOrder.getNote());
 
 	}

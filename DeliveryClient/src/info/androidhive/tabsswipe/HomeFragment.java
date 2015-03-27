@@ -66,12 +66,7 @@ public class HomeFragment extends ParentFragment implements
 	}
 
 	public void callMethod(String m, String s, String error) {
-		if (m.equals("setHomeCountries"))
-			setHomeCountries(s, error);
-		else if (m.equals("setHomeCities"))
-			setHomeCities(s, error);
-		else if (m.equals("setHomeAreas"))
-			setHomeAreas(s, error);
+		
 
 	}
 
@@ -86,15 +81,9 @@ public class HomeFragment extends ParentFragment implements
 				.setCurrentFragment(this);
 		cart = ((deliveryclient) currentActivity.getApplication()).getMyCart();
 		countries = ((deliveryclient) currentActivity.getApplication()).getCountries();
-		if(countries==null)
-			getCountries();
-		else
-		{
-			for (int j = 0; j < countries.size(); j++) {
-				getCities(j);
-			}
-			updateList("country");
-		}
+		
+		updateList("country");
+		
 			
 		// ((MainActivity) currentActivity).getCountries();
 		// updateFooter();
@@ -133,61 +122,7 @@ public class HomeFragment extends ParentFragment implements
 		Log.d("ray", "ray nothing");
 	}
 
-	public void getCountries() {
-		String serverURL = new myURL("countries", null, 0, 30).getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity,
-				"setHomeCountries", true, false);
-		p.get();
-	}
-
-	public void setHomeCountries(String s, String error) {
-		countries = new APIManager().getCountries(s);
-		for (int j = 0; j < countries.size(); j++) {
-			getCities(j);
-		}
-		updateList("country");
-	}
-
-	public void getCities(int position) {
-		countryP = position;
-		int countryId = countries.get(position).getId();
-		String serverURL = new myURL("cities", "countries", countryId, 30)
-				.getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setHomeCities",
-				false);
-		p.get();
-	}
-
-	public void setHomeCities(String s, String error) {
-		cities = new APIManager().getCitiesByCountry(s);
-		for (int j = 0; j < cities.size(); j++) {
-			if (j == cities.size() - 1)
-				last = true;
-			getAreas(j);
-		}
-	}
-
-	public void getAreas(int position) {
-		cityP = position;
-		CityId = cities.get(position).getId();
-		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setHomeAreas",
-				false, last);
-		p.get();
-	}
-
-	public void setHomeAreas(String s, String error) {
-		areas = new APIManager().getAreasByCity(s);
-
-		cities.get(cityP).setAreas(areas);
-		countries.get(countryP).setCities(cities);
-		if (last) {
-			((deliveryclient) currentActivity.getApplication())
-					.setCountries(countries);
-			Log.d("ray", "setting countries: " + CityId + "->" + areas.size());
-
-		}
-	}
+	
 
 	public void updateList(String type) {
 		countrySpinner = (Spinner) view.findViewById(R.id.countriesSP);
@@ -201,7 +136,7 @@ public class HomeFragment extends ParentFragment implements
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			counrytAdapter.notifyDataSetChanged();
 			areaSpinner.setAdapter(null);
-			Log.d("ray", "countr: " + countries.size());
+
 			if (countrySpinner != null) {
 				countrySpinner.setAdapter(counrytAdapter);
 				countrySpinner.setOnItemSelectedListener(this);

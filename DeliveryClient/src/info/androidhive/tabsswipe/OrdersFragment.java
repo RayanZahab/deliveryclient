@@ -1,8 +1,9 @@
 package info.androidhive.tabsswipe;
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -81,7 +83,11 @@ public class OrdersFragment extends ParentFragment {
 			}
 		});
 		mylist = null;
+		view.setFocusableInTouchMode(true);
+		view.requestFocus();
+		
 		return view;
+		
 	}
 
 	@Override
@@ -126,6 +132,37 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void goUp() {
+		if(depth==3 && ((deliveryclient) currentActivity.getApplication())
+				.getMyCart().getAllCount()>0)
+		{
+			new AlertDialog.Builder(currentActivity)
+			.setTitle(
+					"Going Back will empty the cart, are you sure?")
+			.setIcon(R.drawable.categories)
+			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					goingUp();
+				}
+			} )
+			.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog,
+						int whichButton) {
+					return;
+				}
+			}).show();
+		}
+		else
+		{
+			goingUp();
+		}
+
+	}
+	
+	public void goingUp()
+	{
 		if (depth > 0) {
 			depth--;
 			int id = 0;
@@ -148,7 +185,6 @@ public class OrdersFragment extends ParentFragment {
 			}
 			getList(sequence.get(depth), id);
 		}
-
 	}
 
 	public void getList(String type, int id) {
@@ -171,6 +207,8 @@ public class OrdersFragment extends ParentFragment {
 			shopId = branchId = categoryId = 0;
 			getShops(areaId);
 		} else if (type.equals("branches")) {
+			((deliveryclient) currentActivity.getApplication()).emptyCart();
+			updateFooter();
 			branchId = categoryId = 0;
 			shopId = id;
 			getBranches(id);

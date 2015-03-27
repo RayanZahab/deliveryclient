@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -200,6 +201,7 @@ public class MainActivity extends Activity {
 			args.putString("orders", "pending");
 			fragment.setArguments(args);
 			fragments.add(fragment);
+			
 			break;
 
 		case 4:
@@ -224,10 +226,9 @@ public class MainActivity extends Activity {
 
 		if (fragment != null) {
 			
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, (Fragment) fragment)
-					.commit();
-
+			FragmentTransaction tx = fragmentManager.beginTransaction();
+			tx.addToBackStack(null);
+			tx.replace(R.id.frame_container, (Fragment) fragment).commit();
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
@@ -235,6 +236,8 @@ public class MainActivity extends Activity {
 			mDrawerLayout.closeDrawer(mDrawerList);
 		} 
 	}
+	
+	
 
 	@Override
 	public void setTitle(CharSequence title) {
@@ -405,7 +408,23 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		new AlertDialog.Builder(this)
+		Fragment fragment = getVisibleFragment();
+
+	    if (fragment.getClass().equals(OrdersFragment.class)) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
+	    	Method returnFunction;
+			try {
+				returnFunction = fragment.getClass().getDeclaredMethod(
+						"goUp");
+				if (returnFunction != null)
+					returnFunction.invoke(fragment);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    else
+	    {
+			new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(R.string.exit)
 				.setMessage(R.string.exitquest)
@@ -421,6 +440,7 @@ public class MainActivity extends Activity {
 								settings1.edit().remove("PREFS_NAME").commit();
 							}
 						}).setNegativeButton(R.string.no, null).show();
+	    }
 	}
 
 	public static Fragment getVisibleFragment() {

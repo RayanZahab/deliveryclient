@@ -116,6 +116,7 @@ public class deliveryclient extends Application {
 			productId = 0;
 			orderId = 0;
 			orderStatus = null;
+			
 		} else if (current.equals("order")) {
 			branchId = 0;
 			categoryId = 0;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -15,13 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class AddAddressActivity extends SharedMenu implements
+public class AddAddressActivity extends Activity implements
 		OnItemSelectedListener {
-
-	public AddAddressActivity(Menu menu, Context ctx) {
-		super(menu, ctx);
-		// TODO Auto-generated constructor stub
-	}
 
 	Spinner countrySpinner, citySpinner, areaSpinner;
 	ArrayList<Country> countries = new ArrayList<Country>();
@@ -34,6 +28,7 @@ public class AddAddressActivity extends SharedMenu implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_address);
+		
 		currentActivity = this;
 		countrySpinner = (Spinner) findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) findViewById(R.id.citiesSP);

@@ -118,8 +118,6 @@
                 android:layout_height="fill_parent"
                 android:layout_marginTop="8dp" >
             </ListView>
-            
-            
 
             <RelativeLayout
                 android:id="@+id/totalamount"

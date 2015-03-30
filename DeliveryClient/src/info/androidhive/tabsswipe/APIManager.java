@@ -90,19 +90,126 @@ public class APIManager {
 
 	}
 
-	public ArrayList<City> getCitiesByCountry(String cont) {
+	public ArrayList<Country> getAllCountries(String cont) {
 		JSONObject jsonResponse;
-		ArrayList<City> gridArray = new ArrayList<City>();
+		ArrayList<Country> gridArray = new ArrayList<Country>();
+		ArrayList<City> citiesArray = new ArrayList<City>();
+		Country currentCountry;
 		try {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				String name;
+				String name, cities, areas;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
 					int lengthJsonArr = jsonMainNode.length();
+					for (int i = 0; i < lengthJsonArr; i++) {
+						JSONObject jsonChildNode = jsonMainNode
+								.getJSONObject(i);
 
+						id = Integer.parseInt(jsonChildNode.optString("id")
+								.toString());
+
+						name = jsonChildNode.optString("name").toString();
+						cities = jsonChildNode.optString("cities").toString();
+						currentCountry = new Country(id, name);
+						if (jsonChildNode.has("cities")) {
+							JSONArray jsonCityNode = jsonChildNode
+									.optJSONArray("cities");
+							citiesArray = getCities(jsonCityNode,id);
+							currentCountry.setCities(citiesArray);
+						}
+						gridArray.add(currentCountry);
+					}
+				} else {
+					id = Integer.parseInt(jsonResponse.optString("id")
+							.toString());
+					name = jsonResponse.optString("name").toString();
+					gridArray.add(new Country(id, name));
+				}
+			} else {
+				return gridArray;
+			}
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
+
+		return gridArray;
+
+	}
+
+	public ArrayList<City> getCities(JSONArray jsonMainNode,int country_id) {
+		ArrayList<City> gridArray = new ArrayList<City>();
+		ArrayList<Area> areasArray = new ArrayList<Area>();
+		City currentCity;
+		int lengthJsonArr = jsonMainNode.length();
+		int id;
+		String name, areas;
+		try {
+			for (int i = 0; i < lengthJsonArr; i++) {
+				JSONObject jsonChildNode;
+				jsonChildNode = jsonMainNode.getJSONObject(i);
+				id = Integer.parseInt(jsonChildNode.optString("id").toString());
+				name = jsonChildNode.optString("name").toString();
+				areas = jsonChildNode.optString("areas").toString();
+				currentCity = new City(id, name);
+				currentCity.setCountry_id(country_id);
+				if (jsonChildNode.has("areas")) {
+					JSONArray jsonAreaNode = jsonChildNode
+							.optJSONArray("areas");
+					areasArray = getAreas(jsonAreaNode,id,country_id);
+					currentCity.setAreas(areasArray);
+				}
+
+				gridArray.add(currentCity);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return gridArray;
+	}
+
+	public ArrayList<Area> getAreas(JSONArray jsonMainNode,int city_id,int country_id) {
+
+		ArrayList<Area> gridArray = new ArrayList<Area>();
+		String name;
+		int id;
+		int lengthJsonArr = jsonMainNode.length();
+		try {
+			for (int i = 0; i < lengthJsonArr; i++) {
+				JSONObject jsonChildNode = jsonMainNode
+						.getJSONObject(i);
+
+				id = Integer.parseInt(jsonChildNode.optString("id")
+						.toString());
+				name = jsonChildNode.optString("name").toString();
+				gridArray.add(new Area(id, city_id, country_id, name));
+			}
+		}
+
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return gridArray;
+	}
+
+	public ArrayList<City> getCitiesByCountry(String cont) {
+		JSONObject jsonResponse;
+		ArrayList<City> gridArray = new ArrayList<City>();
+		ArrayList<Area> areasArray = new ArrayList<Area>();
+		City currentCity;
+		try {
+			jsonResponse = new JSONObject(cont);
+			if (!errorCheck(jsonResponse)) {
+				int id;
+				String name, areas;
+				if (jsonResponse.has("elements")) {
+					JSONArray jsonMainNode = jsonResponse
+							.optJSONArray("elements");
+					int lengthJsonArr = jsonMainNode.length();
 					for (int i = 0; i < lengthJsonArr; i++) {
 						JSONObject jsonChildNode = jsonMainNode
 								.getJSONObject(i);
@@ -110,7 +217,14 @@ public class APIManager {
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
 						name = jsonChildNode.optString("name").toString();
-						gridArray.add(new City(id, name));
+						areas = jsonChildNode.optString("areas").toString();
+						currentCity = new City(id, name);
+						if (areas != null) {
+							areasArray = getAreasByCity(areas);
+							currentCity.setAreas(areasArray);
+						}
+
+						gridArray.add(currentCity);
 					}
 				}
 			}
@@ -606,7 +720,7 @@ public class APIManager {
 
 	public ArrayList<Address> getAddress(String cont) {
 		JSONObject jsonResponse;
-		Log.d("ray add: ","add:"+cont);
+		Log.d("ray add: ", "add:" + cont);
 		ArrayList<Address> gridArray = new ArrayList<Address>();
 		try {
 			jsonResponse = new JSONObject(cont);

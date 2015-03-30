@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.Window;
 
 public class LoadingActivity extends Activity {
-	
+
 	int i, countryP, cityP, areaP;
 	ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
@@ -34,66 +34,28 @@ public class LoadingActivity extends Activity {
 		getMenuInflater().inflate(R.menu.loading, menu);
 		return true;
 	}
+
 	public void callMethod(String m, String s, String error) {
 		Log.d("ray", "calling method: " + m);
-
-		if (m.equals("setCountries"))
-			setCountries(s, error);
-		else if (m.equals("setCities"))
-			setCities(s, error);
-		else if (m.equals("setAreas"))
-			setAreas(s, error);
+		if (m.equals("finish"))
+			finish(s, error);
 	}
 
 	public void getCountries() {
-		String serverURL = new myURL("countries", null, 0, 30).getURL();
-		RZHelper p = new RZHelper(serverURL, this, "setCountries", true,false);
+		String serverURL = new myURL("countries/get_all_cities_areas", null, 0,
+				30).getURL();
+		RZHelper p = new RZHelper(serverURL, this, "finish", true, false);
 		p.get();
 	}
 
-	public void setCountries(String s, String error) {
-		countries = new APIManager().getCountries(s);
-		for (int j = 0; j < countries.size(); j++) {
-			getCities(j);
-		}
-	}
+	
+	public void finish(String s, String error) {
+		countries = new APIManager().getAllCountries(s);
 
-	public void getCities(int position) {
-		countryP = position;
-		int countryId = countries.get(position).getId();
-		String serverURL = new myURL("cities", "countries", countryId, 30)
-				.getURL();
-		RZHelper p = new RZHelper(serverURL, this, "setCities", false);
-		p.get();
-	}
+		((deliveryclient) this.getApplication()).setCountries(countries);
+		Log.d("ray", "setting countries: " + CityId + "->" + areas.size());
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
 
-	public void setCities(String s, String error) {
-		cities = new APIManager().getCitiesByCountry(s);
-		for (int j = 0; j < cities.size(); j++) {
-			if (j == cities.size() - 1)
-				last = true;
-			getAreas(j);
-		}
-	}
-
-	public void getAreas(int position) {
-		cityP = position;
-		CityId = cities.get(position).getId();
-		String serverURL = new myURL("areas", "cities", CityId, 30).getURL();
-		RZHelper p = new RZHelper(serverURL, this, "setAreas", false, last);
-		p.get();
-	}
-
-	public void setAreas(String s, String error) {
-		areas = new APIManager().getAreasByCity(s);
-
-		cities.get(cityP).setAreas(areas);
-		countries.get(countryP).setCities(cities);
-		if (last) {
-			((deliveryclient) this.getApplication()).setCountries(countries);
-			Log.d("ray", "setting countries: " + CityId + "->" + areas.size());
-			Intent i = new Intent(this, MainActivity.class);
-			startActivity(i);
-		}
 	}
 }

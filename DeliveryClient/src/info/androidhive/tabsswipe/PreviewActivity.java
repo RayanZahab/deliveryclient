@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PreviewActivity extends Activity {
 	Cart cart;
@@ -82,6 +83,8 @@ public class PreviewActivity extends Activity {
 			getAdd(s, error);
 		else
 		{
+			Toast.makeText(getApplicationContext(), R.string.success_order,
+					Toast.LENGTH_SHORT).show();
 			gotomain();
 		}
 	}

@@ -136,8 +136,7 @@ public class OrdersFragment extends ParentFragment {
 				.getMyCart().getAllCount()>0)
 		{
 			new AlertDialog.Builder(currentActivity)
-			.setTitle(
-					"Going Back will empty the cart, are you sure?")
+			.setTitle(R.string.empty_cart)
 			.setIcon(R.drawable.categories)
 			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -201,23 +200,27 @@ public class OrdersFragment extends ParentFragment {
 			categoryId = 0;
 			productId = 0;
 			depth = 0;
-			
+			currentActivity.getActionBar().setTitle(getString(R.string.business_categories));
 			getBusinesses();
 		}  else if (type.equals("shops")) {
 			shopId = branchId = categoryId = 0;
+			currentActivity.getActionBar().setTitle(getString(R.string.shops));
 			getShops(areaId);
 		} else if (type.equals("branches")) {
 			((deliveryclient) currentActivity.getApplication()).emptyCart();
 			updateFooter();
 			branchId = categoryId = 0;
 			shopId = id;
+			currentActivity.getActionBar().setTitle(getString(R.string.branches));
 			getBranches(id);
 		} else if (type.equals("categories")) {
 			categoryId = 0;
 			branchId = id;
+			currentActivity.getActionBar().setTitle(getString(R.string.categories));
 			getCategories(id);
 		} else if (type.equals("products")) {
 			categoryId = id;
+			currentActivity.getActionBar().setTitle(getString(R.string.products));
 			getProducts(branchId, id);
 			Log.d("rya","here");
 		}
@@ -276,7 +279,7 @@ public class OrdersFragment extends ParentFragment {
 			}
 			else
 			{
-				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address",
+				Toast.makeText(currentActivity.getApplicationContext(), R.string.add_address,
 						Toast.LENGTH_SHORT).show();
 				intent = new Intent(this.getActivity(), AddAddressActivity.class);
 				intent.putExtra("previous", "preview");

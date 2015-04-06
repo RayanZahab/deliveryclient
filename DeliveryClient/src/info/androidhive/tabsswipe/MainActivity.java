@@ -12,6 +12,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.profile));
 		navMenuTitles.add(getString(R.string.pending_orders));
 		navMenuTitles.add(getString(R.string.closed_orders));
-		navMenuTitles.add(getString(R.string.home));
+		navMenuTitles.add(getString(R.string.Logout));
 
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
@@ -115,6 +116,7 @@ public class MainActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// display view for selected nav drawer item
+			Log.d("ray position","position: "+position);
 			displayView(position);
 		}
 	}
@@ -145,21 +147,19 @@ public class MainActivity extends Activity {
 		navDrawerItems = new ArrayList<NavDrawerItem>();
 
 		// adding nav drawer items to array
-		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),
 				R.drawable.ic_home, true, "0"));
-		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),
 				R.drawable.ic_people));
-		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),
 				R.drawable.ic_communities));
-		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),
 				R.drawable.ic_communities));
-		// Photos
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),
 				R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(5).toString(),
+				R.drawable.ic_communities));
+
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		// setting the nav drawer list adapter
@@ -211,10 +211,7 @@ public class MainActivity extends Activity {
 			fragments.add(fragment);
 			break;
 		case 5:
-			fragment = new HomeFragment();
-			args.putString("orders", "closed");
-			fragment.setArguments(args);
-			fragments.add(fragment);
+			logout(true);
 			break;
 
 		default:
@@ -424,23 +421,53 @@ public class MainActivity extends Activity {
 	    }
 	    else
 	    {
-			new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setTitle(R.string.exit)
-				.setMessage(R.string.exitquest)
-				.setPositiveButton(R.string.yes,
-						new DialogInterface.OnClickListener() {
-							@SuppressLint("NewApi")
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								MainActivity.this.finishAffinity();
-								SharedPreferences settings1 = getSharedPreferences(
-										"PREFS_NAME", 0);
-								settings1.edit().remove("PREFS_NAME").commit();
-							}
-						}).setNegativeButton(R.string.no, null).show();
+	    	logout(false);
 	    }
+	}
+	
+	public void logout(boolean login)
+	{
+		if(!login)
+		{
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle(R.string.exit)
+			.setMessage(R.string.exitquest)
+			.setPositiveButton(R.string.yes,
+					new DialogInterface.OnClickListener() {
+						@SuppressLint("NewApi")
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							MainActivity.this.finishAffinity();
+							SharedPreferences settings1 = getSharedPreferences(
+									"PREFS_NAME", 0);
+							settings1.edit().remove("PREFS_NAME").commit();
+						}
+					}).setNegativeButton(R.string.no, null).show();
+		}
+		else
+		{
+			new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle(R.string.exit)
+			.setMessage(R.string.exitquest)
+			.setPositiveButton(R.string.yes,
+					new DialogInterface.OnClickListener() {
+						@SuppressLint("NewApi")
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							
+							SharedPreferences settings1 = getSharedPreferences(
+									"PREFS_NAME", 0);
+							settings1.edit().remove("PREFS_NAME").commit();
+							Intent i = new Intent(MainActivity.this, LoginActivity.class);
+							startActivity(i);
+						}
+					}).setNegativeButton(R.string.no, null).show();
+		}
+		
 	}
 
 	public static Fragment getVisibleFragment() {

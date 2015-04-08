@@ -17,30 +17,30 @@
         <Spinner 
             android:id="@+id/countriesSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner"
             android:spinnerMode="dialog"
-            android:paddingRight="10dp" />
+            android:paddingRight="20dp" />
 
         <Spinner
             android:id="@+id/citiesSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignLeft="@+id/countriesSP"
             android:layout_below="@+id/countriesSP"
             android:layout_marginTop="10dp"
-            android:paddingRight="10dp"
+            android:paddingRight="20dp"
             android:spinnerMode="dialog"
             android:background="@drawable/myspinner" />
 
         <Spinner
             android:id="@+id/areasSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignLeft="@+id/citiesSP"
             android:layout_below="@+id/citiesSP"
-            android:paddingRight="10dp"
+            android:paddingRight="20dp"
             android:spinnerMode="dialog"
             android:layout_marginTop="10dp"
             android:background="@drawable/myspinner" />
@@ -144,7 +144,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/details"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/details"
             android:layout_marginTop="10dp"
             android:onClick="submit"

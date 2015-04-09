@@ -12,13 +12,14 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <info.androidhive.tabsswipe.PullToRefreshListView
+        <com.mobilive.delivery.client.view.listview.PullToRefreshListView
             android:id="@+id/orderslist"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
             android:divider="@android:color/transparent" >
-        </info.androidhive.tabsswipe.PullToRefreshListView>
+        </com.mobilive.delivery.client.view.listview.PullToRefreshListView>
+        
     </LinearLayout>
 
 </RelativeLayout>

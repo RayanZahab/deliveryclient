@@ -64,6 +64,7 @@ public class OrdersFragment extends ParentFragment {
 	int userId = 0;
 	ArrayList<Address> Addresses ;
 	public RelativeLayout footer;
+	ImageView buttonOne;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +95,7 @@ public class OrdersFragment extends ParentFragment {
 		footer = (RelativeLayout) view.findViewById(R.id.mycart);
 
 		updateFooter();
-		ImageView buttonOne = (ImageView) view.findViewById(R.id.back);
+		buttonOne = (ImageView) view.findViewById(R.id.back);
 		buttonOne.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				goUp();
@@ -427,6 +428,14 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void updateList() {
+		if(depth ==0)
+		{
+			buttonOne.setVisibility(View.GONE);
+		}
+		else
+		{
+			buttonOne.setVisibility(View.VISIBLE);
+		}
 		if(depth<=2)
 		{
 			footer.setVisibility(View.GONE);

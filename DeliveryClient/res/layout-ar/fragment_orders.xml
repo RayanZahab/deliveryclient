@@ -25,7 +25,8 @@
             android:id="@+id/ordersfooter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/redbg" >
+            android:background="@color/redbg"
+            android:visibility="gone" >
             
             <ImageView 
                 android:id="@+id/back"

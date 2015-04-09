@@ -37,7 +37,12 @@
                 android:layout_marginBottom="5dp"
                 android:src="@drawable/ar_backarrow"
                 />
-            
+              <RelativeLayout
+                android:id="@+id/mycart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:visibility="gone"
+                android:layout_alignParentLeft="true">
             <ImageView 
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
@@ -59,7 +64,7 @@
 		        android:textSize="14sp"
 		        android:textColor="@color/yellow" />
 
-            
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

@@ -91,7 +91,7 @@ public class OrdersFragment extends ParentFragment {
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
 		fragmentManager = getFragmentManager();
-		footer = (RelativeLayout) view.findViewById(R.id.ordersfooter);
+		footer = (RelativeLayout) view.findViewById(R.id.mycart);
 
 		updateFooter();
 		ImageView buttonOne = (ImageView) view.findViewById(R.id.back);

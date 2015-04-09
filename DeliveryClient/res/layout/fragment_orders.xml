@@ -37,15 +37,23 @@
                 android:layout_marginBottom="5dp"
                 android:src="@drawable/backarrow"
                 />
-            
+
+            <RelativeLayout
+                android:id="@+id/mycart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:visibility="gone"
+                android:layout_alignParentRight="true">
+
             <ImageView 
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                
+                android:layout_alignParentRight="true"
                 android:src="@drawable/cart"
                 />
             <TextView
@@ -59,7 +67,7 @@
 		        android:textSize="14sp"
 		        android:textColor="@color/yellow" />
 
-            
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

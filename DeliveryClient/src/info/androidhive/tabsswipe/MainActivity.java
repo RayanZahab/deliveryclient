@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -70,6 +72,7 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.profile));
 		navMenuTitles.add(getString(R.string.pending_orders));
 		navMenuTitles.add(getString(R.string.closed_orders));
+		navMenuTitles.add(getString(R.string.info));
 		navMenuTitles.add(getString(R.string.Logout));
 
 		addSlideMenu();
@@ -159,6 +162,8 @@ public class MainActivity extends Activity {
 				R.drawable.ic_communities));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(5).toString(),
 				R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(6).toString(),
+				R.drawable.ic_communities));
 
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
@@ -211,6 +216,18 @@ public class MainActivity extends Activity {
 			fragments.add(fragment);
 			break;
 		case 5:
+			try {
+				Toast.makeText(
+						getApplicationContext(),
+						"version" + getPackageManager().getPackageInfo(
+										getPackageName(), 0).versionName,
+						Toast.LENGTH_SHORT).show();
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case 6:
 			logout(true);
 			break;
 

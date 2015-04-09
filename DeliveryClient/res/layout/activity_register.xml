@@ -43,67 +43,11 @@
                 android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
-            
-            <TextView
-		        android:id="@+id/choosecountry"
-		        style="@style/mytextview"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="12dp"
-		        android:text="@string/select_country"
-		        android:textColor="@color/redbg" />
-		
-		    <Spinner
-		        android:id="@+id/countriesSP"
-		        android:layout_width="fill_parent"
-		        android:layout_height="30dp"
-		        android:background="@drawable/myspinner"
-		        android:paddingRight="22dp"
-		        android:spinnerMode="dialog" />
-		
-			<TextView
-		        android:id="@+id/phonenum"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="12dp"
-		        android:text="@string/phonenum"
-		        android:textColor="@color/redbg" />
 			
 			<LinearLayout 
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:orientation="horizontal">
-				
-			<EditText
-			    android:id="@+id/countrycode"
-			    android:layout_width="60dp"
-			    android:layout_height="45dp"
-			    android:layout_weight="0.3"
-			    android:background="@drawable/edittextbg"
-			    android:ems="10"
-			    android:gravity="center"
-			    android:inputType="none"
-			    android:enabled="false"
-			    android:paddingLeft="2dp"
-			    android:paddingRight="2dp" >
-		
-		    </EditText>
-		
-		    <EditText
-		        android:id="@+id/phone"
-		        android:layout_width="wrap_content"
-		        android:layout_height="45dp"
-		        android:layout_weight="0.7"
-		        android:layout_marginLeft="5dp"
-		        android:background="@drawable/edittextbg"
-		        android:ems="10"
-		        android:hint="@string/phonenum"
-		        android:textColor="@color/redbg"
-                android:textColorHint="#bdbdbd"
-		        android:inputType="phone"
-		        android:paddingLeft="8dp"
-		        android:paddingRight="8dp" >
-		    </EditText>
 		    </LinearLayout>
             
             <TextView

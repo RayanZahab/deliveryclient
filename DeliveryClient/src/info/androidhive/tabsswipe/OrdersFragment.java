@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.KeyEvent;
@@ -41,6 +42,7 @@ public class OrdersFragment extends ParentFragment {
 	int call =-1;
 	int userId = 0;
 	ArrayList<Address> Addresses ;
+	public RelativeLayout footer;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +70,7 @@ public class OrdersFragment extends ParentFragment {
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
 		fragmentManager = getFragmentManager();
+		footer = (RelativeLayout) view.findViewById(R.id.ordersfooter);
 
 		updateFooter();
 		ImageView buttonOne = (ImageView) view.findViewById(R.id.back);
@@ -407,6 +410,14 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void updateList() {
+		if(depth<=2)
+		{
+			footer.setVisibility(View.GONE);
+		}
+		else
+		{
+			footer.setVisibility(View.VISIBLE);
+		}
 		final ListView listView = (ListView) view.findViewById(R.id.orderslist);
 		if (mylist.size() == 0) {
 			Item i = new Item();

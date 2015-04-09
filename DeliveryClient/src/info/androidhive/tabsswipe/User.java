@@ -180,7 +180,7 @@ public class User {
 		int msg = 0;
 		if (this.name.isEmpty() || this.name.length() < 3) {
 			msg = R.string.invalid_name;
-		} else if (this.phone==null || this.phone.isEmpty() || this.phone.length() < 6) {
+		} else if (this.phone==null || this.phone.isEmpty() || this.phone.length() < 8) {
 			msg = R.string.invalid_phone;
 		} else if (!is_customer && !mine && !this.is_admin && !this.is_delivery && !this.is_preparer) {
 			msg = R.string.select_role;

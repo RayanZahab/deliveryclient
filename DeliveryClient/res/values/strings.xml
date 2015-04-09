@@ -90,6 +90,9 @@
     <string name="enter">Enter</string>
     <string name="login">Login</string>
     <string name="gender">Gender</string>
+    <string name="thankyou">Thank You Very Much</string>
+    <string name="followup">Now you can check your order status
+         in Old Orders Tab</string>
 
     <string-array name="acc_type">
         <item>Income</item>

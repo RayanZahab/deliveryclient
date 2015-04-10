@@ -207,6 +207,7 @@
 		            android:layout_marginBottom="@dimen/activity_vertical_margin"
 		            android:text="@string/submit"
 		            android:background="@color/yellow"
+		            android:onClick="submit"
 		            android:textColor="@color/redbg"
 		            android:textSize="18sp" />
         </RelativeLayout>

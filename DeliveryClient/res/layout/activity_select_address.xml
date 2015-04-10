@@ -15,12 +15,21 @@
     </ListView>
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/addAddress"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/yellow"
         android:onClick="addAddress"
         android:text="Add New Address"
+        android:textColor="@color/redbg"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/yellow"
+        android:onClick="submit"
+        android:text="Submit"
         android:textColor="@color/redbg"
         android:textSize="18sp" />
 

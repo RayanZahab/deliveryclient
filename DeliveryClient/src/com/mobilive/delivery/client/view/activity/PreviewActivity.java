@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.ThankYouActivity;
 import com.mobilive.delivery.client.adapter.MyCustomAdapter;
 import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Cart;
@@ -66,11 +67,16 @@ public class PreviewActivity extends Activity {
 		if (error == null) {
 			TextView customerName = (TextView) findViewById(R.id.customerName);
 			TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
+			TextView customerPhone = (TextView) findViewById(R.id.customerphone);
 
 			SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 
 			String name = settings1.getString("name", "");
+			String phoneVal = settings1.getString("phone", "");
+			
 			customerName.setText(" " + name);
+			
+			customerPhone.setText(""+phoneVal);
 			myAddresses = new APIManager().getAddress(s);
 			ArrayList<Country> countries = ((DeliveryClientApplication) this.getApplication())
 					.getCountries();
@@ -107,8 +113,8 @@ public class PreviewActivity extends Activity {
 	}
 	public void gotomain()
 	{
-		((DeliveryClientApplication) this.getApplication()).emptyCart();
-		 Intent i = new Intent(this, MainActivity.class);
+		//((DeliveryClientApplication) this.getApplication()).emptyCart();
+		 Intent i = new Intent(this, ThankYouActivity.class);
 		 startActivity(i);
 	}
 

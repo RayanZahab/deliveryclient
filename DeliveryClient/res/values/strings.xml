@@ -219,5 +219,6 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_product_info">ProductInfoActivity</string>
     <string name="title_activity_loading">LoadingActivity</string>
+    <string name="title_activity_thank_you">ThankYouActivity</string>
 
 </resources>

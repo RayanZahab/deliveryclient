@@ -66,6 +66,7 @@
         <activity
             android:name="com.mobilive.delivery.client.view.listview.SelectAdress"
             android:label="@string/title_activity_select_adress"
+            
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -89,6 +90,10 @@
         <activity
             android:name="com.mobilive.delivery.client.view.activity.LoadingActivity"
             android:label="@string/title_activity_loading" >
+        </activity>
+        <activity
+            android:name="com.mobilive.delivery.client.ThankYouActivity"
+            android:label="@string/title_activity_thank_you" >
         </activity>
     </application>
 

@@ -217,7 +217,14 @@ public class DeliveryClientApplication extends Application {
 	}
 
 	public int getUserId() {
-		return userId;
+		if(userId != 0)
+			return userId;
+		else
+		{
+			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+			this.userId = settings.getInt("id", 0);		
+			return userId;
+		}
 	}
 
 	public void setUserId(int userId) {

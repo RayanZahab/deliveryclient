@@ -184,9 +184,25 @@ public class Address {
 				}
 			}			
 		}
+		String addressString = "";
+		String[] part1 = new String[]{this.getCountryName(),this.getCityName(),this.getAreaName()};
+		String[] part2 = new String[]{this.building, this.floor,this.details};
 		
-		return this.getCountryName() + " , " + this.getCityName() + " , " + this.getAreaName() + "\n"
-				+ this.building + " , " + this.floor + " \n" + this.details;
+		addressString = strJoin(part1,",") + " \n"+ strJoin(part2,",") ;
+		
+		return addressString;
+	}
+	public static String strJoin(String[] aArr, String sSep) {
+	    StringBuilder sbStr = new StringBuilder();
+	    for (int i = 0, il = aArr.length; i < il; i++) {
+	        if(aArr[i].length()>0)
+	        {
+		        if (i > 0)
+		            sbStr.append(sSep);
+	        	sbStr.append(aArr[i]);
+	        }
+	    }
+	    return sbStr.toString();
 	}
 
 	public boolean isDefault() {

@@ -13,11 +13,13 @@ import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.activity.AddAddressActivity;
 import com.mobilive.delivery.client.view.activity.MainActivity;
+import com.mobilive.delivery.client.view.activity.PreviewActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -28,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,18 +44,42 @@ public class SelectAdress extends ListActivity {
 	ArrayList<String> addOut = new ArrayList<String>();
 	Activity current;
 	int myId;
+	int defaultAddId = 0;
+	String defaultAddName = "";
+	ArrayList<Country> countries;
+	String previous = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_address);
+		current = this;
 
 		listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setTextFilterEnabled(true);
 		myId = ((DeliveryClientApplication) this.getApplication()).getUserId();		
+		countries = ((DeliveryClientApplication) this.getApplication())
+				.getCountries();
 		getAddresses(myId);
-		current = this;
+		Button submit = (Button) findViewById(R.id.submit);
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			previous = extras.getString("previous");
+			
+			if(previous.equals("preview"))
+			{
+				submit.setVisibility(View.VISIBLE);
+			}
+			else
+			{
+				submit.setVisibility(View.GONE);
+			}
+		}
+		else
+		{
+			submit.setVisibility(View.GONE);
+		}
 	}
 
 	public void getAddresses(int userId) {
@@ -66,12 +93,21 @@ public class SelectAdress extends ListActivity {
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("setAdd"))
 			getAdd(s, error);
+		else
+		{
+			/*addressId = currentAddress.getId();
+			Log.d("ray","add found ");
+			editor.putInt("addressId", currentAddress.getId());
+			ArrayList<Country> countries = ((DeliveryClientApplication) currentActivity.getApplication())
+					.getCountries();
+			editor.putString("addressName", currentAddress.toString(countries));
+			editor.commit();*/
+		}
 	}
 
 	public void getAdd(String s, String error) {
 		int defaultPosition = 0, i = 0;
-		ArrayList<Country> countries = ((DeliveryClientApplication) this.getApplication())
-				.getCountries();
+		
 		Log.d("ray", "adds: " + countries.size());
 
 		if (error == null) {
@@ -85,7 +121,10 @@ public class SelectAdress extends ListActivity {
 					it.setId(add.getId());
 					mylist.add(it);
 					if (add.isDefault())
-						defaultPosition = i;
+					{
+						defaultPosition = i;						
+						setDefault(add.getId(),it.getName());
+					}
 					i++;
 					addOut.add(add.toString(countries));
 				}
@@ -116,7 +155,10 @@ public class SelectAdress extends ListActivity {
 						String serverURL = new myURL("set_default",
 								"customers/addresses", mylist.get(position)
 										.getId(), 0).getURL();
-
+						defaultAddId = mylist.get(position)
+								.getId();
+						defaultAddName = mylist.get(position).toString();
+						setDefault(defaultAddId,defaultAddName);
 						RZHelper p = new RZHelper(serverURL, current,
 								"nothing", true);
 						p.put(null);
@@ -126,16 +168,40 @@ public class SelectAdress extends ListActivity {
 		}
 
 	}
+	public void setDefault(int addId, String addName)
+	{
+		defaultAddId = addId;
+		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+		SharedPreferences.Editor editor = settings.edit();
+		
+		editor.putInt("addressId", addId);
+		editor.putString("addressName", addName);
+		editor.commit();
+	}
 
 	public void addAddress(View v) {
 		Intent i = new Intent(this, AddAddressActivity.class);
+		i.putExtra("previous", previous);
 		startActivity(i);
+	}
+	public void submit(View v)
+	{
+		Intent intent = new Intent(this, PreviewActivity.class);
+		intent.putExtra("previous", "preview");
+		startActivity(intent);
 	}
 
 	@Override
 	public void onBackPressed() {
 		Intent i = new Intent(this, MainActivity.class);
-		i.putExtra("fragmentIndex", 2);
+		if(!previous.equals("preview"))
+		{
+			i.putExtra("fragmentIndex", 2);
+		}
+		else
+		{
+			i.putExtra("fragmentIndex", 1);			
+		}
 		startActivity(i);
 	}
 	public void onCreateContextMenu(ContextMenu menu, View v,

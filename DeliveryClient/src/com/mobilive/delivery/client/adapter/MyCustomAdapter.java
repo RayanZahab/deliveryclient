@@ -82,6 +82,8 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 					Intent i = new Intent(activity.getBaseContext(),
 							ProductInfoActivity.class);
 					((DeliveryClientApplication) activity.getApplication()).setProductId(item.getId());
+					int catId = ((DeliveryClientApplication) activity.getApplication()).getDepthVal();
+					i.putExtra("catId", catId);
 					activity.startActivity(i);
 				}
 			});

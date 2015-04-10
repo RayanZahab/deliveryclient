@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -105,8 +106,7 @@ public class HomeFragment extends ParentFragment implements OnItemSelectedListen
 				search();
 			}
 		});
-
-		((DeliveryClientApplication) currentActivity.getApplication()).setDepths(0,0);
+		
 		return view;
 	}
 
@@ -150,6 +150,9 @@ public class HomeFragment extends ParentFragment implements OnItemSelectedListen
 	}
 
 	public void updateList(String type) {
+
+		((DeliveryClientApplication) currentActivity.getApplication()).setDepths(0,0);
+		Log.d("ray","empty");
 		countrySpinner = (Spinner) view.findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) view.findViewById(R.id.citiesSP);
 		areaSpinner = (Spinner) view.findViewById(R.id.areasSP);

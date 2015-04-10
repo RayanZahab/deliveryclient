@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class ProductInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_info);
+		 this.setFinishOnTouchOutside(false);
 		name = (TextView) findViewById(R.id.productname);
 		desc = (TextView) findViewById(R.id.description);
 		price = (TextView) findViewById(R.id.price);
@@ -171,6 +173,16 @@ public class ProductInfoActivity extends Activity {
 	{
 		onBackPressed();
 	}
+	@Override
+	public void onBackPressed() {
+
+		Intent i = new Intent(this, MainActivity.class);
+		i.putExtra("fragmentIndex", 7);
+		categoryId = ((DeliveryClientApplication) this.getApplication()).getDepthVal();
+		i.putExtra("categoryId", categoryId);
+		startActivity(i);
+	}
+
 
 	public void getUnits(boolean first) {
 		// getUnits

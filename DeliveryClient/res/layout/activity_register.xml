@@ -43,7 +43,28 @@
                 android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
-			
+			<TextView
+		        android:id="@+id/phonenum"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:text="@string/phonenum"
+		        android:textColor="@color/redbg" />
+			<EditText
+		        android:id="@+id/phone"
+		        android:layout_width="wrap_content"
+		        android:layout_height="45dp"
+		        android:layout_weight="0.7"
+		        android:layout_marginLeft="5dp"
+		        android:background="@drawable/edittextbg"
+		        android:ems="10"
+		        android:hint="@string/phonenum"
+		        android:textColor="@color/redbg"
+                android:textColorHint="#bdbdbd"
+		        android:inputType="phone"
+		        android:paddingLeft="8dp"
+		        android:paddingRight="8dp" >
+		    </EditText>
 			<LinearLayout 
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"

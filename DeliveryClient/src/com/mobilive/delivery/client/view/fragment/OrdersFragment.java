@@ -105,7 +105,8 @@ public class OrdersFragment extends ParentFragment {
 		ImageView submit = (ImageView) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				getAddresses();
+				//getAddresses();
+				move();
 			}
 		});
 		mylist = null;

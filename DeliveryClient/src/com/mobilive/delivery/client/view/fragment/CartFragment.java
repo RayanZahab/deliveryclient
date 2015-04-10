@@ -11,8 +11,10 @@ import com.mobilive.delivery.client.model.Cart;
 import com.mobilive.delivery.client.model.CartItem;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Product;
+import com.mobilive.delivery.client.view.activity.AddAddressActivity;
 import com.mobilive.delivery.client.view.activity.MainActivity;
 import com.mobilive.delivery.client.view.activity.PreviewActivity;
+import com.mobilive.delivery.client.view.listview.SelectAdress;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +39,7 @@ public class CartFragment extends ParentFragment {
 	static View myview;
 	int userId = 0;
 	ArrayList<Address> Addresses ;
-	TextView name,phone,address;
+	TextView name,phone;
 	int addressId = 0;
 
 	@Override
@@ -53,7 +55,7 @@ public class CartFragment extends ParentFragment {
 			}
 		});		
 		name = (TextView) view.findViewById(R.id.customerName);
-		address = (TextView) view.findViewById(R.id.customerAdd);
+		//address = (TextView) view.findViewById(R.id.customerAdd);
 		phone = (TextView) view.findViewById(R.id.customerphone);
 		return view;
 	}
@@ -64,7 +66,9 @@ public class CartFragment extends ParentFragment {
 	}
 	public void submitCart()
 	{		
-		Intent intent = new Intent(this.getActivity(), PreviewActivity.class);
+		//Intent intent = new Intent(this.getActivity(), PreviewActivity.class);
+		Intent intent = new Intent(this.getActivity(), SelectAdress.class);
+		intent.putExtra("previous", "preview");
 		startActivity(intent);
 	}
 
@@ -81,7 +85,7 @@ public class CartFragment extends ParentFragment {
 		addressId = settings1.getInt("addressId", 0);
 		name.setText(nameVal);
 		phone.setText(phoneVal);
-		address.setText(addVal);		
+		//address.setText(addVal);		
 		
 		getProducts();
 		updateFooter();

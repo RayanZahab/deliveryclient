@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.adapter.NavDrawerListAdapter;
 import com.mobilive.delivery.client.utilities.NavDrawerItem;
@@ -70,6 +71,8 @@ public class MainActivity extends Activity {
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
 	public static List<Fragment> fragments = new ArrayList<Fragment>();	
+	public int categoryId = 0;
+	int fragmentIndex = 0;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -87,18 +90,19 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.closed_orders));
 		navMenuTitles.add(getString(R.string.info));
 		navMenuTitles.add(getString(R.string.Logout));
-
+		navMenuTitles.add(getString(R.string.home));
+		Bundle extras = getIntent().getExtras();
+		
+		if(extras!=null)
+		{
+			fragmentIndex = extras.getInt("fragmentIndex");
+			categoryId = extras.getInt("categoryId");			
+		}
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		Bundle extras = getIntent().getExtras();
-		int fragmentIndex = 0;
-		if(extras!=null)
-		{
-			fragmentIndex = extras.getInt("fragmentIndex");
-			displayView(fragmentIndex);
-		}
+		
 		// toggler
 		toggler();
 
@@ -183,7 +187,7 @@ public class MainActivity extends Activity {
 		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-		displayView(0);
+		displayView(fragmentIndex);
 	}
 
 	public static void updateCounter(int count) {
@@ -243,14 +247,18 @@ public class MainActivity extends Activity {
 		case 6:
 			logout(true);
 			break;
+		case 7:
+			fragment = new OrdersFragment();
+			args.putInt("categoryId", categoryId);
+			fragment.setArguments(args);
+			fragments.add(fragment);
+			break;
 
 		default:
 			fragment = new ProfileFragment();
 			fragments.add(fragment);
 			break;
 		}
-		Log.e("ray", "currentf" + position);
-
 		if (fragment != null) {
 			
 			FragmentTransaction tx = fragmentManager.beginTransaction();

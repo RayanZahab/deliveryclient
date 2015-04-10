@@ -69,21 +69,22 @@ public class OrdersFragment extends ParentFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		currentActivity = getActivity();	
 		sequence.add("business");		
 		sequence.add("shops");
 		sequence.add("branches");
 		sequence.add("categories");
 		sequence.add("products");
 		sequence.add("info");
-		currentActivity = getActivity();
 		userId = ((DeliveryClientApplication) currentActivity.getApplication()).getUserId();
 		if(getArguments()!=null)
 		{
 			areaId = getArguments().getInt("areaId");
+			categoryId = getArguments().getInt("categoryId");
 			mylist = null;
 			depth=0;
 		}
-		Log.d("ray","getting myarea: "+areaId);
+
 		if (savedInstanceState != null) {
 			mContent = getFragmentManager().getFragment(savedInstanceState,
 					"mContent");
@@ -120,8 +121,10 @@ public class OrdersFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((DeliveryClientApplication) currentActivity.getApplication())
 				.setCurrentFragment(this);
-		if(call!=-1)
+		if(call!=-1 ||categoryId!=0)
 		{
+			depth = ((DeliveryClientApplication) currentActivity.getApplication())
+					.getDepth();
 			getList(sequence.get(((DeliveryClientApplication) currentActivity.getApplication())
 					.getDepth()),
 					((DeliveryClientApplication) currentActivity.getApplication())

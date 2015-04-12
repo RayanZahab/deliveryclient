@@ -1,17 +1,25 @@
 package com.mobilive.delivery.client.model;
 
 
+import java.io.Serializable;
+
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.utilities.ValidationError;
 
-public class User {
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 477550760291642297L;
 	private int id;
 	private String name;
 	private String username;
 	private String password;
 	private String phone, token;
+	private String imei;
+	private Gender gender;
 	private int is_fired;
 	private Address address;
 	private int branch_id;
@@ -214,5 +222,21 @@ public class User {
 
 	public void setIs_customer(boolean is_customer) {
 		this.is_customer = is_customer;
+	}
+
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 }

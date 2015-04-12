@@ -7,14 +7,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Area;
 import com.mobilive.delivery.client.model.Branch;
 import com.mobilive.delivery.client.model.Business;
 import com.mobilive.delivery.client.model.Category;
 import com.mobilive.delivery.client.model.City;
+import com.mobilive.delivery.client.model.CodeVerificationRequest;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Customer;
+import com.mobilive.delivery.client.model.ForgetPasswordRequest;
 import com.mobilive.delivery.client.model.OpenHours;
 import com.mobilive.delivery.client.model.Order;
 import com.mobilive.delivery.client.model.OrderItem;
@@ -23,8 +27,6 @@ import com.mobilive.delivery.client.model.Product;
 import com.mobilive.delivery.client.model.Shop;
 import com.mobilive.delivery.client.model.Unit;
 import com.mobilive.delivery.client.model.User;
-
-import android.util.Log;
 
 public class APIManager {
 
@@ -75,25 +77,27 @@ public class APIManager {
 			if (!errorCheck(jsonResponse)) {
 				int id;
 				String name;
+				String countryCode;
+				String isoCode;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
 					int lengthJsonArr = jsonMainNode.length();
 					for (int i = 0; i < lengthJsonArr; i++) {
-						JSONObject jsonChildNode = jsonMainNode
-								.getJSONObject(i);
-
-						id = Integer.parseInt(jsonChildNode.optString("id")
-								.toString());
-
+						JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+						id = Integer.parseInt(jsonChildNode.optString("id").toString());
 						name = jsonChildNode.optString("name").toString();
-						gridArray.add(new Country(id, name));
+						countryCode = jsonChildNode.optString("country_code").toString();
+						isoCode = jsonChildNode.optString("iso_code").toString();
+						gridArray.add(new Country(id, name,countryCode,isoCode));
+						
 					}
 				} else {
-					id = Integer.parseInt(jsonResponse.optString("id")
-							.toString());
+					id = Integer.parseInt(jsonResponse.optString("id").toString());
 					name = jsonResponse.optString("name").toString();
-					gridArray.add(new Country(id, name));
+					countryCode = jsonResponse.optString("country_code").toString();
+					isoCode = jsonResponse.optString("iso_code").toString();
+					gridArray.add(new Country(id, name,countryCode,isoCode));
 				}
 			} else {
 				return gridArray;
@@ -1250,6 +1254,8 @@ public class APIManager {
 			try {
 				body.put("phone", c.getPhone());
 				body.put("mobile", c.getPhone());
+				body.put("device_id",c.getImei());
+				//body.put("gender", c.getGender());
 				if (c.isLogin()) {
 					body.put("pass", c.getPassword());
 				} else {
@@ -1267,7 +1273,25 @@ public class APIManager {
 				e.printStackTrace();
 			}
 
-		} else if (o instanceof Address) {
+		}else if(o instanceof CodeVerificationRequest){
+			CodeVerificationRequest c = (CodeVerificationRequest) o;
+			try {
+				jsonObjSend.put("mobile", c.getMobileNumber());
+				jsonObjSend.put("code", c.getCode());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}else if(o instanceof ForgetPasswordRequest){
+			ForgetPasswordRequest c = (ForgetPasswordRequest) o;
+			try {
+				jsonObjSend.put("mobile", c.getMobileNumber());
+				jsonObjSend.put("device_id", c.getMobileImei());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}else if (o instanceof Address) {
 			Address c = (Address) o;
 
 			JSONObject body = new JSONObject();

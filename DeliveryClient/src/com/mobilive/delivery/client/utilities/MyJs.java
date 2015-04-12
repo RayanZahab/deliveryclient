@@ -16,34 +16,25 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mobilive.delivery.client.DeliveryClientApplication;
-import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.model.User;
-import com.mobilive.delivery.client.view.dialog.TransparentProgressDialog;
-
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mobilive.delivery.client.DeliveryClientApplication;
+import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.model.User;
+import com.mobilive.delivery.client.view.activity.RegisterActivity;
+import com.mobilive.delivery.client.view.dialog.TransparentProgressDialog;
 
 // Class with extends AsyncTask class
 
 public class MyJs extends AsyncTask<String, Void, Void> {
 
-	private String Content;
+	private String content;
 	private String returnFunction, Error;
 	String data = "";
 	public TextView uiUpdate;
@@ -107,7 +98,6 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		this.setLast(last);
 		MyJs();
 	}
-
 	public MyJs(String returnFunction, Activity m, DeliveryClientApplication mg,
 			String method, Object o) {
 		this.returnFunction = returnFunction;
@@ -146,10 +136,12 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 			if (this.method.equals("Upload")) {
 				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Accept-Charset", "UTF-8");
+				conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
 			} else {
 				conn.setRequestMethod(this.method);
-				conn.setRequestProperty("Content-Type",
-						"application/json; charset=utf-8");
+				conn.setRequestProperty("Accept-Charset", "UTF-8");
+				conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
 			}
 
 			if (this.method.equals("GET")) {
@@ -157,54 +149,48 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 					Error = getConnError(conn);
 				} else {
 					Error = null;
-					reader = new BufferedReader(new InputStreamReader(
-							conn.getInputStream()));
+					reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					StringBuilder sb = new StringBuilder();
 					String line = null;
-
 					while ((line = reader.readLine()) != null) {
 						sb.append(line + "\n");
 					}
-					Content = sb.toString();					
+					content = sb.toString();					
 				}
 
 			} else if (this.method.equals("POST")) {
 				conn.addRequestProperty("Accept", "application/json");
 				conn.addRequestProperty("Accept-Encoding", "gzip");
-				conn.addRequestProperty("Cache-Control",
-						"max-stale=0,max-age=60");
+				conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
+				conn.addRequestProperty("Cache-Control","max-stale=0,max-age=60");
+				conn.setRequestProperty("Accept-Charset", "UTF-8");
 				conn.setDoOutput(true);
 				conn.setDoInput(true);
 
-				JSONObject jsonObjSend = (new APIManager())
-						.objToCreate(this.objectToAdd);
-				OutputStreamWriter wr = new OutputStreamWriter(
-						conn.getOutputStream());
+				JSONObject jsonObjSend = (new APIManager()).objToCreate(this.objectToAdd);
+				OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 				wr.write(jsonObjSend.toString());
 				wr.flush();
 				wr.close();
 
-				if (conn.getResponseCode() != 201
-						&& conn.getResponseCode() != 200) {
-					Content = conn.getResponseMessage();
+				if (conn.getResponseCode() != 201&& conn.getResponseCode() != 200) {
+					content = conn.getResponseMessage();
 					Error = getConnError(conn);
 				} else {
-					BufferedReader responseContent = new BufferedReader(
-							new InputStreamReader(conn.getInputStream()));
+					BufferedReader responseContent = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					StringBuilder sb = new StringBuilder();
 					String line = null;
-
 					while ((line = responseContent.readLine()) != null) {
 						sb.append(line + "\n");
 					}
-					Content = sb.toString();
+					content = sb.toString();
 					Error = null;
 				}
 			} else if (this.method.equals("PUT")) {
 				conn.addRequestProperty("Accept", "application/json");
 				conn.addRequestProperty("Accept-Encoding", "gzip");
-				conn.addRequestProperty("Cache-Control",
-						"max-stale=0,max-age=60");
+				conn.addRequestProperty("Content-Type", "application/json; charset=utf-8");
+				conn.addRequestProperty("Cache-Control","max-stale=0,max-age=60");
 				conn.setDoOutput(true);
 				conn.setDoInput(true);
 				JSONObject jsonObjSend = (new APIManager())
@@ -217,28 +203,28 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 				wr.close();
 
 				if (conn.getResponseCode() != 200) {
-					Content = null;
+					content = null;
 					Error = getConnError(conn);
 				} else {
-					Content = "done";
+					content = "done";
 					Error = null;
 				}
 
 			} else if (this.method.equals("DELETE")) {
 				conn.addRequestProperty("Accept", "application/json");
 				conn.addRequestProperty("Accept-Encoding", "gzip");
-				conn.addRequestProperty("Cache-Control",
-						"max-stale=0,max-age=60");
+				conn.addRequestProperty("Cache-Control","max-stale=0,max-age=60");
 				if (conn.getResponseCode() != 204) {
-					Content = null;
+					content = null;
 					Error = getConnError(conn);
 				} else {
-					Content = "done";
+					content = "done";
 					Error = null;
 				}
 			} else if (this.method.equals("Upload")) {
 				User p = (User) this.objectToAdd;
-				Content = register(p, url, token);
+				content = register(p, url, token);
+				System.out.print(content);
 			}
 		} catch (Exception ex) {
 			Error = ex.getLocalizedMessage();
@@ -278,18 +264,25 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			DeliveryClientApplication.loader.dismiss();
 		}
 		try {
-			if (Content == null)
-				Content = "";
+			if (content == null)
+				content = "";
 			if (Error != null) {
 				if (DeliveryClientApplication.loader != null && last)
 					DeliveryClientApplication.loader.dismiss();
-				new GlobalM().bkToNav(mc, getError(Content, Error));
+				new GlobalM().bkToNav(mc, getError(content, Error));
+				if(mc instanceof RegisterActivity){
+					Method returnFunction = this.mc.getClass().getMethod(
+							"callMethod", content.getClass(), content.getClass(),
+							content.getClass());
+					returnFunction.invoke(this.mc, this.returnFunction, content,
+							Error);
+				}
 
 			} else {
 				Method returnFunction = this.mc.getClass().getMethod(
-						"callMethod", Content.getClass(), Content.getClass(),
-						Content.getClass());
-				returnFunction.invoke(this.mc, this.returnFunction, Content,
+						"callMethod", content.getClass(), content.getClass(),
+						content.getClass());
+				returnFunction.invoke(this.mc, this.returnFunction, content,
 						Error);
 			}
 		} catch (Exception e) {
@@ -326,10 +319,11 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.addRequestProperty("Content-Type", "application/json; charset=utf-8");
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		con.setRequestProperty("Connection", "Keep-Alive");
-		con.setRequestProperty("Content-Type", "multipart/form-data;boundary="
-				+ boundary);
+		con.setRequestProperty("Accept-Charset", "UTF-8");
+		con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+ boundary);
 
 		con.setDoInput(true);
 		con.setDoOutput(true);
@@ -341,21 +335,20 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		paramsVal.put("phone", "" + p.getPhone());
 		paramsVal.put("mobile", "" + p.getPhone());
 		paramsVal.put("encrypted_password", "" + p.getPassword());
-		paramsVal.put("gender", "Male");
-
-		Iterator iterator = paramsVal.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Map.Entry mapEntry = (Map.Entry) iterator.next();
+		paramsVal.put("gender", p.getGender().toString());
+        paramsVal.put("device_id", p.getImei());
+		for (String key : paramsVal.keySet()) {
+			String value = paramsVal.get(key);
 			dos.writeBytes(twoHyphens + boundary + lineEnd);
-			dos.writeBytes("Content-Disposition: form-data; name=\""
-					+ mapEntry.getKey() + "\"" + lineEnd);
-			System.out.println("\n Content-Disposition: form-data; name=\""
-					+ mapEntry.getKey() + "\"" + lineEnd);
-			System.out.println(mapEntry.getValue().toString());
+			dos.writeBytes("Content-Disposition: form-data; name=\""+ key + "\"" + lineEnd);
 			dos.writeBytes(lineEnd);
-			dos.writeBytes(mapEntry.getValue().toString());
+			if(key.equals("encrypted_password"))
+				dos.writeBytes(value.trim());
+			else
+				dos.writeUTF(value.trim());
 			dos.writeBytes(lineEnd);
 		}
+		
 		dos.writeBytes("\r\n--" + boundary + "--\r\n");
 		dos.flush();
 
@@ -378,7 +371,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}
-			return response.toString();
+			return responseCode+"";
 		}
 
 	}
@@ -422,6 +415,14 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 		} catch (JSONException e) {
 			return cont;
 		}
+	}
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

@@ -2,7 +2,17 @@ package com.mobilive.delivery.client.view.fragment;
 
 
 import java.util.ArrayList;
-import java.util.List;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
@@ -24,21 +34,9 @@ import com.mobilive.delivery.client.view.activity.OrderInfoActivity;
 import com.mobilive.delivery.client.view.listview.PullToRefreshListView;
 import com.mobilive.delivery.client.view.listview.PullToRefreshListView.OnRefreshListener;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-
 public class PendingOrdersFragment extends ParentFragment {
 	PullToRefreshListView lvTweets;
 	static int depth = 0;
-	private static List<String> sequence = new ArrayList<String>();
 	static ArrayList<Country> countries = new ArrayList<Country>();
 	ArrayList<City> cities = new ArrayList<City>();
 	ArrayList<Area> areas = new ArrayList<Area>();
@@ -96,15 +94,13 @@ public class PendingOrdersFragment extends ParentFragment {
 	}
 
 	public void getOrders() {
-		String serverURL = new myURL(null, "customers", orderStatus + "_orders", 30)
-				.getURL();
+		String serverURL = new myURL(null, "customers", orderStatus + "_orders", 30).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setOrders",true);
 		p.get();
 	}
 
 	public void fetchTimelineAsync(int page) {
-		Toast.makeText(currentActivity.getApplicationContext(), "Refreshed",
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(currentActivity.getApplicationContext(), "Refreshed",Toast.LENGTH_SHORT).show();
 		getOrders();
 	}
 
@@ -150,11 +146,8 @@ public class PendingOrdersFragment extends ParentFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (morders.size() > 0) {
-					Intent i = new Intent(currentActivity.getBaseContext(),
-								OrderInfoActivity.class);
-					
-					((DeliveryClientApplication) currentActivity.getApplication())
-							.setOrderId(orderItems.get(position).getId());
+					Intent i = new Intent(currentActivity.getBaseContext(),OrderInfoActivity.class);
+					((DeliveryClientApplication) currentActivity.getApplication()).setOrderId(orderItems.get(position).getId());
 					startActivity(i);
 				}
 			}
@@ -170,7 +163,4 @@ public class PendingOrdersFragment extends ParentFragment {
 		ft.commit();
 	}
 
-	private void showToast(String msg) {
-		Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-	}
 }

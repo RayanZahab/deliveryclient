@@ -30,7 +30,7 @@
             android:name="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
             android:icon="@drawable/moto"
             android:label="@string/title_activity_order_info"
-            android:parentActivityName="OrderInfoActivity"
+            android:parentActivityName="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
@@ -66,19 +66,18 @@
         <activity
             android:name="com.mobilive.delivery.client.view.listview.SelectAdress"
             android:label="@string/title_activity_select_adress"
-            
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName="LoginActivity"
+            android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.AddAddressActivity"
             android:label="@string/title_activity_test"
-            android:parentActivityName="SelectAdress"
+            android:parentActivityName="com.mobilive.delivery.client.view.activity.SelectAdress"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -92,8 +91,20 @@
             android:label="@string/title_activity_loading" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.ThankYouActivity"
+            android:name="com.mobilive.delivery.client.view.activity.RegisterConfirmationActivity"
+            android:label="@string/title_activity_register_confirmation"
+            android:parentActivityName="com.mobilive.delivery.client.view.activity.RegisterActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.mobilive.delivery.client.view.activity.ThankYouActivity"
             android:label="@string/title_activity_thank_you" >
+        </activity>
+        <activity
+            android:name="com.mobilive.delivery.client.view.activity.ForgetPasswordActivity"
+            android:label="@string/title_activity_forget_password" 
+            android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

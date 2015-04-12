@@ -83,11 +83,18 @@ public class LoginActivity extends Activity {
 		} else {
 			settings1.edit().remove("PREFS_NAME").commit();
 		}
+		TextView forgetPassword = (TextView) findViewById(R.id.forgotpassword);
+		forgetPassword.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(LoginActivity.this,ForgetPasswordActivity.class);
+				startActivity(i);
+			}
+		});
+		
 		TextView register = (TextView) findViewById(R.id.register);
 		register.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(LoginActivity.this,
-						RegisterActivity.class);
+				Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
 				startActivity(i);
 			}
 		});
@@ -263,10 +270,5 @@ public class LoginActivity extends Activity {
 								LoginActivity.this.finishAffinity();
 							}
 						}).setNegativeButton(R.string.no, null).show();
-	}
-	public  String getPhoneNumber(){
-		TelephonyManager tm = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-		String number = tm.getDeviceId();
-		return number;
 	}
 }

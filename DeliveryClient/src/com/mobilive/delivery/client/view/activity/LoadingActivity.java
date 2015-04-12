@@ -46,7 +46,6 @@ public class LoadingActivity extends Activity {
 	}
 
 	public void callMethod(String m, String s, String error) {
-		Log.d("ray", "calling method: " + m);
 		if (m.equals("finish"))
 			finish(s, error);
 	}

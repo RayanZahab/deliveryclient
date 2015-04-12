@@ -53,11 +53,11 @@ public class OrdersFragment extends ParentFragment {
 	ArrayList<Product> products = new ArrayList<Product>();
 	static int areaId = 0, shopId = 0, branchId = 0,
 			categoryId = 0, productId = 0;
-	static ArrayList<Item> mylist = new ArrayList<Item>();
+	ArrayList<Item> mylist = new ArrayList<Item>();
 	static Activity currentActivity;
 	static View view;
-	static int fragmentId;
-	static android.app.FragmentManager fragmentManager;
+	int fragmentId;
+	android.app.FragmentManager fragmentManager;
 	android.app.Fragment mContent;
 	boolean passedByOnCreate = false;
 	int call =-1;
@@ -242,7 +242,7 @@ public class OrdersFragment extends ParentFragment {
 			branchId = categoryId = 0;
 			shopId = id;
 			currentActivity.getActionBar().setTitle(getString(R.string.branches));
-			getBranches(id);
+			getBranches(id,areaId);
 		} else if (type.equals("categories")) {
 			categoryId = 0;
 			branchId = id;
@@ -324,8 +324,7 @@ public class OrdersFragment extends ParentFragment {
 	public void getShops(int areaId) {
 		Log.d("ray","getting shop myarea: "+areaId);
 		MainActivity.setShowHomeFragment(false);
-		String serverURL = new myURL("shops?business_id="+((DeliveryClientApplication) currentActivity.getApplication()).getBusinessId()
-				, "areas", areaId, 0).getURL();
+		String serverURL = new myURL("shops?business_id="+((DeliveryClientApplication) currentActivity.getApplication()).getBusinessId(), "areas", areaId, 0).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setShops", true,true);
 		p.get();
 	}
@@ -345,12 +344,11 @@ public class OrdersFragment extends ParentFragment {
 		updateList();
 	}
 
-	public void getBranches(int shopId) {
-		String serverURL = new myURL("branches", "shops", shopId, 30).getURL();
+	public void getBranches(int shopId, int areaId) {
+		String serverURL = new myURL("branches?area_id="+areaId, "shops", shopId, 30).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true,true);
 		p.get();
 	}
-
 	public void setBranches(String s, String error) {
 		branches = new APIManager().getBranchesByShop(s);
 		mylist = new ArrayList<Item>();

@@ -11,6 +11,7 @@ import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.MyJs;
+import com.mobilive.delivery.client.utilities.PhoneInfoManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.ValidationError;
 import com.mobilive.delivery.client.utilities.myURL;
@@ -82,7 +83,7 @@ public class ProfileFragment extends ParentFragment {
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(currentActivity,
 				android.R.layout.simple_spinner_item, list);
 		dataAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		langSp.setAdapter(dataAdapter);
 
 		nameTxt.setText(name);
@@ -103,33 +104,24 @@ public class ProfileFragment extends ParentFragment {
 				showAddresses();
 			}
 		});
-		
+
 		return rootView;
 	}
 	public void updateInfo() {
 		if (!passTxt.getText().toString().equals(pass2.getText().toString())) {
-			Toast.makeText(currentActivity, R.string.wrongcredentials,
-					Toast.LENGTH_SHORT).show();
-		} else {
+			Toast.makeText(currentActivity, R.string.wrongcredentials,Toast.LENGTH_SHORT).show();
+		}else {
 			String serverURL = new myURL(null, "customers", id, 0).getURL();
 			User user = new User(nameTxt.getText().toString(), phone, null, branchId, 0);
-			user.setEncPassword(passTxt
-					.getText().toString());
+			user.setEncPassword(passTxt.getText().toString());
+			user.setImei(PhoneInfoManager.getPhoneImei(currentActivity.getApplicationContext()));
 			ValidationError valid = user.validate(true);
 			if(valid.isValid(currentActivity))
-			{
-				//RZHelper p = new RZHelper(serverURL, currentActivity, "done", true);
-				//p.put(user);
-				new MyJs("done", currentActivity, ((DeliveryClientApplication) currentActivity.getApplication()),
-						"PUT", (Object) user, true, true).execute(serverURL);
-			}
-			
+				new MyJs("done", currentActivity, ((DeliveryClientApplication) currentActivity.getApplication()),"PUT", (Object) user, true, true).execute(serverURL);
 		}
 	}
 
 	public void done(String s, String error) {
-		Toast.makeText(currentActivity, "GOOD", Toast.LENGTH_SHORT)
-				.show();
 		String serverURL = new myURL(null, "customers", "login", 0).getURL();
 		User user = new User(phone, pass);
 		user.setEncPassword(pass);
@@ -147,7 +139,7 @@ public class ProfileFragment extends ParentFragment {
 			editor.putBoolean("isChecked", keeplog.isChecked());
 			editor.putString("token", user.getToken());
 			editor.putString("name", user.getName());
-			
+
 			if (langSp.getSelectedItem().equals(getString(R.string.english))) {
 				lang_abv = "en";
 			} else {
@@ -164,19 +156,16 @@ public class ProfileFragment extends ParentFragment {
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
 			config.locale = locale;
-
-			currentActivity.getBaseContext().getResources().updateConfiguration(config,
-					currentActivity.getBaseContext().getResources().getDisplayMetrics());
+			currentActivity.getBaseContext().getResources().updateConfiguration(config,currentActivity.getBaseContext().getResources().getDisplayMetrics());
 			new GlobalM().bkToNav(currentActivity, null);
 		} else {
-			Toast.makeText(currentActivity.getApplicationContext(), R.string.wrongcredentials,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(currentActivity.getApplicationContext(), R.string.wrongcredentials,Toast.LENGTH_SHORT).show();
 		}
 	}
 	public void showAddresses()
 	{
-	     Intent i = new Intent (currentActivity,SelectAdress.class);
-	     startActivity(i);
+		Intent i = new Intent (currentActivity,SelectAdress.class);
+		startActivity(i);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

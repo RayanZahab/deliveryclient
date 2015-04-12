@@ -1,0 +1,75 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="true"
+    android:orientation="vertical"
+    android:background="@color/gris" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="18dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="18dp" >
+
+            <TextView
+                android:id="@+id/choosecountry"
+                style="@style/mytextview"
+                android:layout_width="278dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_weight="0.07"
+                android:text="@string/confirmCodeDesc"
+                android:textColor="@color/redbg" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextbg"
+                android:ellipsize="start"
+                android:ems="10"
+                android:hint="@string/registerCode"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/redbg"
+                android:textColorHint="#bdbdbd"
+                android:textSize="16sp" >
+
+                <requestFocus />
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/redbg"
+            android:onClick="checkCode"
+            android:text="@string/confirmCode"
+            android:textColor="@color/yellow"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</ScrollView>

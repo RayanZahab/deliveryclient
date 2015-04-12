@@ -13,6 +13,7 @@
     <string name="password">Password </string>
     <string name="confirm_password">Confirm Password </string>
     <string name="submit">Submit</string>
+    <string name="confirmCode">Confirm Code</string>
     <string name="info">Info</string>
     <string name="categories">Categories</string>
     <string name="from">From:</string>
@@ -38,6 +39,7 @@
     <string name="preparerguy">Preparer</string>
     <string name="details">Details</string>
     <string name="name">Name</string>
+    <string name="registerCode">Register Code</string>
     <string name="textButton">TextButton</string>
     <string name="selectphoto">Select Photo</string>
     <string name="slash">/</string>
@@ -117,6 +119,8 @@
     <string name="select_location">Select Your location And Business Category</string>
     <string name="select_business">Select A Business Category</string>
     <string name="select_country">Country</string>
+    <string name="confirmCodeDesc">Dear Customer, you should get the Code by SMS please enter below to continue your registration..</string>
+    <string name="forgetPassDesc">Dear Customer, Enter your Number to get SMS which contains your new Password..</string>
     <string name="select_city">City</string>
     <string name="select_area">Area</string>
     <string name="select">Confirm Selection</string>
@@ -216,9 +220,11 @@
         <item>@drawable/ic_whats_hot</item>
     </array>
 
+    <string name="title_activity_register_confirmation">Confirm Code</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_product_info">ProductInfoActivity</string>
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="title_activity_thank_you">ThankYouActivity</string>
+    <string name="title_activity_forget_password">ForgetPasswordActivity</string>
 
 </resources>

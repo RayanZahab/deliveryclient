@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.ThankYouActivity;
 import com.mobilive.delivery.client.adapter.MyCustomAdapter;
 import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Cart;

@@ -7,11 +7,21 @@ import android.util.Log;
 public class Country {
 	private Integer id;
 	private String name;
-	private ArrayList<City> cities = new ArrayList<City>();
 	private String json;
+    private String countrCode;
+    private String isoCode;
+    
+	private ArrayList<City> cities = new ArrayList<City>();
+	
 	public Country(Integer id, String name) {
 		this.setId(id);
 		this.setName(name);
+	}
+	public Country(Integer id, String name,String countrCode, String isoCode) {
+		this.setId(id);
+		this.setName(name);
+		this.countrCode = countrCode;
+		this.isoCode = isoCode;
 	}
 	public Country(Integer id) {
 		this.setId(id);
@@ -56,5 +66,17 @@ public class Country {
 	}
 	public void setJson(String json) {
 		this.json = json;
+	}
+	public String getCountrCode() {
+		return countrCode;
+	}
+	public void setCountrCode(String countrCode) {
+		this.countrCode = countrCode;
+	}
+	public String getIsoCode() {
+		return isoCode;
+	}
+	public void setIsoCode(String isoCode) {
+		this.isoCode = isoCode;
 	}
 }

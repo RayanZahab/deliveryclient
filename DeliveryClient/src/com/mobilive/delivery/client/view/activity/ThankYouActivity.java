@@ -1,15 +1,17 @@
-package com.mobilive.delivery.client;
+package com.mobilive.delivery.client.view.activity;
 
-import com.mobilive.delivery.client.view.activity.MainActivity;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.R.id;
+import com.mobilive.delivery.client.R.layout;
+import com.mobilive.delivery.client.R.menu;
 
 public class ThankYouActivity extends Activity {
 

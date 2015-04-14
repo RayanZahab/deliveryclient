@@ -42,6 +42,7 @@ public class ProductInfoActivity extends Activity {
 	Spinner unitsSP;
 	GlobalM glob = new GlobalM();
 	ImageView plus, minus;
+	final Item item = new Item();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,34 +68,8 @@ public class ProductInfoActivity extends Activity {
 		} else {
 			getUnits(true);
 		}
-		final Item item = new Item();
-		item.setId(productId);
-
-		plus = (ImageView) findViewById(R.id.plus);
-		minus = (ImageView) findViewById(R.id.minus);
-		final TextView qtTxt = (TextView) findViewById(R.id.qtTxt);
-
-		plus.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				int qt = Integer.parseInt(qtTxt.getText().toString());
-				if (qt < 9) {
-					qt++;
-					qtTxt.setText("" + qt);
-					addToCart(item);
-				}
-
-			}
-		});
-		minus.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				int qt = Integer.parseInt(qtTxt.getText().toString());
-				if (qt > 0) {
-					qt--;
-					qtTxt.setText("" + qt);
-					rmvFromCart(item);
-				}
-			}
-		});
+		
+		
 
 	}
 
@@ -148,7 +123,7 @@ public class ProductInfoActivity extends Activity {
 		name.setText(currentProduct.getName());
 		desc.setText(currentProduct.getDescription());
 		price.setText("" + currentProduct.getPrice());
-
+		item.setPrice(currentProduct.getPrice());
 		new ImageTask((ImageView) findViewById(R.id.productimg),
 				ProductInfoActivity.this).execute(currentProduct.getPhoto()
 				.getUrl());
@@ -156,6 +131,33 @@ public class ProductInfoActivity extends Activity {
 				.getProductCount(currentProduct);
 		qtTxt.setText(i + "");
 
+		item.setId(productId);
+
+		plus = (ImageView) findViewById(R.id.plus);
+		minus = (ImageView) findViewById(R.id.minus);
+		final TextView qtTxt = (TextView) findViewById(R.id.qtTxt);
+
+		plus.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				int qt = Integer.parseInt(qtTxt.getText().toString());
+				if (qt < 9) {
+					qt++;
+					qtTxt.setText("" + qt);
+					addToCart(item);
+				}
+
+			}
+		});
+		minus.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				int qt = Integer.parseInt(qtTxt.getText().toString());
+				if (qt > 0) {
+					qt--;
+					qtTxt.setText("" + qt);
+					rmvFromCart(item);
+				}
+			}
+		});
 		getUnits(false);
 	}
 

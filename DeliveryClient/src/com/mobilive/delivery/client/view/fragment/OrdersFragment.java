@@ -371,6 +371,9 @@ public class OrdersFragment extends ParentFragment {
 			it.setName(myBranch.toString());
 			it.setType("branch");
 			it.setId(myBranch.getId());
+			it.setTime(myBranch.getEstimation_time());
+			it.setCharge(myBranch.getDelivery_charge());
+			it.setMinimum(myBranch.getMin_amount());
 			mylist.add(it);
 		}
 		updateList();

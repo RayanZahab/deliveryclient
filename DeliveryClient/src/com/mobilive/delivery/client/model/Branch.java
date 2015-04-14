@@ -14,7 +14,7 @@ public class Branch {
 	private String description;
 	private Area area;
 	private String address;
-	private String estimation_time;
+	private String estimation_time, min_amount, delivery_charge;
 	private int is_available;
 	private Shop shop;
 	private String longitude;
@@ -237,5 +237,17 @@ public class Branch {
 
 	public void setOpenHours(OpenHours openHours) {
 		this.openHours = openHours;
+	}
+	public String getMin_amount() {
+		return min_amount;
+	}
+	public void setMin_amount(String min_amount) {
+		this.min_amount = min_amount;
+	}
+	public String getDelivery_charge() {
+		return delivery_charge;
+	}
+	public void setDelivery_charge(String delivery_charge) {
+		this.delivery_charge = delivery_charge;
 	}
 }

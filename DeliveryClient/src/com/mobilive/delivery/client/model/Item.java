@@ -13,6 +13,7 @@ public class Item {
 	private boolean isNew;
 	private Integer quantity;
 	private double totalPrice;
+	private String time,charge, minimum;
 
 	public Item(){}
 	
@@ -113,5 +114,29 @@ public class Item {
 	}
 	public String getDate() {
 		return this.date;
+	}
+
+	public String getCharge() {
+		return charge;
+	}
+
+	public void setCharge(String charge) {
+		this.charge = charge;
+	}
+
+	public String getMinimum() {
+		return minimum;
+	}
+
+	public void setMinimum(String minimum) {
+		this.minimum = minimum;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

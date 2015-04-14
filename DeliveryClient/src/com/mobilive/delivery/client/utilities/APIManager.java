@@ -19,6 +19,7 @@ import com.mobilive.delivery.client.model.CodeVerificationRequest;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Customer;
 import com.mobilive.delivery.client.model.ForgetPasswordRequest;
+import com.mobilive.delivery.client.model.Gender;
 import com.mobilive.delivery.client.model.OpenHours;
 import com.mobilive.delivery.client.model.Order;
 import com.mobilive.delivery.client.model.OrderItem;
@@ -43,9 +44,15 @@ public class APIManager {
 				int id = Integer.parseInt(jsonResponse.optString("id")
 						.toString());
 				String token = jsonResponse.optString("auth_token").toString();
+				String gender = jsonResponse.optString("gender").toString();
 				Log.d("ray", "token: " + token);
 				String name = jsonResponse.optString("name").toString();
-				return new Customer(id, name, token);
+				Customer c = new Customer(id, name, token);
+				if(gender.equals("Male"))
+					c.setGender(Gender.Male);
+				else
+					c.setGender(Gender.Famale);
+				return c;
 
 			}
 		} catch (JSONException e) {

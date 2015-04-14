@@ -9,6 +9,7 @@ import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Cart;
 import com.mobilive.delivery.client.model.CartItem;
 import com.mobilive.delivery.client.model.Country;
+import com.mobilive.delivery.client.model.Gender;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Order;
 import com.mobilive.delivery.client.model.OrderItem;
@@ -25,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,7 @@ public class PreviewActivity extends Activity {
 	ArrayList<Address> myAddresses;
 	String name, addName, phoneVal;
 	int addId;
+	ImageView genderImg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,15 @@ public class PreviewActivity extends Activity {
 		customerName.setText("" + name);
 		customerPhone.setText("" + phoneVal);
 		customerAdd.setText(addName.replace(",", "\n"));
+		String genderVal = settings1.getString("gender", "");
+		if(genderVal.equals(Gender.Male.toString()))
+		{
+			genderImg.setImageResource(R.drawable.malepicto);
+		}
+		else
+		{
+			genderImg.setImageResource(R.drawable.femalepicto);			
+		}
 		preview();
 	}
 

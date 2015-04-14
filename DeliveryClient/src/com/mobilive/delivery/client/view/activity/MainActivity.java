@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 	public static ArrayList<NavDrawerItem> navDrawerItems;
 	private static NavDrawerListAdapter adapter;
 	public static List<Fragment> fragments = new ArrayList<Fragment>();	
-	public int categoryId = 0;
+	public int categoryId = 0, branchId = 0;
 	int fragmentIndex = 0;
 
 	@SuppressLint("NewApi")
@@ -98,6 +98,7 @@ public class MainActivity extends Activity {
 			fragmentIndex = extras.getInt("fragmentIndex");
 			categoryId = extras.getInt("categoryId");			
 		}
+		
 		addSlideMenu();
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -204,6 +205,11 @@ public class MainActivity extends Activity {
 		// update the main content by replacing fragments
 		ParentFragment fragment = null;
 		Bundle args = new Bundle();
+		if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0)
+		{
+			branchId = ((DeliveryClientApplication) getApplication()).getBranchId();	
+			position = 7;
+		}
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
@@ -250,6 +256,7 @@ public class MainActivity extends Activity {
 		case 7:
 			fragment = new OrdersFragment();
 			args.putInt("categoryId", categoryId);
+			args.putInt("branchId", branchId);
 			fragment.setArguments(args);
 			fragments.add(fragment);
 			break;

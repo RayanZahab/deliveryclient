@@ -198,7 +198,9 @@ public class HomeFragment extends ParentFragment implements OnItemSelectedListen
 			MainActivity.fragments.add(ordersFragment);
 			fragmentTransaction.replace(fragmentId, ordersFragment);	
 			Bundle arguments = new Bundle();
-			arguments.putInt("areaId", ((Area)areaSpinner.getSelectedItem()).getId());
+			int areaId = ((Area)areaSpinner.getSelectedItem()).getId();
+			arguments.putInt("areaId", areaId);
+			((DeliveryClientApplication) currentActivity.getApplication()).setAreaId(areaId);
 			ordersFragment.setArguments(arguments);
 			fragmentTransaction.commit();
 		}else

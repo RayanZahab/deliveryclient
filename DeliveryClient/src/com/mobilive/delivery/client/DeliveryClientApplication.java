@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class DeliveryClientApplication extends Application {
 	private String token, orderStatus;
-	private int shopId = 0, branchId = 0, categoryId = 0, productId = 0,
+	private int areaId = 0, shopId = 0, branchId = 0, categoryId = 0, productId = 0,
 			orderId = 0, userId = 0 , addressId =0, businessId =0;
 	private boolean admin, prep, delivery, keepme;
 	public static TransparentProgressDialog loader;
@@ -300,6 +300,12 @@ public class DeliveryClientApplication extends Application {
 	}
 	public void setBusinessId(int businessId) {
 		this.businessId = businessId;
+	}
+	public int getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(int areaId) {
+		this.areaId = areaId;
 	}
 
 }

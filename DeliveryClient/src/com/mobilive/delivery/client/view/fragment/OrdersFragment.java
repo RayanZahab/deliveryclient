@@ -79,8 +79,9 @@ public class OrdersFragment extends ParentFragment {
 		userId = ((DeliveryClientApplication) currentActivity.getApplication()).getUserId();
 		if(getArguments()!=null)
 		{
-			areaId = getArguments().getInt("areaId");
+			areaId = ((DeliveryClientApplication) currentActivity.getApplication()).getAreaId();
 			categoryId = getArguments().getInt("categoryId");
+			branchId = getArguments().getInt("branchId");
 			mylist = null;
 			depth=0;
 		}
@@ -122,14 +123,23 @@ public class OrdersFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((DeliveryClientApplication) currentActivity.getApplication())
 				.setCurrentFragment(this);
-		if(call!=-1 ||categoryId!=0)
+		if(call!=-1 ||categoryId!=0 )
 		{
 			depth = ((DeliveryClientApplication) currentActivity.getApplication())
 					.getDepth();
+			
 			getList(sequence.get(((DeliveryClientApplication) currentActivity.getApplication())
 					.getDepth()),
 					((DeliveryClientApplication) currentActivity.getApplication())
 							.getDepthVal());
+		}
+		else if (branchId != 0)
+		{
+			depth = 3;
+			((DeliveryClientApplication) currentActivity.getApplication())
+			.setDepths(depth,branchId);
+			
+			getList(sequence.get(depth),branchId);
 		}
 	}
 
@@ -246,10 +256,14 @@ public class OrdersFragment extends ParentFragment {
 		} else if (type.equals("categories")) {
 			categoryId = 0;
 			branchId = id;
+			categoryId = 0;
+			((DeliveryClientApplication) currentActivity.getApplication()).setCategoryId(id);
 			currentActivity.getActionBar().setTitle(getString(R.string.categories));
+			((DeliveryClientApplication) currentActivity.getApplication()).setBranchId(id);
 			getCategories(id);
 		} else if (type.equals("products")) {
 			categoryId = id;
+			((DeliveryClientApplication) currentActivity.getApplication()).setCategoryId(id);
 			currentActivity.getActionBar().setTitle(getString(R.string.products));
 			getProducts(branchId, id);
 			Log.d("rya","here");
@@ -346,7 +360,7 @@ public class OrdersFragment extends ParentFragment {
 
 	public void getBranches(int shopId, int areaId) {
 		String serverURL = new myURL("branches?area_id="+areaId, "shops", shopId, 30).getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true,true);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true);
 		p.get();
 	}
 	public void setBranches(String s, String error) {
@@ -365,7 +379,7 @@ public class OrdersFragment extends ParentFragment {
 	public void getCategories(int branchId) {
 		String serverURL = new myURL("categories", "branches", branchId, 30)
 				.getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "setCategories", true,true);
+		RZHelper p = new RZHelper(serverURL, currentActivity, "setCategories", true);
 		p.get();
 	}
 

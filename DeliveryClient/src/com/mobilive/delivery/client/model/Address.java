@@ -186,12 +186,13 @@ public class Address {
 		}
 		String addressString = "";
 		String[] part1 = new String[]{this.getCountryName(),this.getCityName(),this.getAreaName()};
-		String[] part2 = new String[]{this.building, this.floor,this.details};
+		String[] part2 = new String[]{this.street,this.building, this.floor,this.details};
 		
 		addressString = strJoin(part1,",") + " \n"+ strJoin(part2,",") ;
 		
 		return addressString;
 	}
+	
 	public static String strJoin(String[] aArr, String sSep) {
 	    StringBuilder sbStr = new StringBuilder();
 	    for (int i = 0, il = aArr.length; i < il; i++) {

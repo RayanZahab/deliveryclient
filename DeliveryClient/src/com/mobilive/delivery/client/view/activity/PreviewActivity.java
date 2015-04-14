@@ -1,6 +1,5 @@
 package com.mobilive.delivery.client.view.activity;
 
-
 import java.util.ArrayList;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
@@ -36,6 +35,8 @@ public class PreviewActivity extends Activity {
 	MyCustomAdapter dataAdapter = null;
 	Order myOrder;
 	ArrayList<Address> myAddresses;
+	String name, addName, phoneVal;
+	int addId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,75 +47,43 @@ public class PreviewActivity extends Activity {
 		myOrder = new Order();
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
+
+		name = settings1.getString("name", "");
+		addName = settings1.getString("addressName", "");
+		addId = settings1.getInt("addressId", 0);
+		phoneVal = settings1.getString("phone", "");
+		TextView customerName = (TextView) findViewById(R.id.customerName);
+		TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
+		TextView customerPhone = (TextView) findViewById(R.id.customerphone);
+		customerName.setText("" + name);
+		customerPhone.setText("" + phoneVal);
+		customerAdd.setText(addName);
 		preview();
-	}
-
-	public void getAddresses(int userId) {
-		String serverURL = new myURL("addresses", "customers", ((DeliveryClientApplication) this.getApplication()).getUserId(), 0).getURL();
-		
-		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
-		p.get();
-	}
-	public void selectAdd(View v)
-	{
-		Intent i = new Intent(this, SelectAdress.class);
-		i.putExtra("previous", "preview");
-		 startActivity(i);
-	}
-
-	public void getAdd(String s, String error) {
-		if (error == null) {
-			TextView customerName = (TextView) findViewById(R.id.customerName);
-			TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
-			TextView customerPhone = (TextView) findViewById(R.id.customerphone);
-
-			SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
-
-			String name = settings1.getString("name", "");
-			String phoneVal = settings1.getString("phone", "");
-			
-			customerName.setText(" " + name);
-			
-			customerPhone.setText(""+phoneVal);
-			myAddresses = new APIManager().getAddress(s);
-			ArrayList<Country> countries = ((DeliveryClientApplication) this.getApplication())
-					.getCountries();
-			for(int i =0;i<myAddresses.size();i++)
-			{
-				if(myAddresses.get(i).isDefault())
-				{
-					customerAdd.setText(myAddresses.get(i).toString(countries));
-					break;
-				}
-			}
-			
-		}
 	}
 
 	public void submit(View v) {
 		TextView noteTxt = (TextView) findViewById(R.id.note);
 		myOrder.setNote(noteTxt.getText().toString());
 		String serverURL = new myURL("orders", null, 0, 0).getURL();
-		
+
 		RZHelper p = new RZHelper(serverURL, this, "afterCreation", true);
 		p.post(myOrder);
 	}
 
 	public void callMethod(String m, String s, String error) {
-		if(m.equals("setAdd"))
-			getAdd(s, error);
-		else
+
 		{
 			Toast.makeText(getApplicationContext(), R.string.success_order,
 					Toast.LENGTH_SHORT).show();
-			gotomain();
+			thankyou();
 		}
 	}
-	public void gotomain()
-	{
-		//((DeliveryClientApplication) this.getApplication()).emptyCart();
-		 Intent i = new Intent(this, ThankYouActivity.class);
-		 startActivity(i);
+
+	public void thankyou() {
+		// ((DeliveryClientApplication) this.getApplication()).emptyCart();
+		Intent i = new Intent(this, ThankYouActivity.class);
+		startActivity(i);
 	}
 
 	public void preview() {
@@ -137,10 +106,11 @@ public class PreviewActivity extends Activity {
 		}
 		myOrder.setOrderItems(ois);
 
-		int id = ((DeliveryClientApplication) this.getApplication()).getUserId();
-		int addressId = ((DeliveryClientApplication) this.getApplication()).getAddressId();
+		int id = ((DeliveryClientApplication) this.getApplication())
+				.getUserId();
+
 		myOrder.setCustomer_id(id);
-		myOrder.setAddress_id(addressId);
+		myOrder.setAddress_id(addId);
 		myOrder.setCount(cart.getAllCount());
 		myOrder.setTotal(cart.getTotalPrice());
 
@@ -148,10 +118,10 @@ public class PreviewActivity extends Activity {
 
 		dataAdapter = new MyCustomAdapter(this, R.layout.row_preview, mylist);
 		listView.setAdapter(dataAdapter);
-		
+
 		TextView total = (TextView) findViewById(R.id.allTotal);
-		total.setText(""+((DeliveryClientApplication) this.getApplication()).getMyCart().getTotalPrice());
-		getAddresses(id);
+		total.setText("" + cart.getTotalPrice());
+		// getAddresses(id);
 	}
 
 	@Override

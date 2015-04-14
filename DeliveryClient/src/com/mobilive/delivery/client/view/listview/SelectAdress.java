@@ -152,11 +152,11 @@ public class SelectAdress extends ListActivity {
 						if (textView != null) {
 							textView.setTextColor(Color.RED);
 						}
-						String serverURL = new myURL("set_default",
-								"customers/addresses", mylist.get(position)
-										.getId(), 0).getURL();
 						defaultAddId = mylist.get(position)
 								.getId();
+						String serverURL = new myURL("set_default",
+								"customers/addresses", defaultAddId, 0).getURL();
+						Log.d("ray","setting default: "+defaultAddId +" => "+serverURL);
 						defaultAddName = mylist.get(position).toString();
 						setDefault(defaultAddId,defaultAddName);
 						RZHelper p = new RZHelper(serverURL, current,
@@ -176,6 +176,8 @@ public class SelectAdress extends ListActivity {
 		
 		editor.putInt("addressId", addId);
 		editor.putString("addressName", addName);
+		Log.d("ray","pref saving default: "+defaultAddId );
+		((DeliveryClientApplication) this.getApplication()).setAddressId(addId);
 		editor.commit();
 	}
 

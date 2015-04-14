@@ -40,7 +40,6 @@ public class CartFragment extends ParentFragment {
 	int userId = 0;
 	ArrayList<Address> Addresses ;
 	TextView name,phone;
-	int addressId = 0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,11 +80,8 @@ public class CartFragment extends ParentFragment {
 				"PREFS_NAME", 0);
 		String nameVal = settings1.getString("name", "");
 		String phoneVal = settings1.getString("phone", "");
-		String addVal = settings1.getString("addressName", "");
-		addressId = settings1.getInt("addressId", 0);
 		name.setText(nameVal);
 		phone.setText(phoneVal);
-		//address.setText(addVal);		
 		
 		getProducts();
 		updateFooter();

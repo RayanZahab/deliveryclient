@@ -199,6 +199,7 @@ public class LoginActivity extends Activity {
 			editor.putString("name", user.getName());
 			editor.putString("pass", password.getText().toString());
 			editor.putString("phone", username.getText().toString());
+			editor.putString("gender", user.getGender().toString());
 			editor.commit();
 			((DeliveryClientApplication) this.getApplication()).setGlobals();
 			Intent i = new Intent(this, LoadingActivity.class);

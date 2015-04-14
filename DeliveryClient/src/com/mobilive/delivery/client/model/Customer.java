@@ -12,6 +12,7 @@ public class Customer {
 	private int default_address_id;
 	private Photo photo;
 	private String token;
+	private Gender gender;
 
 	public Customer(int id, String name, String username, String password,
 			String phone, String mobile, int is_allowed, int default_address_id) {
@@ -123,5 +124,13 @@ public class Customer {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 }

@@ -9,6 +9,7 @@ import com.mobilive.delivery.client.adapter.MyCustomAdapter;
 import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Cart;
 import com.mobilive.delivery.client.model.CartItem;
+import com.mobilive.delivery.client.model.Gender;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Product;
 import com.mobilive.delivery.client.view.activity.AddAddressActivity;
@@ -26,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ public class CartFragment extends ParentFragment {
 	int userId = 0;
 	ArrayList<Address> Addresses ;
 	TextView name,phone;
+	ImageView genderImg;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +59,8 @@ public class CartFragment extends ParentFragment {
 		name = (TextView) view.findViewById(R.id.customerName);
 		//address = (TextView) view.findViewById(R.id.customerAdd);
 		phone = (TextView) view.findViewById(R.id.customerphone);
+		genderImg = (ImageView)  view.findViewById(R.id.gender);
+		
 		return view;
 	}
 	
@@ -83,6 +88,15 @@ public class CartFragment extends ParentFragment {
 		name.setText(nameVal);
 		phone.setText(phoneVal);
 		
+		String genderVal = settings1.getString("gender", "");
+		if(genderVal.equals(Gender.Male.toString()))
+		{
+			genderImg.setImageResource(R.drawable.malepicto);
+		}
+		else
+		{
+			genderImg.setImageResource(R.drawable.femalepicto);			
+		}
 		getProducts();
 		updateFooter();
 	}

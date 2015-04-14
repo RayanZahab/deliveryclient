@@ -58,7 +58,7 @@ public class PreviewActivity extends Activity {
 		TextView customerPhone = (TextView) findViewById(R.id.customerphone);
 		customerName.setText("" + name);
 		customerPhone.setText("" + phoneVal);
-		customerAdd.setText(addName);
+		customerAdd.setText(addName.replace(",", "\n"));
 		preview();
 	}
 
@@ -81,7 +81,6 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void thankyou() {
-		// ((DeliveryClientApplication) this.getApplication()).emptyCart();
 		Intent i = new Intent(this, ThankYouActivity.class);
 		startActivity(i);
 	}
@@ -121,7 +120,6 @@ public class PreviewActivity extends Activity {
 
 		TextView total = (TextView) findViewById(R.id.allTotal);
 		total.setText("" + cart.getTotalPrice());
-		// getAddresses(id);
 	}
 
 	@Override

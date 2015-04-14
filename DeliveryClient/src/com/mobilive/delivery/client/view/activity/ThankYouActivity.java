@@ -28,6 +28,7 @@ public class ThankYouActivity extends Activity {
 
 	public void gotomain(View v) {
 		Intent i = new Intent(this, MainActivity.class);
+		i.putExtra("fragmentIndex", 3);
 		startActivity(i);
 	}
 

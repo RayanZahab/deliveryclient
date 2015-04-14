@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -271,14 +272,21 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 	}
 
 	class branchHolder extends ViewHolder {
-		TextView name;
+		TextView name,time,minimum,charge;
 		ImageView picture;
 
 		public branchHolder(View convertView, Item item) {
-			TextView name = (TextView) convertView.findViewById(R.id.name);
+			name = (TextView) convertView.findViewById(R.id.name);
+			name.setText(item.getName());
+		
+			time = (TextView) convertView.findViewById(R.id.estimatedtime);
+			time.setText(""+
+							item.getTime());
+			minimum = (TextView) convertView.findViewById(R.id.minorder);
+			minimum.setText(""+item.getMinimum());
+			charge = (TextView) convertView.findViewById(R.id.delivcharge);
+			charge.setText(""+item.getCharge());
 			
-			name.setText(
-					item.getName());
 		}
 	}
 

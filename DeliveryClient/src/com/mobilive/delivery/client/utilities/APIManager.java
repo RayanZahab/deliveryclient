@@ -423,6 +423,7 @@ public class APIManager {
 			if (!errorCheck(jsonResponse)) {
 				int id;
 				String name, address, area_str;
+				String time,charge, minimum;
 				ArrayList<Area> areas;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
@@ -437,8 +438,14 @@ public class APIManager {
 						address = jsonChildNode.optString("address").toString();
 						area_str = jsonChildNode.optString("area").toString();
 						// areas = getAreasByCity(area_str);
-						gridArray.add(new Branch(id, name, new Area(1, "area"),
-								address));
+						time = jsonChildNode.optString("delivery_expected_time").toString();
+						charge = jsonChildNode.optString("delivery_charge").toString();
+						minimum = jsonChildNode.optString("min_amount").toString();
+						Branch b = new Branch(id, name, null, null);
+						b.setMin_amount(minimum);
+						b.setEstimation_time(time);
+						b.setDelivery_charge(charge);
+						gridArray.add(b);
 					}
 				}
 			}

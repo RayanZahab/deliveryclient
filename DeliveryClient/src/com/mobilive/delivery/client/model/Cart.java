@@ -59,7 +59,6 @@ public class Cart {
 		} else {
 			CartItem ci = new CartItem(p, 1);
 			cartItems.add(ci);
-
 		}
 		updateFooter(fragmentClass);
 	}

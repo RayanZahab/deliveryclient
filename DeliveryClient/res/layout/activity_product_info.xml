@@ -60,7 +60,7 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2000"
+                android:text=""
                 android:textColor="@color/redbg"/>
             <TextView 
                 android:id="@+id/lira"
@@ -80,13 +80,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="4"
+                android:text=""
                 android:textColor="@color/redbg"/>
             <TextView 
                 android:id="@+id/units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kg"
+                android:text=""
                 android:textColor="@color/redbg"/>            
         </LinearLayout>
         

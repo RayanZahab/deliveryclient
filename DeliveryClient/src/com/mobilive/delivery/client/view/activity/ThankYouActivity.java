@@ -8,10 +8,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.R.id;
-import com.mobilive.delivery.client.R.layout;
-import com.mobilive.delivery.client.R.menu;
 
 public class ThankYouActivity extends Activity {
 
@@ -27,6 +25,7 @@ public class ThankYouActivity extends Activity {
 	}
 
 	public void gotomain(View v) {
+		((DeliveryClientApplication) this.getApplication()).emptyCart();
 		Intent i = new Intent(this, MainActivity.class);
 		i.putExtra("fragmentIndex", 3);
 		startActivity(i);

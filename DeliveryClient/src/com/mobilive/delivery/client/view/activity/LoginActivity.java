@@ -4,6 +4,24 @@ package com.mobilive.delivery.client.view.activity;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.model.Area;
@@ -14,26 +32,6 @@ import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
@@ -173,13 +171,16 @@ public class LoginActivity extends Activity {
 	}
 
 	public void login(View view) {
-		String serverURL = new myURL(null, "customers", "login", 0).getURL();
-
-		User user = new User(username.getText().toString(), null);
-		user.setEncPassword(password.getText().toString());
-
-		RZHelper p = new RZHelper(serverURL, this, "getLoggedIn", true);
-		p.post(user);
+		if(_validateLogIn(username,password)){
+			String countryCode= "961";
+			String serverURL = new myURL(null, "customers", "login", 0).getURL();
+			User user = new User(countryCode+username.getText().toString(), null);
+			user.setEncPassword(password.getText().toString());
+			RZHelper p = new RZHelper(serverURL, this, "getLoggedIn", true);
+			p.post(user);
+		}else{
+			Toast.makeText(getApplicationContext(), "please enter User Name and Password",Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void getLoggedIn(String s, String error) {
@@ -242,6 +243,11 @@ public class LoginActivity extends Activity {
 		if (m.equals("getLoggedIn"))
 			getLoggedIn(s, error);
 
+	}
+	
+	private boolean _validateLogIn(EditText userName, EditText pass) {
+		return  userName.getText()!=null && userName.getText().length()>0 
+				&& pass.getText()!=null && pass.getText().length()>0;
 	}
 
 	public void forgotpassword(View view) {

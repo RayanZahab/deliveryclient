@@ -223,15 +223,12 @@ public class MainActivity extends Activity {
 			fragment = new ProfileFragment();
 			fragments.add(fragment);
 			break;
-
 		case 3:
 			fragment = new PendingOrdersFragment();
 			args.putString("orders", "pending");
 			fragment.setArguments(args);
 			fragments.add(fragment);
-			
 			break;
-
 		case 4:
 			fragment = new PendingOrdersFragment();
 			args.putString("orders", "closed");

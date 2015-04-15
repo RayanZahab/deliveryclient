@@ -2,34 +2,31 @@ package com.mobilive.delivery.client.view.activity;
 
 import java.util.ArrayList;
 
-import com.mobilive.delivery.client.DeliveryClientApplication;
-import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.adapter.MyCustomAdapter;
-import com.mobilive.delivery.client.model.Address;
-import com.mobilive.delivery.client.model.Cart;
-import com.mobilive.delivery.client.model.CartItem;
-import com.mobilive.delivery.client.model.Country;
-import com.mobilive.delivery.client.model.Gender;
-import com.mobilive.delivery.client.model.Item;
-import com.mobilive.delivery.client.model.Order;
-import com.mobilive.delivery.client.model.OrderItem;
-import com.mobilive.delivery.client.model.Product;
-import com.mobilive.delivery.client.utilities.APIManager;
-import com.mobilive.delivery.client.utilities.RZHelper;
-import com.mobilive.delivery.client.utilities.myURL;
-import com.mobilive.delivery.client.view.listview.SelectAdress;
-
-import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mobilive.delivery.client.DeliveryClientApplication;
+import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.adapter.MyCustomAdapter;
+import com.mobilive.delivery.client.model.Address;
+import com.mobilive.delivery.client.model.Cart;
+import com.mobilive.delivery.client.model.CartItem;
+import com.mobilive.delivery.client.model.Gender;
+import com.mobilive.delivery.client.model.Item;
+import com.mobilive.delivery.client.model.Order;
+import com.mobilive.delivery.client.model.OrderItem;
+import com.mobilive.delivery.client.model.Product;
+import com.mobilive.delivery.client.utilities.RZHelper;
+import com.mobilive.delivery.client.utilities.myURL;
 
 public class PreviewActivity extends Activity {
 	Cart cart;
@@ -59,6 +56,7 @@ public class PreviewActivity extends Activity {
 		TextView customerName = (TextView) findViewById(R.id.customerName);
 		TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
 		TextView customerPhone = (TextView) findViewById(R.id.customerphone);
+		genderImg = (ImageView)findViewById(R.id.gender);
 		customerName.setText("" + name);
 		customerPhone.setText("" + phoneVal);
 		customerAdd.setText(addName.replace(",", "\n"));
@@ -74,22 +72,17 @@ public class PreviewActivity extends Activity {
 		preview();
 	}
 
-	public void submit(View v) {
+	public void afterCreationSubmit(View v) {
 		TextView noteTxt = (TextView) findViewById(R.id.note);
 		myOrder.setNote(noteTxt.getText().toString());
 		String serverURL = new myURL("orders", null, 0, 0).getURL();
-
 		RZHelper p = new RZHelper(serverURL, this, "afterCreation", true);
 		p.post(myOrder);
 	}
 
 	public void callMethod(String m, String s, String error) {
-
-		{
-			Toast.makeText(getApplicationContext(), R.string.success_order,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), R.string.success_order,Toast.LENGTH_SHORT).show();
 			thankyou();
-		}
 	}
 
 	public void thankyou() {

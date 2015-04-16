@@ -368,7 +368,7 @@ public class MainActivity extends Activity {
 				}
 
 			}
-		} else if (m.equals("done")) {
+		} else if (m.equals("done") || m.equals("getLoggedIn")) {
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(ProfileFragment.class)) {
 					Method returnFunction;

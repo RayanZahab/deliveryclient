@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
+import com.mobilive.delivery.client.view.activity.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -45,12 +46,10 @@ public class GlobalM {
 		Intent i;
 		Log.d("raya", "backkkkkkkkkk2: "+msg);
 		
-		/*
-		if (admin)
-			i = new Intent(a, NavigationActivity.class);
-		else
-			i = new Intent(a, OrdersActivity.class);
-*/
+		i = new Intent(a, MainActivity.class);
+		
+			i.putExtra("fragmentIndex", 0);			
+		
 		if (msg != null && !msg.isEmpty()) {
 			Toast t = Toast.makeText(a.getApplicationContext(), msg,
 					Toast.LENGTH_SHORT);
@@ -61,6 +60,8 @@ public class GlobalM {
 		}/*
 		if (((DeliveryClient) a.getApplication()).getToken() != null)
 			a.startActivity(i);*/
+
+		a.startActivity(i); 
 			
 	}
 	public void showError(Activity from, String msg)

@@ -15,6 +15,7 @@ import com.mobilive.delivery.client.utilities.PhoneInfoManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.ValidationError;
 import com.mobilive.delivery.client.utilities.myURL;
+import com.mobilive.delivery.client.view.activity.MainActivity;
 import com.mobilive.delivery.client.view.listview.SelectAdress;
 
 import android.app.Activity;
@@ -22,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +54,7 @@ public class ProfileFragment extends ParentFragment {
 		rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 		currentActivity = getActivity();
 		super.onCreate(savedInstanceState);
-
+ 
 		usernameTxt = (EditText) rootView.findViewById(R.id.user_name);
 		nameTxt = (EditText) rootView.findViewById(R.id.name);
 		passTxt = (EditText) rootView.findViewById(R.id.password);
@@ -123,13 +125,14 @@ public class ProfileFragment extends ParentFragment {
 
 	public void done(String s, String error) {
 		String serverURL = new myURL(null, "customers", "login", 0).getURL();
-		User user = new User(phone, pass);
-		user.setEncPassword(pass);
+		User user = new User("961"+phone, passTxt.getText().toString());
+		user.setEncPassword(passTxt.getText().toString());
 		RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
 		p.post(user);
 	}
 
 	public void getLoggedIn(String s, String error) {
+		Log.d("ray","hereeeeeee");
 		if (error == null) {
 			Customer user = new APIManager().getLogedInUser(s);
 			CheckBox keeplog = (CheckBox) rootView.findViewById(R.id.keeploggedin);
@@ -150,6 +153,7 @@ public class ProfileFragment extends ParentFragment {
 			editor.putString("pass", pass);
 
 			editor.commit();
+			Log.d("ray","hereeeeeee");
 
 			((DeliveryClientApplication) currentActivity.getApplication()).setGlobals();
 			Locale locale = new Locale(lang_abv);
@@ -157,10 +161,13 @@ public class ProfileFragment extends ParentFragment {
 			Configuration config = new Configuration();
 			config.locale = locale;
 			currentActivity.getBaseContext().getResources().updateConfiguration(config,currentActivity.getBaseContext().getResources().getDisplayMetrics());
-			new GlobalM().bkToNav(currentActivity, null);
+			new GlobalM().bkToNav(currentActivity, "Profile updated succ");
+			
+			
 		} else {
 			Toast.makeText(currentActivity.getApplicationContext(), R.string.wrongcredentials,Toast.LENGTH_SHORT).show();
 		}
+		Log.d("ray","hereeeeeee");
 	}
 	public void showAddresses()
 	{

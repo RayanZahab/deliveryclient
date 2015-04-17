@@ -4,20 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.mobilive.delivery.client.DeliveryClientApplication;
-import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.model.Customer;
-import com.mobilive.delivery.client.model.User;
-import com.mobilive.delivery.client.utilities.APIManager;
-import com.mobilive.delivery.client.utilities.GlobalM;
-import com.mobilive.delivery.client.utilities.MyJs;
-import com.mobilive.delivery.client.utilities.PhoneInfoManager;
-import com.mobilive.delivery.client.utilities.RZHelper;
-import com.mobilive.delivery.client.utilities.ValidationError;
-import com.mobilive.delivery.client.utilities.myURL;
-import com.mobilive.delivery.client.view.activity.MainActivity;
-import com.mobilive.delivery.client.view.listview.SelectAdress;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +19,19 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.mobilive.delivery.client.DeliveryClientApplication;
+import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.model.Customer;
+import com.mobilive.delivery.client.model.User;
+import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.GlobalM;
+import com.mobilive.delivery.client.utilities.MyJs;
+import com.mobilive.delivery.client.utilities.PhoneInfoManager;
+import com.mobilive.delivery.client.utilities.RZHelper;
+import com.mobilive.delivery.client.utilities.ValidationError;
+import com.mobilive.delivery.client.utilities.myURL;
+import com.mobilive.delivery.client.view.listview.SelectAdress;
 
 public class ProfileFragment extends ParentFragment {
 	Activity currentActivity;

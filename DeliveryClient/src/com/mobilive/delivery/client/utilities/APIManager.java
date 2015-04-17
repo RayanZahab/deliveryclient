@@ -1251,6 +1251,7 @@ public class APIManager {
 							body.put("address_id", c.getAddress_id());
 							body.put("customer_id", c.getCustomer_id());
 							body.put("note", c.getNote());
+							body.put("branch_id", c.getBranch_id());
 							jsonObjSend.put("order", body);
 						} catch (JSONException e) {
 							e.printStackTrace();

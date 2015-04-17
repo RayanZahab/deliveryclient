@@ -75,6 +75,8 @@ public class PreviewActivity extends Activity {
 	public void afterCreationSubmit(View v) {
 		TextView noteTxt = (TextView) findViewById(R.id.note);
 		myOrder.setNote(noteTxt.getText().toString());
+		int branchId = ((DeliveryClientApplication) this.getApplication()).getBranchId();
+		myOrder.setBranch_id(branchId);
 		String serverURL = new myURL("orders", null, 0, 0).getURL();
 		RZHelper p = new RZHelper(serverURL, this, "afterCreation", true);
 		p.post(myOrder);

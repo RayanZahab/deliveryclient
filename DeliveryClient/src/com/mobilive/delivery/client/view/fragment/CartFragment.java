@@ -56,6 +56,12 @@ public class CartFragment extends ParentFragment {
 				submitCart();
 			}
 		});		
+		Button back = (Button) view.findViewById(R.id.back);
+		back.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				back();
+			}
+		});		
 		name = (TextView) view.findViewById(R.id.customerName);
 		//address = (TextView) view.findViewById(R.id.customerAdd);
 		phone = (TextView) view.findViewById(R.id.customerphone);
@@ -74,6 +80,14 @@ public class CartFragment extends ParentFragment {
 		Intent intent = new Intent(this.getActivity(), SelectAdress.class);
 		intent.putExtra("previous", "preview");
 		startActivity(intent);
+	}
+	public void back()
+	{		
+		Intent i = new Intent(currentActivity, MainActivity.class);
+		i.putExtra("fragmentIndex", 7);
+		int branchId = ((DeliveryClientApplication) currentActivity.getApplication()).getBranchId();
+		i.putExtra("branchId", branchId);
+		startActivity(i);
 	}
 
 	@Override

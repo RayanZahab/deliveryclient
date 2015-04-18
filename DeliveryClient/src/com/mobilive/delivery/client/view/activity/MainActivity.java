@@ -205,10 +205,12 @@ public class MainActivity extends Activity {
 		// update the main content by replacing fragments
 		ParentFragment fragment = null;
 		Bundle args = new Bundle();
+		boolean cartEmpty = true;
 		if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0)
 		{
 			branchId = ((DeliveryClientApplication) getApplication()).getBranchId();	
 			position = 7;
+			cartEmpty = false;
 		}
 		switch (position) {
 		case 0:
@@ -216,8 +218,17 @@ public class MainActivity extends Activity {
 			fragments.add(fragment);
 			break;
 		case 1:
-			fragment = new CartFragment();
-			fragments.add(fragment);
+			if(!cartEmpty)
+			{
+				fragment = new CartFragment();
+				fragments.add(fragment);
+			}else
+			{
+				Toast.makeText(
+						getApplicationContext(),
+						R.string.cart_is_empty,
+						Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case 2:
 			fragment = new ProfileFragment();

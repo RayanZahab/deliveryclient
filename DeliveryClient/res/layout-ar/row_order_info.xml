@@ -20,7 +20,7 @@
     	    android:layout_weight="0.4"
     	    android:layout_gravity="right|center_vertical"
     	    android:gravity="center"
-    	    android:background="@drawable/bar">
+    	    android:background="@drawable/ar_bar">
     	    
     	    <TextView 
 	    	    android:id="@+id/quantity"
@@ -41,17 +41,6 @@
 	    	    android:gravity="center"
 	    	    android:text="X"
 	    	    android:textColor="@color/redbg" />
-    	    <TextView 
-	    	    android:id="@+id/unit"
-	    	    android:layout_width="wrap_content"
-	    	    android:layout_height="wrap_content"
-	    	    android:layout_weight="0.1"
-	    	    android:layout_gravity="center_vertical"
-	    	    android:gravity="center"
-	    	    android:layout_marginLeft="8dp"
-	    	    android:text="2000"
-	    	    android:textColor="@color/redbg" />
-
     	    <TextView
     	        android:id="@+id/unit_lira"
     	        android:layout_width="wrap_content"
@@ -60,6 +49,17 @@
     	        android:gravity="right"
     	        android:text="@string/lira"
     	        android:textColor="@color/redbg" />
+    	    <TextView 
+	    	    android:id="@+id/unit"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:layout_weight="0.1"
+	    	    android:layout_gravity="center_vertical"
+	    	    android:gravity="center"
+	    	    android:layout_marginLeft="8dp"
+	    	    android:paddingRight="3dp"
+	    	    android:text="2000"
+	    	    android:textColor="@color/redbg" />
 
     	</LinearLayout>
     	<TextView
@@ -110,24 +110,25 @@
     	android:layout_marginTop="5dp"
     	android:orientation="horizontal">
         
-        
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="0dp"
-            android:layout_weight="0.4"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="1000"
-            android:textColor="@color/redbg" />
         <TextView
             android:id="@+id/price_lira"
             android:layout_width="0dp"
             android:layout_weight="0.1"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:layout_marginLeft="3dp"
             android:singleLine="true"
             android:text="@string/lira"
             android:textColor="@color/redbg" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="1000"
+            android:textColor="@color/redbg" />
+        
         <TextView 
             android:id="@+id/price_txt"
             android:layout_width="0dp"
@@ -135,7 +136,7 @@
             android:layout_weight="0.5"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Sub Total:"
+            android:text="@string/subtotal"
             android:textColor="@color/redbg"/>
     </LinearLayout>
 

@@ -132,34 +132,31 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/reddivider"/>
-            
+            <TextView
+                    android:id="@+id/lira"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/carttotalprice"
+                    android:layout_alignBottom="@+id/carttotalprice"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textColor="@color/redbg"
+                    android:text="@string/lira"
+                    android:textSize="19sp" />
             <TextView
                     android:id="@+id/carttotalprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/totallabel"
                     android:layout_alignBottom="@+id/totallabel"
-                    android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
+                    android:layout_toRightOf="@+id/lira"
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold"
                     android:text="25"
                     android:textColor="@color/redbg"
                     android:textSize="19sp" />
-
-                <TextView
-                    android:id="@+id/lira"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/carttotalprice"
-                    android:layout_alignBottom="@+id/carttotalprice"
-                    android:layout_toRightOf="@+id/carttotalprice"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    android:textColor="@color/redbg"
-                    android:text="@string/lira"
-                    android:textSize="19sp" />
-
                 <TextView
                     android:id="@+id/totallabel"
                     android:layout_width="wrap_content"

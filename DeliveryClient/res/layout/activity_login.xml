@@ -26,6 +26,7 @@
                 android:inputType="phone"
                 android:hint="@string/username"
                 android:paddingLeft="50dp"
+                android:paddingRight="50dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff" >
             </EditText>
@@ -120,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/keeploggedin"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/sublogologin" />
 
         </RelativeLayout>

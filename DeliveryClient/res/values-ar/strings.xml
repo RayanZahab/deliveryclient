@@ -29,7 +29,7 @@
     <string name="deliveryguy">رجل توصيل الطلبات</string>
     <string name="preparerguy">معد طلبات</string>
     <string name="details">تفاصيل</string>
-    <string name="name">الإ سم</string>
+    <string name="name">الإسم</string>
     <string name="textButton">ar_TextButton</string>
     <string name="selectphoto">اختر الصورة</string>
     <string name="slash">\</string>
@@ -51,7 +51,7 @@
     <string name="Logout">خروج</string>
     <string name="search_hint">ابحث هنا</string>
     <string name="settings">الإعدادات</string>
-    <string name="keeploggedin">ar_Keep me Logged in</string>
+    <string name="keeploggedin">تذكرني</string>
     <string name="monday">الإثنين</string>
     <string name="tuseday">الثلاثاء</string>
     <string name="wednesday">الأربعاء</string>
@@ -102,7 +102,7 @@
     <string name="business_categories">فئات الأعمال</string>
     <string name="shops">محلات</string>
     <string name="shop">محل</string>
-    <string name="items">المنتجات</string>
+    <string name="items">منتجات</string>
     <string name="ContinueShopping">متابعة التسوق</string>
     <string name="add_address">إضافة عنوان</string>
     <string name="home">الصفحة الرئيسية</string>
@@ -113,6 +113,7 @@
     <string name="title_activity_loading">تحميل</string>
     <string name="title_activity_thank_you">شكرا</string>
     <string name="title_activity_forget_password">فقدان كلمة المرور</string>
+    <string name="subtotal">حاصل الجمع</string>
 
     <string-array name="acc_type">ar_
         <item>Income</item>
@@ -135,9 +136,9 @@
 
     <string name="select_location">ar_Select Your location And Business Category</string>
     <string name="select_business">ar_Select A Business Category</string>
-    <string name="select_country">ar_Country</string>
-    <string name="select_city">ar_City</string>
-    <string name="select_area">ar_Area</string>
+    <string name="select_country">البلد</string>
+    <string name="select_city">المدينة</string>
+    <string name="select_area">المنطقة</string>
     <string name="select">ar_Confirm Selection</string>
     <string name="pick">ar_Pick</string>
     <string name="lblCountry">ar_Select Country</string>
@@ -180,7 +181,7 @@
     <string name="arabic">ar_Arabic</string>
     <string name="pass_dnt_match">ar_Passwords do not match </string>
     <string name="branch">ar_Branch</string>
-    <string name="phonenum">ar_Phone number</string>
+    <string name="phonenum">رقم الهاتف</string>
     <string name="invalid_phone">ar_Invalid Phone number</string>
     <string name="admin">ar_Admin</string>
     <string name="from_bigger">ar_Make sure all from is less than to</string>
@@ -197,12 +198,12 @@
     <string name="title_activity_register">ar_RegisterActivity</string>
     <string name="register">ar_Register</string>
     <string name="fullname">الأسم</string>
-    <string name="retypepass">ar_Retype Password</string>
+    <string name="retypepass">أعد كتابة كلمة المرور</string>
     <string name="street">ar_Street</string>
     <string name="building">ar_Building</string>
     <string name="floor">ar_Floor</string>
-    <string name="back">ar_Back</string>
-    <string name="addresses">ar_Addresses</string>
+    <string name="back">رجوع</string>
+    <string name="addresses">العناوين</string>
     <string name="addtocart">ar_Add To Cart</string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">

@@ -41,6 +41,14 @@
 	    	    android:gravity="center"
 	    	    android:text="X"
 	    	    android:textColor="@color/redbg" />
+    	    <TextView
+    	        android:id="@+id/unit_lira"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_gravity="center_vertical"
+    	        android:gravity="right"
+    	        android:text="@string/lira"
+    	        android:textColor="@color/redbg" />
     	    <TextView 
 	    	    android:id="@+id/price"
 	    	    android:layout_width="wrap_content"
@@ -50,16 +58,8 @@
 	    	    android:gravity="center"
 	    	    android:layout_marginLeft="8dp"
 	    	    android:text="2000"
+	    	    android:layout_marginRight="3dp"
 	    	    android:textColor="@color/redbg" />
-
-    	    <TextView
-    	        android:id="@+id/unit_lira"
-    	        android:layout_width="wrap_content"
-    	        android:layout_height="wrap_content"
-    	        android:layout_gravity="center_vertical"
-    	        android:gravity="right"
-    	        android:text="@string/lira"
-    	        android:textColor="@color/redbg" />
 
     	</LinearLayout>
     	

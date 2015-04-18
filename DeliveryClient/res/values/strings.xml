@@ -7,7 +7,6 @@
     <string name="ptr_refreshing">Refreshing…</string>
     <string name="ptr_last_updated">Updated: %1$s</string>
     <string name="app_name">DeliveryClient</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="username">Username </string>
     <string name="password">Password </string>
@@ -16,76 +15,26 @@
     <string name="confirmCode">Confirm Code</string>
     <string name="info">Info</string>
     <string name="categories">Categories</string>
-    <string name="from">From:</string>
-    <string name="to">To:</string>
-    <string name="title_activity_navigation">Menu</string>
-    <string name="title_activity_categories">Categories</string>
-    <string name="title_activity_branches">Branches</string>
-    <string name="title_activity_add_branch">Add Branch</string>
-    <string name="title_activity_users">Users</string>
     <string name="title_activity_order_info">Order Info</string>
-    <string name="add">Add</string>
     <string name="search">Search</string>
-    <string name="personalinfo">Personal Information:</string>
-    <string name="preparer">This is preparer</string>
-    <string name="opening_hours">Opening Hours</string>
-    <string name="clientinfo">Client Info</string>
     <string name="address">Address</string>
     <string name="total">Total</string>
     <string name="status">Status</string>
     <string name="notes">Notes:</string>
-    <string name="cancel">Cancel</string>
-    <string name="deliveryguy">Delivery Guy</string>
-    <string name="preparerguy">Preparer</string>
     <string name="details">Details</string>
     <string name="name">Name</string>
     <string name="registerCode">Register Code</string>
-    <string name="textButton">TextButton</string>
-    <string name="selectphoto">Select Photo</string>
-    <string name="slash">/</string>
-    <string name="priceunit">Price/Unit</string>
-    <string name="producticon">Product Icon:</string>
-    <string name="estimatedtime">Estimated Time:</string>
     <string name="description">Description</string>
     <string name="productname">Product Name</string>
-    <string name="selectlanguage">Select Language</string>
     <string name="buttonlogin">Login</string>
     <string name="products">Products</string>
     <string name="reason">Reason:</string>
     <string name="item">Item</string>
-    <string name="textview">TextView</string>
-    <string name="checkbox">CheckBox</string>
-    <string name="estimation">Estimated Time</string>
-    <string name="About">About us</string>
-    <string name="navigation">Navigation Menu</string>
     <string name="Logout">Logout</string>
-    <string name="search_hint">Search Here</string>
-    <string name="settings">Settings</string>
     <string name="keeploggedin">Keep me Logged in</string>
-    <string name="monday">Monday</string>
-    <string name="tuseday">Tuseday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
-    <string name="sunday">Sunday</string>
-    <string name="invalednameentered">Invalid Name Entered</string>
-    <string name="youselected">You selected: </string>
-    <string name="areaselected">Area selected: </string>
-    <string name="selected">Selected</string>
-    <string name="editing">Editing: </string>
-    <string name="activate">Activate: </string>
-    <string name="deactivate">Deactivate: </string>
-    <string name="categoryname">Category Name</string>
-    <string name="deletethiscat">Delete this Category?</string>
-    <string name="deletethisuser">Delete this User?</string>
-    <string name="deletethisprod">Delete this Product?</string>
-    <string name="deletethisbranch">Delete this Branch?</string>
     <string name="wrongcredentials">Wrong Credentialsss</string>
     <string name="exit">Exit</string>
     <string name="exitquest">Are you sure you want to exit?</string>
-    <string name="cancelreason">Please enter a reason</string>
-    <string name="ordercanceled">Order Canceled</string>
     <string name="forgotpass"><u>Forgot Password?</u></string>
     <string name="lira">L.L</string>
     <string name="yes">Yes</string>
@@ -97,71 +46,19 @@
     <string name="followup">Now you can check your order status
          in Old Orders Tab</string>
 
-    <string-array name="acc_type">
-        <item>Income</item>
-        <item>Expense</item>
-    </string-array>
-    <string-array name="languages">
-        <item>English</item>
-        <item>Arabic</item>
-    </string-array>
-    <string-array name="country_arr">
-        <item>Afghanistan</item>
-        <item>Bangladesh</item>
-        <item>Bhutan</item>
-        <item>India</item>
-        <item>Maldives</item>
-        <item>Sri Lanka</item>
-        <item>Nepal</item>
-        <item>Pakistan</item>
-    </string-array>
+    
 
-    <string name="select_location">Select Your location And Business Category</string>
-    <string name="select_business">Select A Business Category</string>
     <string name="select_country">Country</string>
     <string name="confirmCodeDesc">Dear Customer, you should get the Code by SMS please enter below to continue your registration..</string>
     <string name="forgetPassDesc">Dear Customer, Enter your Number to get SMS which contains your new Password..</string>
-    <string name="select_city">City</string>
-    <string name="select_area">Area</string>
-    <string name="select">Confirm Selection</string>
-    <string name="pick">Pick</string>
-    <string name="lblCountry">Select Country</string>
-    <string name="lblAdd">Add New Mobile Name</string>
-    <string name="btnAdd">Add Name</string>
-    <string name="txtHint">HTC</string>
-    <string name="lblDisp">Select Name</string>
-    <string name="lblSubAcc">Select Account Head</string>
-    <string name="title_activity_user_info">User Info</string>
-    <string name="title_activity_selection">Select Activity</string>
-    <string name="country_name">Country Name</string>
-    <string name="add_country">Add Country</string>
-    <string name="add_city">Add City</string>
-    <string name="add_area">Add Area</string>
-    <string name="add_business">Add Business</string>
-    <string name="title_activity_add_category">Add Category</string>
-    <string name="title_activity_orders">Orders</string>
-    <string name="title_activity_product">Products</string>
-    <string name="title_activity_add_product">Add Product</string>
-    <string name="title_activity_old_orders">Old Orders</string>
-    <string name="title_activity_old_orders_info">Old Orders Info</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
-    <string name="title_activity_search_results">Search Results</string>
-    <string name="title_activity_user_profile">User Profile</string>
     <string name="no_net">No net Connection</string>
-    <string name="loding">Loading please wait</string>
-    <string name="restore_pass">Restore</string>
     <string name="pending_orders">Penidng Orders</string>
-    <string name="new_orders">New Orders</string>
-    <string name="assigned_orders">Assigned Orders</string>
-    <string name="prepared_orders">Prepared Orders</string>
-    <string name="canceled_orders">Canceled Orders</string>
     <string name="closed_orders">Closed Orders</string>
     <string name="branches">Branches</string>
     <string name="empty_cart">Going Back will empty the cart, are you sure?</string>
     <string name="business_categories">Business Categories</string>
     <string name="shops">Shops</string>
     <string name="shop">Shop</string>
-    <string name="users">Users</string>
     <string name="empty_list">No items</string>
     <string name="items">Items</string>
     <string name="open_status">Open</string>
@@ -169,11 +66,8 @@
     <string name="delivered_status">Closed</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
-    <string name="pass_dnt_match">Passwords do not match </string>
-    <string name="branch">Branch</string>
     <string name="phonenum">Phone number</string>
     <string name="invalid_phone">Invalid Phone number</string>
-    <string name="admin">Admin</string>
     <string name="from_bigger">Make sure all from is less than to</string>
     <string name="open_missing">Please select FROM And TO</string>
     <string name="invalid_name">Invalid Name</string>
@@ -182,12 +76,9 @@
     <string name="invalid_time">Invalid Estimation time</string>
     <string name="select_role">Please select a role</string>
     <string name="title_activity_preview">PreviewActivity</string>
-    <string name="invalid_branch">Please select a branch</string>
-    <string name="order_updated">Order updated successfully</string>
     <string name="title_activity_select_adress">SelectAdress</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="register">Register</string>
-    <string name="fullname">Full Name</string>
     <string name="retypepass">Retype Password</string>
     <string name="street">Street</string>
     <string name="building">Building</string>
@@ -196,30 +87,12 @@
     <string name="ContinueShopping">Continue Shopping</string>
     <string name="add_address">Add an Address</string>
     <string name="addresses">Addresses</string>
-    <string name="addtocart">Add To Cart</string>
     <string name="home">Home</string>
     <string name="cart">Cart</string>
     <string name="profile">My Profile</string>
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
-        <item>Home</item>
-        <item>Find People</item>
-        <item>Photos</item>
-        <item>Communities</item>
-        <item>Pages</item>
-        <item>What\'s Hot</item>
-    </string-array>
+    
 
-    <!-- Nav Drawer List Item Icons -->
-    <!-- Keep them in order as the titles are in -->
-    <array name="nav_drawer_icons">
-        <item>@drawable/ic_home</item>
-        <item>@drawable/ic_people</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_communities</item>
-        <item>@drawable/ic_pages</item>
-        <item>@drawable/ic_whats_hot</item>
-    </array>
+    
 
     <string name="title_activity_register_confirmation">Confirm Code</string>
     <string name="title_activity_test">TestActivity</string>

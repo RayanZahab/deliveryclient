@@ -109,7 +109,6 @@
     <string name="cart">سلة التسوق</string>
     <string name="profile">ملفي الشخصي</string>
     <string name="title_activity_register_confirmation">تأكيد الكود</string>
-    <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_product_info">معلومات المنتج</string>
     <string name="title_activity_loading">تحميل</string>
     <string name="title_activity_thank_you">شكرا</string>

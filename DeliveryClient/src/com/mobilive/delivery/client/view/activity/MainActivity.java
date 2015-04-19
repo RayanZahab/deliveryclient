@@ -42,7 +42,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	
-	Fragment activeFragment;
+	private Fragment activeFragment;
 	// private ViewPager viewPager;
 	// private TabsPagerAdapter mAdapter;
 	// private ActionBar actionBar;
@@ -453,7 +453,7 @@ public class MainActivity extends Activity {
 
 	// @Override
 	public void onAttachFragment(Fragment fragment) {
-		activeFragment = fragment;
+		setActiveFragment(fragment);
 	}
 
 	/*@Override
@@ -581,6 +581,14 @@ public class MainActivity extends Activity {
 			}
 		}
 		return null;
+	}
+
+	public Fragment getActiveFragment() {
+		return activeFragment;
+	}
+
+	public void setActiveFragment(Fragment activeFragment) {
+		this.activeFragment = activeFragment;
 	}
 
 	

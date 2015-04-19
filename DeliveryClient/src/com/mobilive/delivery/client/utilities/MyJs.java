@@ -27,8 +27,10 @@ import android.widget.TextView;
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.model.User;
+import com.mobilive.delivery.client.view.activity.MainActivity;
 import com.mobilive.delivery.client.view.activity.RegisterActivity;
 import com.mobilive.delivery.client.view.dialog.TransparentProgressDialog;
+import com.mobilive.delivery.client.view.fragment.ProfileFragment;
 
 // Class with extends AsyncTask class
 
@@ -270,20 +272,18 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 				if (DeliveryClientApplication.loader != null && last)
 					DeliveryClientApplication.loader.dismiss();
 				new GlobalM().bkToNav(mc, getError(content, Error));
-				if(mc instanceof RegisterActivity){
-					Method returnFunction = this.mc.getClass().getMethod(
-							"callMethod", content.getClass(), content.getClass(),
-							content.getClass());
-					returnFunction.invoke(this.mc, this.returnFunction, content,
-							Error);
+				if(mc instanceof MainActivity){
+					if(((MainActivity) mc).getActiveFragment() instanceof ProfileFragment){
+						Method returnFunction = this.mc.getClass().getMethod("callMethod", content.getClass(), content.getClass(),content.getClass());
+						returnFunction.invoke(this.mc, this.returnFunction, content,Error);
+					}
+				}else if(mc instanceof RegisterActivity){
+					Method returnFunction = this.mc.getClass().getMethod("callMethod", content.getClass(), content.getClass(),content.getClass());
+					returnFunction.invoke(this.mc, this.returnFunction, content,Error);
 				}
-
-			} else {
-				Method returnFunction = this.mc.getClass().getMethod(
-						"callMethod", content.getClass(), content.getClass(),
-						content.getClass());
-				returnFunction.invoke(this.mc, this.returnFunction, content,
-						Error);
+			}else{
+				Method returnFunction = this.mc.getClass().getMethod("callMethod", content.getClass(), content.getClass(),content.getClass());
+				returnFunction.invoke(this.mc, this.returnFunction, content,Error);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

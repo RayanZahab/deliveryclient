@@ -25,9 +25,11 @@ import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.model.Customer;
 import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.MyJs;
 import com.mobilive.delivery.client.utilities.PhoneInfoManager;
+import com.mobilive.delivery.client.utilities.PreferenecesManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.ValidationError;
 import com.mobilive.delivery.client.utilities.myURL;
@@ -53,7 +55,6 @@ public class ProfileFragment extends ParentFragment {
 		rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 		currentActivity = getActivity();
 		super.onCreate(savedInstanceState);
- 
 		usernameTxt = (EditText) rootView.findViewById(R.id.user_name);
 		nameTxt = (EditText) rootView.findViewById(R.id.name);
 		passTxt = (EditText) rootView.findViewById(R.id.password);
@@ -93,7 +94,7 @@ public class ProfileFragment extends ParentFragment {
 		pass2.setText(pass);
 		keep.setChecked(isChecked);
 		new GlobalM().setSelected(langSp, dataAdapter, lang);
-		Button buttonOne = (Button) rootView.findViewById(R.id.submit);
+		Button buttonOne = (Button) rootView.findViewById(R.id.updateProfileBtn);
 		buttonOne.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				updateInfo();
@@ -123,15 +124,19 @@ public class ProfileFragment extends ParentFragment {
 	}
 
 	public void done(String s, String error) {
-		String serverURL = new myURL(null, "customers", "login", 0).getURL();
-		User user = new User("961"+phone, passTxt.getText().toString());
-		user.setEncPassword(passTxt.getText().toString());
-		RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
-		p.post(user);
+		if(error==null){
+			String serverURL = new myURL(null, "customers", "login", 0).getURL();
+			User user = new User("961"+phone, passTxt.getText().toString());
+			user.setEncPassword(passTxt.getText().toString());
+			RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
+			p.post(user);
+		}else{
+			String currentLang = PreferenecesManager.getInstance().getCurrentLanguage(getActivity());
+			Toast.makeText(currentActivity.getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(getActivity(), currentLang, error),Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void getLoggedIn(String s, String error) {
-		Log.d("ray","hereeeeeee");
 		if (error == null) {
 			Customer user = new APIManager().getLogedInUser(s);
 			CheckBox keeplog = (CheckBox) rootView.findViewById(R.id.keeploggedin);
@@ -180,5 +185,10 @@ public class ProfileFragment extends ParentFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+	}
+	
+	@Override
+	public void onAttach(Activity activity){
+		super.onAttach(activity);
 	}
 }

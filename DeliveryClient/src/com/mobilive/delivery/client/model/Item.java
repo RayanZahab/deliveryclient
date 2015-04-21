@@ -14,6 +14,7 @@ public class Item {
 	private Integer quantity;
 	private double totalPrice;
 	private String time,charge, minimum;
+	private String photoName;
 
 	public Item(){}
 	
@@ -138,5 +139,13 @@ public class Item {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 }

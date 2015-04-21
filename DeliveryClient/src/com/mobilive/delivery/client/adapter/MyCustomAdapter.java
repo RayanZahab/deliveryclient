@@ -22,6 +22,7 @@ import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Product;
+import com.mobilive.delivery.client.utilities.ImageTask;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.activity.ProductInfoActivity;
@@ -262,11 +263,27 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		public txImgHolder(View convertView, Item item) {
 			TextView name = (TextView) convertView.findViewById(R.id.name);
-			ImageView picture = (ImageView) convertView
-					.findViewById(R.id.image);
+			ImageView picture = (ImageView) convertView.findViewById(R.id.image);
 			picture.setImageResource(item.getImg());
-			name.setText(
-					item.getName());
+			name.setText(item.getName());
+		}
+	}
+	
+	class txUrlImgHolder extends ViewHolder {
+		TextView name;
+		ImageView picture;
+
+		public txUrlImgHolder(View convertView, Item item,Activity activity) {
+			try{
+				TextView name = (TextView) convertView.findViewById(R.id.name);
+				if(item.getPhotoName()!=null){
+					ImageView picture = (ImageView) convertView.findViewById(R.id.image);
+					new ImageTask(picture,activity).execute(item.getPhotoName());
+				}
+				name.setText(item.getName());
+			}catch(Exception e){
+
+			}
 		}
 	}
 
@@ -308,13 +325,19 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 
 				layout = R.layout.row_txtimg;
 				convertView = vi.inflate(layout, null);
-				holder = new txImgHolder(convertView, currentItem);
+				holder = new txUrlImgHolder(convertView, currentItem,activity);
 
 			} else if (this.type.equals("shop") ) {
 
 				layout = R.layout.row_shop;
 				convertView = vi.inflate(layout, null);
 				holder = new txImgHolder(convertView, currentItem);
+
+			} else if (this.type.equals("businesses") ) {
+
+				layout = R.layout.row_business;
+				convertView = vi.inflate(layout, null);
+				holder = new txUrlImgHolder(convertView, currentItem,activity);
 
 			}  else if (this.type.equals("branch") ) {
 

@@ -314,7 +314,7 @@ public class APIManager {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				String name;
+				String name,photoName;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -327,13 +327,20 @@ public class APIManager {
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
 						name = jsonChildNode.optString("name").toString();
-						gridArray.add(new Business(id, name));
+						photoName  = jsonChildNode.optString("photo").toString();
+						Business business = new Business(id, name);
+						business.setPhotoWithParse(photoName);
+						gridArray.add(business);
+						
 					}
 				} else {
 					id = Integer.parseInt(jsonResponse.optString("id")
 							.toString());
 					name = jsonResponse.optString("name").toString();
-					gridArray.add(new Business(id, name));
+					photoName = jsonResponse.optString("photo").toString();
+					Business business = new Business(id, name);
+					business.setPhoto(photoName);
+					gridArray.add(business);
 				}
 			} else {
 				return gridArray;
@@ -552,7 +559,7 @@ public class APIManager {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				String name;
+				String name,photoName;
 				boolean is_active;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
@@ -567,7 +574,10 @@ public class APIManager {
 						name = jsonChildNode.optString("name").toString();
 						is_active = Boolean.valueOf(jsonChildNode.optString(
 								"is_active").toString());
-						gridArray.add(new Category(id, name, is_active, 0));
+						photoName = jsonChildNode.optString("photo").toString();
+						 Category category = new Category(id, name, is_active, 0);		
+						 category.setPhotoWithParse(photoName);
+						gridArray.add(category);
 					}
 				} else {
 					id = Integer.parseInt(jsonResponse.optString("id")
@@ -575,7 +585,11 @@ public class APIManager {
 					name = jsonResponse.optString("name").toString();
 					is_active = Boolean.valueOf(jsonResponse.optString(
 							"is_active").toString());
-					gridArray.add(new Category(id, name, is_active, 0));
+					 photoName = jsonResponse.optString("photo").toString();
+					 Category category = new Category(id, name, is_active, 0);		
+					 category.setPhotoWithParse(photoName);
+					 gridArray.add(category);
+					
 				}
 			} else {
 				return gridArray;

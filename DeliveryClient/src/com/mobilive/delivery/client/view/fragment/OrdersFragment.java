@@ -393,6 +393,7 @@ public class OrdersFragment extends ParentFragment {
 			it.setName(myCat.toString());
 			it.setType("txtImg");
 			it.setId(myCat.getId());
+			it.setPhotoName(myCat.getPhotoName());
 			mylist.add(it);
 		}
 		updateList();
@@ -438,7 +439,8 @@ public class OrdersFragment extends ParentFragment {
 		for (Business myBusin : businesses) {
 			Item it = new Item();
 			it.setName(myBusin.toString());
-			it.setType("txt");
+			it.setType("businesses");
+			it.setPhotoName(myBusin.getPhoto());
 			it.setId(myBusin.getId());
 			mylist.add(it);
 		}

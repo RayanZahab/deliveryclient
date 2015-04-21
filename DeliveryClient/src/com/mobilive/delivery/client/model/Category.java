@@ -4,6 +4,7 @@ public class Category {
 	private int id, shopId;
 	private String name;
 	private boolean active;
+	private String photoName;
 
 	public Category(int id, String name, boolean is_active, int shopId) {
 		this.setId(id);
@@ -48,6 +49,29 @@ public class Category {
 
 	public void setShopId(int shopId) {
 		this.shopId = shopId;
+	}
+	public String getPhotoName() {
+		return photoName;
+	}
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
+	}
+	
+    public void setPhotoWithParse(String photo) {
+		if(photo!=null)
+			this.photoName = parsePhoto(photo);
+	}
+	
+	private String parsePhoto(String error){
+		String res = "";
+		int index1= error.indexOf("{\"url\":\"");
+		int index2= error.indexOf("\"}");
+		if(index1!=-1 && index2!=-1){
+			res = error.substring(index1+"{\"url\":\"".length(),index2);
+			res = res.replaceAll("\\\\", "");
+		}else
+			res = null;
+		return res;
 	}
 
 }

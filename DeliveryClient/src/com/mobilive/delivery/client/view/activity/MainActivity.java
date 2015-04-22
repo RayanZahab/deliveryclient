@@ -31,7 +31,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,10 +42,6 @@ public class MainActivity extends Activity {
 
 	
 	private Fragment activeFragment;
-	// private ViewPager viewPager;
-	// private TabsPagerAdapter mAdapter;
-	// private ActionBar actionBar;
-	// Tab titles
 	static FragmentManager fragmentManager;
 
 	private static Context context;
@@ -134,10 +129,7 @@ public class MainActivity extends Activity {
 	private class SlideMenuClickListener implements
 			ListView.OnItemClickListener {
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			// display view for selected nav drawer item
-			Log.d("ray position","position: "+position);
+		public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 			displayView(position);
 		}
 	}
@@ -147,45 +139,27 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// if nav drawer is opened, hide the action items
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	public void addSlideMenu() {
-		// load slide menu items
-		// navMenuTitles ;//=
-		// getResources().getStringArray(R.array.nav_drawer_items);
-
-		// nav drawer icons from resources
-		// navMenuIcons = getResources()
-		// .obtainTypedArray(R.array.nav_drawer_icons);
-
+		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-
 		navDrawerItems = new ArrayList<NavDrawerItem>();
-
-		// adding nav drawer items to array
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),
-				R.drawable.ic_home, true, "0"));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),
-				R.drawable.ic_people));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),
-				R.drawable.ic_communities));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),
-				R.drawable.ic_communities));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),
-				R.drawable.ic_communities));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(5).toString(),
-				R.drawable.ic_communities));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(6).toString(),
-				R.drawable.ic_communities));
+		
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),R.drawable.ic_home, true, "0"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),R.drawable.ic_people));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(5).toString(),R.drawable.ic_communities));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(6).toString(),R.drawable.ic_communities));
 
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
-		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 		displayView(fragmentIndex);
@@ -193,16 +167,11 @@ public class MainActivity extends Activity {
 
 	public static void updateCounter(int count) {
 		navDrawerItems.get(0).setCount("" + count);
-		// setting the nav drawer list adapter
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 	}
 
-	/**
-	 * Diplaying fragment view for selected nav drawer list item
-	 * */
 	private void displayView(int position) {
-		// update the main content by replacing fragments
 		ParentFragment fragment = null;
 		Bundle args = new Bundle();
 		boolean cartEmpty = true;
@@ -222,12 +191,8 @@ public class MainActivity extends Activity {
 			{
 				fragment = new CartFragment();
 				fragments.add(fragment);
-			}else
-			{
-				Toast.makeText(
-						getApplicationContext(),
-						R.string.cart_is_empty,
-						Toast.LENGTH_SHORT).show();
+			}else{
+				Toast.makeText(getApplicationContext(),R.string.cart_is_empty,Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case 2:
@@ -248,13 +213,8 @@ public class MainActivity extends Activity {
 			break;
 		case 5:
 			try {
-				Toast.makeText(
-						getApplicationContext(),
-						"version" + getPackageManager().getPackageInfo(
-										getPackageName(), 0).versionName,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),"version" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName,Toast.LENGTH_SHORT).show();
 			} catch (NameNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -279,7 +239,6 @@ public class MainActivity extends Activity {
 			FragmentTransaction tx = fragmentManager.beginTransaction();
 			tx.addToBackStack(null);
 			tx.replace(R.id.frame_container, (Fragment) fragment).commit();
-			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
 			setTitle(navMenuTitles.get(position).toString());
@@ -295,22 +254,15 @@ public class MainActivity extends Activity {
 		getActionBar().setTitle(mTitle);
 	}
 
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
 		mDrawerToggle.syncState();
 	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
@@ -319,61 +271,44 @@ public class MainActivity extends Activity {
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, // nav menu toggle icon
 				R.string.app_name, // nav drawer open - description for
-									// accessibility
 				R.string.app_name // nav drawer close - description for
-									// accessibility
 		) {
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
-				// calling onPrepareOptionsMenu() to show action bar icons
 				invalidateOptionsMenu();
 			}
 
 			public void onDrawerOpened(View drawerView) {
 				getActionBar().setTitle(mDrawerTitle);
-				// calling onPrepareOptionsMenu() to hide action bar icons
 				invalidateOptionsMenu();
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
 	}
 
 	public void callMethod(String m, String s, String error) {
-		Log.d("ray", "calling method: " + m);
-
 		if (m.equals("setOrders")) {
-			Log.d("ray", "Here5: " + m);
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(PendingOrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here52: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
 		} else if (m.equals("getAdd")) {
-			Log.d("ray", "Here3: " + m);
 			for (Fragment fragment : fragments) {
-				Log.d("ray", "Here30: " + fragment.getClass() + "=="
-						+ CartFragment.class);
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here31: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -384,12 +319,10 @@ public class MainActivity extends Activity {
 				if (fragment.getClass().equals(ProfileFragment.class)) {
 					Method returnFunction;
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -400,53 +333,41 @@ public class MainActivity extends Activity {
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here41: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 
 			}
-		} else if(m.contains("Home"))
-		{
+		} else if(m.contains("Home")){
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(HomeFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here51: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-
 			}
 		}else {
 			for (Fragment fragment : fragments) {
 				if (fragment.getClass().equals(OrdersFragment.class)) {
 					Method returnFunction;
-					Log.d("ray", "Here41: " + m);
 					try {
-						returnFunction = fragment.getClass().getDeclaredMethod(
-								m, s.getClass(), s.getClass());
+						returnFunction = fragment.getClass().getDeclaredMethod(m, s.getClass(), s.getClass());
 						if (returnFunction != null)
 							returnFunction.invoke(fragment, s, error);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-
 			}
 		}
 	}
@@ -456,28 +377,6 @@ public class MainActivity extends Activity {
 		setActiveFragment(fragment);
 	}
 
-	/*@Override
-	public void onBackPressed() {
-		Fragment fragment = getVisibleFragment();
-
-	    if (fragment.getClass().equals(OrdersFragment.class)) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
-	    	Method returnFunction;
-			try {
-				returnFunction = fragment.getClass().getDeclaredMethod(
-						"goUp");
-				if (returnFunction != null)
-					returnFunction.invoke(fragment);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	    else
-	    {
-	    	logout(false);
-	    }
-	}
-*/
 	@Override
 	public void onBackPressed() {
 		Fragment fragment = getVisibleFragment();

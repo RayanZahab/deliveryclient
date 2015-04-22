@@ -137,8 +137,6 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					// OrdersFragment.move();
 				}
 			});
 			name = (TextView) convertView.findViewById(R.id.name);
@@ -219,7 +217,6 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 
 	class shopHolder extends ViewHolder {
 		TextView name;
-
 		public shopHolder(View convertView, Item item) {
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
@@ -241,12 +238,7 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 				makeDefault.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						
 						String serverURL = new myURL("set_default", "customers/addresses", item.getId(), 0).getURL();
-						/*MyJs mjs = new MyJs("nothing", activity,
-								((deliveryclient) activity.getApplication()), "PUT");
-						mjs.execute(serverURL);	
-						*/	
 						RZHelper p = new RZHelper(serverURL, activity, "nothing", true);
 						p.put(null);
 					}
@@ -260,7 +252,6 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 	class txImgHolder extends ViewHolder {
 		TextView name;
 		ImageView picture;
-
 		public txImgHolder(View convertView, Item item) {
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			ImageView picture = (ImageView) convertView.findViewById(R.id.image);
@@ -272,7 +263,6 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 	class txUrlImgHolder extends ViewHolder {
 		TextView name;
 		ImageView picture;
-
 		public txUrlImgHolder(View convertView, Item item,Activity activity) {
 			try{
 				TextView name = (TextView) convertView.findViewById(R.id.name);
@@ -290,19 +280,15 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 	class branchHolder extends ViewHolder {
 		TextView name,time,minimum,charge;
 		ImageView picture;
-
 		public branchHolder(View convertView, Item item) {
 			name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getName());
-		
 			time = (TextView) convertView.findViewById(R.id.estimatedtime);
-			time.setText(""+
-							item.getTime());
+			time.setText(""+item.getTime());
 			minimum = (TextView) convertView.findViewById(R.id.minorder);
 			minimum.setText(""+item.getMinimum());
 			charge = (TextView) convertView.findViewById(R.id.delivcharge);
 			charge.setText(""+item.getCharge());
-			
 		}
 	}
 
@@ -313,62 +299,45 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 		Item currentItem = currentList.get(position);
 
 		if (convertView == null) {
-
 			int layout = 0;
-			LayoutInflater vi = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			
 			if (this.type.equals("txt") || this.type.equals("empty")) {
 				layout = R.layout.row_txt;
 				convertView = vi.inflate(layout, null);
 				holder = new txtHolder(convertView, currentItem);
 			} else if (this.type.equals("txtImg") ) {
-
 				layout = R.layout.row_txtimg;
 				convertView = vi.inflate(layout, null);
 				holder = new txUrlImgHolder(convertView, currentItem,activity);
-
 			} else if (this.type.equals("shop") ) {
-
 				layout = R.layout.row_shop;
 				convertView = vi.inflate(layout, null);
-				holder = new txImgHolder(convertView, currentItem);
-
+				holder = new txUrlImgHolder(convertView, currentItem,activity);
 			} else if (this.type.equals("businesses") ) {
-
 				layout = R.layout.row_business;
 				convertView = vi.inflate(layout, null);
 				holder = new txUrlImgHolder(convertView, currentItem,activity);
-
 			}  else if (this.type.equals("branch") ) {
-
 				layout = R.layout.row_branch;
 				convertView = vi.inflate(layout, null);
 				holder = new branchHolder(convertView, currentItem);
-
 			} else if (this.type.equals("product")) {
 				layout = R.layout.row_product;
 				convertView = vi.inflate(layout, null);
 				holder = new productHolder(convertView, currentItem);
-
 			} else if (this.type.equals("order")) {
-
 				layout = R.layout.activity_main;
 				holder = new orderHolder();
-
 			} else if (this.type.equals("cart")) {
-
 				layout = R.layout.row_product;
 				convertView = vi.inflate(layout, null);
 				holder = new productHolder(convertView, currentItem);
-
 			} else if (this.type.equals("address")) {
-
 				layout = R.layout.row_address;
 				convertView = vi.inflate(layout, null);
 				holder = new radioHolder(convertView, currentItem);
-
 			} else if (this.type.equals("preview")) {
-
 				layout = R.layout.row_preview;
 				convertView = vi.inflate(layout, null);
 				holder = new previewHolder(convertView, currentItem);

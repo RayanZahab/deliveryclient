@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +29,7 @@ import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Customer;
 import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 
@@ -125,9 +125,7 @@ public class LoginActivity extends Activity {
 		Locale.setDefault(locale);
 		Configuration config = new Configuration();
 		config.locale = locale;
-
-		getBaseContext().getResources().updateConfiguration(config,
-				getBaseContext().getResources().getDisplayMetrics());
+		getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
 
 		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 		SharedPreferences.Editor editor = settings.edit();
@@ -154,12 +152,9 @@ public class LoginActivity extends Activity {
 		}
 		int sdk = android.os.Build.VERSION.SDK_INT;
 		if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-			username.setBackgroundDrawable(getResources().getDrawable(bgId));
-
-			// password.setBackgroundDrawable(getResources().getDrawable(R.drawable.passwordbgar));
+			username.setBackground(getResources().getDrawable(bgId));
 		} else {
 			username.setBackground(getResources().getDrawable(bgId));
-			// password.setBackground(getResources().getDrawable(R.drawable.passwordbgar));
 		}
 		username.setText(null);
 		username.setHint(getString(R.string.username));
@@ -179,7 +174,7 @@ public class LoginActivity extends Activity {
 			RZHelper p = new RZHelper(serverURL, this, "getLoggedIn", true);
 			p.post(user);
 		}else{
-			Toast.makeText(getApplicationContext(), "please enter User Name and Password",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "please enter User Name and Password"),Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -196,7 +191,6 @@ public class LoginActivity extends Activity {
 
 			editor.putBoolean("isChecked", keeplog.isChecked());
 			editor.putString("token", user.getToken());
-			Log.d("ray", "token: " + user.getToken());
 			editor.putString("name", user.getName());
 			editor.putString("pass", password.getText().toString());
 			editor.putString("phone", username.getText().toString());
@@ -206,8 +200,7 @@ public class LoginActivity extends Activity {
 			Intent i = new Intent(this, LoadingActivity.class);
 			startActivity(i);
 		} else {
-			Toast.makeText(getApplicationContext(), R.string.wrongcredentials,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, error),Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -227,9 +220,7 @@ public class LoginActivity extends Activity {
 		Locale.setDefault(locale);
 		Configuration config = new Configuration();
 		config.locale = locale;
-
-		getBaseContext().getResources().updateConfiguration(config,
-				getBaseContext().getResources().getDisplayMetrics());
+		getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
 
 		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
 		SharedPreferences.Editor editor = settings.edit();
@@ -251,14 +242,10 @@ public class LoginActivity extends Activity {
 	}
 
 	public void forgotpassword(View view) {
-		// Intent i = new Intent(LoginActivity.this,
-		// ForgotPasswordActivity.class);
-		// startActivity(i);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 

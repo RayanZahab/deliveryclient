@@ -131,8 +131,7 @@ public class ProfileFragment extends ParentFragment {
 			RZHelper p = new RZHelper(serverURL, currentActivity, "getLoggedIn", true);
 			p.post(user);
 		}else{
-			String currentLang = PreferenecesManager.getInstance().getCurrentLanguage(getActivity());
-			Toast.makeText(currentActivity.getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(getActivity(), currentLang, error),Toast.LENGTH_SHORT).show();
+			Toast.makeText(currentActivity.getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(getActivity(), error),Toast.LENGTH_SHORT).show();
 		}
 	}
 

@@ -6,6 +6,7 @@ public class Shop {
 	private String name;
 	private String description;
 	private int is_available;
+	private String photoName;
 	private Business business;
 
 	public Shop(Integer id) {
@@ -63,6 +64,30 @@ public class Shop {
 	public String toString()
 	{
 		return getName();
+	}
+
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
+	}
+	public void setPhotoWithParse(String photo) {
+		if(photo!=null)
+			this.photoName = parsePhoto(photo);
+	}
+	
+	private String parsePhoto(String error){
+		String res = "";
+		int index1= error.indexOf("{\"url\":\"");
+		int index2= error.indexOf("\"}");
+		if(index1!=-1 && index2!=-1){
+			res = error.substring(index1+"{\"url\":\"".length(),index2);
+			res = res.replaceAll("\\\\", "");
+		}else
+			res = null;
+		return res;
 	}
 
 }

@@ -21,10 +21,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,7 +106,6 @@ public class OrderInfoActivity extends Activity {
 	}
 
 	public void setOrderInfo(String s, String error) {
-		Log.d("ray","order info: "+s);
 		currentOrder = new APIManager().getOrder(s);
 		addItemsOnStatus();
 		orderitem = currentOrder.getOrderItems();

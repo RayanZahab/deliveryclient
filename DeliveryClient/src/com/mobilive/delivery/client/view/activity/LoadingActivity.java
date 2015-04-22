@@ -3,6 +3,12 @@ package com.mobilive.delivery.client.view.activity;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.Window;
+
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.model.Area;
@@ -11,13 +17,6 @@ import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
-import android.view.Window;
 
 public class LoadingActivity extends Activity {
 
@@ -33,14 +32,12 @@ public class LoadingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		getActionBar().hide();
-
 		setContentView(R.layout.activity_loading);
 		getCountries();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.loading, menu);
 		return true;
 	}
@@ -59,9 +56,7 @@ public class LoadingActivity extends Activity {
 	
 	public void finish(String s, String error) {
 		countries = new APIManager().getAllCountries(s);
-
 		((DeliveryClientApplication) this.getApplication()).setCountries(countries);
-		Log.d("ray", "setting countries: " + CityId + "->" + areas.size());
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
 

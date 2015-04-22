@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +49,7 @@ public class OrdersFragment extends ParentFragment {
 	ArrayList<Branch> branches = new ArrayList<Branch>();
 	ArrayList<Category> categories = new ArrayList<Category>();
 	ArrayList<Product> products = new ArrayList<Product>();
-	static int areaId = 0, shopId = 0, branchId = 0,
-			categoryId = 0, productId = 0;
+	static int areaId = 0, shopId = 0, branchId = 0,categoryId = 0, productId = 0;
 	ArrayList<Item> mylist = new ArrayList<Item>();
 	static Activity currentActivity;
 	static View view;
@@ -66,8 +64,8 @@ public class OrdersFragment extends ParentFragment {
 	ImageView buttonOne;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+		
 		currentActivity = getActivity();	
 		sequence.add("business");		
 		sequence.add("shops");
@@ -89,6 +87,7 @@ public class OrdersFragment extends ParentFragment {
 			mContent = getFragmentManager().getFragment(savedInstanceState,
 					"mContent");
 		}
+		
 		view = inflater.inflate(R.layout.fragment_orders, container, false);
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
@@ -105,14 +104,12 @@ public class OrdersFragment extends ParentFragment {
 		ImageView submit = (ImageView) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				//getAddresses();
 				move();
 			}
 		});
 		mylist = null;
 		view.setFocusableInTouchMode(true);
 		view.requestFocus();
-		
 		return view;
 		
 	}
@@ -120,24 +117,15 @@ public class OrdersFragment extends ParentFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		((DeliveryClientApplication) currentActivity.getApplication())
-				.setCurrentFragment(this);
-		if(call!=-1 ||categoryId!=0 )
-		{
-			depth = ((DeliveryClientApplication) currentActivity.getApplication())
-					.getDepth();
-			
-			getList(sequence.get(((DeliveryClientApplication) currentActivity.getApplication())
-					.getDepth()),
-					((DeliveryClientApplication) currentActivity.getApplication())
-							.getDepthVal());
+		((DeliveryClientApplication) currentActivity.getApplication()).setCurrentFragment(this);
+		if(call!=-1 ||categoryId!=0 ){
+			depth = ((DeliveryClientApplication) currentActivity.getApplication()).getDepth();
+			getList(sequence.get(((DeliveryClientApplication) currentActivity.getApplication()).getDepth()),
+					((DeliveryClientApplication) currentActivity.getApplication()).getDepthVal());
 		}
-		else if (branchId != 0)
-		{
+		else if (branchId != 0){
 			depth = 3;
-			((DeliveryClientApplication) currentActivity.getApplication())
-			.setDepths(depth,branchId);
-			
+			((DeliveryClientApplication) currentActivity.getApplication()).setDepths(depth,branchId);
 			getList(sequence.get(depth),branchId);
 		}
 	}
@@ -156,7 +144,6 @@ public class OrdersFragment extends ParentFragment {
 		int hcall = ((DeliveryClientApplication) currentActivity.getApplication())
 				.getDepth() * ((DeliveryClientApplication) currentActivity.getApplication())
 				.getDepthVal();
-		Log.d("ra","called from resume"+call+" - "+hcall);
 
 		if(call!=hcall || call==-1)
 		{
@@ -230,9 +217,7 @@ public class OrdersFragment extends ParentFragment {
 		call = ((DeliveryClientApplication) currentActivity.getApplication())
 				.getDepth() * ((DeliveryClientApplication) currentActivity.getApplication())
 				.getDepthVal();
-		((DeliveryClientApplication) currentActivity.getApplication()).setDepths(sequence
-				.indexOf(type),id);
-		Log.d("ray","getting "+type);
+		((DeliveryClientApplication) currentActivity.getApplication()).setDepths(sequence.indexOf(type),id);
 		if (type.equals("business")) {			
 			shopId = 0;
 			branchId = 0;
@@ -265,13 +250,11 @@ public class OrdersFragment extends ParentFragment {
 			((DeliveryClientApplication) currentActivity.getApplication()).setCategoryId(id);
 			currentActivity.getActionBar().setTitle(getString(R.string.products));
 			getProducts(branchId, id);
-			Log.d("rya","here");
 		}
 
 	}
 
 	public void move() {
-
 		CartFragment fh = new CartFragment();
 		android.app.FragmentTransaction ft = fragmentManager.beginTransaction();
 		MainActivity.fragments.add(fh);
@@ -279,20 +262,15 @@ public class OrdersFragment extends ParentFragment {
 		ft.commit();
 	}
 	public void getAddresses() {
-		Log.d("ray","cart getting add");
-		
 		String serverURL = new myURL("addresses", "customers", userId, 0).getURL();
-				
 		RZHelper p = new RZHelper(serverURL, currentActivity, "getAdd", false,true);
 		p.get();
 	}
 
 	public void getAdd(String s, String error) {
 		if (error == null) {
-			Log.d("ray","error add not null");
 			Addresses = new APIManager().getAddress(s);
 			Intent intent;
-			int addressId = 0;
 			int addCount = Addresses.size();
 			if(addCount>0)
 			{
@@ -305,19 +283,15 @@ public class OrdersFragment extends ParentFragment {
 				for(int i =0;i<addCount;i++) 
 				{
 					currentAddress = Addresses.get(i);
-					Log.d("ray","add: "+i);
 					if (currentAddress.isDefault() ) {
-						addressId = currentAddress.getId();
-						Log.d("ray","add found ");
-						editor.putInt("addressId", currentAddress.getId());
-						ArrayList<Country> countries = ((DeliveryClientApplication) currentActivity.getApplication())
-								.getCountries();
+						int addressId = currentAddress.getId();
+						editor.putInt("addressId", addressId);
+						ArrayList<Country> countries = ((DeliveryClientApplication) currentActivity.getApplication()).getCountries();
 						editor.putString("addressName", currentAddress.toString(countries));
 						editor.commit();
 						break;
 					}
 				}
-				//intent = new Intent(this.getActivity(), PreviewActivity.class);
 				move();
 			}
 			else
@@ -328,14 +302,11 @@ public class OrdersFragment extends ParentFragment {
 				intent.putExtra("previous", "preview");
 				startActivity(intent);
 			}
-			//startActivity(intent);
-		}else
-			Log.d("ray","error:"+error);
+		}
 			
 	}
 
 	public void getShops(int areaId) {
-		Log.d("ray","getting shop myarea: "+areaId);
 		MainActivity.setShowHomeFragment(false);
 		String serverURL = new myURL("shops?business_id="+((DeliveryClientApplication) currentActivity.getApplication()).getBusinessId(), "areas", areaId, 0).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setShops", true,true);
@@ -343,8 +314,6 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void setShops(String s, String error) {
-		Log.d("ray","setting shops "+areaId);
-
 		shops = new APIManager().getShopsByArea(s);
 		mylist = new ArrayList<Item>();
 		for (Shop myShop : shops) {
@@ -352,6 +321,7 @@ public class OrdersFragment extends ParentFragment {
 			it.setName(myShop.toString());
 			it.setType("shop");
 			it.setId(myShop.getId());
+			it.setPhotoName(myShop.getPhotoName());
 			mylist.add(it);
 		}
 		updateList();
@@ -486,26 +456,21 @@ public class OrdersFragment extends ParentFragment {
 						((DeliveryClientApplication) currentActivity.getApplication()).setBusinessId(itemId);
 					}
 					depth++;
-					Log.d("ray","setting: "+depth+ " - "+itemId);
 					getList(sequence.get(depth), itemId);
-					listView.setAdapter(new MyCustomAdapter(currentActivity,
-							R.layout.row_txtimg, mylist));
+					listView.setAdapter(new MyCustomAdapter(currentActivity,R.layout.row_txtimg, mylist));
 				}
 			}
 		});
 	}
 
 	public static void updateFooter() {
-		Cart cart = ((DeliveryClientApplication) currentActivity.getApplication())
-				.getMyCart();
+		Cart cart = ((DeliveryClientApplication) currentActivity.getApplication()).getMyCart();
 		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
 		TextView price = (TextView) view.findViewById(R.id.totalprice);
 		int totalPrice = 0;
-
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
-		//price.setText(totalPrice + currentActivity.getString(R.string.lira));
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

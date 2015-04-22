@@ -360,49 +360,41 @@ public class APIManager {
 		try {
 			jsonResponse = new JSONObject(cont);
 			int id, is_available;
-			String name, desc, business_str;
+			String name, desc, business_str,photoName;
 			Business business;
 			ArrayList<Business> businesses;
 			if (!errorCheck(jsonResponse)) {
 				if (jsonResponse.has("elements")) {
-					JSONArray jsonMainNode = jsonResponse
-							.optJSONArray("elements");
+					JSONArray jsonMainNode = jsonResponse.optJSONArray("elements");
 					int lengthJsonArr = jsonMainNode.length();
-
 					for (int i = 0; i < lengthJsonArr; i++) {
-						JSONObject jsonChildNode = jsonMainNode
-								.getJSONObject(i);
-
-						id = Integer.parseInt(jsonChildNode.optString("id")
-								.toString());
+						JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+						id = Integer.parseInt(jsonChildNode.optString("id").toString());
 						name = jsonChildNode.optString("name").toString();
+						photoName = jsonChildNode.optString("photo").toString();
 						is_available = 1;// Integer.parseInt(jsonChildNode.optString("is").toString());
 						desc = jsonChildNode.optString("name").toString();
-
 						// Getting business object
-						business_str = jsonChildNode.optString("business")
-								.toString();
+						business_str = jsonChildNode.optString("business").toString();
 						businesses = getBusinesses(business_str);
 						business = businesses.get(0);
-
-						gridArray.add(new Shop(id, name, desc, is_available,
-								business));
+						Shop shop = new Shop(id, name, desc, is_available,business);
+						shop.setPhotoWithParse(photoName);
+						gridArray.add(shop);
 					}
 				} else {
-					id = Integer.parseInt(jsonResponse.optString("id")
-							.toString());
+					id = Integer.parseInt(jsonResponse.optString("id").toString());
 					name = jsonResponse.optString("name").toString();
+					photoName = jsonResponse.optString("photo").toString();
 					is_available = 1;// Integer.parseInt(jsonResponse.optString("is").toString());
 					desc = jsonResponse.optString("name").toString();
-
 					// Getting business object
-					business_str = jsonResponse.optString("business")
-							.toString();
+					business_str = jsonResponse.optString("business").toString();
 					businesses = getBusinesses(business_str);
 					business = businesses.get(0);
-
-					gridArray.add(new Shop(id, name, desc, is_available,
-							business));
+					Shop shop = new Shop(id, name, desc, is_available,business);
+					shop.setPhotoWithParse(photoName);
+					gridArray.add(shop);
 				}
 			}
 		} catch (JSONException e) {

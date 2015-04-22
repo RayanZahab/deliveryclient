@@ -13,6 +13,7 @@ import com.mobilive.delivery.client.R.id;
 import com.mobilive.delivery.client.R.layout;
 import com.mobilive.delivery.client.R.menu;
 import com.mobilive.delivery.client.model.ForgetPasswordRequest;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.PhoneInfoManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
@@ -50,7 +51,7 @@ public class ForgetPasswordActivity extends Activity {
 
 	private void finish(String s, String error) {
 		if(error==null || !(error.length()>0)){
-			Toast.makeText(getApplicationContext(), "check your Messages to get your password",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "check your Messages to get your password"),Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this,LoginActivity.class);
 			startActivity(intent);
 		}

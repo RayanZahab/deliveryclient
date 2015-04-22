@@ -123,5 +123,7 @@
     <string name="userNotFound">User Not Found</string>
     <string name="cityNotFound">City Not Found</string>
     <string name="defaultError">Sorry our customer, we have unknown error please try again later..</string>
+    <string name="enterUserAndPass">please enter User Name and Password</string>
+    <string name="checkYourMessages">check your Messages to get your password</string>
     
 </resources>

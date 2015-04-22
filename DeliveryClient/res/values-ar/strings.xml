@@ -248,6 +248,6 @@
     <string name="userNotFound">Arb User Not Found</string>
     <string name="cityNotFound">Arb City Not Found</string>
     <string name="defaultError">هذا مثير للإحراج! لقد حدث خطئ غير معروف أثناء استخدامك للموقع. يرجى إعادة المحاولة بوقت لاحق.</string>
-    
-    
+    <string name="enterUserAndPass">الرجاء إدخال اسم المستخدم وكلمة المرور</string>
+    <string name="checkYourMessages">arb check your Messages to get your password</string>    
 </resources>

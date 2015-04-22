@@ -2,15 +2,15 @@ package com.mobilive.delivery.client.utilities;
 
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -39,9 +39,8 @@ public class RZHelper {
 		this.returnMethod = method;
 		this.show = isShow;
 		this.myAQuery = new AQuery(currentActivity);
-		Log.d("RZ", "URL: " + url + "->" + returnMethod);
 		if (!isNetworkAvailable()) {
-			Toast toast = Toast.makeText(myAQuery.getContext(), "Errors: "+ currentActivity.getString(R.string.no_net),Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(myAQuery.getContext(), currentActivity.getString(R.string.no_net),Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.TOP, 0, 0);
 			toast.show();
 		} else {
@@ -57,19 +56,13 @@ public class RZHelper {
 						reply = html.toString();
 					if (status != null)
 						error = status.getError();
-					Log.d("RZ", "UR:" + url + " REPLY: " + reply + "->Error: "+ error);
 					if (error != null) {
-						Toast.makeText(myAQuery.getContext(),"Error2: " + error, Toast.LENGTH_LONG).show();
+						Toast.makeText(myAQuery.getContext(),ErrorHandlerManager.getInstance().getErrorString(currentActivity, error), Toast.LENGTH_LONG).show();
 					}else {
 						Method returnFunction;
 						try {
-							returnFunction = currentActivity.getClass().getMethod(
-									"callMethod", stringType.getClass(), stringType.getClass(),
-									stringType.getClass());
-							returnFunction.invoke(currentActivity, returnMethod, reply,
-									error);
-							Log.d("ray callback", url + ": " + "error: "
-									+ error + " => reply: " + reply);
+							returnFunction = currentActivity.getClass().getMethod("callMethod", stringType.getClass(), stringType.getClass(),stringType.getClass());
+							returnFunction.invoke(currentActivity, returnMethod, reply,error);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -85,7 +78,6 @@ public class RZHelper {
 			String token = settings1.getString("token", "");
 			if (!token.isEmpty()) {
 				callBack.header("auth_token", token);
-				Log.d("ray token: ", "token: " + token);
 			}
 		}
 	}
@@ -98,7 +90,6 @@ public class RZHelper {
 		this.last = islast;
 		this.show = false;
 		this.myAQuery = new AQuery(currentActivity);
-		Log.d("RZ", "URL: " + url + "->" + returnMethod);
 		if (!isNetworkAvailable()) {
 			Toast toast = Toast.makeText(myAQuery.getContext(), "Errors: "+ currentActivity.getString(R.string.no_net),Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.TOP, 0, 0);
@@ -110,35 +101,22 @@ public class RZHelper {
 				DeliveryClientApplication.loader = loader;
 				DeliveryClientApplication.loader.show();
 			}
-
 			callBack = new AjaxCallback<JSONObject>() {
-
 				@Override
-				public void callback(String url, JSONObject html,
-						AjaxStatus status) {
-
+				public void callback(String url, JSONObject html,AjaxStatus status) {
 					String reply = "", error = null, stringType = "";
 					if (html != null)
 						reply = html.toString();
 					if (status != null)
 						error = status.getError();
-					Log.d("RZ", "UR:" + url + " REPLY: " + reply + "->Error: "
-							+ error);
 					if (error != null) {
-						Toast.makeText(myAQuery.getContext(),
-								"Error2: " + error, Toast.LENGTH_LONG).show();
-
+						Toast.makeText(myAQuery.getContext(),ErrorHandlerManager.getInstance().getErrorString(currentActivity, error), Toast.LENGTH_LONG).show();
 					} else {
 						Method returnFunction;
 						try {							
-							Log.d("ray callback", url + ": " + "error: "
-									+ error + " => reply: " + reply);
-							returnFunction = currentActivity.getClass().getMethod(
-									"callMethod", stringType.getClass(), stringType.getClass(),
-									stringType.getClass());
+							returnFunction = currentActivity.getClass().getMethod("callMethod", stringType.getClass(), stringType.getClass(),stringType.getClass());
 							returnFunction.invoke(currentActivity, returnMethod, reply,error);
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -147,13 +125,10 @@ public class RZHelper {
 					}
 				}
 			};
-
-			SharedPreferences settings1 = currentActivity.getSharedPreferences(
-					"PREFS_NAME", 0);
+			SharedPreferences settings1 = currentActivity.getSharedPreferences("PREFS_NAME", 0);
 			String token = settings1.getString("token", "");
 			if (!token.isEmpty()) {
 				callBack.header("auth_token", token);
-				Log.d("ray token: ", "token: " + token);
 			}
 		}
 	}
@@ -165,34 +140,25 @@ public class RZHelper {
 		myAQuery = new AQuery(currentActivity);
 
 		if (!isNetworkAvailable()) {
-			Toast t = Toast.makeText(myAQuery.getContext(), "Errorss: "
-					+ currentActivity.getString(R.string.no_net),
-					Toast.LENGTH_LONG);
+			Toast t = Toast.makeText(myAQuery.getContext(), currentActivity.getString(R.string.no_net),Toast.LENGTH_LONG);
 			t.setGravity(Gravity.TOP, 0, 0);
 			t.show();
 		} else {
-
 			myAQuery.ajax(url, File.class, new AjaxCallback<File>() {
-
 				public void callback(String url, File file, AjaxStatus status) {
-
 					if (file != null) {
-						myAQuery.progress(loader).id(imageView.getId())
-						.image(myurl, false, false);
+						myAQuery.progress(loader).id(imageView.getId()).image(myurl, false, false);
 					}
 				}
-
 			});
-
 		}
 	}
 
 	public void post(Object obj) {
 		JSONObject params = (new APIManager()).objToCreate(obj);
 		if (loader != null && show) {
-			myAQuery.progress(loader).post(url, params, JSONObject.class,
-					callBack);
-		} else {
+			myAQuery.progress(loader).post(url, params, JSONObject.class,callBack);
+		}else {
 			myAQuery.post(url, params, JSONObject.class, callBack);
 		}
 	}
@@ -203,18 +169,15 @@ public class RZHelper {
 		} else {
 			myAQuery.ajax(url, JSONObject.class, callBack);
 		}
-
 	}
 
 	public void put(Object obj) {
 		JSONObject params = (new APIManager()).objToCreate((Object) obj);
 		if (loader != null && show) {
-			myAQuery.progress(loader).put(url, params, JSONObject.class,
-					callBack);
+			myAQuery.progress(loader).put(url, params, JSONObject.class,callBack);
 		} else {
 			myAQuery.put(url, params, JSONObject.class, callBack);
 		}
-
 	}
 
 	public void delete() {
@@ -223,17 +186,12 @@ public class RZHelper {
 		} else {
 			myAQuery.delete(url, JSONObject.class, callBack);
 		}
-
 	}
 
 	private boolean isNetworkAvailable() {
 		currentActivity.getApplicationContext();
-		ConnectivityManager connectivityManager = (ConnectivityManager) currentActivity
-				.getApplicationContext()
-				.getSystemService(
-						Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = connectivityManager
-				.getActiveNetworkInfo();
+		ConnectivityManager connectivityManager = (ConnectivityManager) currentActivity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 

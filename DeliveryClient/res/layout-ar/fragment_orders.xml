@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/gris"
+    android:background="@color/redbg"
     android:baselineAligned="true" >
 
     <LinearLayout
@@ -18,40 +18,42 @@
             android:layout_height="0dip"
             android:layout_weight="1"
             android:divider="@android:color/transparent"
-            android:dividerHeight="10px" >
+            android:dividerHeight="3px" >
         </ListView>
 
         <RelativeLayout
             android:id="@+id/ordersfooter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/redbg"
-            android:visibility="gone" >
+            android:background="@color/redbg" >
             
             <ImageView 
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/ar_backarrow"
+                android:src="@drawable/backarrow"
+                android:visibility="gone"
                 />
-              <RelativeLayout
+
+            <RelativeLayout
                 android:id="@+id/mycart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
                 android:visibility="gone"
-                android:layout_alignParentLeft="true">
+                android:layout_alignParentRight="true">
+
             <ImageView 
                 android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="14dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="5dp"                
+                android:layout_alignParentRight="true"
                 android:src="@drawable/cart"
                 />
             <TextView

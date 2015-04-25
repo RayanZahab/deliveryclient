@@ -196,7 +196,7 @@
     <string name="order_updated">ar_Order updated successfully</string>
     <string name="title_activity_select_adress">ar_SelectAdress</string>
     <string name="title_activity_register">ar_RegisterActivity</string>
-    <string name="register">ar_Register</string>
+    <string name="register">تسجيل</string>
     <string name="fullname">الأسم</string>
     <string name="retypepass">أعد كتابة كلمة المرور</string>
     <string name="street">ar_Street</string>
@@ -229,25 +229,25 @@
     <string name="title_activity_test">ar_TestActivity</string>
 
     <!--  Errors -->
-     <string name="blockedcustomer">Arb ArbBlocked Customer</string>
-    <string name="customerNotFound">Arb Customer Not Found</string>
-    <string name="areaNotFound">Arb Area Not Found</string>
-    <string name="branchNotFound">Arb Branch Not Found</string>
-    <string name="categoryNotFound">Arb Category Not Found</string>
-    <string name="businessNotFound">Arb Business Not Found</string>
-    <string name="countryNotFound">Arb Country Not Found</string>
-    <string name="mobileTaken">Arb Mobile has already been taken</string>
-    <string name="codeNotCorrect">Arb Code is not correct</string>
-    <string name="maxRestPass">Arb Max reset password is reached</string>
-    <string name="deviceNotRegistered">Arb Device is not registered</string>
-    <string name="customerNotActivated">Arb Customer is not activated or locked</string>
-    <string name="itemNotFound">Arb Item Not Found</string>
-    <string name="orderNotFound">Arb Order Not Found</string>
-    <string name="shopNotFound">Arb Shop Not Found</string>
-    <string name="unitNotFound">Arb Unit Not Found</string>
-    <string name="userNotFound">Arb User Not Found</string>
-    <string name="cityNotFound">Arb City Not Found</string>
+     <string name="blockedcustomer">مستخدم محظور</string>
+    <string name="customerNotFound">المستخدم ليس موجود</string>
+    <string name="areaNotFound">لم يتم العثورعلى المنطقة</string>
+    <string name="branchNotFound">لم يتم العثورعلى الفرع</string>
+    <string name="categoryNotFound">لم يتم العثورعلى الفئة</string>
+    <string name="businessNotFound">لم يتم العثورعلى فئة الأعمال</string>
+    <string name="countryNotFound">لم يتم العثورعلى البلد</string>
+    <string name="mobileTaken">رقم الهاتف مستعمل</string>
+    <string name="codeNotCorrect">الرمز غير صحيح</string>
+    <string name="maxRestPass">لقد نفذ عدد محاولات إعادة تعيين كلمة المرور</string>
+    <string name="deviceNotRegistered">لم يتم تسجيل الجهاز</string>
+    <string name="customerNotActivated">مستخدم غير مفعل أو غير مسجل</string>
+    <string name="itemNotFound">لم يتم العثورعلى المنتج</string>
+    <string name="orderNotFound">لم يتم العثورعلى الطلب</string>
+    <string name="shopNotFound">لم يتم العثورعلى المحل</string>
+    <string name="unitNotFound">لم يتم العثورعلى الوحدة</string>
+    <string name="userNotFound">لم يتم العثورعلى المستخدم</string>
+    <string name="cityNotFound">لم يتم العثورعلى المدينة</string>
     <string name="defaultError">هذا مثير للإحراج! لقد حدث خطئ غير معروف أثناء استخدامك للموقع. يرجى إعادة المحاولة بوقت لاحق.</string>
     <string name="enterUserAndPass">الرجاء إدخال اسم المستخدم وكلمة المرور</string>
-    <string name="checkYourMessages">arb check your Messages to get your password</string>    
+    <string name="checkYourMessages">الرجاء تفقد الرسائل لإستلام كلمة المرور</string>    
 </resources>

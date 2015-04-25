@@ -112,7 +112,6 @@
                 android:layout_below="@+id/forgotpassword"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:onClick="forgotpassword"
                 android:text="@string/register"
                 android:textColor="#ffffff" />
 

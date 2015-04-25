@@ -157,23 +157,14 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public int goUp() {
-		if(depth==3 && ((DeliveryClientApplication) currentActivity.getApplication())
-				.getMyCart().getAllCount()>0)
+		if(depth==3 && ((DeliveryClientApplication) currentActivity.getApplication()).getMyCart().getAllCount()>0)
 		{
-			new AlertDialog.Builder(currentActivity)
-			.setTitle(R.string.empty_cart)
-			.setIcon(R.drawable.categories)
-			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
+			new AlertDialog.Builder(currentActivity).setTitle(R.string.empty_cart).setIcon(R.drawable.categories).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int whichButton) {
 					goingUp();
 				}
-			} )
-			.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-
-				public void onClick(DialogInterface dialog,
-						int whichButton) {
+			} ).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int whichButton) {
 					return;
 				}
 			}).show();

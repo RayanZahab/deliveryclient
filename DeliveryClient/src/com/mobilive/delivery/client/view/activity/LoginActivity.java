@@ -50,6 +50,7 @@ public class LoginActivity extends Activity {
 	private CheckBox keeploggedin;
 	private Button submit;
 	String lang ;
+	private TextView register;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,8 @@ public class LoginActivity extends Activity {
 
 		username = (EditText) findViewById(R.id.user_name);
 		password = (EditText) findViewById(R.id.password);
-
+		register = (TextView) findViewById(R.id.register);
+		
 		SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 		isChecked = settings1.getBoolean("isChecked", false);
 
@@ -89,7 +91,7 @@ public class LoginActivity extends Activity {
 			}
 		});
 		
-		TextView register = (TextView) findViewById(R.id.register);
+		
 		register.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
@@ -162,6 +164,7 @@ public class LoginActivity extends Activity {
 		forgotpassword.setText(getString(R.string.forgotpass));
 		keeploggedin.setText(getString(R.string.keeploggedin));
 		loginTxt.setText(getString(R.string.login));
+		register.setText(getString(R.string.register));
 		submit.setText(getString(R.string.enter));
 	}
 

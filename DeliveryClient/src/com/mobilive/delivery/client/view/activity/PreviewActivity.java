@@ -59,7 +59,7 @@ public class PreviewActivity extends Activity {
 		genderImg = (ImageView)findViewById(R.id.gender);
 		customerName.setText("" + name);
 		customerPhone.setText("" + phoneVal);
-		customerAdd.setText(addName.replace(",", "\n"));
+		customerAdd.setText(addName);
 		String genderVal = settings1.getString("gender", "");
 		if(genderVal.equals(Gender.Male.toString()))
 		{

@@ -3,6 +3,19 @@ package com.mobilive.delivery.client.view.fragment;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.adapter.MyCustomAdapter;
@@ -12,25 +25,8 @@ import com.mobilive.delivery.client.model.CartItem;
 import com.mobilive.delivery.client.model.Gender;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Product;
-import com.mobilive.delivery.client.view.activity.AddAddressActivity;
 import com.mobilive.delivery.client.view.activity.MainActivity;
-import com.mobilive.delivery.client.view.activity.PreviewActivity;
 import com.mobilive.delivery.client.view.listview.SelectAdress;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class CartFragment extends ParentFragment {
 	Cart cart;

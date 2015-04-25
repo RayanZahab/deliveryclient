@@ -55,7 +55,7 @@
     <string name="pending_orders">Penidng Orders</string>
     <string name="closed_orders">Closed Orders</string>
     <string name="branches">Branches</string>
-    <string name="empty_cart">Going Back will empty the cart, are you sure?</string>
+    <string name="empty_cart">you will empty the cart, are you sure?</string>
     <string name="cart_is_empty">Your Cart is empty</string>
     <string name="business_categories">Business Categories</string>
     <string name="shops">Shops</string>

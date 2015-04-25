@@ -88,20 +88,15 @@ public class MainActivity extends Activity {
 		navMenuTitles.add(getString(R.string.home));
 		Bundle extras = getIntent().getExtras();
 		
-		if(extras!=null)
-		{
+		if(extras!=null){
 			fragmentIndex = extras.getInt("fragmentIndex");
 			categoryId = extras.getInt("categoryId");			
 		}
 		
 		addSlideMenu();
-		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		
-		// toggler
 		toggler();
-
 	}
 
 	@Override
@@ -112,20 +107,15 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// toggle nav drawer on selecting action bar app icon/title
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		// Handle action bar actions click
 		if (item.getItemId() == R.id.action_settings)
 			return true;
 		else
 			return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * Slide menu item click listener
-	 * */
 	private class SlideMenuClickListener implements
 			ListView.OnItemClickListener {
 		@Override
@@ -133,10 +123,6 @@ public class MainActivity extends Activity {
 			displayView(position);
 		}
 	}
-
-	/* *
-	 * Called when invalidateOptionsMenu() is triggered
-	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
@@ -145,7 +131,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void addSlideMenu() {
-		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 		navDrawerItems = new ArrayList<NavDrawerItem>();
@@ -172,23 +157,50 @@ public class MainActivity extends Activity {
 	}
 
 	private void displayView(int position) {
-		ParentFragment fragment = null;
-		Bundle args = new Bundle();
 		boolean cartEmpty = true;
-		if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0)
+		final int tempPosition = position;
+		if((position==0 || position==2 ||position==3 ||position==4 || position==7) && ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
+			position = -1;
+			new AlertDialog.Builder(this).setTitle(R.string.empty_cart).setIcon(R.drawable.categories).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int whichButton) {
+					((DeliveryClientApplication) getApplication()).emptyCart();
+					_routeView(tempPosition,true);
+				}
+			} ).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int whichButton) {
+					return;
+				}
+			}).show();
+		}else if((position==6)&& ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
+			position = -1;
+			logout(true);
+		}else if((position==5)&& ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
+			position = -1;
+			try {
+				Toast.makeText(getApplicationContext(),"version" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName,Toast.LENGTH_SHORT).show();
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		}else if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0)
 		{
 			branchId = ((DeliveryClientApplication) getApplication()).getBranchId();	
 			position = 7;
 			cartEmpty = false;
 		}
+		if(position!=-1)
+			_routeView(position,cartEmpty);
+	}
+	
+	private  void _routeView(int position,boolean cartEmpty){
+		ParentFragment fragment = null;
+		Bundle args = new Bundle(); 
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
 			fragments.add(fragment);
 			break;
 		case 1:
-			if(!cartEmpty)
-			{
+			if(!cartEmpty){
 				fragment = new CartFragment();
 				fragments.add(fragment);
 			}else{
@@ -235,7 +247,7 @@ public class MainActivity extends Activity {
 			break;
 		}
 		if (fragment != null) {
-			
+
 			FragmentTransaction tx = fragmentManager.beginTransaction();
 			tx.addToBackStack(null);
 			tx.replace(R.id.frame_container, (Fragment) fragment).commit();
@@ -245,8 +257,6 @@ public class MainActivity extends Activity {
 			mDrawerLayout.closeDrawer(mDrawerList);
 		} 
 	}
-	
-	
 
 	@Override
 	public void setTitle(CharSequence title) {
@@ -417,32 +427,28 @@ public class MainActivity extends Activity {
 	
 	public void logout(boolean login)
 	{
-		if(!login)
-		{
+		if(!login){
 			_exitApp();
 		}
 		else
 		{
-			new AlertDialog.Builder(this)
-			.setIcon(android.R.drawable.ic_dialog_alert)
-			.setTitle(R.string.exit)
-			.setMessage(R.string.exitquest)
-			.setPositiveButton(R.string.yes,
+			new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(R.string.exit).setMessage(R.string.exitquest).setPositiveButton(R.string.yes,
 					new DialogInterface.OnClickListener() {
 						@SuppressLint("NewApi")
 						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							
-							SharedPreferences settings1 = getSharedPreferences(
-									"PREFS_NAME", 0);
+						public void onClick(DialogInterface dialog,int which) {
+							((DeliveryClientApplication) getApplication()).emptyCart();
+							SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 							settings1.edit().remove("PREFS_NAME").commit();
 							Intent i = new Intent(MainActivity.this, LoginActivity.class);
 							startActivity(i);
 						}
-					}).setNegativeButton(R.string.no, null).show();
+					}).setNegativeButton(R.string.no,new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int whichButton) {
+							return;
+						}
+					}).show();
 		}
-		
 	}
 
 	public static boolean isShowHomeFragment() {
@@ -453,19 +459,14 @@ public class MainActivity extends Activity {
 		MainActivity.showHomeFragment = showHomeFragment;
 	}
 	private void _exitApp() {
-		new AlertDialog.Builder(this)
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setTitle(R.string.exit)
-		.setMessage(R.string.exitquest)
-		.setPositiveButton(R.string.yes,
-				new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle(R.string.exit).setMessage(R.string.exitquest).
+		    setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
 			@SuppressLint("NewApi")
 			@Override
-			public void onClick(DialogInterface dialog,
-					int which) {
+			public void onClick(DialogInterface dialog,int which) {
+				((DeliveryClientApplication) getApplication()).emptyCart();
 				MainActivity.this.finishAffinity();
-				SharedPreferences settings1 = getSharedPreferences(
-						"PREFS_NAME", 0);
+				SharedPreferences settings1 = getSharedPreferences("PREFS_NAME", 0);
 				settings1.edit().remove("PREFS_NAME").commit();
 			}
 		}).setNegativeButton(R.string.no, null).show();
@@ -473,11 +474,9 @@ public class MainActivity extends Activity {
 	}
 
 	public static Fragment getVisibleFragment() {
-
 		for (Fragment fragment : fragments) {
-			if (fragment != null && fragment.isVisible()) {
+			if (fragment != null && fragment.isVisible())
 				return fragment;
-			}
 		}
 		return null;
 	}
@@ -489,6 +488,5 @@ public class MainActivity extends Activity {
 	public void setActiveFragment(Fragment activeFragment) {
 		this.activeFragment = activeFragment;
 	}
-
 	
 }

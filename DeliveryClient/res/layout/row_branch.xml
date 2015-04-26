@@ -18,8 +18,8 @@
         android:layout_weight="0.5"
         android:gravity="left"
         android:text="text"
-        android:textStyle="bold"
-        android:textSize="18sp" />
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/divider"

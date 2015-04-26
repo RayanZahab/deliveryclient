@@ -35,6 +35,31 @@ public class APIManager {
 
 	}
 
+	public Area getBranchArea(JSONObject jsonResponse) {
+		JSONObject jsonChildNode;
+		Area area = null;
+		try {
+			jsonChildNode = jsonResponse.getJSONObject("area");
+			if (!errorCheck(jsonResponse)) {
+				int id, country_id, city_id;
+				String name;
+
+				id = Converter.toInt(jsonChildNode.optString("id").toString());
+				country_id = Converter.toInt(jsonChildNode.optString(
+						"country_id").toString());
+				city_id = Converter.toInt(jsonChildNode.optString("city_id")
+						.toString());
+				name = jsonChildNode.optString("name").toString();
+				area = new Area(id, city_id, country_id, name);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return area;
+	}
+	
 	public Customer getLogedInUser(String cont) {
 		JSONObject jsonResponse;
 
@@ -383,18 +408,9 @@ public class APIManager {
 						gridArray.add(shop);
 					}
 				} else {
-					id = Integer.parseInt(jsonResponse.optString("id").toString());
-					name = jsonResponse.optString("name").toString();
-					photoName = jsonResponse.optString("photo").toString();
-					is_available = 1;// Integer.parseInt(jsonResponse.optString("is").toString());
-					desc = jsonResponse.optString("name").toString();
-					// Getting business object
-					business_str = jsonResponse.optString("business").toString();
-					businesses = getBusinesses(business_str);
-					business = businesses.get(0);
-					Shop shop = new Shop(id, name, desc, is_available,business);
-					shop.setPhotoWithParse(photoName);
-					gridArray.add(shop);
+					Shop shop = getShop(jsonResponse);
+					if(shop!=null)
+						gridArray.add(shop);
 				}
 			}
 		} catch (JSONException e) {
@@ -451,6 +467,16 @@ public class APIManager {
 						b.setMin_amount(minimum);
 						b.setEstimation_time(time);
 						b.setDelivery_charge(charge);
+						JSONObject jsonShopChildNode = jsonChildNode.getJSONObject("shop");
+						if (!errorCheck(jsonShopChildNode)) {
+							Shop shop = getShop(jsonShopChildNode);
+							if(shop!=null)
+								b.setShop(shop);
+						}
+						Area area = getBranchArea(jsonChildNode);
+						if(area!=null)
+							b.setArea(area);
+						
 						gridArray.add(b);
 					}
 				}
@@ -488,6 +514,14 @@ public class APIManager {
 				Branch b = new Branch(id, name, description, area, address,
 						null, estimation_time);
 				b.setOpenHours(getOpenHours(open_hours));
+				
+				JSONObject jsonChildNode = jsonResponse.getJSONObject("shop");
+				if (!errorCheck(jsonChildNode)) {
+					Shop shop = getShop(jsonChildNode);
+					if(shop!=null)
+						b.setShop(shop);
+				}
+				
 				return b;
 			}
 		} catch (JSONException e) {
@@ -1223,6 +1257,17 @@ public class APIManager {
 		return false;
 	}
 
+	private Shop getShop(JSONObject jsonResponse) {
+		if(jsonResponse!=null){
+			int id = Converter.toInt(jsonResponse.optString("id")
+					.toString());
+			String name = jsonResponse.optString("name").toString();
+			return new Shop(id,name);
+		}
+		return null;
+	}
+
+	
 	public JSONObject objToCreate(Object o) {
 		JSONObject jsonObjSend = new JSONObject();
 		if (o instanceof Order) {

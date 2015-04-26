@@ -189,11 +189,12 @@ public class Branch {
 		this.shop = shop;
 	}
 
+	public String displayName() {
+		return (this.shop!=null?  this.shop.toString()+ " - ":"") +(this.area!=null?  this.area.toString()+ " - ":"") + this.name ;
+	}
+	
 	public String toString() {
-		if(this.area!=null)
-		return this.name + "\n" + this.area.toString() + "," + this.address;
-		else
-			return this.name;
+		return (this.shop!=null?  this.shop.toString()+ " - ":"") +(this.area!=null?  this.area.toString()+ " - ":"") + this.name ;
 	}
 
 	@Override

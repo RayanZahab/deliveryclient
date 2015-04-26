@@ -21,6 +21,11 @@ public class Shop {
 		this.setIs_available(is_available);
 		this.setBusiness(business);
 	}
+	
+	public Shop(Integer id, String name) {
+		this.setId(id);
+		this.setName(name);
+	}
 
 	public Integer getId() {
 		return id;
@@ -61,10 +66,12 @@ public class Shop {
 	public void setBusiness(Business business) {
 		this.business = business;
 	}
-	public String toString()
-	{
-		return getName();
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
+	
 
 	public String getPhotoName() {
 		return photoName;

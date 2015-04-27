@@ -73,7 +73,7 @@
             android:label="@string/title_activity_register"
             android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.AddAddressActivity"

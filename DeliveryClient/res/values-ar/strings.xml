@@ -26,7 +26,7 @@
     <string name="wrongcredentials">ar_Wrong Credentials</string>
     <string name="exit">خروج</string>
     <string name="exitquest">هل أنت متأكد أنك تريد الخروج؟</string>
-    <string name="forgotpass">نسيت كلمة المرور</string>
+    <string name="forgotpass"><u>نسيت كلمة المرور</u></string>
     <string name="lira">ل.ل</string>
     <string name="yes">نعم</string>
     <string name="no">كلا</string>
@@ -85,9 +85,9 @@
     <string name="invalid_time">التوقيت المتوقع غير صحيح</string>
     <string name="select_role">ar_Please select a role</string>
     <string name="title_activity_preview">السلة</string>
-    <string name="title_activity_select_adress">العناوين</string>
+    <string name="title_activity_select_adress">اختيار العناون</string>
     <string name="title_activity_register">التسجيل</string>
-    <string name="register">تسجيل</string>
+    <string name="register"><u>تسجيل </u></string>
     <string name="retypepass">أعد كتابة كلمة المرور</string>
     <string name="street">الشارع</string>
     <string name="building">البناء</string>

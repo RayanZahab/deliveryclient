@@ -17,33 +17,33 @@
         <Spinner 
             android:id="@+id/countriesSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/myspinner"
+            android:background="@drawable/mymainspinner"
             android:spinnerMode="dialog"
             android:paddingRight="20dp" />
 
         <Spinner
             android:id="@+id/citiesSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_alignLeft="@+id/countriesSP"
             android:layout_below="@+id/countriesSP"
             android:layout_marginTop="10dp"
             android:spinnerMode="dialog"
             android:paddingRight="20dp"
-            android:background="@drawable/myspinner" />
+            android:background="@drawable/mymainspinner" />
 
         <Spinner
             android:id="@+id/areasSP"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_alignLeft="@+id/citiesSP"
             android:layout_below="@+id/citiesSP"
             android:paddingRight="20dp"
             android:spinnerMode="dialog"
             android:layout_marginTop="10dp"
-            android:background="@drawable/myspinner" />
+            android:background="@drawable/mymainspinner" />
 
         <TextView
             android:id="@+id/streetlabel"

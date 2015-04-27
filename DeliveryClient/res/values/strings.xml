@@ -42,6 +42,7 @@
     <string name="enter">Enter</string>
     <string name="login">Login</string>
     <string name="gender">Gender</string>
+    <string name="loadingdata">Loading Data Please Wait</string>
     <string name="thankyou">Thank You Very Much</string>
     <string name="followup">Now you can check your order status
          in Old Orders Tab</string>
@@ -92,12 +93,13 @@
     <string name="cart">Cart</string>
     <string name="profile">My Profile</string>
     <string name="subtotal">Sub total</string>
+    <string name="addnewaddress">Add New Address</string>
     
 
     
 
     <string name="title_activity_register_confirmation">Confirm Code</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_addaddress">Add Address</string>
     <string name="title_activity_product_info">ProductInfoActivity</string>
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="title_activity_thank_you">ThankYouActivity</string>

@@ -59,7 +59,7 @@
 		    <Spinner
 		        android:id="@+id/countriesSP"
 		        android:layout_width="fill_parent"
-		        android:layout_height="30dp"
+		        android:layout_height="45dp"
 		        android:gravity="center_vertical"
 		        android:background="@drawable/mymainspinner"
 		        android:paddingRight="22dp"
@@ -169,7 +169,7 @@
 		    <Spinner
 		        android:id="@+id/genderSP"
 		        android:layout_width="fill_parent"
-		        android:layout_height="30dp"
+		        android:layout_height="45dp"
 		        android:background="@drawable/mymainspinner"
 		        android:gravity="center_vertical"
 		        android:paddingRight="22dp"

@@ -76,7 +76,7 @@
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.AddAddressActivity"
-            android:label="@string/title_activity_test"
+            android:label="@string/title_activity_addaddress"
             android:parentActivityName="com.mobilive.delivery.client.view.listview.SelectAdress"
             android:screenOrientation="portrait" >
         </activity>

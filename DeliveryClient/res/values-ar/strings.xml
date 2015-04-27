@@ -8,74 +8,24 @@
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="submit">موافق</string>
     <string name="categories">فئات</string>
-    <string name="from">من</string>
-    <string name="to">إلى</string>
-    <string name="title_activity_navigation">القائمة</string>
-    <string name="title_activity_categories">الفئات</string>
-    <string name="title_activity_branches">الفروع</string>
-    <string name="title_activity_add_branch">اضافة فرع</string>
-    <string name="title_activity_users">المستخدمين</string>
     <string name="title_activity_order_info">معلومات الطلب</string>
-    <string name="add">اضافة</string>
-    <string name="personalinfo">المعلومات الشخصية</string>
-    <string name="preparer">مهيئ</string>
-    <string name="opening_hours">ساعات العمل</string>
-    <string name="clientinfo">معلومات العميل</string>
     <string name="address">العنوان</string>
     <string name="total">المجموع</string>
     <string name="status">الحالة</string>
     <string name="notes">ملاحظات</string>
-    <string name="cancel">إلغاء</string>
-    <string name="deliveryguy">رجل توصيل الطلبات</string>
-    <string name="preparerguy">معد طلبات</string>
     <string name="details">تفاصيل</string>
     <string name="name">الإسم</string>
-    <string name="textButton">ar_TextButton</string>
-    <string name="selectphoto">اختر الصورة</string>
-    <string name="slash">\</string>
-    <string name="priceunit">الوحدة \السعر</string>
-    <string name="producticon">رمز المنتج</string>
-    <string name="estimatedtime">الوقت المقدر</string>
     <string name="description">وصف</string>
     <string name="productname">اسم المنتج</string>
-    <string name="selectlanguage">اختار اللغة</string>
     <string name="buttonlogin">تسجيل الدخول</string>
     <string name="products">المنتجات</string>
     <string name="reason">السبب</string>
     <string name="item">ar_Item</string>
-    <string name="textview">ar_TextView</string>
-    <string name="checkbox">ar_CheckBox</string>
-    <string name="estimation">ar_Estimated Time</string>
-    <string name="About">رقم الإصدار</string>
-    <string name="navigation">ar_Navigation Menu</string>
     <string name="Logout">خروج</string>
-    <string name="search_hint">ابحث هنا</string>
-    <string name="settings">الإعدادات</string>
     <string name="keeploggedin">تذكرني</string>
-    <string name="monday">الإثنين</string>
-    <string name="tuseday">الثلاثاء</string>
-    <string name="wednesday">الأربعاء</string>
-    <string name="thursday">الخميس</string>
-    <string name="friday">الجمعة</string>
-    <string name="saturday">السبت</string>
-    <string name="sunday">الأحد</string>
-    <string name="invalednameentered">اسم غير صالح</string>
-    <string name="youselected">الذي حددته</string>
-    <string name="areaselected">ar_Area selected: </string>
-    <string name="selected">ar_Selected</string>
-    <string name="editing">ar_Editing: </string>
-    <string name="activate">نشط</string>
-    <string name="deactivate">عطل</string>
-    <string name="categoryname">اسم الفئة</string>
-    <string name="deletethiscat">حذف هذه الفئة؟</string>
-    <string name="deletethisuser">حذف هذا العضو؟</string>
-    <string name="deletethisprod">حذف هذا المنتج؟</string>
-    <string name="deletethisbranch">حذف هذا الفرع؟</string>
     <string name="wrongcredentials">ar_Wrong Credentials</string>
     <string name="exit">خروج</string>
     <string name="exitquest">هل أنت متأكد أنك تريد الخروج؟</string>
-    <string name="cancelreason">الرجاء إدخال السبب</string>
-    <string name="ordercanceled">إلغاء الطلب</string>
     <string name="forgotpass">نسيت كلمة المرور</string>
     <string name="lira">ل.ل</string>
     <string name="yes">نعم</string>
@@ -114,119 +64,39 @@
     <string name="title_activity_thank_you">شكرا</string>
     <string name="title_activity_forget_password">فقدان كلمة المرور</string>
     <string name="subtotal">حاصل الجمع</string>
-
-    <string-array name="acc_type">ar_
-        <item>Income</item>
-        <item>Expense</item>
-    </string-array>
-    <string-array name="languages">ar_
-        <item>English</item>
-        <item>Arabic</item>
-    </string-array>
-    <string-array name="country_arr">ar_
-        <item>Afghanistan</item>
-        <item>Bangladesh</item>
-        <item>Bhutan</item>
-        <item>India</item>
-        <item>Maldives</item>
-        <item>Sri Lanka</item>
-        <item>Nepal</item>
-        <item>Pakistan</item>
-    </string-array>
-
-    <string name="select_location">ar_Select Your location And Business Category</string>
-    <string name="select_business">ar_Select A Business Category</string>
+    <string name="loadingdata">جاري تحميل المعلومات الرجاء الإنتظار</string>
     <string name="select_country">البلد</string>
-    <string name="select_city">المدينة</string>
-    <string name="select_area">المنطقة</string>
-    <string name="select">ar_Confirm Selection</string>
-    <string name="pick">ar_Pick</string>
-    <string name="lblCountry">ar_Select Country</string>
-    <string name="lblAdd">ar_Add New Mobile Name</string>
-    <string name="btnAdd">ar_Add Name</string>
-    <string name="txtHint">ar_HTC</string>
-    <string name="lblDisp">ar_Select Name</string>
-    <string name="lblSubAcc">ar_Select Account Head</string>
-    <string name="title_activity_user_info">ar_User Info</string>
-    <string name="title_activity_selection">ar_Select Activity</string>
-    <string name="country_name">ar_Country Name</string>
-    <string name="add_country">ar_Add Country</string>
-    <string name="add_city">ar_Add City</string>
-    <string name="add_area">ar_Add Area</string>
-    <string name="add_business">ar_Add Business</string>
-    <string name="title_activity_add_category">ar_Add Category</string>
-    <string name="title_activity_orders">ar_Orders</string>
-    <string name="title_activity_product">ar_Products</string>
-    <string name="title_activity_add_product">ar_Add Product</string>
-    <string name="title_activity_old_orders">ar_Old Orders</string>
-    <string name="title_activity_old_orders_info">ar_Old Orders Info</string>
-    <string name="title_activity_splash_screen">ar_SplashScreenActivity</string>
-    <string name="title_activity_search_results">ar_Search Results</string>
-    <string name="title_activity_user_profile">ar_User Profile</string>
-    <string name="no_net">ar_No net Connection</string>
-    <string name="loding">ar_Loading please wait</string>
-    <string name="restore_pass">ar_Restore</string>
-    <string name="new_orders">ar_New Orders</string>
-    <string name="assigned_orders">ar_Assigned Orders</string>
-    <string name="prepared_orders">ar_Prepared Orders</string>
-    <string name="canceled_orders">ar_Canceled Orders</string>
-    <string name="closed_orders">ar_Closed Orders</string>
+    <string name="no_net">لقد انقطع الإتصال بالشبكة</string>
+    <string name="closed_orders">طلبات منتهية</string>
     <string name="branches">الفروع</string>
-    <string name="users">ar_Users</string>
-    <string name="empty_list">ar_No items</string>
+    <string name="empty_list">لا يوجد منتجات</string>
     <string name="open_status">ar_Open</string>
     <string name="prepared_status">ar_Prepared</string>
     <string name="delivered_status">ar_Closed</string>
-    <string name="english">ar_English</string>
-    <string name="arabic">ar_Arabic</string>
-    <string name="pass_dnt_match">ar_Passwords do not match </string>
-    <string name="branch">ar_Branch</string>
+    <string name="english">انجليزي</string>
+    <string name="arabic">عربي</string>
     <string name="phonenum">رقم الهاتف</string>
-    <string name="invalid_phone">ar_Invalid Phone number</string>
-    <string name="admin">ar_Admin</string>
-    <string name="from_bigger">ar_Make sure all from is less than to</string>
-    <string name="open_missing">ar_Please select FROM And TO</string>
-    <string name="invalid_name">ar_Invalid Name</string>
-    <string name="invalid_add">ar_Invalid Address</string>
-    <string name="invalid_area">ar_Invalid Area</string>
-    <string name="invalid_time">ar_Invalid Estimation time</string>
+    <string name="invalid_phone">رقم الهاتف غير صحيح</string>
+    <string name="from_bigger">توقيت "من" يجب أن يكون أصغر من "إلى"</string>
+    <string name="open_missing">الرجاء ادخال توقيت من وإلى</string>
+    <string name="invalid_name">الإسم غير صحيح</string>
+    <string name="invalid_add">العنوان غير صحيح</string>
+    <string name="invalid_area">المنطقة غير صحيحة</string>
+    <string name="invalid_time">التوقيت المتوقع غير صحيح</string>
     <string name="select_role">ar_Please select a role</string>
     <string name="title_activity_preview">السلة</string>
-    <string name="invalid_branch">الرجاء اختيار الفرع</string>
-    <string name="order_updated">تم تحديث الطلبية بشكل ناجح</string>
     <string name="title_activity_select_adress">العناوين</string>
     <string name="title_activity_register">التسجيل</string>
     <string name="register">تسجيل</string>
-    <string name="fullname">الأسم</string>
     <string name="retypepass">أعد كتابة كلمة المرور</string>
     <string name="street">الشارع</string>
     <string name="building">البناء</string>
     <string name="floor">الطابق</string>
     <string name="back">رجوع</string>
     <string name="addresses">العناوين</string>
-    <string name="addtocart">ar_Add To Cart</string>
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
-        <item>Home</item>
-        <item>Find People</item>
-        <item>Photos</item>
-        <item>Communities</item>
-        <item>Pages</item>
-        <item>What\'s Hot</item>
-    </string-array>
-
-    <!-- Nav Drawer List Item Icons -->
-    <!-- Keep them in order as the titles are in -->
-    <array name="nav_drawer_icons">ar_
-        <item>@drawable/ic_home</item>
-        <item>@drawable/ic_people</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_communities</item>
-        <item>@drawable/ic_pages</item>
-        <item>@drawable/ic_whats_hot</item>
-    </array>
-
-    <string name="title_activity_test">ar_TestActivity</string>
+    <string name="addnewaddress">أضف عنوان جديد</string>
+    <string name="title_activity_addaddress">إضافة عنوان</string>
+    <string name="cart_is_empty">سلة المشتريات فاضية</string>
 
     <!--  Errors -->
      <string name="blockedcustomer">مستخدم محظور</string>

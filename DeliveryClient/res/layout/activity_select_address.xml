@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:background="@color/yellow"
         android:onClick="addAddress"
-        android:text="Add New Address"
+        android:text="@string/addnewaddress"
         android:layout_marginBottom="2dp"
         android:textColor="@color/redbg"
         android:textSize="18sp" />
@@ -30,7 +30,7 @@
         android:layout_height="40dp"
         android:background="@color/yellow"
         android:onClick="submit"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@color/redbg"
         android:textSize="18sp" />
 

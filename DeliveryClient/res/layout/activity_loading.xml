@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgLogo"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_marginTop="25dp"
-        android:text="Loading Data Please Wait"
+        android:text="@string/loadingdata"
         android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceLarge" />
  

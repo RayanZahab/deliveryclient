@@ -72,7 +72,8 @@
             android:name="com.mobilive.delivery.client.view.activity.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.AddAddressActivity"
@@ -94,7 +95,8 @@
             android:name="com.mobilive.delivery.client.view.activity.RegisterConfirmationActivity"
             android:label="@string/title_activity_register_confirmation"
             android:parentActivityName="com.mobilive.delivery.client.view.activity.RegisterActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.ThankYouActivity"
@@ -104,7 +106,8 @@
             android:name="com.mobilive.delivery.client.view.activity.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password" 
             android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>
 

@@ -4,7 +4,7 @@
     <item><layer-list>
             
             <item><shape>
-                <solid android:color="@color/gris"/>
+                <solid android:color="#f4f5f6"/>
            <stroke android:width="2dp" android:color="#cdcccb" />
            </shape></item>
            <item><bitmap android:gravity="center|right" android:src="@drawable/spinner_arrow"/>

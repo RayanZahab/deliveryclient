@@ -79,7 +79,7 @@
     <string name="select_role">Please select a role</string>
     <string name="title_activity_preview">PreviewActivity</string>
     <string name="title_activity_select_adress">SelectAdress</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Register</string>
     <string name="register">Register</string>
     <string name="retypepass">Retype Password</string>
     <string name="street">Street</string>

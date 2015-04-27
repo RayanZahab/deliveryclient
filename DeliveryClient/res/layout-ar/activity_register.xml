@@ -61,7 +61,7 @@
 		        android:layout_width="fill_parent"
 		        android:layout_height="30dp"
 		        android:gravity="center_vertical"
-		        android:background="@drawable/myspinner"
+		        android:background="@drawable/mymainspinner"
 		        android:paddingRight="22dp"
 		        android:spinnerMode="dialog" />
 		
@@ -134,25 +134,6 @@
                 android:textSize="16sp" />
             
             <TextView
-		        android:id="@+id/choosegender"
-		        style="@style/mytextview"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="12dp"
-		        android:layout_gravity="right"
-		        android:text="@string/gender"
-		        android:textColor="@color/redbg" />
-		
-		    <Spinner
-		        android:id="@+id/genderSP"
-		        android:layout_width="fill_parent"
-		        android:layout_height="30dp"
-		        android:background="@drawable/myspinner"
-		        android:gravity="center_vertical"
-		        android:paddingRight="22dp"
-		        android:spinnerMode="dialog" />
-            
-            <TextView
 	        android:id="@+id/confirmpass"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
@@ -175,6 +156,24 @@
                 android:textColor="@color/redbg"
                 android:textColorHint="#bdbdbd"
                 android:textSize="16sp" />
+            <TextView
+		        android:id="@+id/choosegender"
+		        style="@style/mytextview"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="12dp"
+		        android:layout_gravity="right"
+		        android:text="@string/gender"
+		        android:textColor="@color/redbg" />
+		
+		    <Spinner
+		        android:id="@+id/genderSP"
+		        android:layout_width="fill_parent"
+		        android:layout_height="30dp"
+		        android:background="@drawable/mymainspinner"
+		        android:gravity="center_vertical"
+		        android:paddingRight="22dp"
+		        android:spinnerMode="dialog" />
         </LinearLayout>
 
         <Button

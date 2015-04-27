@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/mymainspinner"
             android:spinnerMode="dialog"
-            android:paddingEnd="20dp" />
+            android:paddingRight="20dp" />
 
         <Spinner
             android:id="@+id/citiesSP"

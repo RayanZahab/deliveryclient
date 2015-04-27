@@ -70,6 +70,7 @@
 	                    android:layout_width="0dp"
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
+	                    android:paddingRight="8dp"
 	                    android:paddingLeft="8dp"
 	                    android:text="@string/address" />
                 </LinearLayout>
@@ -94,13 +95,12 @@
 	                    android:layout_width="0dp"
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
+	                    android:paddingRight="8dp"
 	                    android:paddingLeft="8dp"
 	                    android:text="@string/phonenum" />
                 </LinearLayout>
-                
-                
             </LinearLayout>
-            </LinearLayout>
+          </LinearLayout>
             
 		<ImageView 
                android:id="@+id/dividerblue"
@@ -135,10 +135,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/totallabel"
                     android:layout_alignBottom="@+id/totallabel"
-                    android:layout_toLeftOf="@+id/lira"
+                    android:layout_toRightOf="@+id/lira"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
-                    android:text="25"
                     android:textColor="@color/redbg"
                     android:textSize="19sp" />
 
@@ -148,10 +147,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/allTotal"
                     android:layout_alignBottom="@+id/allTotal"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
                     android:paddingRight="7dp"
                     android:textStyle="bold"
+                    android:text="@string/lira"
                     android:textColor="@color/redbg"
                     android:textSize="19sp" />
 
@@ -159,11 +159,10 @@
                     android:id="@+id/totallabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
                     android:layout_below="@+id/divider"
                     android:paddingLeft="7dp"
-                    android:layout_marginBottom="8dp"
                     android:textStyle="bold"
                     android:textColor="@color/redbg"
                     android:text="@string/total"
@@ -176,14 +175,15 @@
 	                android:layout_height="wrap_content"
 	                android:layout_gravity="start"
 	                android:layout_below="@+id/totallabel"
-	                android:layout_marginTop="8dp"
+	                android:layout_marginTop="5dp"
 	                android:layout_marginLeft="8dp"
+	                android:textColor="@color/redbg"
 	                android:text="@string/notes" />
 
 	            <EditText
 	                android:id="@+id/note"
 	                android:layout_width="match_parent"
-	                android:layout_height="80dp"
+	                android:layout_height="70dp"
 	                android:background="@drawable/edittextbg"
 	                android:ems="10"
 	                android:gravity="top"

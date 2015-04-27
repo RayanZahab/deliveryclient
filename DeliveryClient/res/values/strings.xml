@@ -77,7 +77,7 @@
     <string name="invalid_area">Invalid Area</string>
     <string name="invalid_time">Invalid Estimation time</string>
     <string name="select_role">Please select a role</string>
-    <string name="title_activity_preview">PreviewActivity</string>
+    <string name="title_activity_preview">Preview Cart</string>
     <string name="title_activity_select_adress">Select Address</string>
     <string name="title_activity_register">Register</string>
     <string name="register"><u>Register</u></string>

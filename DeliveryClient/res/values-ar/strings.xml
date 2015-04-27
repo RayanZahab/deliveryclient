@@ -84,7 +84,7 @@
     <string name="invalid_area">المنطقة غير صحيحة</string>
     <string name="invalid_time">التوقيت المتوقع غير صحيح</string>
     <string name="select_role">ar_Please select a role</string>
-    <string name="title_activity_preview">السلة</string>
+    <string name="title_activity_preview">مراجعة السلة</string>
     <string name="title_activity_select_adress">اختيار العناون</string>
     <string name="title_activity_register">التسجيل</string>
     <string name="register"><u>تسجيل </u></string>

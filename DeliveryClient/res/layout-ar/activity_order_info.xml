@@ -1,38 +1,24 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cart"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gris"
-    android:fillViewport="true"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:focusableInTouchMode="true" >
+    android:paddingBottom="8dp"
+    android:baselineAligned="true" >
 
-    <ScrollView
-        android:id="@+id/scroll" 
+    <LinearLayout
+        android:id="@+id/listofcart"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin" >
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
            
            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1">
-            
-			<ImageView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_weight="0.4"
-			    android:src="@drawable/femalepicto"/>
-			
+            android:layout_marginTop="8dp">			
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,9 +32,9 @@
 	                    android:layout_width="match_parent"
 	                    android:layout_height="wrap_content"
 	                    android:gravity="center|center_vertical"
-	                    android:layout_gravity="left"
+	                    android:layout_gravity="right"
 	                    android:singleLine="true"
-	                    android:layout_marginRight="30dp"
+	                    android:layout_marginLeft="30dp"
 	                    android:textStyle="bold"
 	                    android:background="@drawable/namebg"
 	                    android:text="@string/name"
@@ -60,15 +46,6 @@
 	        		android:layout_height="0dp"
 	        		android:layout_weight="1"
 	        		android:orientation="horizontal">
-	        		
-                    <ImageView 
-                        android:id="@+id/addressimg"
-                        android:layout_width="0dp"
-                        android:layout_height="15dp"
-                        android:layout_weight="0.25"
-                        android:layout_gravity="right"
-                        android:src="@drawable/address"/>
-
 	                <TextView
 	                    android:id="@+id/customerAdd"
 	                    style="@style/mytextview"
@@ -77,21 +54,22 @@
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
 	                    android:paddingLeft="8dp"
+	                    android:paddingRight="8dp"
 	                    android:text="@string/address" />
+	                <ImageView 
+                        android:id="@+id/addressimg"
+                        android:layout_width="0dp"
+                        android:layout_height="15dp"
+                        android:layout_weight="0.25"
+                        android:layout_gravity="right"
+                        android:src="@drawable/address"/>
                 </LinearLayout>
                 <LinearLayout 
                     android:layout_width="match_parent"
 	        		android:layout_height="0dp"
 	        		android:layout_weight="1"
+	        		android:layout_marginTop="5dp"
 	        		android:orientation="horizontal">
-	        		
-                    <ImageView 
-                        android:id="@+id/phoneimg"
-                        android:layout_width="0dp"
-                        android:layout_height="15dp"
-                        android:layout_weight="0.25"
-                        android:layout_gravity="right"
-                        android:src="@drawable/phoneimg"/>
 
 	                <TextView
 	                    android:id="@+id/customerphone"
@@ -101,12 +79,23 @@
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
 	                    android:paddingLeft="8dp"
+	                    android:paddingRight="8dp"
 	                    android:text="@string/phonenum" />
-                </LinearLayout>
-                
-                
+	                <ImageView 
+                        android:id="@+id/phoneimg"
+                        android:layout_width="0dp"
+                        android:layout_height="15dp"
+                        android:layout_weight="0.25"
+                        android:layout_gravity="right"
+                        android:src="@drawable/phoneimg"/>
+                </LinearLayout>                
             </LinearLayout>
-            </LinearLayout>
+            <ImageView 
+			    android:layout_width="100dp"
+			    android:layout_height="100dp"
+			    android:layout_weight="0.4"
+			    android:src="@drawable/femalepicto"/>
+         </LinearLayout>
 			<ImageView 
                android:id="@+id/dividerblue"
                android:layout_width="match_parent"
@@ -114,8 +103,9 @@
                android:src="@drawable/reddivider"/>
             <ListView
                 android:id="@+id/listView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
                 android:layout_marginTop="8dp" >
             </ListView>
 
@@ -131,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/totallabel"
                     android:layout_alignBottom="@+id/totallabel"
-                    android:layout_toLeftOf="@+id/lira"
+                    android:layout_toRightOf="@+id/lira"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
                     android:text="25"
@@ -144,9 +134,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/total"
                     android:layout_alignBottom="@+id/total"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
-                    android:paddingRight="7dp"
+                    android:paddingLeft="7dp"
                     android:textStyle="bold"
                     android:textColor="@color/redbg"
                     android:text="@string/lira"
@@ -156,9 +146,9 @@
                     android:id="@+id/totallabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
-                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textStyle="bold"
                     android:textColor="@color/redbg"
                     android:text="@string/total"
@@ -183,17 +173,18 @@
                 style="@style/mytextview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textColor="@color/redbg"
                 android:text="@string/status" />
 
             <Spinner
                 android:id="@+id/order_status"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/myspinner"
-                android:layout_marginLeft="8dp"
-                android:spinnerMode="dialog"
+                android:background="@drawable/mymainspinner"
                 android:layout_marginRight="8dp"
+                android:spinnerMode="dialog"
+                android:layout_marginLeft="8dp"
                 android:paddingLeft="8dp" />
 
             <TextView
@@ -202,14 +193,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginTop="23dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
+                android:textColor="@color/redbg"
                 android:text="@string/notes" />
 
             <EditText
                 android:id="@+id/noteinput"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="70dp"
                 android:background="@drawable/edittextbg"
                 android:ems="10"
                 android:gravity="top"
@@ -219,15 +211,4 @@
                 android:paddingLeft="5dp"
                 android:singleLine="false" />
         </LinearLayout>
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="10dp" >
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

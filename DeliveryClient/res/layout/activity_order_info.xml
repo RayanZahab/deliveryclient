@@ -1,35 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cart"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gris"
-    android:fillViewport="true"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:focusableInTouchMode="true" >
+    android:paddingBottom="8dp"
+    android:baselineAligned="true" >
 
-    <ScrollView
-        android:id="@+id/scroll" 
+    <LinearLayout
+        android:id="@+id/listofcart"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin" >
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
            
            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1">
+            android:layout_marginTop="8dp">
             
 			<ImageView 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
+			    android:layout_width="100dp"
+			    android:layout_height="100dp"
 			    android:layout_weight="0.4"
 			    android:src="@drawable/femalepicto"/>
 			
@@ -77,6 +70,7 @@
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
 	                    android:paddingLeft="8dp"
+	                    android:paddingRight="8dp"
 	                    android:text="@string/address" />
                 </LinearLayout>
                 <LinearLayout 
@@ -101,6 +95,7 @@
 	                    android:layout_height="wrap_content"
 	                    android:layout_gravity="left"
 	                    android:paddingLeft="8dp"
+	                    android:paddingRight="8dp"
 	                    android:text="@string/phonenum" />
                 </LinearLayout>
                 
@@ -114,8 +109,9 @@
                android:src="@drawable/reddivider"/>
             <ListView
                 android:id="@+id/listView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
                 android:layout_marginTop="8dp" >
             </ListView>
 
@@ -184,13 +180,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:textColor="@color/redbg"
                 android:text="@string/status" />
 
             <Spinner
                 android:id="@+id/order_status"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/myspinner"
+                android:background="@drawable/mymainspinner"
                 android:layout_marginLeft="8dp"
                 android:spinnerMode="dialog"
                 android:layout_marginRight="8dp"
@@ -202,14 +199,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="8dp"
+                android:textColor="@color/redbg"
                 android:text="@string/notes" />
 
             <EditText
                 android:id="@+id/noteinput"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="70dp"
                 android:background="@drawable/edittextbg"
                 android:ems="10"
                 android:gravity="top"
@@ -219,15 +217,4 @@
                 android:paddingLeft="5dp"
                 android:singleLine="false" />
         </LinearLayout>
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="10dp" >
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -138,11 +138,11 @@
             <Spinner
                 android:id="@+id/languageSP"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:gravity="right|center_vertical"
                 android:paddingRight="20dp"
                 android:spinnerMode="dialog"
-                android:background="@drawable/myspinner"
+                android:background="@drawable/mymainspinner"
                 android:layout_marginTop="22dp" />
 
             <CheckBox

@@ -130,8 +130,8 @@
             <Spinner
                 android:id="@+id/languageSP"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/myspinner"
+                android:layout_height="45dp"
+                android:background="@drawable/mymainspinner"
                 android:spinnerMode="dialog"
                 android:layout_marginTop="22dp" />
 

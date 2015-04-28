@@ -32,7 +32,7 @@
             android:label="@string/title_activity_order_info"
             android:parentActivityName="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.SplashScreenActivity"

@@ -54,16 +54,20 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 		String serverURL = new myURL(null, "customers", "register", 0).getURL();
 		String method = "Upload";
 
+		User user = new User();
+		user.setName(username.getText().toString());
+		user.setPhone(countrycode.getText()+""+inputphone.getText().toString());
+		user.setImei(PhoneInfoManager.getPhoneImei(getApplicationContext()));
+		user.setEncPassword(pass.getText().toString());
+		user.setGender(_getSelectedGender());
+		ValidationError valid = user.validate(false);
+        if(valid!=null && valid.getErrorMsgId()!=0 && getString(new Integer(valid.getErrorMsgId()))!=null){
+        	Toast.makeText(this, getString(new Integer(valid.getErrorMsgId())),Toast.LENGTH_SHORT).show();
+        	return;
+        }
+        
 		if(_validatePass(pass,pass2))
 		{
-			User user = new User();
-			user.setName(username.getText().toString());
-			user.setPhone(countrycode.getText()+""+inputphone.getText().toString());
-			user.setImei(PhoneInfoManager.getPhoneImei(getApplicationContext()));
-			user.setEncPassword(pass.getText().toString());
-			user.setGender(_getSelectedGender());
-			ValidationError valid = user.validate(false);
-
 			if (valid.isValid(this)) {
 				this.user = user;
 				new MyJs("returnErrorMsg", this, ((DeliveryClientApplication) this.getApplication()),method, (Object) user, true,true).execute(serverURL);
@@ -71,7 +75,7 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 		}
 		else
 		{
-			Toast.makeText(this, "Pass is empty or do not match",Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "Pass is empty or do not match"),Toast.LENGTH_SHORT).show();
 		}
 	}
 

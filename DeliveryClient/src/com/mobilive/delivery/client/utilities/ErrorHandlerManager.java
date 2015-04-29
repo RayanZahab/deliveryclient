@@ -39,6 +39,8 @@ public class ErrorHandlerManager {
 		errorsMap.put("user not found", R.string.userNotFound);
 		errorsMap.put("please enter User Name and Password",R.string.enterUserAndPass);
 		errorsMap.put("check your Messages to get your password", R.string.checkYourMessages);
+		errorsMap.put("Pass is empty or do not match", R.string.passEmptyOrDMatch);
+		
 	}
 
 	public static ErrorHandlerManager getInstance() {

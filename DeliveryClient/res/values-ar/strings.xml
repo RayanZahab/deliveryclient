@@ -119,5 +119,6 @@
     <string name="cityNotFound">لم يتم العثورعلى المدينة</string>
     <string name="defaultError">هذا مثير للإحراج! لقد حدث خطئ غير معروف أثناء استخدامك للموقع. يرجى إعادة المحاولة بوقت لاحق.</string>
     <string name="enterUserAndPass">الرجاء إدخال اسم المستخدم وكلمة المرور</string>
-    <string name="checkYourMessages">الرجاء تفقد الرسائل لإستلام كلمة المرور</string>    
+    <string name="checkYourMessages">الرجاء تفقد الرسائل لإستلام كلمة المرور</string>
+    <string name="passEmptyOrDMatch">كلمة السر غير متطابقة أو فارغة</string>    
 </resources>

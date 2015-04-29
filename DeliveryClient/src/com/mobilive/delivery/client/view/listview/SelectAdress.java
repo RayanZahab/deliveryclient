@@ -17,16 +17,20 @@ import com.mobilive.delivery.client.view.activity.PreviewActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -48,6 +52,7 @@ public class SelectAdress extends ListActivity {
 	String defaultAddName = "";
 	ArrayList<Country> countries;
 	String previous = "";
+	ArrayAdapter<String> dataAdapter ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +98,9 @@ public class SelectAdress extends ListActivity {
 	public void callMethod(String m, String s, String error) {
 		if (m.equals("setAdd"))
 			getAdd(s, error);
-		else
+		else if(m.equals("afterDelete"))
 		{
+			afterDelete(s, error);
 			/*addressId = currentAddress.getId();
 			Log.d("ray","add found ");
 			editor.putInt("addressId", currentAddress.getId());
@@ -128,10 +134,12 @@ public class SelectAdress extends ListActivity {
 					i++;
 					addOut.add(add.toString(countries));
 				}
-
-				setListAdapter(new ArrayAdapter<String>(this,
-						R.layout.row_radiobutton, addOut));
+				dataAdapter = new ArrayAdapter<String>(this,
+						R.layout.row_radiobutton, addOut);
+				setListAdapter(dataAdapter);
 				listView.setItemChecked(defaultPosition, true);
+
+				registerForContextMenu(listView);
 				
 				
 				listView.setOnItemClickListener(new OnItemClickListener() {
@@ -206,12 +214,69 @@ public class SelectAdress extends ListActivity {
 		}
 		startActivity(i);
 	}
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.clearHeader();
-		menu.add(0, v.getId(), 0, "Delete");
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+		getMenuInflater().inflate(R.menu.cat_context_menu, menu);
 	}
+	public void Delete(final int position) {
+		final int branchId = myAddresses.get(position).getId();
+		new AlertDialog.Builder(this)
+				.setTitle(
+						"Delete this Add: "
+								+ myAddresses.get(position).toString()
+								+ " ?")
+				.setIcon(R.drawable.branches)
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								String serverURL = new myURL(null, "customers/addresses",
+										branchId, 0).getURL();
+								RZHelper p = new RZHelper(serverURL,
+										SelectAdress.this, "afterDelete",
+										false);
+								addOut.remove(position);								
+								p.delete();
+							}
+						}).setNegativeButton(android.R.string.no, null).show();
+	}
+
+	public void afterDelete(String s, String error) {
+		/*Log.d("ray","in after delete");
+		dataAdapter = new ArrayAdapter<String>(this,
+				R.layout.row_radiobutton, addOut);
+		dataAdapter.notifyDataSetChanged();
+		*/
+		Intent i = new Intent(SelectAdress.this, SelectAdress.class);
+		startActivity(i);
+	}
+
+	public void Edit(Address address) {
+		Intent i = new Intent(SelectAdress.this, AddAddressActivity.class);
+		//DeliveryAdminApplication.setBranchId(item.getId());
+		i.putExtra("address_id", address.getId());
+		startActivity(i);
+	}
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
+
+		switch (item.getItemId()) {
+		case R.id.edit:
+			Edit(myAddresses.get((int) info.id));
+			break;
+		case R.id.delete:
+			Delete((int) info.id);
+			break;
+		default:
+			break;
+
+		}
+		return true;
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

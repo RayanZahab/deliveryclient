@@ -10,6 +10,7 @@ import com.mobilive.delivery.client.model.Area;
 import com.mobilive.delivery.client.model.City;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Item;
+import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.listview.SelectAdress;
@@ -37,6 +38,8 @@ public class AddAddressActivity extends Activity implements
 	Activity currentActivity;
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	String previous = "";
+	int id = 0,userId = 0;
+	Address currentAddress;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,15 +49,27 @@ public class AddAddressActivity extends Activity implements
 		countrySpinner = (Spinner) findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) findViewById(R.id.citiesSP);
 		areaSpinner = (Spinner) findViewById(R.id.areasSP);
+		userId = ((DeliveryClientApplication) this.getApplication()).getUserId();
 		getCountries();
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			previous = extras.getString("previous");
+			id = extras.getInt("address_id");
+			if(id!=0)
+			{
+				getAddress(id);
+			}
 		}
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
-
+	public void getAddress(int addId) {
+		String serverURL = new myURL(null, "customers/"+userId+"/addresses",addId, 1)
+				.getURL();
+		Log.d("ray","url : "+serverURL);
+		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
+		p.get();
+	}
 	public void submit(View v) {
 		//street building floor details
 		EditText street = ((EditText) findViewById(R.id.street));
@@ -78,9 +93,24 @@ public class AddAddressActivity extends Activity implements
 		
 	}
 	public void callMethod(String m, String s, String error) {
-		Intent i = new Intent(this, SelectAdress.class);
-		i.putExtra("previous",previous);
-		startActivity(i);
+		if (m.equals("setAdd"))
+			getAdd(s, error);
+		else
+		{
+			Intent i = new Intent(this, SelectAdress.class);
+			i.putExtra("previous",previous);
+			startActivity(i);
+		}
+	}
+	public void getAdd(String s, String error) {
+		int defaultPosition = 0, i = 0;
+		
+		Log.d("ray", "adds: " + countries.size());
+
+		if (error == null) {
+			currentAddress = new APIManager().getAddress(s).get(0);
+		}
+		Log.d("ray","my add: "+currentAddress.toString());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

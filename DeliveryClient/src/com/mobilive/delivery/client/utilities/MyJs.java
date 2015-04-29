@@ -115,7 +115,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 	protected void onPreExecute() {
 		if (!isNetworkAvailable()) {
 			cancel(true);
-			new GlobalM().bkToNav(mc, mc.getString(R.string.no_net));
+			//new GlobalM().bkToNav(mc, mc.getString(R.string.no_net));
 		} else {
 			if (this.first) {
 				showProg();
@@ -271,7 +271,7 @@ public class MyJs extends AsyncTask<String, Void, Void> {
 			if (Error != null) {
 				if (DeliveryClientApplication.loader != null && last)
 					DeliveryClientApplication.loader.dismiss();
-				new GlobalM().bkToNav(mc, getError(content, Error));
+				//new GlobalM().bkToNav(mc, getError(content, Error));
 				if(mc instanceof MainActivity){
 					if(((MainActivity) mc).getActiveFragment() instanceof ProfileFragment){
 						Method returnFunction = this.mc.getClass().getMethod("callMethod", content.getClass(), content.getClass(),content.getClass());

@@ -76,7 +76,7 @@ public class APIManager {
 				if(gender.equals("Male"))
 					c.setGender(Gender.Male);
 				else
-					c.setGender(Gender.Famale);
+					c.setGender(Gender.Female);
 				return c;
 
 			}

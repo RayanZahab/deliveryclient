@@ -7,9 +7,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Gender;
 import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.MyJs;
 import com.mobilive.delivery.client.utilities.PhoneInfoManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
@@ -33,6 +36,7 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private EditText countrycode;
 	private User user;
+	private Button addUserBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 		_initActivityView();
 	}
 
-	public void addUser(View view) {
+	public void addUser() {
 
 		EditText username = (EditText) findViewById(R.id.name);
 		EditText inputphone = (EditText) findViewById(R.id.phone);
@@ -67,7 +71,7 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 		}
 		else
 		{
-			Toast.makeText(getApplicationContext(), "Pass is empty or do not match",Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Pass is empty or do not match",Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -111,6 +115,16 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 	}
 
 	private void _initActionBar() {
+		addUserBtn = (Button)findViewById(R.id.addUserBtn);
+		addUserBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				addUser();
+				
+			}
+		});
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
@@ -130,7 +144,8 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 				intent.putExtra("registerUser", user);
 				intent.putExtra("confirmationMode", ConfirmationMode.NewUser);
 				startActivity(intent);
-			}
+			}else
+				Toast.makeText(this, ErrorHandlerManager.getInstance().getErrorString(this, error),Toast.LENGTH_SHORT).show();
 		}
 	}
 

@@ -20,10 +20,10 @@
     <string name="buttonlogin">تسجيل الدخول</string>
     <string name="products">المنتجات</string>
     <string name="reason">السبب</string>
-    <string name="item">ar_Item</string>
+    <string name="item">مادة</string>
     <string name="Logout">خروج</string>
     <string name="keeploggedin">تذكرني</string>
-    <string name="wrongcredentials">ar_Wrong Credentials</string>
+    <string name="wrongcredentials">كلمة السر غير متطابقة</string>
     <string name="exit">خروج</string>
     <string name="exitquest">هل أنت متأكد أنك تريد الخروج؟</string>
     <string name="forgotpass"><u>نسيت كلمة المرور</u></string>
@@ -119,6 +119,11 @@
     <string name="cityNotFound">لم يتم العثورعلى المدينة</string>
     <string name="defaultError">هذا مثير للإحراج! لقد حدث خطئ غير معروف أثناء استخدامك للموقع. يرجى إعادة المحاولة بوقت لاحق.</string>
     <string name="enterUserAndPass">الرجاء إدخال اسم المستخدم وكلمة المرور</string>
-    <string name="checkYourMessages">الرجاء تفقد الرسائل لإستلام كلمة المرور</string>
-    <string name="passEmptyOrDMatch">كلمة السر غير متطابقة أو فارغة</string>    
+    <string name="checkYourMessages">ستصلك كلمة المرور الجديدة عن طريق رسالة نصية</string>
+    <string name="passEmptyOrDMatch">كلمة السر غير متطابقة أو فارغة</string>
+    <string name="noCity">لايوجد مدن في هذا البلد</string>
+    <string name="noArea">لا يوجد مناطق في هذه المنطقة حتى الآن</string>
+    <string name="noCountry"></string>   
+    <string name="updateProfile">تم تعديل ملفك الشخصي بنجاح</string>
+    <string name="userAddNumber">الرجاء إدخال رقمك الصحيح</string> 
 </resources>

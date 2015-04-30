@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.MyJs;
 import com.mobilive.delivery.client.utilities.PhoneInfoManager;
-import com.mobilive.delivery.client.utilities.PreferenecesManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.ValidationError;
 import com.mobilive.delivery.client.utilities.myURL;
@@ -156,7 +154,6 @@ public class ProfileFragment extends ParentFragment {
 			editor.putString("pass", pass);
 
 			editor.commit();
-			Log.d("ray","hereeeeeee");
 
 			((DeliveryClientApplication) currentActivity.getApplication()).setGlobals();
 			Locale locale = new Locale(lang_abv);
@@ -164,13 +161,12 @@ public class ProfileFragment extends ParentFragment {
 			Configuration config = new Configuration();
 			config.locale = locale;
 			currentActivity.getBaseContext().getResources().updateConfiguration(config,currentActivity.getBaseContext().getResources().getDisplayMetrics());
-			new GlobalM().bkToNav(currentActivity, "Profile updated succ");
+			new GlobalM().bkToNav(currentActivity, getString(R.string.updateProfile));
 			
 			
 		} else {
 			Toast.makeText(currentActivity.getApplicationContext(), R.string.wrongcredentials,Toast.LENGTH_SHORT).show();
 		}
-		Log.d("ray","hereeeeeee");
 	}
 	public void showAddresses()
 	{

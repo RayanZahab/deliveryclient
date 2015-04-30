@@ -126,7 +126,11 @@
     <string name="cityNotFound">City Not Found</string>
     <string name="defaultError">Sorry our customer, we have unknown error please try again later..</string>
     <string name="enterUserAndPass">please enter User Name and Password</string>
-    <string name="checkYourMessages">check your Messages to get your password</string>
+    <string name="checkYourMessages">A new Password was sent by SMS.</string>
     <string name="passEmptyOrDMatch">Password dose not match the confirm password</string>
-    
+    <string name="noCity">No Cities exist in this Country</string>
+    <string name="noArea">No Areas exist in this City</string>
+    <string name="noCountry"></string>
+    <string name="updateProfile">Your Profile updated successfuly</string>
+    <string name="userAddNumber">please Add your Number</string>
 </resources>

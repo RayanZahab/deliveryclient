@@ -38,8 +38,10 @@ public class ErrorHandlerManager {
 		errorsMap.put("unit not found", R.string.unitNotFound);
 		errorsMap.put("user not found", R.string.userNotFound);
 		errorsMap.put("please enter User Name and Password",R.string.enterUserAndPass);
-		errorsMap.put("check your Messages to get your password", R.string.checkYourMessages);
+		errorsMap.put("A new Password was sent by SMS.", R.string.checkYourMessages);
 		errorsMap.put("Pass is empty or do not match", R.string.passEmptyOrDMatch);
+		errorsMap.put("No Areas exist in this City", R.string.noArea);
+		errorsMap.put("No Cities exist in this Country", R.string.noCity);
 		
 	}
 

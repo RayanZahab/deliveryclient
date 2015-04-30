@@ -30,6 +30,7 @@ import com.mobilive.delivery.client.model.Cart;
 import com.mobilive.delivery.client.model.City;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Item;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.view.activity.MainActivity;
 
 public class HomeFragment extends ParentFragment implements OnItemSelectedListener {
@@ -78,8 +79,7 @@ public class HomeFragment extends ParentFragment implements OnItemSelectedListen
 			public boolean onTouch(View v, MotionEvent event) {
 				if (cities!=null && cities.size() <= 0) {
 					citySpinner.setClickable(false);
-					Toast.makeText(v.getContext(),
-							"No Cities exist in this Country", Toast.LENGTH_SHORT).show();
+					Toast.makeText(v.getContext(), ErrorHandlerManager.getInstance().getErrorString(currentActivity, "No Cities exist in this Country"),Toast.LENGTH_SHORT).show();
 				}else{
 					citySpinner.setClickable(true);
 				}
@@ -92,7 +92,7 @@ public class HomeFragment extends ParentFragment implements OnItemSelectedListen
 			public boolean onTouch(View v, MotionEvent event) {
 				if (areas!=null && areas.size() <= 0) {
 					areaSpinner.setClickable(false);
-					Toast.makeText(v.getContext(),"No Areas exist in this City", Toast.LENGTH_SHORT).show();
+					Toast.makeText(v.getContext(), ErrorHandlerManager.getInstance().getErrorString(currentActivity, "No Areas exist in this City"),Toast.LENGTH_SHORT).show();
 				}else{
 					areaSpinner.setClickable(true);
 				}

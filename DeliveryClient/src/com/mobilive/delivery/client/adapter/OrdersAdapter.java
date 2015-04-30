@@ -3,18 +3,16 @@ package com.mobilive.delivery.client.adapter;
 
 import java.util.ArrayList;
 
-import com.mobilive.delivery.client.R;
-import com.mobilive.delivery.client.model.Item;
-import com.mobilive.delivery.client.utilities.GlobalM;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.mobilive.delivery.client.R;
+import com.mobilive.delivery.client.model.Item;
+import com.mobilive.delivery.client.utilities.GlobalM;
 
 public class OrdersAdapter extends ArrayAdapter<Item> {
 
@@ -59,7 +57,6 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 			}
 			else
 			{
-				Log.d("ray","empty adapt");
 				convertView = vi.inflate(R.layout.row_txt, null);
 				holder.address = (TextView) convertView.findViewById(R.id.name);
 				holder.address.setText(orderList.get(0).getTitle());
@@ -80,7 +77,7 @@ public class OrdersAdapter extends ArrayAdapter<Item> {
 			holder.numbofitems.setText(new GlobalM().getago(orderitem.getDate()));
 			holder.numbofitems.setTag(orderitem);
 	
-			holder.totalamount.setText(orderitem.getTotalPrice() + " L.L");
+			holder.totalamount.setText(orderitem.getTotalPrice() + convertView.getContext().getString(R.string.lira));
 			holder.totalamount.setTag(orderitem);
 		}
 		return convertView;

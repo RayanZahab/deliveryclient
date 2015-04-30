@@ -6,7 +6,7 @@
     <string name="ptr_release_to_refresh">Release to refresh</string>
     <string name="ptr_refreshing">Refreshing…</string>
     <string name="ptr_last_updated">Updated: %1$s</string>
-    <string name="app_name">DeliveryClient</string>
+    <string name="app_name">Delivery Client</string>
     <string name="action_settings">Settings</string>
     <string name="username">Username </string>
     <string name="password">Password </string>

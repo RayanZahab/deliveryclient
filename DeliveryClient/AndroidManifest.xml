@@ -17,12 +17,13 @@
     <application
         android:name="com.mobilive.delivery.client.DeliveryClientApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.mobilive.delivery.client.view.activity.MainActivity"
             android:label="@string/app_name"
+            android:icon="@drawable/moto"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
@@ -36,8 +37,6 @@
         </activity>
         <activity
             android:name="com.mobilive.delivery.client.view.activity.SplashScreenActivity"
-            android:icon="@drawable/moto"
-            android:label="@string/buttonlogin"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
             <category android:name="android.intent.category.LAUNCHER" />

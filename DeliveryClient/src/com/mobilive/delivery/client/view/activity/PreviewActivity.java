@@ -112,8 +112,7 @@ public class PreviewActivity extends Activity {
 		}
 		myOrder.setOrderItems(ois);
 
-		int id = ((DeliveryClientApplication) this.getApplication())
-				.getUserId();
+		int id = ((DeliveryClientApplication) this.getApplication()).getUserId();
 
 		myOrder.setCustomer_id(id);
 		myOrder.setAddress_id(addId);
@@ -131,9 +130,22 @@ public class PreviewActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.preview, menu);
 		return true;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(this, MainActivity.class);
+		i.putExtra("fragmentIndex", 1);	
+		startActivity(i);
+	}
+	
+	@Override 
+	public Intent getParentActivityIntent() {
+		Intent i = new Intent(this, MainActivity.class);
+		i.putExtra("fragmentIndex", 1);	
+		return i;
+	};
 
 }

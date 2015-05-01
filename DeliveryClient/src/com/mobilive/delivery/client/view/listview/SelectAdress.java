@@ -71,7 +71,7 @@ public class SelectAdress extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			previous = extras.getString("previous");
-
+			Log.d("ray","ray load prev: "+previous);
 			if(previous!=null && previous.equals("preview"))
 			{
 				submit.setVisibility(View.VISIBLE);
@@ -249,6 +249,7 @@ public class SelectAdress extends ListActivity {
 		dataAdapter.notifyDataSetChanged();
 		*/
 		Intent i = new Intent(SelectAdress.this, SelectAdress.class);
+		i.putExtra("previous",previous);
 		startActivity(i);
 	}
 
@@ -256,7 +257,8 @@ public class SelectAdress extends ListActivity {
 		Intent i = new Intent(SelectAdress.this, AddAddressActivity.class);
 		 ((DeliveryClientApplication) this.getApplication()).setCurrentAddress(address);
 		//DeliveryAdminApplication.setBranchId(item.getId());
-		i.putExtra("address_id", address.getId());
+			i.putExtra("address_id", address.getId());
+			i.putExtra("previous",previous);
 		startActivity(i);
 	}
 	@Override

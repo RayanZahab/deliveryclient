@@ -66,11 +66,9 @@ public class PendingOrdersFragment extends ParentFragment {
 		Bundle args = getArguments();
 		orderStatus = args.getString("orders");
 		if (savedInstanceState != null) {
-			mContent = getFragmentManager().getFragment(savedInstanceState,
-					"mContent");
+			mContent = getFragmentManager().getFragment(savedInstanceState,"mContent");
 		}
-		view = inflater.inflate(R.layout.pending_fragment_orders, container,
-				false);
+		view = inflater.inflate(R.layout.pending_fragment_orders, container,false);
 		mylist = new ArrayList<Item>();
 		fragmentId = this.getId();
 		fragmentManager = getFragmentManager();

@@ -4,6 +4,19 @@ package com.mobilive.delivery.client.view.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.mobilive.delivery.client.DeliveryClientApplication;
 import com.mobilive.delivery.client.R;
 import com.mobilive.delivery.client.adapter.OrderInfoAdapter;
@@ -16,23 +29,6 @@ import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.Helper;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
-
-import android.os.Bundle;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.SharedPreferences;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class OrderInfoActivity extends Activity {
 	Spinner status;
@@ -72,9 +68,7 @@ public class OrderInfoActivity extends Activity {
 			getCurrentOrder(orderId);
 		}
 
-		String orderStatus = ((DeliveryClientApplication) OrderInfoActivity.this
-				.getApplication()).getOrderStatus();
-		actionBar.setTitle(orderStatus);
+		this.setTitle(R.string.preview_order_activity);
 		disable(true);
 
 	}
@@ -85,10 +79,8 @@ public class OrderInfoActivity extends Activity {
 		list.add(getString(R.string.prepared_status));
 		list.add(getString(R.string.delivered_status));
 
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		dataAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		status.setAdapter(dataAdapter);
 		if (list.indexOf(currentOrder.getStatus()) > -1)
 			status.setSelection(list.indexOf(currentOrder.getStatus()));
@@ -115,14 +107,11 @@ public class OrderInfoActivity extends Activity {
 		TextView totalTxt = (TextView) findViewById(R.id.allTotal);
 
 		for (int i = 0; i < orderitem.size(); i++) {
-			_Item = new Item(orderitem.get(i).getId(), orderitem.get(i)
-					.toString(), orderitem.get(i).getQuantity(), orderitem.get(
-					i).getUnitPrice());
+			_Item = new Item(orderitem.get(i).getId(), orderitem.get(i).toString(), orderitem.get(i).getQuantity(), orderitem.get(i).getUnitPrice());
 			SPitems.add(_Item);
 			total = total + orderitem.get(i).getTotalPrice();
 		}
-		dataAdapter = new OrderInfoAdapter(OrderInfoActivity.this,
-				R.layout.row_order_info, SPitems, disabled);
+		dataAdapter = new OrderInfoAdapter(OrderInfoActivity.this,R.layout.row_order_info, SPitems, disabled);
 		dataAdapter.setTotal(totalTxt);
 
 		listView.setAdapter(dataAdapter);
@@ -132,8 +121,7 @@ public class OrderInfoActivity extends Activity {
 		TextView customerphone = (TextView) findViewById(R.id.customerphone);
 		customerName.setText(" " + currentOrder.getCustomer().toString());
 		TextView customerAdd = (TextView) findViewById(R.id.customerAdd);
-		ArrayList<Country> countries = ((DeliveryClientApplication) this.getApplication())
-				.getCountries();
+		ArrayList<Country> countries = ((DeliveryClientApplication) this.getApplication()).getCountries();
 		customerAdd.setText(currentOrder.getAddress().toString(countries));
 		
 		SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);

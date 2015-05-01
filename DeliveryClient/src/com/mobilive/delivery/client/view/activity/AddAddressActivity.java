@@ -11,6 +11,8 @@ import com.mobilive.delivery.client.model.City;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.Converter;
+import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.listview.SelectAdress;
@@ -39,7 +41,8 @@ public class AddAddressActivity extends Activity implements
 	static ArrayList<Item> mylist = new ArrayList<Item>();
 	String previous = "";
 	int id = 0,userId = 0;
-	Address currentAddress;
+	Address currentAddress= null;
+	EditText street,building,floor,details;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,47 +52,56 @@ public class AddAddressActivity extends Activity implements
 		countrySpinner = (Spinner) findViewById(R.id.countriesSP);
 		citySpinner = (Spinner) findViewById(R.id.citiesSP);
 		areaSpinner = (Spinner) findViewById(R.id.areasSP);
+		street = ((EditText) findViewById(R.id.street));
+		building = ((EditText) findViewById(R.id.building));
+		floor = ((EditText) findViewById(R.id.floor));
+		details = ((EditText) findViewById(R.id.details));
 		userId = ((DeliveryClientApplication) this.getApplication()).getUserId();
-		getCountries();
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			previous = extras.getString("previous");
 			id = extras.getInt("address_id");
 			if(id!=0)
 			{
-				getAddress(id);
+				currentAddress = ((DeliveryClientApplication) this.getApplication()).getCurrentAddress();
+				setAddInfo();
 			}
 		}
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		getCountries();
 	}
-	public void getAddress(int addId) {
-		String serverURL = new myURL(null, "customers/"+userId+"/addresses",addId, 1)
-				.getURL();
-		Log.d("ray","url : "+serverURL);
-		RZHelper p = new RZHelper(serverURL, this, "setAdd", true);
-		p.get();
+	public void setAddInfo()
+	{
+		street.setText(currentAddress.getStreet());
+		building.setText(currentAddress.getBuilding());
+		floor.setText(currentAddress.getFloor());
+		details.setText(currentAddress.getDetails());	
+		
 	}
 	public void submit(View v) {
 		//street building floor details
-		EditText street = ((EditText) findViewById(R.id.street));
-		EditText building = ((EditText) findViewById(R.id.building));
-		EditText floor = ((EditText) findViewById(R.id.floor));
-		EditText details = ((EditText) findViewById(R.id.details));
 		
-		Address newAdd = new Address();
-		newAdd.setStreet(street.getText().toString());
-		newAdd.setBuilding(building.getText().toString());
-		newAdd.setFloor(floor.getText().toString());
-		newAdd.setDetails(details.getText().toString());
-		newAdd.setCountry(""+((Country)countrySpinner.getSelectedItem()).getId());
-		newAdd.setCity(""+((City)citySpinner.getSelectedItem()).getId());
-		newAdd.setArea(""+((Area)areaSpinner.getSelectedItem()).getId());
-		newAdd.setDefault(true);
-
-		String serverURL = new myURL(null, "customers", "addresses", 0).getURL();
-		RZHelper p = new RZHelper(serverURL, currentActivity, "afterCreation", true);
-		p.post(newAdd);
+		if(currentAddress!=null)
+		{
+			update();
+		}
+		else
+		{
+			Address newAdd = new Address();
+			newAdd.setStreet(street.getText().toString());
+			newAdd.setBuilding(building.getText().toString());
+			newAdd.setFloor(floor.getText().toString());
+			newAdd.setDetails(details.getText().toString());
+			newAdd.setCountry(""+((Country)countrySpinner.getSelectedItem()).getId());
+			newAdd.setCity(""+((City)citySpinner.getSelectedItem()).getId());
+			newAdd.setArea(""+((Area)areaSpinner.getSelectedItem()).getId());
+			newAdd.setDefault(true);
+	
+			String serverURL = new myURL(null, "customers", "addresses", 0).getURL();
+			RZHelper p = new RZHelper(serverURL, currentActivity, "afterCreation", true);
+			p.post(newAdd);
+		}
 		
 	}
 	public void callMethod(String m, String s, String error) {
@@ -158,10 +170,16 @@ public class AddAddressActivity extends Activity implements
 					this, android.R.layout.simple_spinner_item, countries);
 			counrytAdapter
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			for (int position = 0; position <countries.size(); position++) {
+				Log.d("ray","countries : "+countries.get(position).toString());
+				
+			}
 			counrytAdapter.notifyDataSetChanged();
 			areaSpinner.setAdapter(null);
 			countrySpinner.setAdapter(counrytAdapter);
 			countrySpinner.setOnItemSelectedListener(this);
+			if(currentAddress!=null)
+				new GlobalM().setSelected(countrySpinner, counrytAdapter, new Country(Converter.toInt(currentAddress.getCountry()),""));
 		} else if (type.equals("city")) {
 			ArrayAdapter<City> cityAdapter = new ArrayAdapter<City>(this,
 					android.R.layout.simple_spinner_item, cities);
@@ -171,6 +189,8 @@ public class AddAddressActivity extends Activity implements
 			areaSpinner.setAdapter(null);
 			citySpinner.setAdapter(cityAdapter);
 			citySpinner.setOnItemSelectedListener(this);
+			if(currentAddress!=null)
+				new GlobalM().setSelected(citySpinner, cityAdapter, new City(Converter.toInt(currentAddress.getCity()),""));
 		} else if (type.equals("area")) {
 			ArrayAdapter<Area> areaAdapter = new ArrayAdapter<Area>(this,
 					android.R.layout.simple_spinner_item, areas);
@@ -179,8 +199,30 @@ public class AddAddressActivity extends Activity implements
 			areaAdapter.notifyDataSetChanged();
 			areaSpinner.setAdapter(areaAdapter);
 			areaSpinner.setOnItemSelectedListener(this);
+			if(currentAddress!=null)
+				new GlobalM().setSelected(areaSpinner, areaAdapter, new Area(Converter.toInt(currentAddress.getArea()),""));
 		}
 
+	}
+	
+	public void update()
+	{
+		Address newAdd = new Address();
+		newAdd.setStreet(street.getText().toString());
+		newAdd.setBuilding(building.getText().toString());
+		newAdd.setFloor(floor.getText().toString());
+		newAdd.setDetails(details.getText().toString());
+		newAdd.setCountry(""+((Country)countrySpinner.getSelectedItem()).getId());
+		newAdd.setCity(""+((City)citySpinner.getSelectedItem()).getId());
+		newAdd.setArea(""+((Area)areaSpinner.getSelectedItem()).getId());
+		newAdd.setDefault(true);
+
+		String serverURL = new myURL(null, "customers/addresses",
+				currentAddress.getId(), 0).getURL();
+		RZHelper p = new RZHelper(serverURL,
+				AddAddressActivity.this, "afterCreation",
+				false);
+		p.put(newAdd);
 	}
 
 }

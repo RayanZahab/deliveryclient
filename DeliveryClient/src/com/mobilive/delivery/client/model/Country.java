@@ -55,6 +55,15 @@ public class Country {
 			return true;
 		return false;
 	}
+	
+	public boolean equalsString(Object obj) {
+		Country c = (Country) obj;
+		Log.d("ray","Cont: "+c.getId() +" == "+this.id);
+		if(this.name.equals( c.getName()))
+			return true;
+		return false;
+	}
+	
 	public ArrayList<City> getCities() {
 		return cities;
 	}

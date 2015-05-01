@@ -1,7 +1,15 @@
 package com.mobilive.delivery.client.utilities;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.TimeZone;
+
+import com.mobilive.delivery.client.DeliveryClientApplication;
+import com.mobilive.delivery.client.model.Area;
+import com.mobilive.delivery.client.model.City;
+import com.mobilive.delivery.client.model.Country;
+import com.mobilive.delivery.client.model.Order;
+import com.mobilive.delivery.client.view.activity.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +33,59 @@ public class GlobalM {
 			if (list.getItem(position).equals(o)) {
 				sp.setSelection(position);
 				return;
+			}
+		}
+	}
+	public void setSelectedString(Spinner sp, ArrayList<Country> mylist, String name) {
+		for (int position = 0; position <mylist.size(); position++) {
+		//	Log.d("ray","mylist : "+mylist.get(position).get+ " -- "+name);
+			
+		}
+		ArrayAdapter<?> list = (ArrayAdapter<?>) sp.getAdapter();
+		for (int position = list.getCount()-1; position >=0; position--) {
+			
+			Log.d("ray","check : "+((Country)mylist.get(position)).getName()+ " -- "+name);
+			
+			if (list.getItem(position).toString().equals(name)) {
+				sp.setSelection(position);
+				return;
+			}
+		}
+	}
+	public void setSelectedStrings(Spinner sp, ArrayAdapter<?> list, String name) {
+
+		for (int position = list.getCount()-1; position >=0; position--) {
+			Object o = list.getItem(position);
+			
+			if (o instanceof Country)
+			{
+				Log.d("ray","check Co: "+((Country) o).getName()+ " -- "+name);
+				if ( ((Country)o).getName().equals(name) )
+				{
+					sp.setSelection(position);
+					return;
+				}
+					
+			}
+			else if (o instanceof City)
+			{
+				Log.d("ray","check C: "+((City)o).getName()+ " -- "+name);
+				if (((City)o).getName().equals(name) )
+				{
+					sp.setSelection(position);
+					return;
+				}
+					
+			}
+			else if (o instanceof Area)
+			{
+				Log.d("ray","check A: "+((Area)o).getName()+ " -- "+name);
+				if (((Area)o).getName().equals(name) )
+				{
+					sp.setSelection(position);
+					return;
+				}
+					
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package com.mobilive.delivery.client.model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class City {
 	private int id;
 	private int country_id;
@@ -53,6 +55,12 @@ public class City {
 	public boolean equals(Object obj) {
 		City c = (City) obj;
 		if(this.id == c.getId())
+			return true;
+		return false;
+	}
+	public boolean equalsString(Object obj) {
+		City c = (City) obj;
+		if(this.name.equals( c.getName()))
 			return true;
 		return false;
 	}

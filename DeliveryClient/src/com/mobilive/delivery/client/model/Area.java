@@ -69,6 +69,12 @@ public class Area {
 			return true;
 		return false;
 	}
+	public boolean equalsString(Object obj) {
+		Area c = (Area) obj;
+		if(this.name.equals( c.getName()))
+			return true;
+		return false;
+	}
 	public String getJson() {
 		return json;
 	}

@@ -4,6 +4,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Cart;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.view.activity.MainActivity;
@@ -29,6 +30,7 @@ public class DeliveryClientApplication extends Application {
 	private Fragment currentFragment;
 	private int depth = 0;
 	private int depthVal = 0;
+	private static Address currentAddress;
 	public void emptyCart()
 	{
 		myCart =  new Cart();
@@ -306,6 +308,12 @@ public class DeliveryClientApplication extends Application {
 	}
 	public void setAreaId(int areaId) {
 		this.areaId = areaId;
+	}
+	public Address getCurrentAddress() {
+		return currentAddress;
+	}
+	public void setCurrentAddress(Address currentAddress) {
+		this.currentAddress = currentAddress;
 	}
 
 }

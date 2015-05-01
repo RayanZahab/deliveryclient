@@ -60,6 +60,7 @@ public class AddAddressActivity extends Activity implements
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			previous = extras.getString("previous");
+			Log.d("ray","ray getting prev: "+previous);
 			id = extras.getInt("address_id");
 			if(id!=0)
 			{
@@ -110,6 +111,7 @@ public class AddAddressActivity extends Activity implements
 		else
 		{
 			Intent i = new Intent(this, SelectAdress.class);
+			Log.d("ray","ray send prev: "+previous);
 			i.putExtra("previous",previous);
 			startActivity(i);
 		}
@@ -221,7 +223,7 @@ public class AddAddressActivity extends Activity implements
 				currentAddress.getId(), 0).getURL();
 		RZHelper p = new RZHelper(serverURL,
 				AddAddressActivity.this, "afterCreation",
-				false);
+				true);
 		p.put(newAdd);
 	}
 

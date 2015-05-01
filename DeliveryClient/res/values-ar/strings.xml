@@ -72,6 +72,7 @@
     <string name="empty_list">لا يوجد منتجات</string>
     <string name="open_status">ar_Open</string>
     <string name="prepared_status">ar_Prepared</string>
+    <string name="preview_order_activity">استعراض الطلبية</string>
     <string name="delivered_status">ar_Closed</string>
     <string name="english">انجليزي</string>
     <string name="arabic">عربي</string>

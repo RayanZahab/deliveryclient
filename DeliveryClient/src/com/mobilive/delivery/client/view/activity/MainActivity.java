@@ -135,8 +135,8 @@ public class MainActivity extends Activity {
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 		navDrawerItems = new ArrayList<NavDrawerItem>();
 		
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),R.drawable.ic_home, true, "0"));
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),R.drawable.ic_people));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(0).toString(),R.drawable.ic_home));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(1).toString(),R.drawable.ic_people, true, "0"));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(2).toString(),R.drawable.ic_communities));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(3).toString(),R.drawable.ic_communities));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles.get(4).toString(),R.drawable.ic_communities));
@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 	}
 
 	public static void updateCounter(int count) {
-		navDrawerItems.get(0).setCount("" + count);
+		navDrawerItems.get(1).setCount("" + count);
 		adapter = new NavDrawerListAdapter(context, navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 	}

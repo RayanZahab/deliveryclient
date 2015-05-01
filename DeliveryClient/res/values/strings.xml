@@ -68,7 +68,7 @@
     <string name="delivered_status">Closed</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
-    <string name="phonenum">Phone number</string>
+    <string name="phonenum">Phone Number</string>
     <string name="invalid_phone">Invalid Phone number</string>
     <string name="from_bigger">Make sure all from is less than to</string>
     <string name="open_missing">Please select FROM And TO</string>

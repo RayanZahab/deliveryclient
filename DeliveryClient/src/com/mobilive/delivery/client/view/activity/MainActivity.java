@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
 	private void displayView(int position) {
 		boolean cartEmpty = true;
 		final int tempPosition = position;
-		if((position==0 || position==2 ||position==3 ||position==4 || position==7) && ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
+		if((position==0 || position==2 ||position==3 ||position==4 ) && ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
 			position = -1;
 			new AlertDialog.Builder(this).setTitle(R.string.empty_cart).setIcon(R.drawable.categories).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog,int whichButton) {
@@ -181,12 +181,15 @@ public class MainActivity extends Activity {
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
 			}
-		}else if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0)
+		}else if( ((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0 && position!=1)
 		{
 			branchId = ((DeliveryClientApplication) getApplication()).getBranchId();	
 			position = 7;
 			cartEmpty = false;
 		}
+		if(position==1)
+			cartEmpty = false;
+		
 		if(position!=-1)
 			_routeView(position,cartEmpty);
 	}

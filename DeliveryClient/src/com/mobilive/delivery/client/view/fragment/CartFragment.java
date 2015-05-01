@@ -41,8 +41,7 @@ public class CartFragment extends ParentFragment {
 	ImageView genderImg;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		currentActivity = getActivity();
 		userId = ((DeliveryClientApplication) currentActivity.getApplication()).getUserId();
 		view = inflater.inflate(R.layout.fragment_cart, container, false);
@@ -59,10 +58,9 @@ public class CartFragment extends ParentFragment {
 			}
 		});		
 		name = (TextView) view.findViewById(R.id.customerName);
-		//address = (TextView) view.findViewById(R.id.customerAdd);
 		phone = (TextView) view.findViewById(R.id.customerphone);
 		genderImg = (ImageView)  view.findViewById(R.id.gender);
-		
+		currentActivity.setTitle(R.string.cart);
 		return view;
 	}
 	
@@ -72,7 +70,6 @@ public class CartFragment extends ParentFragment {
 	}
 	public void submitCart()
 	{		
-		//Intent intent = new Intent(this.getActivity(), PreviewActivity.class);
 		Intent intent = new Intent(this.getActivity(), SelectAdress.class);
 		intent.putExtra("previous", "preview");
 		startActivity(intent);
@@ -91,8 +88,7 @@ public class CartFragment extends ParentFragment {
 		super.onActivityCreated(savedInstanceState);
 		((DeliveryClientApplication) currentActivity.getApplication()).setCurrentFragment(this);
 		cart = ((DeliveryClientApplication) currentActivity.getApplication()).getMyCart();
-		SharedPreferences settings1 = currentActivity.getSharedPreferences(
-				"PREFS_NAME", 0);
+		SharedPreferences settings1 = currentActivity.getSharedPreferences("PREFS_NAME", 0);
 		String nameVal = settings1.getString("name", "");
 		String phoneVal = settings1.getString("phone", "");
 		name.setText(nameVal);
@@ -138,17 +134,13 @@ public class CartFragment extends ParentFragment {
 	}
 
 	public static void updateFooter() {
-		Cart cart = ((DeliveryClientApplication) currentActivity.getApplication())
-				.getMyCart();
+		Cart cart = ((DeliveryClientApplication) currentActivity.getApplication()).getMyCart();
 		TextView price = (TextView) view.findViewById(R.id.carttotalprice);
-		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
 		int totalPrice = 0;
-
 		for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
 		}
 		price.setText( 	"" +totalPrice+currentActivity.getString(R.string.lira));
-		//quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}
 }

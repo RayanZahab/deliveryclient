@@ -422,6 +422,21 @@ public class MainActivity extends Activity {
 			}
 			if(goUpReturnIntValue==0)
 				setShowHomeFragment(true);
+		}else if(fragment instanceof CartFragment){
+			HomeFragment homeFragment = new HomeFragment();
+			fragments.clear();
+			fragments.add(homeFragment);
+			Intent i = new Intent(context, MainActivity.class);
+			i.putExtra("fragmentIndex", 7);
+			int branchId = ((DeliveryClientApplication) getApplication()).getBranchId();
+			i.putExtra("branchId", branchId);
+			startActivity(i);
+		}else if(fragment instanceof PendingOrdersFragment || fragment instanceof ProfileFragment){
+			Intent i = new Intent(context, MainActivity.class);
+			i.putExtra("fragmentIndex", 0);
+			int branchId = ((DeliveryClientApplication) getApplication()).getBranchId();
+			i.putExtra("branchId", branchId);
+			startActivity(i);
 		}
 		else{
 			_exitApp();

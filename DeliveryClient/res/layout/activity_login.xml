@@ -24,7 +24,7 @@
                 android:background="@drawable/phonebg"
                 android:ems="10"
                 android:inputType="phone"
-                android:hint="@string/username"
+                android:hint="@string/phonenum"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:textColor="#ffffff"

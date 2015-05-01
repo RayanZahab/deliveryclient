@@ -45,7 +45,6 @@ public class GlobalM {
 		ArrayAdapter<?> list = (ArrayAdapter<?>) sp.getAdapter();
 		for (int position = list.getCount()-1; position >=0; position--) {
 			
-			Log.d("ray","check : "+((Country)mylist.get(position)).getName()+ " -- "+name);
 			
 			if (list.getItem(position).toString().equals(name)) {
 				sp.setSelection(position);
@@ -60,7 +59,6 @@ public class GlobalM {
 			
 			if (o instanceof Country)
 			{
-				Log.d("ray","check Co: "+((Country) o).getName()+ " -- "+name);
 				if ( ((Country)o).getName().equals(name) )
 				{
 					sp.setSelection(position);
@@ -70,7 +68,6 @@ public class GlobalM {
 			}
 			else if (o instanceof City)
 			{
-				Log.d("ray","check C: "+((City)o).getName()+ " -- "+name);
 				if (((City)o).getName().equals(name) )
 				{
 					sp.setSelection(position);
@@ -80,7 +77,6 @@ public class GlobalM {
 			}
 			else if (o instanceof Area)
 			{
-				Log.d("ray","check A: "+((Area)o).getName()+ " -- "+name);
 				if (((Area)o).getName().equals(name) )
 				{
 					sp.setSelection(position);

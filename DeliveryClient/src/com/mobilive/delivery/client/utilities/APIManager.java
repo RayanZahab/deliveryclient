@@ -1166,23 +1166,18 @@ public class APIManager {
 				date = jsonResponse.optString("created_at").toString();
 				order.setStatus(status);
 				add_str = jsonResponse.optString("address").toString();
-				if (add_str != null && !add_str.isEmpty()
-						&& !jsonResponse.isNull("customer")) {
-
+				if (add_str != null && !add_str.isEmpty() && !add_str.equalsIgnoreCase("null") && !jsonResponse.isNull("customer")) {
 					jsonAdd = new JSONObject(add_str);
-					String country = getLocId(jsonAdd.optString("country")
-							.toString()) + "";
-
-					String city = getLocId(jsonAdd.optString("city").toString())
-							+ "";
-					String area = getLocId(jsonAdd.optString("area").toString())
-							+ "";
-					address = new Address(Integer.parseInt(jsonAdd.optString(
-							"id").toString()), country, city, area, jsonAdd
-							.optString("street").toString(), jsonAdd.optString(
-							"building").toString(), jsonAdd.optString("floor")
-							.toString(), jsonAdd.optString("details")
-							.toString());
+					String country = getLocId(jsonAdd.optString("country").toString()) + "";
+					String city = getLocId(jsonAdd.optString("city").toString())+ "";
+					String area = getLocId(jsonAdd.optString("area").toString())+ "";
+					address = new Address(Integer.parseInt(
+							jsonAdd.optString("id").toString()), country, city, area, 
+							jsonAdd.optString("street").toString(), 
+							jsonAdd.optString("building").toString(), 
+							jsonAdd.optString("floor").toString(), 
+							jsonAdd.optString("details").toString());
+					
 					order.setAddress(address);
 				} else {
 					order.setAddress(new Address(0));

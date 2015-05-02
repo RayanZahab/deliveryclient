@@ -463,10 +463,14 @@ public class APIManager {
 						time = jsonChildNode.optString("delivery_expected_time").toString();
 						charge = jsonChildNode.optString("delivery_charge").toString();
 						minimum = jsonChildNode.optString("min_amount").toString();
+						
+						Boolean opened = jsonChildNode.optBoolean("open");
+						
 						Branch b = new Branch(id, name, null, null);
 						b.setMin_amount(minimum);
 						b.setEstimation_time(time);
 						b.setDelivery_charge(charge);
+						b.setIsOpened(opened);
 						JSONObject jsonShopChildNode = jsonChildNode.getJSONObject("shop");
 						if (!errorCheck(jsonShopChildNode)) {
 							Shop shop = getShop(jsonShopChildNode);

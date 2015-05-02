@@ -24,6 +24,7 @@ public class Branch {
 	private HashMap<Integer, String> froms, tos;
 	private HashMap<Integer, Boolean> openDays;
 	private OpenHours openHours;
+	private boolean isOpened;
 	
 	public Branch(int id,String name, Area area, String address)
 	{
@@ -250,5 +251,11 @@ public class Branch {
 	}
 	public void setDelivery_charge(String delivery_charge) {
 		this.delivery_charge = delivery_charge;
+	}
+	public boolean isOpened() {
+		return isOpened;
+	}
+	public void setIsOpened(boolean opened) {
+		this.isOpened = opened;
 	}
 }

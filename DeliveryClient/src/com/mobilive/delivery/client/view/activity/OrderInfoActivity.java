@@ -2,7 +2,6 @@ package com.mobilive.delivery.client.view.activity;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -11,10 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mobilive.delivery.client.DeliveryClientApplication;
@@ -24,6 +21,7 @@ import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Order;
 import com.mobilive.delivery.client.model.OrderItem;
+import com.mobilive.delivery.client.model.OrderStatus;
 import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.Helper;
@@ -31,7 +29,7 @@ import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 
 public class OrderInfoActivity extends Activity {
-	Spinner status;
+	TextView status;
 	OrderInfoAdapter dataAdapter;
 	int orderId;
 	AlertDialog alertDialog;
@@ -48,7 +46,7 @@ public class OrderInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_info);
-		status = (Spinner) findViewById(R.id.order_status);
+		status = (TextView) findViewById(R.id.order_status);
 		listView = (ListView) findViewById(R.id.listView);
 		notes = (EditText) findViewById(R.id.noteinput);
 		stat = new ArrayList<String>();
@@ -74,16 +72,10 @@ public class OrderInfoActivity extends Activity {
 	}
 
 	public void addItemsOnStatus() {
-		List<String> list = new ArrayList<String>();
-		list.add(getString(R.string.open_status));
-		list.add(getString(R.string.prepared_status));
-		list.add(getString(R.string.delivered_status));
-
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		status.setAdapter(dataAdapter);
-		if (list.indexOf(currentOrder.getStatus()) > -1)
-			status.setSelection(list.indexOf(currentOrder.getStatus()));
+		if(currentOrder.getStatus()!=null){
+			OrderStatus orderStatusTxt = OrderStatus.valueOf(currentOrder.getStatus());
+			status.setText(getString(orderStatusTxt.getId()));
+		}
 	}
 
 	public void getCurrentOrder(int orderId) {

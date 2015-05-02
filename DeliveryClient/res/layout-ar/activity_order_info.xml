@@ -177,13 +177,11 @@
                 android:textColor="@color/redbg"
                 android:text="@string/status" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/order_status"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/mymainspinner"
                 android:layout_marginRight="8dp"
-                android:spinnerMode="dialog"
                 android:layout_marginLeft="8dp"
                 android:paddingLeft="8dp" />
 

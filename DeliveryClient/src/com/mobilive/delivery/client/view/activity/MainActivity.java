@@ -200,7 +200,7 @@ public class MainActivity extends Activity {
 			fragments.add(fragment);
 			break;
 		case 1:
-			if(!cartEmpty){
+			if(((DeliveryClientApplication) getApplication()).getMyCart().getAllCount()>0){
 				fragment = new CartFragment();
 				fragments.add(fragment);
 			}else{
@@ -429,6 +429,9 @@ public class MainActivity extends Activity {
 			i.putExtra("branchId", branchId);
 			startActivity(i);
 		}else if(fragment instanceof PendingOrdersFragment || fragment instanceof ProfileFragment){
+			HomeFragment homeFragment = new HomeFragment();
+			fragments.clear();
+			fragments.add(homeFragment);
 			Intent i = new Intent(context, MainActivity.class);
 			i.putExtra("fragmentIndex", 0);
 			int branchId = ((DeliveryClientApplication) getApplication()).getBranchId();

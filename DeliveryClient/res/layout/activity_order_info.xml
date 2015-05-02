@@ -1,17 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cart"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gris"
-    android:baselineAligned="true" >
+    android:fillViewport="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/listofcart"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
         
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,9 +117,8 @@
                android:src="@drawable/reddivider"/>
         <ListView
             android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:background="@color/gris"
             android:divider="@android:color/transparent" >
         </ListView>
@@ -217,5 +221,5 @@
 	                android:singleLine="false" />
         </RelativeLayout>
     </LinearLayout>
-
-</RelativeLayout>
+ </ScrollView>
+</LinearLayout>

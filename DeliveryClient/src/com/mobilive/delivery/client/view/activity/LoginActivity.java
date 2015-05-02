@@ -159,7 +159,7 @@ public class LoginActivity extends Activity {
 			username.setBackground(getResources().getDrawable(bgId));
 		}
 		username.setText(null);
-		username.setHint(getString(R.string.username));
+		username.setHint(getString(R.string.phonenum));
 		password.setHint(getString(R.string.password));
 		forgotpassword.setText(getString(R.string.forgotpass));
 		keeploggedin.setText(getString(R.string.keeploggedin));

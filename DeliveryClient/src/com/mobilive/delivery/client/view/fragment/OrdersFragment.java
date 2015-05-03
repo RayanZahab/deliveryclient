@@ -2,6 +2,7 @@ package com.mobilive.delivery.client.view.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -320,7 +321,11 @@ public class OrdersFragment extends ParentFragment {
 	}
 
 	public void getBranches(int shopId, int areaId) {
-		String serverURL = new myURL("branches?area_id="+areaId, "shops", shopId, 30).getURL();
+		TimeZone timzone = TimeZone.getDefault();
+		//offset in hours
+		int offset = (int) (timzone.getOffset(System.currentTimeMillis())/(1000*60*60));
+		String offsetStr = (offset>=0?"+":"-")+offset;
+		String serverURL = new myURL("branches?area_id="+areaId+"&timezone="+offsetStr, "shops", shopId, 30).getURL();
 		RZHelper p = new RZHelper(serverURL, currentActivity, "setBranches", true);
 		p.get();
 	}

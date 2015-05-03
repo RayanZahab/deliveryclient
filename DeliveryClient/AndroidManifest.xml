@@ -31,7 +31,6 @@
             android:name="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
             android:icon="@drawable/moto"
             android:label="@string/title_activity_order_info"
-            android:parentActivityName="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>

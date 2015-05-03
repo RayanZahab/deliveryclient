@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,9 +36,9 @@ public class OrderInfoActivity extends Activity {
 	Order currentOrder;
 	GlobalM glob = new GlobalM();
 	ArrayList<OrderItem> orderitem;
-	ArrayList<Item> SPitems;
+	ArrayList<Item> spItems;
 	ListView listView;
-	EditText notes;
+	TextView notes;
 	Boolean isAdmin = true, isPreparer = true, disabled = false;
 	ArrayList<String> stat;
 
@@ -48,7 +48,7 @@ public class OrderInfoActivity extends Activity {
 		setContentView(R.layout.activity_order_info);
 		status = (TextView) findViewById(R.id.order_status);
 		listView = (ListView) findViewById(R.id.listView);
-		notes = (EditText) findViewById(R.id.noteinput);
+		notes = (TextView) findViewById(R.id.noteinput);
 		stat = new ArrayList<String>();
 		stat.add(0, "Opened");
 		stat.add(1, "Prepared");
@@ -75,6 +75,12 @@ public class OrderInfoActivity extends Activity {
 		if(currentOrder.getStatus()!=null){
 			OrderStatus orderStatusTxt = OrderStatus.valueOf(currentOrder.getStatus());
 			status.setText(getString(orderStatusTxt.getId()));
+			String cancelReason = currentOrder.getCancelReason();
+			if(cancelReason!=null && !"null".equals(cancelReason) && !cancelReason.isEmpty())
+				cancelReason = getString(R.string.ordercanceled)+":" + currentOrder.getCancelReason();
+			else
+				cancelReason="";
+			notes.setText(notes.getText().toString()+ (notes.getText().toString().isEmpty()?"":"\n") + cancelReason);
 		}
 	}
 
@@ -93,17 +99,17 @@ public class OrderInfoActivity extends Activity {
 		currentOrder = new APIManager().getOrder(s);
 		addItemsOnStatus();
 		orderitem = currentOrder.getOrderItems();
-		SPitems = new ArrayList<Item>();
+		spItems = new ArrayList<Item>();
 		Item _Item;
 		double total = 0;
 		TextView totalTxt = (TextView) findViewById(R.id.allTotal);
 
 		for (int i = 0; i < orderitem.size(); i++) {
 			_Item = new Item(orderitem.get(i).getId(), orderitem.get(i).toString(), orderitem.get(i).getQuantity(), orderitem.get(i).getUnitPrice());
-			SPitems.add(_Item);
+			spItems.add(_Item);
 			total = total + orderitem.get(i).getTotalPrice();
 		}
-		dataAdapter = new OrderInfoAdapter(OrderInfoActivity.this,R.layout.row_order_info, SPitems, disabled);
+		dataAdapter = new OrderInfoAdapter(OrderInfoActivity.this,R.layout.row_order_info, spItems, disabled);
 		dataAdapter.setTotal(totalTxt);
 
 		listView.setAdapter(dataAdapter);
@@ -125,16 +131,10 @@ public class OrderInfoActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.order_info, menu);
-		// SharedMenu.onCreateOptionsMenu(this, menu, getApplicationContext());
 		return true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// if (SharedMenu.onOptionsItemSelected(item, this) == false) {
-		// // handle local menu items here or leave blank
-		// }
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -145,7 +145,27 @@ public class OrderInfoActivity extends Activity {
 		listView.setClickable(false);
 		notes.setEnabled(false);
 		notes.setClickable(false);
-
 		disabled = true;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(this, MainActivity.class);
+		if(currentOrder.getStatus()!=null && (currentOrder.getStatus().equalsIgnoreCase("Opened")||currentOrder.getStatus().equalsIgnoreCase("Assigned")||currentOrder.getStatus().equalsIgnoreCase("Prepared")))
+			i.putExtra("fragmentIndex", 3);
+		else
+			i.putExtra("fragmentIndex", 4);
+		startActivity(i);
+	}
+	
+	@Override 
+	public Intent getParentActivityIntent() {
+		Intent i = new Intent(this, MainActivity.class);
+		if(currentOrder.getStatus()!=null && (currentOrder.getStatus().equalsIgnoreCase("Opened")||currentOrder.getStatus().equalsIgnoreCase("Assigned")||currentOrder.getStatus().equalsIgnoreCase("Prepared")))
+			i.putExtra("fragmentIndex", 3);
+		else
+			i.putExtra("fragmentIndex", 4);
+
+		return i;
+	};
 }

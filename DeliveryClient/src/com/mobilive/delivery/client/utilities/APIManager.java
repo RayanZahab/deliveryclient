@@ -152,7 +152,7 @@ public class APIManager {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				String name, cities, areas;
+				String name;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -165,7 +165,6 @@ public class APIManager {
 								.toString());
 
 						name = jsonChildNode.optString("name").toString();
-						cities = jsonChildNode.optString("cities").toString();
 						currentCountry = new Country(id, name);
 						if (jsonChildNode.has("cities")) {
 							JSONArray jsonCityNode = jsonChildNode
@@ -199,14 +198,13 @@ public class APIManager {
 		City currentCity;
 		int lengthJsonArr = jsonMainNode.length();
 		int id;
-		String name, areas;
+		String name;
 		try {
 			for (int i = 0; i < lengthJsonArr; i++) {
 				JSONObject jsonChildNode;
 				jsonChildNode = jsonMainNode.getJSONObject(i);
 				id = Integer.parseInt(jsonChildNode.optString("id").toString());
 				name = jsonChildNode.optString("name").toString();
-				areas = jsonChildNode.optString("areas").toString();
 				currentCity = new City(id, name);
 				currentCity.setCountry_id(country_id);
 				if (jsonChildNode.has("areas")) {
@@ -444,9 +442,8 @@ public class APIManager {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id;
-				String name, address, area_str;
+				String name;
 				String time,charge, minimum;
-				ArrayList<Area> areas;
 				if (jsonResponse.has("elements")) {
 					JSONArray jsonMainNode = jsonResponse
 							.optJSONArray("elements");
@@ -457,9 +454,6 @@ public class APIManager {
 						id = Integer.parseInt(jsonChildNode.optString("id")
 								.toString());
 						name = jsonChildNode.optString("name").toString();
-						address = jsonChildNode.optString("address").toString();
-						area_str = jsonChildNode.optString("area").toString();
-						// areas = getAreasByCity(area_str);
 						time = jsonChildNode.optString("delivery_expected_time").toString();
 						charge = jsonChildNode.optString("delivery_charge").toString();
 						minimum = jsonChildNode.optString("min_amount").toString();
@@ -1129,7 +1123,7 @@ public class APIManager {
 			jsonResponse = new JSONObject(cont);
 			if (!errorCheck(jsonResponse)) {
 				int id, count, quantity, preparer_id, deliverer_id;
-				String customer_str, add_str, item_str, status, date, customer_name_str, note_str;
+				String customer_str, add_str, item_str, status, date, customer_name_str, note_str,cancelReason;
 
 				double total;
 				Customer customer = new Customer(0, null, null);
@@ -1137,34 +1131,25 @@ public class APIManager {
 				ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
 				OrderItem orderItem;
 				Product product;
-				if (jsonResponse.has("preparer_id")
-						&& !jsonResponse.optString("preparer_id").toString()
-								.equals("null")
-						&& jsonResponse.optString("preparer_id").toString() != null) {
-					preparer_id = Integer.parseInt(jsonResponse.optString(
-							"preparer_id").toString());
+				if (jsonResponse.has("preparer_id")&& !jsonResponse.optString("preparer_id").toString().equals("null") && jsonResponse.optString("preparer_id").toString() != null) {
+					preparer_id = Integer.parseInt(jsonResponse.optString("preparer_id").toString());
 					order.setPreparer(new User(preparer_id));
 				}
-				if (jsonResponse.has("deliverer_id")
-						&& !jsonResponse.optString("deliverer_id").toString()
-								.equals("null")
-						&& jsonResponse.optString("deliverer_id").toString() != "null") {
-					deliverer_id = Integer.parseInt(jsonResponse.optString(
-							"deliverer_id").toString());
+				if (jsonResponse.has("deliverer_id")&& !jsonResponse.optString("deliverer_id").toString().equals("null") && jsonResponse.optString("deliverer_id").toString() != "null") {
+					deliverer_id = Integer.parseInt(jsonResponse.optString("deliverer_id").toString());
 					order.setDelivery(new User(deliverer_id));
 				}
 				id = Integer.parseInt(jsonResponse.optString("id").toString());
 				order.setId(id);
-				total = Double.parseDouble(jsonResponse.optString("total")
-						.toString());
+				total = Double.parseDouble(jsonResponse.optString("total").toString());
 				order.setTotal(total);
-				count = Integer.parseInt(jsonResponse.optString("count")
-						.toString());
+				count = Integer.parseInt(jsonResponse.optString("count").toString());
 				order.setCount(count);
-
 				status = jsonResponse.optString("status").toString();
 				date = jsonResponse.optString("created_at").toString();
 				order.setStatus(status);
+				cancelReason = jsonResponse.optString("cancel_reason").toString();
+				order.setCancelReason(cancelReason);
 				add_str = jsonResponse.optString("address").toString();
 				if (add_str != null && !add_str.isEmpty() && !add_str.equalsIgnoreCase("null") && !jsonResponse.isNull("customer")) {
 					jsonAdd = new JSONObject(add_str);
@@ -1183,46 +1168,35 @@ public class APIManager {
 					order.setAddress(new Address(0));
 				}
 				note_str = jsonResponse.optString("note").toString();
-				if (note_str != null && !note_str.isEmpty()
-						&& !jsonResponse.isNull("note")) {
+				if (note_str != null && !note_str.isEmpty()&& !jsonResponse.isNull("note")) {
 					order.setNote(note_str);
 				}
 				customer_str = jsonResponse.optString("customer").toString();
-				if (customer_str != null && !customer_str.isEmpty()
-						&& !jsonResponse.isNull("customer")) {
+				if (customer_str != null && !customer_str.isEmpty()&& !jsonResponse.isNull("customer")) {
 					jsonCustomer = new JSONObject(customer_str);
 					customer = new Customer(Integer.parseInt(jsonCustomer
 							.optString("id").toString()), jsonCustomer
 							.optString("name").toString(), jsonCustomer
 							.optString("mobile").toString());
 				} else {
-					customer_name_str = jsonResponse.optString("customer_name")
-							.toString();
-					if (customer_name_str != null
-							&& !customer_name_str.isEmpty()
-							&& !jsonResponse.isNull("customer_name")) {
+					customer_name_str = jsonResponse.optString("customer_name").toString();
+					if (customer_name_str != null && !customer_name_str.isEmpty() && !jsonResponse.isNull("customer_name")) {
 						customer = new Customer(0, customer_name_str, null);
 					}
 				}
+				
 				order.setCustomer(customer);
 				order.setDate(date);
-
 				JSONArray jsonItemsNode = jsonResponse.optJSONArray("items");
 				int lengthJsonArr = jsonItemsNode.length();
-
 				for (int i = 0; i < lengthJsonArr; i++) {
-					JSONObject jsonItemChildNode = jsonItemsNode
-							.getJSONObject(i);
-
-					quantity = Integer.parseInt(jsonItemChildNode.optString(
-							"qty").toString());
+					JSONObject jsonItemChildNode = jsonItemsNode.getJSONObject(i);
+					quantity = Integer.parseInt(jsonItemChildNode.optString("qty").toString());
 					item_str = jsonItemChildNode.optString("item").toString();
-					if (item_str != null && !item_str.isEmpty()
-							&& !jsonItemChildNode.isNull("item")) {
+					if (item_str != null && !item_str.isEmpty() && !jsonItemChildNode.isNull("item")) {
 						jsonItem = new JSONObject(item_str);
 						product = getItemsByCategoryAndBranch(item_str).get(0);
 						orderItem = new OrderItem(product, quantity);
-
 						orderItems.add(orderItem);
 					}
 				}

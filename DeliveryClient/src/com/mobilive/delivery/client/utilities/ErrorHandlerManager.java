@@ -43,6 +43,7 @@ public class ErrorHandlerManager {
 		errorsMap.put("No Areas exist in this City", R.string.noArea);
 		errorsMap.put("No Cities exist in this Country", R.string.noCity);
 		errorsMap.put("Sorry the Shop is closed now..", R.string.shopIsClose);
+		errorsMap.put("Phone Number can not start with zero..", R.string.startWithZeroErr);
 	}
 
 	public static ErrorHandlerManager getInstance() {

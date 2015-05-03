@@ -47,6 +47,10 @@ public class ForgetPasswordActivity extends Activity implements OnItemSelectedLi
 	}
 
 	public void getNewPass(View view){
+		if(PhoneInfoManager.containZeroAsPrefix(mobileNumberEditText.getText().toString())){
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "Phone Number can not start with zero.."),Toast.LENGTH_SHORT).show();
+			return;
+		}
 		if(mobileNumberEditText.getText()!=null && !mobileNumberEditText.getText().toString().equals("")){
 				ForgetPasswordRequest forgetPasswordRequest = new ForgetPasswordRequest();
 				forgetPasswordRequest.setMobileNumber(countrycode.getText().toString()+mobileNumberEditText.getText().toString());

@@ -127,4 +127,5 @@
     <string name="updateProfile">تم تعديل ملفك الشخصي بنجاح</string>
     <string name="userAddNumber">الرجاء إدخال رقمك الصحيح</string> 
     <string name="shopIsClose">عذرا المحل مغلق حالياً</string>
+    <string name="startWithZeroErr">رقم الجوال لايمكن أن يبدأ بصفر</string>
 </resources>

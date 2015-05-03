@@ -35,6 +35,7 @@ import com.mobilive.delivery.client.model.Item;
 import com.mobilive.delivery.client.model.Product;
 import com.mobilive.delivery.client.model.Shop;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.activity.AddAddressActivity;
@@ -334,6 +335,7 @@ public class OrdersFragment extends ParentFragment {
 			it.setTime(myBranch.getEstimation_time());
 			it.setCharge(myBranch.getDelivery_charge());
 			it.setMinimum(myBranch.getMin_amount());
+			it.setBranchIsOpened(myBranch.isOpened());
 			mylist.add(it);
 		}
 		updateList();
@@ -441,6 +443,10 @@ public class OrdersFragment extends ParentFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (!mylist.get(0).getType().equals("empty")) {
+					if(mylist.get(position).getType().equalsIgnoreCase("branch")&& !mylist.get(position).isBranchIsOpened()){
+						Toast.makeText(currentActivity, ErrorHandlerManager.getInstance().getErrorString(currentActivity, "Sorry the Shop is closed now.."),Toast.LENGTH_SHORT).show();
+						return;
+					}
 					int itemId = mylist.get(position).getId();
 					if(depth==0)
 					{

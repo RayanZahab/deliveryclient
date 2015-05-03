@@ -39,7 +39,7 @@ public class Helper {
 			for (int size = 0; size < myListAdapter.getCount(); size++) {
 				View listItem = myListAdapter.getView(size, null, myListView);
 				listItem.measure(0, 0);
-				totalHeight += listItem.getMeasuredHeight()+80;
+				totalHeight += listItem.getMeasuredHeight()+3;
 			}
 			// setting listview item in adapter
 			ViewGroup.LayoutParams params = myListView.getLayoutParams();

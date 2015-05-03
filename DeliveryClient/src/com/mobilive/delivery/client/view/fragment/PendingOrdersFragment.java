@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +121,6 @@ public class PendingOrdersFragment extends ParentFragment {
 			i.setType("empty");
 			i.setTitle(currentActivity.getString(R.string.empty_list));
 			orderItems.add(i);
-			Log.d("ray", "empty");
 			empty = true;
 		} else {
 			for (int i = 0; i < morders.size(); i++) {
@@ -133,7 +131,6 @@ public class PendingOrdersFragment extends ParentFragment {
 				orderItems.add(itm);
 			}
 		}
-		Log.d("ray", "ray orders: " + orderItems.size());
 
 		OrdersAdapter dataAdapter = new OrdersAdapter(currentActivity,
 				R.layout.row_order, orderItems);

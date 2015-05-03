@@ -54,6 +54,10 @@ public class RegisterActivity extends Activity implements OnItemSelectedListener
 		String serverURL = new myURL(null, "customers", "register", 0).getURL();
 		String method = "Upload";
 
+		if(PhoneInfoManager.containZeroAsPrefix(inputphone.getText().toString())){
+			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "Phone Number can not start with zero.."),Toast.LENGTH_SHORT).show();
+			return;
+		}
 		User user = new User();
 		user.setName(username.getText().toString());
 		user.setPhone(countrycode.getText()+""+inputphone.getText().toString());

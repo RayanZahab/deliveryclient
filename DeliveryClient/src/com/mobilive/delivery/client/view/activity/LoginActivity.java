@@ -30,6 +30,7 @@ import com.mobilive.delivery.client.model.Customer;
 import com.mobilive.delivery.client.model.User;
 import com.mobilive.delivery.client.utilities.APIManager;
 import com.mobilive.delivery.client.utilities.ErrorHandlerManager;
+import com.mobilive.delivery.client.utilities.PhoneInfoManager;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 
@@ -169,7 +170,12 @@ public class LoginActivity extends Activity {
 	}
 
 	public void login(View view) {
+		
 		if(_validateLogIn(username,password)){
+			if(PhoneInfoManager.containZeroAsPrefix(username.getText().toString())){
+				Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, "Phone Number can not start with zero.."),Toast.LENGTH_SHORT).show();
+				return;
+			}
 			String countryCode= "961";
 			String serverURL = new myURL(null, "customers", "login", 0).getURL();
 			User user = new User(countryCode+username.getText().toString(), null);

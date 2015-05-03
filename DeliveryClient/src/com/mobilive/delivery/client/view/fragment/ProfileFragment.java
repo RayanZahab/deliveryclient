@@ -47,8 +47,7 @@ public class ProfileFragment extends ParentFragment {
 	User user;
 	View rootView;
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 		currentActivity = getActivity();

@@ -27,6 +27,7 @@ import com.mobilive.delivery.client.model.Order;
 import com.mobilive.delivery.client.model.Product;
 import com.mobilive.delivery.client.model.Shop;
 import com.mobilive.delivery.client.utilities.APIManager;
+import com.mobilive.delivery.client.utilities.GlobalM;
 import com.mobilive.delivery.client.utilities.RZHelper;
 import com.mobilive.delivery.client.utilities.myURL;
 import com.mobilive.delivery.client.view.activity.OrderInfoActivity;
@@ -127,7 +128,7 @@ public class PendingOrdersFragment extends ParentFragment {
 				Item itm = new Item(morders.get(i).getId(), morders.get(i)
 						.toString(), morders.get(i).getCount(), morders.get(i)
 						.getTotal(), morders.get(i).isNewCustomer());
-				itm.setDate(morders.get(i).getDate());
+				itm.setDate(new GlobalM().getago(morders.get(i).getDate()));
 				orderItems.add(itm);
 			}
 		}

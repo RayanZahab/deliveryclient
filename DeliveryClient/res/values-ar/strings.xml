@@ -96,7 +96,7 @@
     <string name="addresses">العناوين</string>
     <string name="addnewaddress">أضف عنوان جديد</string>
     <string name="title_activity_addaddress">إضافة عنوان</string>
-    <string name="cart_is_empty">سلة المشتريات فاضية</string>
+    <string name="cart_is_empty">سلة المشتريات فارغة</string>
 
     <!--  Errors -->
      <string name="blockedcustomer">عذراً، مستخدم محظور</string>

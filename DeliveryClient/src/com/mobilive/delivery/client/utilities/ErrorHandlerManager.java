@@ -42,7 +42,7 @@ public class ErrorHandlerManager {
 		errorsMap.put("Pass is empty or do not match", R.string.passEmptyOrDMatch);
 		errorsMap.put("No Areas exist in this City", R.string.noArea);
 		errorsMap.put("No Cities exist in this Country", R.string.noCity);
-		
+		errorsMap.put("Sorry the Shop is closed now..", R.string.shopIsClose);
 	}
 
 	public static ErrorHandlerManager getInstance() {

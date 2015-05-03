@@ -15,7 +15,8 @@ public class Item {
 	private double totalPrice;
 	private String time,charge, minimum;
 	private String photoName;
-
+	private boolean branchIsOpened;
+	
 	public Item(){}
 	
 	public Item(int id, String title, Integer quantity, double price, boolean status) {
@@ -147,5 +148,13 @@ public class Item {
 
 	public void setPhotoName(String photoName) {
 		this.photoName = photoName;
+	}
+
+	public boolean isBranchIsOpened() {
+		return branchIsOpened;
+	}
+
+	public void setBranchIsOpened(boolean branchIsOpened) {
+		this.branchIsOpened = branchIsOpened;
 	}
 }

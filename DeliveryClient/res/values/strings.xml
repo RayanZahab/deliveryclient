@@ -134,4 +134,5 @@
     <string name="noCountry"></string>
     <string name="updateProfile">Your Profile updated successfuly</string>
     <string name="userAddNumber">please Add your Number</string>
+    <string name="shopIsClose">Sorry the Shop is closed now..</string>
 </resources>

@@ -126,4 +126,5 @@
     <string name="noCountry"></string>   
     <string name="updateProfile">تم تعديل ملفك الشخصي بنجاح</string>
     <string name="userAddNumber">الرجاء إدخال رقمك الصحيح</string> 
+    <string name="shopIsClose">عذرا المحل مغلق حالياً</string>
 </resources>

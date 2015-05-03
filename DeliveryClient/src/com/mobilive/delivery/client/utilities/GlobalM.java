@@ -2,24 +2,21 @@ package com.mobilive.delivery.client.utilities;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
-
-import com.mobilive.delivery.client.DeliveryClientApplication;
-import com.mobilive.delivery.client.model.Area;
-import com.mobilive.delivery.client.model.City;
-import com.mobilive.delivery.client.model.Country;
-import com.mobilive.delivery.client.model.Order;
-import com.mobilive.delivery.client.view.activity.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mobilive.delivery.client.model.Area;
+import com.mobilive.delivery.client.model.City;
+import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.view.activity.MainActivity;
 
 public class GlobalM {
@@ -127,7 +124,7 @@ public class GlobalM {
 		try {
 			long now = System.currentTimeMillis();
 			long time = System.currentTimeMillis();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.US);
 			TimeZone tz = TimeZone.getTimeZone("GMT");
 			sdf.setTimeZone(tz);
 			time = sdf.parse(date).getTime();

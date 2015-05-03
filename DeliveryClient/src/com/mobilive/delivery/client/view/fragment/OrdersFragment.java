@@ -29,7 +29,6 @@ import com.mobilive.delivery.client.model.Address;
 import com.mobilive.delivery.client.model.Branch;
 import com.mobilive.delivery.client.model.Business;
 import com.mobilive.delivery.client.model.Cart;
-import com.mobilive.delivery.client.model.CartItem;
 import com.mobilive.delivery.client.model.Category;
 import com.mobilive.delivery.client.model.Country;
 import com.mobilive.delivery.client.model.Item;
@@ -468,11 +467,11 @@ public class OrdersFragment extends ParentFragment {
 	public static void updateFooter() {
 		Cart cart = ((DeliveryClientApplication) currentActivity.getApplication()).getMyCart();
 		TextView quantity = (TextView) view.findViewById(R.id.totalQuantity);
-		TextView price = (TextView) view.findViewById(R.id.totalprice);
-		int totalPrice = 0;
-		for (CartItem myP : cart.getCartItems()) {
+		//TextView price = (TextView) view.findViewById(R.id.totalprice);
+		//int totalPrice = 0;
+		/*for (CartItem myP : cart.getCartItems()) {
 			totalPrice += (myP.getCount() * myP.getProduct().getPrice());
-		}
+		}*/
 		quantity.setText("" + cart.getAllCount());
 		MainActivity.updateCounter(cart.getAllCount());
 	}

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -347,8 +348,30 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
+			
 		}
-
+		Item navitem = currentList.get(position);
+		if (this.type.equals("txt") || this.type.equals("empty")) {
+			holder = new txtHolder(convertView, navitem);
+		} else if (this.type.equals("txtImg") ) {
+			holder = new txUrlImgHolder(convertView, navitem,activity);
+		} else if (this.type.equals("shop") ) {
+			holder = new txUrlImgHolder(convertView, navitem,activity);
+		} else if (this.type.equals("businesses") ) {
+			holder = new txUrlImgHolder(convertView, navitem,activity);
+		}  else if (this.type.equals("branch") ) {
+			holder = new branchHolder(convertView, navitem);
+		} else if (this.type.equals("product")) {
+			holder = new productHolder(convertView, navitem);
+		} else if (this.type.equals("order")) {
+			holder = new orderHolder();
+		} else if (this.type.equals("cart")) {
+			holder = new productHolder(convertView, navitem);
+		} else if (this.type.equals("address")) {
+			holder = new radioHolder(convertView, navitem);
+		} else if (this.type.equals("preview")) {
+			holder = new previewHolder(convertView, navitem);
+		}
 		return convertView;
 	}
 

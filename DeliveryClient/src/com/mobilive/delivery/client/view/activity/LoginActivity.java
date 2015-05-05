@@ -189,25 +189,33 @@ public class LoginActivity extends Activity {
 
 	public void getLoggedIn(String s, String error) {
 		if (error == null) {
-			user = new APIManager().getLogedInUser(s);
-			CheckBox keeplog = (CheckBox) findViewById(R.id.keeploggedin);
-			SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
-			SharedPreferences.Editor editor = settings.edit();
+			if (s != null) {
+				user = new APIManager().getLogedInUser(s);
+				if (user != null) {
+					CheckBox keeplog = (CheckBox) findViewById(R.id.keeploggedin);
+					SharedPreferences settings = getSharedPreferences("PREFS_NAME", 0);
+					SharedPreferences.Editor editor = settings.edit();
 
-			editor.putInt("id", user.getId());
-			editor.putString("lang", lang);
-			editor.commit();
+					editor.putInt("id", user.getId());
+					editor.putString("lang", lang);
+					editor.commit();
 
-			editor.putBoolean("isChecked", keeplog.isChecked());
-			editor.putString("token", user.getToken());
-			editor.putString("name", user.getName());
-			editor.putString("pass", password.getText().toString());
-			editor.putString("phone", username.getText().toString());
-			editor.putString("gender", user.getGender().toString());
-			editor.commit();
-			((DeliveryClientApplication) this.getApplication()).setGlobals();
-			Intent i = new Intent(this, LoadingActivity.class);
-			startActivity(i);
+					editor.putBoolean("isChecked", keeplog.isChecked());
+					editor.putString("token", user.getToken());
+					editor.putString("name", user.getName());
+					editor.putString("pass", password.getText().toString());
+					editor.putString("phone", username.getText().toString());
+					editor.putString("gender", user.getGender().toString());
+					editor.commit();
+					((DeliveryClientApplication) this.getApplication()).setGlobals();
+					Intent i = new Intent(this, LoadingActivity.class);
+					startActivity(i);
+				}else {
+					Toast.makeText(getApplicationContext(), R.string.no_net, Toast.LENGTH_LONG).show();
+				}
+			} else {
+				Toast.makeText(getApplicationContext(), R.string.no_net, Toast.LENGTH_LONG).show();
+			}
 		} else {
 			Toast.makeText(getApplicationContext(), ErrorHandlerManager.getInstance().getErrorString(this, error),Toast.LENGTH_SHORT).show();
 		}

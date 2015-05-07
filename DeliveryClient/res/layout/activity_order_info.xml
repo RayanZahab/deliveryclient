@@ -194,9 +194,11 @@
                     android:layout_alignBaseline="@+id/statusTextView"
                     android:layout_alignBottom="@+id/statusTextView"
                     android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/redbg"
                     android:layout_marginRight="8dp"
                     android:paddingLeft="8dp" />
-
                 <TextView
 	                android:id="@+id/notes"
 	                style="@style/mytextview"

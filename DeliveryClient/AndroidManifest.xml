@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mobilive.delivery.client"
+    package="com.mobilife.delivery.client"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -15,27 +15,27 @@
         android:targetSdkVersion="19" />
 
     <application
-        android:name="com.mobilive.delivery.client.DeliveryClientApplication"
+        android:name="com.mobilife.delivery.client.DeliveryClientApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.MainActivity"
+            android:name="com.mobilife.delivery.client.view.activity.MainActivity"
             android:label="@string/app_name"
             android:icon="@drawable/moto"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.OrderInfoActivity"
+            android:name="com.mobilife.delivery.client.view.activity.OrderInfoActivity"
             android:icon="@drawable/moto"
             android:label="@string/title_activity_order_info"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.SplashScreenActivity"
+            android:name="com.mobilife.delivery.client.view.activity.SplashScreenActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
             <category android:name="android.intent.category.LAUNCHER" />
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.LoginActivity"
+            android:name="com.mobilife.delivery.client.view.activity.LoginActivity"
             android:icon="@drawable/moto"
             android:label="@string/buttonlogin"
             android:screenOrientation="portrait"
@@ -57,53 +57,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.PreviewActivity"
+            android:name="com.mobilife.delivery.client.view.activity.PreviewActivity"
             android:label="@string/title_activity_preview"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.listview.SelectAdress"
+            android:name="com.mobilife.delivery.client.view.listview.SelectAdress"
             android:label="@string/title_activity_select_adress"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.RegisterActivity"
+            android:name="com.mobilife.delivery.client.view.activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
+            android:parentActivityName="com.mobilife.delivery.client.view.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.AddAddressActivity"
+            android:name="com.mobilife.delivery.client.view.activity.AddAddressActivity"
             android:label="@string/title_activity_addaddress"
-            android:parentActivityName="com.mobilive.delivery.client.view.listview.SelectAdress"
+            android:parentActivityName="com.mobilife.delivery.client.view.listview.SelectAdress"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.ProductInfoActivity"
+            android:name="com.mobilife.delivery.client.view.activity.ProductInfoActivity"
             android:label="@string/title_activity_product_info"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.LoadingActivity"
+            android:name="com.mobilife.delivery.client.view.activity.LoadingActivity"
             android:label="@string/title_activity_loading" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.RegisterConfirmationActivity"
+            android:name="com.mobilife.delivery.client.view.activity.RegisterConfirmationActivity"
             android:label="@string/title_activity_register_confirmation"
-            android:parentActivityName="com.mobilive.delivery.client.view.activity.RegisterActivity"
+            android:parentActivityName="com.mobilife.delivery.client.view.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.ThankYouActivity"
+            android:name="com.mobilife.delivery.client.view.activity.ThankYouActivity"
             android:label="@string/title_activity_thank_you" >
         </activity>
         <activity
-            android:name="com.mobilive.delivery.client.view.activity.ForgetPasswordActivity"
+            android:name="com.mobilife.delivery.client.view.activity.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password" 
-            android:parentActivityName="com.mobilive.delivery.client.view.activity.LoginActivity"
+            android:parentActivityName="com.mobilife.delivery.client.view.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>

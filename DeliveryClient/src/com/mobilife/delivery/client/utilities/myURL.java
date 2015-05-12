@@ -1,7 +1,7 @@
 package com.mobilife.delivery.client.utilities;
 
 public class myURL {
-	private String urlPrefix = "http://delivery.zaher.info/api/v1/";
+	private String urlPrefix = "http://deliveryappz.info/api/v1/";
 	private String url = "", by, api;
 	private int limit, value;
 	private String svalue;

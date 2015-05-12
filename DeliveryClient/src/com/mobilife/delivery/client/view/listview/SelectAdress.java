@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -103,10 +104,11 @@ public class SelectAdress extends ListActivity {
 	}
 
 	public void getAdd(String s, String error) {
-		int defaultPosition = 0, i = 0;
+		int defaultPosition = -1, i = 0;
 		if (error == null) {
 			myAddresses = new APIManager().getAddress(s);
 			if (myAddresses.size() > 0) {
+				Item firstItem ;
 				final ArrayList<Item> mylist = new ArrayList<Item>();
 				for (Address add : myAddresses) {
 					Item it = new Item();
@@ -121,6 +123,12 @@ public class SelectAdress extends ListActivity {
 					}
 					i++;
 					addOut.add(add.toString(countries));
+				}
+				if(defaultPosition==-1)
+				{
+					defaultPosition = 0;					
+					Log.d("ray","setting def: "+mylist.get(0).getId()+ " - "+mylist.get(0).getName());
+					setDefault(mylist.get(0).getId(),mylist.get(0).getName());
 				}
 				dataAdapter = new ArrayAdapter<String>(this,R.layout.row_radiobutton, addOut);
 				setListAdapter(dataAdapter);
@@ -143,16 +151,22 @@ public class SelectAdress extends ListActivity {
 							textView.setTextColor(Color.RED);
 						}
 						defaultAddId = mylist.get(position).getId();
-						String serverURL = new myURL("set_default","customers/addresses", defaultAddId, 0).getURL();
 						defaultAddName = mylist.get(position).toString();
-						setDefault(defaultAddId,defaultAddName);
-						RZHelper p = new RZHelper(serverURL, current,"nothing", true);
-						p.put(null);
+						setServerDefault(defaultAddId,defaultAddName);
 					}
 				});
 			}
 		}
 
+	}
+
+	public void setServerDefault(int addId, String addName)
+	{
+		String serverURL = new myURL("set_default","customers/addresses", addId, 0).getURL();
+		
+		setDefault(addId,addName);
+		RZHelper p = new RZHelper(serverURL, current,"nothing", true);
+		p.put(null);
 	}
 	public void setDefault(int addId, String addName)
 	{

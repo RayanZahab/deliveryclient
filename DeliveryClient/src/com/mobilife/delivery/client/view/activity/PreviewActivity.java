@@ -26,6 +26,7 @@ import com.mobilife.delivery.client.model.OrderItem;
 import com.mobilife.delivery.client.model.Product;
 import com.mobilife.delivery.client.utilities.RZHelper;
 import com.mobilife.delivery.client.utilities.myURL;
+import com.mobilife.delivery.client.view.listview.SelectAdress;
 import com.mobilife.delivery.client.R;
 
 public class PreviewActivity extends Activity {
@@ -61,7 +62,7 @@ public class PreviewActivity extends Activity {
 		customerPhone.setText("" + phoneVal);
 		customerAdd.setText(addName);
 		String genderVal = settings1.getString("gender", "");
-		if(genderVal.equals(Gender.Male.toString()))
+		if(Gender.Male.toString().equals(genderVal))
 		{
 			genderImg.setImageResource(R.drawable.malepicto);
 		}
@@ -70,6 +71,12 @@ public class PreviewActivity extends Activity {
 			genderImg.setImageResource(R.drawable.femalepicto);			
 		}
 		preview();
+	}
+	
+	public void selectAdd(View v){
+		Intent intent = new Intent(this, SelectAdress.class);
+		intent.putExtra("previous", "preview");
+		startActivity(intent);
 	}
 
 	public void afterCreationSubmit(View v) {

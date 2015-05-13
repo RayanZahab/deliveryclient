@@ -91,6 +91,7 @@
                 </LinearLayout>                
             </LinearLayout>
             <ImageView 
+                android:id="@+id/gender"
 			    android:layout_width="100dp"
 			    android:layout_height="100dp"
 			    android:layout_weight="0.4"

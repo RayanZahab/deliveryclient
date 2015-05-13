@@ -11,12 +11,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mobilife.delivery.client.DeliveryClientApplication;
 import com.mobilife.delivery.client.adapter.OrderInfoAdapter;
 import com.mobilife.delivery.client.model.Country;
+import com.mobilife.delivery.client.model.Gender;
 import com.mobilife.delivery.client.model.Item;
 import com.mobilife.delivery.client.model.Order;
 import com.mobilife.delivery.client.model.OrderItem;
@@ -41,6 +43,7 @@ public class OrderInfoActivity extends Activity {
 	TextView notes;
 	Boolean isAdmin = true, isPreparer = true, disabled = false;
 	ArrayList<String> stat;
+	private ImageView genderImg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,18 @@ public class OrderInfoActivity extends Activity {
 		stat.add(2, "Closed");
 		isAdmin = ((DeliveryClientApplication) this.getApplication()).isAdmin();
 		isPreparer = ((DeliveryClientApplication) this.getApplication()).isPrep();
-
+		genderImg = (ImageView)  findViewById(R.id.gender);
+		SharedPreferences preferences = getSharedPreferences("PREFS_NAME", 0);
+		String genderVal = preferences.getString("gender", "");
+		if(Gender.Male.toString().equals(genderVal))
+		{
+			genderImg.setImageResource(R.drawable.malepicto);
+		}
+		else
+		{
+			genderImg.setImageResource(R.drawable.femalepicto);			
+		}
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 

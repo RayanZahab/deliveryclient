@@ -69,7 +69,7 @@ public class SelectAdress extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			previous = extras.getString("previous");
-			if(previous!=null && previous.equals("preview"))
+			if("preview".equals(previous))
 			{
 				submit.setVisibility(View.VISIBLE);
 			}
@@ -108,7 +108,6 @@ public class SelectAdress extends ListActivity {
 		if (error == null) {
 			myAddresses = new APIManager().getAddress(s);
 			if (myAddresses.size() > 0) {
-				Item firstItem ;
 				final ArrayList<Item> mylist = new ArrayList<Item>();
 				for (Address add : myAddresses) {
 					Item it = new Item();
@@ -195,7 +194,7 @@ public class SelectAdress extends ListActivity {
 	@Override
 	public void onBackPressed() {
 		Intent i = new Intent(this, MainActivity.class);
-		if(!previous.equals("preview"))
+		if(!"preview".equals(previous))
 		{
 			i.putExtra("fragmentIndex", 2);
 		}
@@ -209,7 +208,7 @@ public class SelectAdress extends ListActivity {
 	@Override 
 	public Intent getParentActivityIntent() {
 		Intent i = new Intent(this, MainActivity.class);
-		if(!previous.equals("preview"))
+		if(!"preview".equals(previous))
 		{
 			i.putExtra("fragmentIndex", 2);
 		}
@@ -221,12 +220,14 @@ public class SelectAdress extends ListActivity {
 	};
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
-		getMenuInflater().inflate(R.menu.cat_context_menu, menu);
+		if(!"preview".equals(previous)){// Not from cart activity
+			getMenuInflater().inflate(R.menu.cat_context_menu, menu);
+		}
 	}
 	public void Delete(final int position) {
 		final int branchId = myAddresses.get(position).getId();
 		new AlertDialog.Builder(this)
-				.setTitle("Delete this Add: "+ myAddresses.get(position).toString()+ " ?")
+				.setTitle(getString(R.string.deleteAddressConfirmation)+ myAddresses.get(position).toString()+ " ?")
 				.setIcon(R.drawable.branches)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
@@ -254,19 +255,22 @@ public class SelectAdress extends ListActivity {
 		i.putExtra("previous",previous);
 		startActivity(i);
 	}
+	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.edit:
-			Edit(myAddresses.get((int) info.id));
-			break;
-		case R.id.delete:
-			Delete((int) info.id);
-			break;
-		default:
-			break;
+		if(!"preview".equals(previous)){// Not from cart activity
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+			switch (item.getItemId()) {
+			case R.id.edit:
+				Edit(myAddresses.get((int) info.id));
+				break;
+			case R.id.delete:
+				Delete((int) info.id);
+				break;
+			default:
+				break;
 
+			}
 		}
 		return true;
 	}

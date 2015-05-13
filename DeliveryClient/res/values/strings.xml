@@ -95,6 +95,9 @@
     <string name="profile">My Profile</string>
     <string name="subtotal">Sub total</string>
     <string name="addnewaddress">Add New Address</string>
+    <string name="deleteAddressConfirmation">Are you sure you want to delete this Address: </string>
+    <string name="submitOrder">Order</string>
+    
     
 
     

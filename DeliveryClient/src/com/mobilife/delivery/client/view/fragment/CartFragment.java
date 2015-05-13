@@ -95,7 +95,7 @@ public class CartFragment extends ParentFragment {
 		phone.setText(phoneVal);
 		
 		String genderVal = settings1.getString("gender", "");
-		if(genderVal.equals(Gender.Male.toString()))
+		if(Gender.Male.toString().equals(genderVal))
 		{
 			genderImg.setImageResource(R.drawable.malepicto);
 		}

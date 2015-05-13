@@ -97,6 +97,9 @@
     <string name="addnewaddress">أضف عنوان جديد</string>
     <string name="title_activity_addaddress">إضافة عنوان</string>
     <string name="cart_is_empty">سلة المشتريات فارغة</string>
+    <string name="deleteAddressConfirmation">هل تريد بالفعل حذف هذا العنوان: </string>
+    <string name="submitOrder">ارسال الطلب</string>
+    
 
     <!--  Errors -->
      <string name="blockedcustomer">عذراً، مستخدم محظور</string>

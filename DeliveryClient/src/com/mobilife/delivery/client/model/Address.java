@@ -237,5 +237,9 @@ public class Address {
 	public void setAreaName(String areaName) {
 		this.areaName = areaName;
 	}
+	
+	public String toString() {
+		return this.building + " , " + this.floor + " , " + this.details;
+	}
 
 }

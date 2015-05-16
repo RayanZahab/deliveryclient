@@ -265,9 +265,9 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 		ImageView picture;
 		public txUrlImgHolder(View convertView, Item item,Activity activity) {
 			try{
-				name = (TextView) convertView.findViewById(R.id.name);
-				picture = (ImageView) convertView.findViewById(R.id.image);
+				TextView name = (TextView) convertView.findViewById(R.id.name);
 				if(item.getPhotoName()!=null){
+					ImageView picture = (ImageView) convertView.findViewById(R.id.image);
 					new ImageTask(picture,activity).execute(item.getPhotoName());
 				}
 				name.setText(item.getName());
@@ -297,9 +297,11 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 
 		ViewHolder holder = null;
 		Item currentItem = currentList.get(position);
-		LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		int layout = 0;
+
 		if (convertView == null) {
+			int layout = 0;
+			LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			
 			if (this.type.equals("txt") || this.type.equals("empty")) {
 				layout = R.layout.row_txt;
 				convertView = vi.inflate(layout, null);
@@ -349,48 +351,24 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 		}
 		Item navitem = currentList.get(position);
 		if (this.type.equals("txt") || this.type.equals("empty")) {
-			layout = R.layout.row_txt;
-			convertView = vi.inflate(layout, null);
 			holder = new txtHolder(convertView, navitem);
 		} else if (this.type.equals("txtImg") ) {
-			layout = R.layout.row_txtimg;
-			convertView = vi.inflate(layout, null);
 			holder = new txUrlImgHolder(convertView, navitem,activity);
-			((txUrlImgHolder)holder).picture = (ImageView) convertView.findViewById(R.id.image);
-			if(navitem.getPhotoName()!=null){
-				new ImageTask(((txUrlImgHolder)holder).picture,activity).execute(navitem.getPhotoName());
-			}
-			
 		} else if (this.type.equals("shop") ) {
-			layout = R.layout.row_shop;
-			convertView = vi.inflate(layout, null);
 			holder = new txUrlImgHolder(convertView, navitem,activity);
 		} else if (this.type.equals("businesses") ) {
-			layout = R.layout.row_business;
-			convertView = vi.inflate(layout, null);
 			holder = new txUrlImgHolder(convertView, navitem,activity);
 		}  else if (this.type.equals("branch") ) {
-			layout = R.layout.row_branch;
-			convertView = vi.inflate(layout, null);
 			holder = new branchHolder(convertView, navitem);
 		} else if (this.type.equals("product")) {
-			layout = R.layout.row_product;
-			convertView = vi.inflate(layout, null);
 			holder = new productHolder(convertView, navitem);
 		} else if (this.type.equals("order")) {
-			layout = R.layout.activity_main;
 			holder = new orderHolder();
 		} else if (this.type.equals("cart")) {
-			layout = R.layout.row_product;
-			convertView = vi.inflate(layout, null);
 			holder = new productHolder(convertView, navitem);
 		} else if (this.type.equals("address")) {
-			layout = R.layout.row_address;
-			convertView = vi.inflate(layout, null);
 			holder = new radioHolder(convertView, navitem);
 		} else if (this.type.equals("preview")) {
-			layout = R.layout.row_preview;
-			convertView = vi.inflate(layout, null);
 			holder = new previewHolder(convertView, navitem);
 		}
 		return convertView;

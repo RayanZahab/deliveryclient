@@ -105,7 +105,7 @@ public class OrdersFragment extends ParentFragment {
 		ImageView submit = (ImageView) view.findViewById(R.id.submit);
 		submit.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				move();
+				getAddresses();
 			}
 		});
 		mylist = null;
@@ -288,7 +288,7 @@ public class OrdersFragment extends ParentFragment {
 			}
 			else
 			{
-				Toast.makeText(currentActivity.getApplicationContext(), R.string.add_address,
+				Toast.makeText(currentActivity.getApplicationContext(), "Please add an address before proceeding",
 						Toast.LENGTH_SHORT).show();
 				intent = new Intent(this.getActivity(), AddAddressActivity.class);
 				intent.putExtra("previous", "preview");

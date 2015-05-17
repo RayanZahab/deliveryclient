@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.mobilife.delivery.client.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -40,7 +42,12 @@ public class ImageTask extends AsyncTask<String, Void, Bitmap> {
 		String urldisplay = url[0];
 		Bitmap mIcon11 = null;
 		try {
-			if (exists(urldisplay)) {
+			if(urldisplay.equals("empty"))
+			{
+				mIcon11 = BitmapFactory.decodeResource(current.getResources(),R.drawable.moto);
+				exist = true;
+			}
+			else if (exists(urldisplay)) {
 				InputStream in = new java.net.URL(urldisplay).openStream();
 				mIcon11 = BitmapFactory.decodeStream(in);
 				exist = true;
@@ -49,6 +56,11 @@ public class ImageTask extends AsyncTask<String, Void, Bitmap> {
 					File imgFile = new File(urldisplay);
 					mIcon11 = BitmapFactory.decodeFile(imgFile
 							.getAbsolutePath());
+					exist = true;
+				}
+				else
+				{
+					mIcon11 = BitmapFactory.decodeResource(current.getResources(),R.drawable.moto);
 					exist = true;
 				}
 			}

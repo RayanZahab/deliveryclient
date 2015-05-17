@@ -270,6 +270,11 @@ public class MyCustomAdapter extends ArrayAdapter<Item> {
 					ImageView picture = (ImageView) convertView.findViewById(R.id.image);
 					new ImageTask(picture,activity).execute(item.getPhotoName());
 				}
+				else
+				{
+					ImageView picture = (ImageView) convertView.findViewById(R.id.image);
+					new ImageTask(picture,activity).execute("empty");
+				}
 				name.setText(item.getName());
 			}catch(Exception e){
 

@@ -90,7 +90,8 @@ public class MainActivity extends Activity {
 		
 		if(extras!=null){
 			fragmentIndex = extras.getInt("fragmentIndex");
-			categoryId = extras.getInt("categoryId");			
+			categoryId = extras.getInt("categoryId");	
+			branchId = extras.getInt("branchId");
 		}
 		
 		addSlideMenu();

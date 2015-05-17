@@ -136,7 +136,7 @@
                 android:layout_weight="0.2"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="5"
+                android:text=""
                 android:textColor="@color/redbg"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -159,7 +159,7 @@
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginBottom="@dimen/vertical_margin"
             android:background="@color/yellow"
-            android:onClick="submit"
+            android:onClick="back"
             android:text="@string/back"
             android:textColor="@color/redbg"
             android:textSize="18sp" />

@@ -73,6 +73,7 @@
     <string name="prepared_status">قيد التحضير</string>
     <string name="preview_order_activity">استعراض الطلبية</string>
     <string name="delivered_status">مغلق</string>
+    <string name="cancelled_status">ملغى</string>
     <string name="english">انجليزي</string>
     <string name="arabic">عربي</string>
     <string name="phonenum">رقم الهاتف</string>

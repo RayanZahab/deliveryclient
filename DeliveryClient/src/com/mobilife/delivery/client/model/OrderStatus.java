@@ -22,10 +22,10 @@ public enum OrderStatus {
 			return R.string.prepared_status;
 		case Closed:
 			return R.string.delivered_status;
-		/*case Cancelled:
-			return R.string.canceled_orders;
+		case Cancelled:
+			return R.string.cancelled_status;
 		case Assigned:
-			return R.string.assigned_orders;*/
+			return R.string.prepared_status;
 		default:
 			return 0;
 		}

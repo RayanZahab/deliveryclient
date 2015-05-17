@@ -116,7 +116,7 @@
                 android:layout_weight="0.2"
                 android:layout_gravity="center"
                 android:gravity="right"
-                android:text="5"
+                android:text=""
                 android:textColor="@color/redbg"
                 android:textSize="18sp"
                 android:textStyle="bold"/>

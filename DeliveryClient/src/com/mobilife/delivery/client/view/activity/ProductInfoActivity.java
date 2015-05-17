@@ -8,7 +8,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mobilife.delivery.client.DeliveryClientApplication;
+import com.mobilife.delivery.client.R;
 import com.mobilife.delivery.client.model.Item;
 import com.mobilife.delivery.client.model.Photo;
 import com.mobilife.delivery.client.model.Product;
@@ -26,7 +26,6 @@ import com.mobilife.delivery.client.utilities.GlobalM;
 import com.mobilife.delivery.client.utilities.ImageTask;
 import com.mobilife.delivery.client.utilities.RZHelper;
 import com.mobilife.delivery.client.utilities.myURL;
-import com.mobilife.delivery.client.R;
 
 public class ProductInfoActivity extends Activity {
 	ArrayList<Unit> units;
@@ -182,6 +181,7 @@ public class ProductInfoActivity extends Activity {
 		i.putExtra("fragmentIndex", 7);
 		categoryId = ((DeliveryClientApplication) this.getApplication()).getDepthVal();
 		i.putExtra("categoryId", categoryId);
+		i.putExtra("branchId", branchId);
 		startActivity(i);
 	}
 

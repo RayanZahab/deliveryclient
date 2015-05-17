@@ -63,9 +63,11 @@
     <string name="shop">Shop</string>
     <string name="empty_list">No items</string>
     <string name="items">Items</string>
-    <string name="open_status">Open</string>
-    <string name="prepared_status">Prepared</string>
+    <string name="open_status">Opened</string>
+    <string name="prepared_status">Under Preparing</string>
     <string name="delivered_status">Closed</string>
+    <string name="cancelled_status">Cancelled</string>
+    
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="phonenum">Phone Number</string>

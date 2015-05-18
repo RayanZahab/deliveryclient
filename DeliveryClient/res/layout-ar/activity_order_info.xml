@@ -1,24 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cart"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/gris"
-    android:paddingBottom="8dp"
-    android:baselineAligned="true" >
+    android:fillViewport="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/listofcart"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
-           
-           <LinearLayout
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">			
+            android:onClick="selectAdd"
+            android:layout_marginTop="8dp">
+			
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,13 +52,15 @@
 	        		android:layout_height="0dp"
 	        		android:layout_weight="1"
 	        		android:orientation="horizontal">
+
 	                <TextView
 	                    android:id="@+id/customerAdd"
 	                    style="@style/mytextview"
 	                    android:layout_weight="0.75"
 	                    android:layout_width="0dp"
 	                    android:layout_height="wrap_content"
-	                    android:layout_gravity="left"
+	                    android:layout_gravity="right"
+	                    android:gravity="right"
 	                    android:paddingLeft="8dp"
 	                    android:paddingRight="8dp"
 	                    android:text="@string/address" />
@@ -68,55 +76,65 @@
                     android:layout_width="match_parent"
 	        		android:layout_height="0dp"
 	        		android:layout_weight="1"
-	        		android:layout_marginTop="5dp"
 	        		android:orientation="horizontal">
-
 	                <TextView
 	                    android:id="@+id/customerphone"
 	                    style="@style/mytextview"
 	                    android:layout_weight="0.75"
 	                    android:layout_width="0dp"
 	                    android:layout_height="wrap_content"
-	                    android:layout_gravity="left"
+	                    android:layout_gravity="right"
+	                    android:gravity="right"
 	                    android:paddingLeft="8dp"
 	                    android:paddingRight="8dp"
 	                    android:text="@string/phonenum" />
-	                <ImageView 
+	                	        		
+                    <ImageView 
                         android:id="@+id/phoneimg"
                         android:layout_width="0dp"
                         android:layout_height="15dp"
                         android:layout_weight="0.25"
                         android:layout_gravity="right"
                         android:src="@drawable/phoneimg"/>
-                </LinearLayout>                
+                </LinearLayout>
             </LinearLayout>
             <ImageView 
-                android:id="@+id/gender"
+			    android:id="@+id/gender"
 			    android:layout_width="100dp"
 			    android:layout_height="100dp"
 			    android:layout_weight="0.4"
+			    android:layout_gravity="top"
 			    android:src="@drawable/femalepicto"/>
-         </LinearLayout>
-			<ImageView 
+            </LinearLayout>
+            
+		<ImageView 
                android:id="@+id/dividerblue"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:src="@drawable/reddivider"/>
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-	            android:layout_height="0dp"
-	            android:layout_weight="1"
-                android:layout_marginTop="8dp" >
-            </ListView>
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gris"
+            android:divider="@android:color/transparent" >
+        </ListView>
 
-            <RelativeLayout
-                android:id="@+id/totalamount"
+        <RelativeLayout
+            android:id="@+id/totalamount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:background="@color/gris" >
+            
+            <ImageView 
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp" >
-
-                <TextView
+                android:layout_alignParentTop="true"
+                android:src="@drawable/reddivider"/>
+            
+            <TextView
                     android:id="@+id/allTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +143,6 @@
                     android:layout_toRightOf="@+id/lira"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
-                    android:text="25"
                     android:textColor="@color/redbg"
                     android:textSize="19sp" />
 
@@ -133,14 +150,14 @@
                     android:id="@+id/lira"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/total"
-                    android:layout_alignBottom="@+id/total"
+                    android:layout_alignBaseline="@+id/allTotal"
+                    android:layout_alignBottom="@+id/allTotal"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
-                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
                     android:textStyle="bold"
-                    android:textColor="@color/redbg"
                     android:text="@string/lira"
+                    android:textColor="@color/redbg"
                     android:textSize="19sp" />
 
                 <TextView
@@ -149,65 +166,64 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
+                    android:layout_below="@+id/divider"
                     android:paddingRight="7dp"
                     android:textStyle="bold"
                     android:textColor="@color/redbg"
                     android:text="@string/total"
                     android:textSize="19sp" />
-            </RelativeLayout>
-            
-            <ImageView 
-                    android:id="@+id/dividerblue1"
-                    android:layout_width="match_parent"
+                
+                <TextView
+	                android:id="@+id/statusTextView"
+	                style="@style/mytextview"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_below="@+id/totallabel"
+	                android:layout_alignParentRight="true"
+	                android:layout_marginRight="8dp"
+	                android:layout_marginTop="8dp"
+	                android:textStyle="bold"
+	                android:textColor="@color/redbg"
+	                android:text="@string/status" />
+
+                <TextView
+                    android:id="@+id/order_status"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/reddivider"/>
-
-            <RelativeLayout
-                android:id="@+id/orderbuttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="17dp" >
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textView5"
-                style="@style/mytextview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:textColor="@color/redbg"
-                android:text="@string/status" />
-
-            <TextView
-                android:id="@+id/order_status"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:paddingLeft="8dp" />
-
-            <TextView
-                android:id="@+id/notes"
-                style="@style/mytextview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="8dp"
-                android:textColor="@color/redbg"
-                android:text="@string/notes" />
-
-            <EditText
-                android:id="@+id/noteinput"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@drawable/edittextbg"
-                android:ems="10"
-                android:gravity="top"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:inputType="text"
-                android:paddingLeft="5dp"
-                android:singleLine="false" />
-        </LinearLayout>
-</RelativeLayout>
+                    android:layout_alignBaseline="@+id/statusTextView"
+                    android:layout_alignBottom="@+id/statusTextView"
+                    android:layout_alignParentLeft="true"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/redbg"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="8dp" />
+                <TextView
+	                android:id="@+id/notes"
+	                style="@style/mytextview"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="start"
+	                android:layout_below="@+id/order_status"
+	                android:layout_marginTop="10dp"
+	                android:layout_marginRight="8dp"
+	                android:textColor="@color/redbg"
+	                android:text="@string/notes" />
+                
+                <TextView
+	                android:id="@+id/noteinput"
+	                android:layout_width="match_parent"
+	                android:layout_height="70dp"
+	                android:background="@drawable/edittextbg"
+	                android:ems="10"
+	                android:gravity="top"
+	                android:layout_below="@+id/notes"
+	                android:layout_marginLeft="8dp"
+	                android:layout_marginRight="8dp"
+	                android:paddingLeft="5dp"
+	                android:paddingTop="4dp"
+	                android:paddingRight="5dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+ </ScrollView>
+</LinearLayout>
